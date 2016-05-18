@@ -4,12 +4,16 @@ class Html {
 		return '<!DOCTYPE html>'."\n";
 	}
 
-	public static function xmlns(){
-		return 'xmlns="http://www.w3.org/1999/xhtml"';
+	public static function lang(){
+		return 'lang="en" xmlns="http://www.w3.org/1999/xhtml"';
 	}
 
 	public static function content_type(){
 		return '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />'."\n";
+	}
+
+	public static function meta_charset(){
+		return '<meta charset=utf-8" />'."\n";
 	}
 
 	public static function author(){
@@ -41,79 +45,82 @@ class Html {
 	}
 
 	public static function meta_title($page){
-		$result1 = DB::select_query('pages', array('slug=' => $page, 'status=' => 1 ));
-		$count1 = DB::count_query('pages', array('slug=' => $page, 'status=' => 1 ));
-
-		$result2 = DB::select_query('private_jobs', array('slug=' => $page, 'status=' => 1 ));
-		$count2 = DB::count_query('private_jobs', array('slug=' => $page, 'status=' => 1 ));
+		$meta_tables = Db::check_meta();
+		$count_tables = count($meta_tables);
+		$cond = array(
+			'slug=' => $page,
+			'status=' => 1
+		);
 		
-		if($count1 > 0){
-			$meta_title = $result1[0]['meta_title'];
-		} else {
-			if($count2 > 0){
-				$meta_title = $result2[0]['meta_title'];
+		for($i = 0 ; $i <= $count_tables-1; $i++){
+			$result =  Db::select($meta_tables[$i], $cond);
+			$count = Db::count($meta_tables[$i], $cond);
+
+			if($count > 0){
+				$meta_title = $result[0]['meta_title'];
+				break;
 			} else {
-				$meta_title = '404 - Not Found';	
+				$meta_title = '404 - Not Found';
 			}
 		}
-
 		$meta_title = '<title>'.$meta_title.'</title>'."\n";
 		return $meta_title;
 	}
 
 	public static function meta_description($page){
-		$result1 = DB::select_query('pages', array('slug=' => $page, 'status=' => 1 ));
-		$count1 = DB::count_query('pages', array('slug=' => $page, 'status=' => 1 ));
+		$meta_tables = Db::check_meta();
+		$count_tables = count($meta_tables);
+		$cond = array(
+			'slug=' => $page,
+			'status=' => 1
+		);
+		
+		for($i = 0 ; $i <= $count_tables-1; $i++){
+			$result =  Db::select($meta_tables[$i], $cond);
+			$count = Db::count($meta_tables[$i], $cond);
 
-		$result2 = DB::select_query('private_jobs', array('slug=' => $page, 'status=' => 1 ));
-		$count2 = DB::count_query('private_jobs', array('slug=' => $page, 'status=' => 1 ));
-
-		if($count1 > 0){
-			$meta_description = $result1[0]['meta_description'];
-		} else {
-			if($count2 > 0){
-				$meta_description = $result2[0]['meta_description'];
+			if($count > 0){
+				$meta_description = $result[0]['meta_description'];
+				break;
 			} else {
 				$meta_description = 'Content Not found';
 			}
 		}
-
 		$meta_description = '<meta name="description" content="'.$meta_description.'" />'."\n";
 		return $meta_description;
 	}
 
 	public static function meta_keywords($page){
-		$result1 = DB::select_query('pages', array('slug=' => $page, 'status=' => 1 ));
-		$count1 = DB::count_query('pages', array('slug=' => $page, 'status=' => 1 ));
-
-		$result2 = DB::select_query('private_jobs', array('slug=' => $page, 'status=' => 1 ));
-		$count2 = DB::count_query('private_jobs', array('slug=' => $page, 'status=' => 1 ));
+		$meta_tables = Db::check_meta();
+		$count_tables = count($meta_tables);
+		$cond = array(
+			'slug=' => $page,
+			'status=' => 1
+		);
 		
-		if($count1 > 0){
-			$meta_keywords = $result1[0]['meta_keywords'];
-		} else {
-			if($count2 > 0){
-				$meta_keywords = $result2[0]['meta_keywords'];
+		for($i = 0 ; $i <= $count_tables-1; $i++){
+			$result =  Db::select($meta_tables[$i], $cond);
+			$count = Db::count($meta_tables[$i], $cond);
+
+			if($count > 0){
+				$meta_keywords = $result[0]['meta_keywords'];
+				break;
 			} else {
 				$meta_keywords = 'not found, 404 error';
 			}
 		}
-
 		$meta_keywords = '<meta name="keywords" content="'.$meta_keywords.'" />'."\n";
 		return $meta_keywords;
 	}
 
-	// Generates an HTML unordered list from an single or multi-dimensional array.
 	public static function ul($list, $attributes = '') {
 		return Html::_list('ul', $list, $attributes);
 	}
 
-	// Generates an HTML ordered list from an single or multi-dimensional array.
 	public static function ol($list, $attributes = '') {
 		return _list('ol', $list, $attributes);
 	}
 
-	// Generates an HTML ordered list from an single or multi-dimensional array.
  	public static function _list($type = 'ul', $list, $attributes = '', $depth = 0) {
 		// If an array wasn't submitted there's nothing to do...
 		if ( ! is_array($list)) {
@@ -165,6 +172,33 @@ class Html {
 		$out .= "</".$type.">\n";
 
 		return $out;
+	}
+
+
+	// Generates <img> tag
+	public static function img($src = '') {
+		if ( ! is_array($src) ) {
+			$src = array('src' => $src);
+		}
+
+		// If there is no alt attribute defined, set it to an empty string
+		if ( ! isset($src['alt'])) {
+			$src['alt'] = '';
+		}
+
+		$img = '<img';
+
+		foreach ($src as $k=>$v) {
+			if ($k == 'src' AND strpos($v, '://') === FALSE) {
+				$img .= ' src="'.THEME_PATH.'/images/'.$v.'"';
+			} else {
+				$img .= " $k=\"$v\"";
+			}
+		}
+
+		$img .= '/>';
+
+		return $img;
 	}
 
 	//Creates the opening portion of the form.
@@ -911,63 +945,6 @@ if ( ! function_exists('heading'))
 	{
 		$attributes = ($attributes != '') ? ' '.$attributes : $attributes;
 		return "<h".$h.$attributes.">".$data."</h".$h.">";
-	}
-}
-
-
-// ------------------------------------------------------------------------
-
-/**
- * Image
- *
- * Generates an <img /> element
- *
- * @access	public
- * @param	mixed
- * @return	string
- */
-if ( ! function_exists('img'))
-{
-	function img($src = '', $index_page = FALSE)
-	{
-		if ( ! is_array($src) )
-		{
-			$src = array('src' => $src);
-		}
-
-		// If there is no alt attribute defined, set it to an empty string
-		if ( ! isset($src['alt']))
-		{
-			$src['alt'] = '';
-		}
-
-		$img = '<img';
-
-		foreach ($src as $k=>$v)
-		{
-
-			if ($k == 'src' AND strpos($v, '://') === FALSE)
-			{
-				$CI =& get_instance();
-
-				if ($index_page === TRUE)
-				{
-					$img .= ' src="'.$CI->config->site_url($v).'"';
-				}
-				else
-				{
-					$img .= ' src="'.$CI->config->slash_item('base_url').$v.'"';
-				}
-			}
-			else
-			{
-				$img .= " $k=\"$v\"";
-			}
-		}
-
-		$img .= '/>';
-
-		return $img;
 	}
 }
 

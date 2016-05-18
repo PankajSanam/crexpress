@@ -1,21 +1,41 @@
 <?php
+/*
+ * ---------------------------------------------------------------------
+ * Autoload
+ * ---------------------------------------------------------------------
+ * This class is used for loading all library files from library folder
+ * and package files from package folder.
+ *
+ */
 
 class Retina{
 
-	public static function library($files) {
-		foreach ($files as $file) {
-			require_once '../library/'.$file.'.php';
+	/*
+	| ---------------------------------------------------------------------
+	|  Library
+	| ---------------------------------------------------------------------
+	| Loads all libraries in library folder automatically.
+	|
+	*/
+	public static function library(){
+	    foreach (glob("../library/*.php") as $filename) {
+			require_once $filename;
 		}
 	}
 
-	public static function package($files) {
-		foreach ($files as $location => $file) {
-			foreach($file as $f){
-				require_once '../package/'. $location.'/'. $f . '.php';
-			}
+
+	/*
+	| ---------------------------------------------------------------------
+	|  Package
+	| ---------------------------------------------------------------------
+	| Loads all packages in package folder automatically.
+	|
+	*/
+	public static function package($folder){
+	    foreach (glob("../package/$folder/*.php") as $filename) {
+			require_once $filename;
 		}
 	}
 
 }
-
 ?>

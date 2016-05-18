@@ -4,25 +4,14 @@ require_once 'retina.php';
 require_once '../core/connection.php';
 require_once '../core/db.php';
 
-Retina::library(array(
-	'helper',
-	'validation',
-	'sanitize',
-	'location',
-	'gallery',
-	'slider',
-	'upload',
-	'ajax',
-	'html',
-	'image',
-	'page'
-));
+Retina::library();
 
-Retina::package( array(
-	'job_portal' => array (
-		'private_jobs_model'
-	)
-));
+
+$package_names = Db::select('packages',array('status=' => 1));
+foreach($package_names as $package_name){
+	$package = strtolower(preg_replace("/[ ]/", '_', $package_name['name']));
+	Retina::package($package);
+}
 
 
 //Template Files

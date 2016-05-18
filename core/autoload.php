@@ -1,30 +1,41 @@
 <?php
-//Core Files
-require_once 'core/retina.php';
-require_once 'core/connection.php';
-require_once 'core/db.php';
+/*
+ * ---------------------------------------------------------------------
+ * Autoload
+ * ---------------------------------------------------------------------
+ * This class is used for loading all library files from library folder
+ * and package files from package folder.
+ *
+ */
 
-Retina::library(array(
-	'helper',
-	'validation',
-	'sanitize',
-	'location',
-	'gallery',
-	'slider',
-	'upload',
-	'ajax',
-	'html',
-	'image',
-	'page'
-));
+class Autoload{
 
-Retina::package( array(
-	'job_portal' => array (
-		'private_jobs_model'
-	)
-));
+	/*
+	| ---------------------------------------------------------------------
+	|  Library
+	| ---------------------------------------------------------------------
+	| Loads all libraries in library folder automatically.
+	|
+	*/
+	public static function library(){
+	    foreach (glob("library/*.php") as $filename) {
+			require_once $filename;
+		}
+	}
 
 
-//Template Files
-include 'theme/'.THEME_NAME.'/view/right_sidebar.php';
+	/*
+	| ---------------------------------------------------------------------
+	|  Package
+	| ---------------------------------------------------------------------
+	| Loads all packages in package folder automatically.
+	|
+	*/
+	public static function package($folder){
+	    foreach (glob("package/$folder/*.php") as $filename) {
+			require_once $filename;
+		}
+	}
+
+}
 ?>

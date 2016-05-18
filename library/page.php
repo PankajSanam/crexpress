@@ -2,11 +2,11 @@
 class Page {
 	public static function slug($page,$page_template){
 		if($page_template=='private_job') {
-			$count = DB::count_query('private_jobs', array('slug=' => $page, 'status=' => 1 ));
-			$result = DB::select_query('private_jobs', array('slug=' => $page, 'status=' => 1 ));
+			$count = Db::count('private_jobs', array('slug=' => $page, 'status=' => 1 ));
+			$result = Db::select('private_jobs', array('slug=' => $page, 'status=' => 1 ));
 		} else {
-			$count = DB::count_query('pages', array('slug=' => $page, 'status=' => 1 ));
-			$result = DB::select_query('pages', array('slug=' => $page, 'status=' => 1 ));
+			$count = Db::count('pages', array('slug=' => $page, 'status=' => 1 ));
+			$result = Db::select('pages', array('slug=' => $page, 'status=' => 1 ));
 		}
 		if($count > 0)
 			return $result[0]['slug'];
@@ -15,11 +15,11 @@ class Page {
 	}
 
 	public static function template($page){
-		$result1 = DB::select_query('pages', array('slug=' => $page, 'status=' => 1 ));
-		$count1 = DB::count_query('pages', array('slug=' => $page, 'status=' => 1 ));
+		$result1 = Db::select('pages', array('slug=' => $page, 'status=' => 1 ));
+		$count1 = Db::count('pages', array('slug=' => $page, 'status=' => 1 ));
 		
-		$result2 = DB::select_query('private_jobs', array('slug=' => $page, 'status=' => 1 ));
-		$count2 = DB::count_query('private_jobs', array('slug=' => $page, 'status=' => 1 ));
+		$result2 = Db::select('private_jobs', array('slug=' => $page, 'status=' => 1 ));
+		$count2 = Db::count('private_jobs', array('slug=' => $page, 'status=' => 1 ));
 
 		if($count1 > 0 ) {
 			$page_template = Page::template_name($result1[0]['page_template_id']);
@@ -35,7 +35,7 @@ class Page {
 
 	public static function template_name($id){
 		$cond = array( 'id=' => $id );
-		$query = DB::select_query('page_templates',$cond);
+		$query = Db::select('page_templates',$cond);
 		foreach($query as $q){ }
 		return $q['template_name'];
 	}
@@ -43,14 +43,14 @@ class Page {
 	public static function name($slug,$page_template=''){
 		if($page_template == 'private_job') {
 			$conditions = array( 'slug=' => $slug );
-			$query= DB::select_query('private_jobs',$conditions);
+			$query= Db::select('private_jobs',$conditions);
 			foreach($query as $q){
 				$page_name = $q['title'];
 			}
 		} else {
 			if($slug!=404){
 				$conditions = array( 'slug=' => $slug );
-				$query= DB::select_query('pages',$conditions);
+				$query= Db::select('pages',$conditions);
 				foreach($query as $q){
 					$page_name = $q['title'];
 				}
@@ -64,7 +64,7 @@ class Page {
 	public static function content($slug,$page_template=''){
 		if($slug!=404){
 			$conditions = array( 'slug=' => $slug );
-			$query= DB::select_query('pages',$conditions);
+			$query= Db::select('pages',$conditions);
 			foreach($query as $q){
 				$page_content = $q['content'];
 			}
@@ -79,7 +79,28 @@ class Page {
 		if($slug!=404){
 			$page_featured_image = '';
 			$conditions = array( 'slug=' => $slug );
-			$query= DB::select_query('pages',$conditions);
+			$query= Db::select('pages',$conditions);
+			foreach($query as $q){
+				$page_featured_image = $q['featured_image'];
+			}
+		
+			if(isset($page_featured_image) && $page_featured_image!=''){
+				$featured_image = '<img class="'.$class.'" src="uploads/pages/'.$page_featured_image.'" width="'.$width.'" height="'.$height.'" />';
+			} else {
+				$featured_image = '';
+			}
+		} else {
+			$featured_image = '<img class="'.$class.'" src="uploads/general/404.png" width="'.$width.'" height="'.$height.'" />';
+		}
+
+		return $featured_image;
+	}
+
+	public static function thumb($slug,$width='',$height='',$class=''){
+		if($slug!=404){
+			$page_featured_image = '';
+			$conditions = array( 'slug=' => $slug );
+			$query= Db::select('pages',$conditions);
 			foreach($query as $q){
 				$page_featured_image = $q['featured_image'];
 			}
@@ -100,7 +121,7 @@ class Page {
 	public static function last_updated($slug) {
 		if($slug!=404){
 			$condition = array('slug=' => $slug);
-			$query = DB::select_query('pages',$condition);
+			$query = Db::select('pages',$condition);
 			foreach($query as $q){
 				$page_last_updated = $q['last_updated'];
 			}
@@ -114,7 +135,7 @@ class Page {
 	public static function id($slug) {
 		if($slug!=404){
 			$condition = array('slug=' => $slug);
-			$query = DB::select_query('pages',$condition);
+			$query = Db::select('pages',$condition);
 			foreach($query as $q){
 				$row = $q['id'];
 			}
@@ -127,7 +148,7 @@ class Page {
 
 	public static function link($slug){
 		$condition = array('slug=' => $slug);
-		$query = DB::select_query('pages',$condition);
+		$query = Db::select('pages',$condition);
 		foreach($query as $q){
 			$row = $q['slug'];
 		}
@@ -136,7 +157,7 @@ class Page {
 	}
 
 	public static function latest_page(){
-		$query = DB::select_query('pages','','last_updated','DESC',0,1);
+		$query = Db::select('pages','','last_updated','DESC',0,1);
 		foreach($query as $q){
 			$col[] = $q;
 		}

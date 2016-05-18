@@ -2,14 +2,14 @@ Project		: GIT BOX
 Description : GIT BOX is a CMF (Content Management Framework). Project is still in beta phase.
 Author 		: Pankaj Sanam
 Company		: GIT Infosys
-Version 	: 0.6 (Beta)
+Version 	: 0.7 (Beta)
 History 	:
-	GIT BOX 0.0
+	GIT BOX 0.0.0
 		Release Date : 25/09/2013
 		Features List :
 			- Wordpress Site
 
-	GIT BOX 0.1
+	GIT BOX 0.0.1
 		Release Date : 27/09/2013
 		Features List :
 			- Ability to add pages.
@@ -17,7 +17,7 @@ History 	:
 			- Responsive Admin Panel.
 			- Added Page Template.
 	
-	GIT BOX 0.2
+	GIT BOX 0.0.2
 		Release Date : 03/10/2013
 		Features List :
 			- Added File Manager.
@@ -25,7 +25,7 @@ History 	:
 			- Reavamped Data Models and Core Files.
 			- Improved Admin Login.
 	
-	GIT BOX 0.3
+	GIT BOX 0.0.3
 		Release Date : 06/10/2013
 		Features List :
 			- Added Private Job feature in admin.
@@ -33,7 +33,7 @@ History 	:
 			- Added User management in admin.
 			- Revamped SEO structured with Private job feature.
 	
-	GIT BOX 0.4
+	GIT BOX 0.0.4
 		Release Date : 07/10/2013
 		Features List :
 			- Added Slider feature in admin.
@@ -50,7 +50,7 @@ History 	:
 			- Added validation class in library
 			- Revamped admin panel with all new changes
 
-	GIT BOX 0.5
+	GIT BOX 0.0.5
 		Release Date : 14/10/2013
 		Bug Fixes:
 			- Removed two dirty functions from validation class.
@@ -80,7 +80,7 @@ History 	:
 			- Cleaned up htaccess file.
 			- Added active menu class in top navigation.
 
-	GIT BOX 0.6
+	GIT BOX 0.0.6
 		Release Date : 18/10/2013
 		Bug Fixes:
 			- Fixed echo_error method in image library class.
@@ -93,3 +93,41 @@ History 	:
 			- Improved private job page design.
 			- Added a new method in helper class for "from to" statements.
 			- Added ul and ol list methods in html library class.
+
+	GIT BOX 0.0.7
+		Release Date : 26/10/2013
+		Bug Fixes:
+			- Fixed css issues.
+			- Fixed location method bug in private job template.
+			- Removed un-nessary classes in style.
+		Features List :
+			- Added packages and admin_menus table in db.
+			- Added packages option in admin panel.
+			- Ability to see all installed packages.
+			- Made minor changes in connection file.
+			- Added check meta method in db class for extracting the table names which contains meta tags.
+			- Revamped meta methods in html class where they can take as many as tables with meta meta tags.
+			- Changed xmlns method to lang in html class and theme header file.
+			- Retina class is updated to add libraries and packages automatically.
+			- Renamed job_portal package to private_jobs.
+			- Packages will be included automatically in autoload from packages database.
+			- Merged autoload configuration in index file.
+			- Changed Retina class to autoload class.
+			- Added documentation comments in index, autoload and connection file.
+			- Added meta_charset method in html class.
+			- Added img method in html class.
+			- Added social_icons method in helper class.
+			- Added copyright and powered_by methods in helper class.
+			- Secured select_query and update_query method from sql injection in db class.
+			- Renamed DB class to Db.
+			- Added a delete method in Db class.
+			- Added a confirm delete javascript function in admin footer.
+			- Added encrypt class in library with lock and unlock methods to encrypt data with mcrypt.
+			- Encrypted id is passed in url when deleting a record in admin users.
+			- Added delete functionality with confirmation in admin/users and pages.
+			- Parted header information into header file in admin.
+			- Removed *_query from all Db class methods.
+			- Commented unnecessary code in htaccess file.
+			- Optimized some data in mysql tables.
+			- Added a thumb method in page class.
+			- Removed default image from featured_image method in page class.

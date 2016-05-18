@@ -27,12 +27,12 @@
 					$errors[] = 'Please enter a search term.';
 				} elseif(strlen($_GET['search']) < 3){
 					$errors[] = 'Your search term must be 3 or more characters.';
-				} elseif(DB::search_query($_GET['search']) === false){
+				} elseif(Db::search($_GET['search']) === false){
 					$errors[] = 'Your search for <strong>'.$_GET['search'].'</strong> returned no results';
 				}
 
 				if(empty($errors)){
-					$results = DB::search_query($_GET['search']);
+					$results = Db::search($_GET['search']);
 					$results_num = count($results);
 					$suffix = ($results_num != 1) ? 's' : '';
 					echo 'Your search for <strong>'.$_GET['search'].'</strong> returned '.$results_num.' result'.$suffix;

@@ -1,7 +1,50 @@
 <?php
-class DB {
+/*
+ * ---------------------------------------------------------------------
+ * Database Operations
+ * ---------------------------------------------------------------------
+ * This file defines all database related operations. e.g.
+ * 		1. Selecting data from a table
+ * 		2. Counting total number of rows from select query
+ * 		3. Inserting data into a table
+ * 		4. Updating a table records
+ * 		5. Searching data from a table
+ * 		6. Check if meta tags exist in any table then returns the table names
+ * 		7. Deleting a data from table
+ */
+class Db {
 
-	public static function select_query($table_name,$conditions='',$sort_by='',$sort_order='',$start_limit='',$end_limit='') {
+	/*
+	| ---------------------------------------------------------------------
+	|  Fetch Data from Table
+	| ---------------------------------------------------------------------
+	| This is used for fetching data from a table and store all its records
+	| in an array to further used later in system.
+	|
+	| 'tablename' 	=>	Name of table where data needs to be fetched from.
+	| 'conditions'	=>	where statement of a select query to define all
+	|					conditions which are helpful to select sepecific
+	|					records. If you want to select all data from a
+	|					table then you can leave this field empty.
+	| 'sort_by'		=> 	It specifies the column name which will be used to
+	|					sort the fetched data from a table. If you don't
+	|					want it then you can leave this empty.
+	| 'sort_order'	=>	Defines the ascending and descending sort order.
+	|					ASC for Ascending order, DESC for descending order.
+	| 'start_limit'	=> 	Set the number of records you want the data to be
+	|					fetched from. e.g. if you want to fetch the data
+	|					by skipping first row then you can start it from 1.
+	|					Very helpful in pagination. But if you just want to
+	|					limit the records nothing more than that then use
+	|					end limit and leave this empty.
+	| 'end_limit'	=> 	It specifies the last record you need to fetch.
+	|					e.g. if you want to fetch only 5 records from a
+	|					table then you can set it to 5.
+	|
+	| Example:
+	|		Db::select('table_name',array('id='=>1),'id','asc','','5')
+	*/
+	public static function select($table_name,$conditions='',$sort_by='',$sort_order='',$start_limit='',$end_limit='') {
 		global $pdo;
 
 		$sql = NULL;
@@ -32,7 +75,7 @@ class DB {
 		return $query->fetchAll();
 	}
 
-	public static function count_query($table_name,$conditions="") {
+	public static function count($table_name,$conditions="") {
 		global $pdo;
 
 		$sql = NULL;
@@ -52,9 +95,9 @@ class DB {
 		return $query->rowCount();
 	}
 
-	public static function insert_query($table_name,$values) {
+	public static function insert($table_name,$values) {
 		global $pdo;
-
+		$data = array();
 		$columns = array_keys($values);
 		$columns = implode(", ", $columns);
 
@@ -63,30 +106,49 @@ class DB {
 			$value[] = stripslashes(trim($val));
 		}
 
-		$values = implode("','", $value);
+		$count_val = count($value);
+		$count_value = '';
+		for($i=1;$i<=$count_val;$i++){
+			$count_value .= '?';
+			if($i!=$count_val){
+				$count_value .= ',';
+			}
+		}
+		$sql = "INSERT into ".$table_name." (".$columns.") VALUES (".$count_value.")";
+		$query = $pdo->prepare($sql);
 
-		$query = $pdo->prepare("INSERT into ".$table_name." (".$columns.") VALUES ('".$values."')");
-		$query->execute();
+		foreach($value as $v){
+			$data[] = $v;
+		}
+		$query->execute($data);
+
 	}
 
-	public static function update_query($table_name,$values,$conditions){
+
+	public static function update($table_name,$values,$conditions){
 		global $pdo;		
+		$data = array();
 
 		foreach($values as $key1=>$value) {
-			$set[] = " ".$key1." = '".stripslashes(trim($value))."'";
+			$set[] = " ".$key1." = ?";
+
+			$data[] = $value;
 		}
 		$set_clause = implode(', ', $set);
 		
 		foreach($conditions as $key2=>$condition) {
-			$where[] = $key2." '".$condition."'";
+			$where[] = $key2.' ? ';
+			$data[] = $condition;
 		}
 		$where_clause = implode(', ', $where);
 		
 		$query = $pdo->prepare("UPDATE $table_name SET $set_clause WHERE $where_clause");
-		$query->execute();
+
+		$query->execute($data);
 	}
 
-	public static function search_query($keywords) {
+
+	public static function search($keywords) {
 		global $pdo;
 
 		$where = '';
@@ -131,19 +193,36 @@ class DB {
 		
 	}
 
-	public static function delete_me($tblname,$values,$onSuccess="",$onFailure=""){
-		if($values!='') {
-			foreach($values as $key=>$value) {
-				$where[] = " ".$key." = '".$value."'";
-			}
-			$where_clause = implode(' AND ', $where);
-			
-			$sql = "delete from ".$tblname." where ".$where_clause."";
-		}
+	public static function check_meta() {
+		global $pdo;
 
-		$result=mysql_query($sql) or die('DB Halt');
-		if(!$result) { $process_msg=$onFailure; } else { $process_msg=$onSuccess;}
-		echo $process_msg;
+		$query = $pdo->prepare("SELECT distinct * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = '".DB_NAME."'  AND COLUMN_NAME = 'meta_title'");
+		$query->execute();
+
+		$rows = $query->fetchAll();
+		foreach($rows as $row){
+			$col[] = $row['TABLE_NAME'];
+		}
+		return $col;
 	}
+
+	public static function delete($table_name,$conditions){
+		global $pdo;
+		
+		foreach($conditions as $key=>$condition) {
+			$where[] = $key .' ' . $condition;
+		}
+		$where_clause = implode(' AND ', $where);
+
+		$sql = "DELETE from ".$table_name." where ".$where_clause."";
+		$query = $pdo->prepare($sql);
+
+		foreach($condition as $c){
+			$data[] = $c;
+		}
+		$query->execute($data);
+	}
+
+	
 }
 ?>

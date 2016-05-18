@@ -88,25 +88,11 @@
 	</div>
 	<div class="subnav subnav-hidden">
 		<div class="subnav-title">
-			<a href="#" class='toggle-subnav'><i class="icon-angle-right"></i><span>Plugins</span></a>
+			<a href="#" class='toggle-subnav'><i class="icon-angle-right"></i><span>Packages</span></a>
 		</div>
 		<ul class="subnav-menu">
-			<li><a href="#">Menu</a></li>
-			<li class='dropdown'>
-				<a href="#" data-toggle="dropdown">With submenu</a>
-				<ul class="dropdown-menu">
-					<li><a href="#">Action #1</a></li>
-					<li><a href="#">Antoher Link</a></li>
-					<li class='dropdown-submenu'>
-						<a href="#" data-toggle="dropdown" class='dropdown-toggle'>More stuff</a>
-						<ul class="dropdown-menu">
-							<li><a href="#">This is level 3</a></li>
-							<li><a href="#">Easy to use</a></li>
-						</ul>
-					</li>
-				</ul>
-			</li>
-			<li><a href="#">Security settings</a></li>
+			<li><a href="packages.php">All Packages</a></li>
+			<li><a href="manage-package.php">Install Package</a></li>
 		</ul>
 	</div>
 </div>

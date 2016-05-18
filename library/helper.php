@@ -29,5 +29,27 @@ class Helper {
 		}
 	}
 
+	public static function social_icons(){
+		$social = '<ul>';
+		$social_icons = Db::select('social_icons');
+		foreach($social_icons as $social_icon){
+			$social .= '<li><a title="'.$social_icon['name'].'" href="'.$social_icon['url'].$social_icon['link'].'">
+					<img src="uploads/social/'.$social_icon['image'].'" width="28" /></a></li>';
+		}
+		$social .= '</ul>';
+
+		return $social;
+	}
+
+	public static function copyright( $year = '2013' ){
+		$copy = '&copy; '.$year.', All Rights Reserved.';
+		return $copy;
+	}
+
+	public static function powered_by( $title = 'Website Designing and Development' ){
+		$powered = 'Powered By <a href="http://www.gitinfosys.com" title="'.$title.'">GIT Infosys</a>';
+		return $powered;
+	}
+
 }
 ?>

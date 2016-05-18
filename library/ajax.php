@@ -1,4 +1,12 @@
 <?php
+/*
+$edit_ajax = new ajaxClass;
+$edit_ajax->function_name='editBooking';
+$edit_ajax->arg='id';
+$edit_ajax->id='booking-container';
+$edit_ajax->filename='ajax-edit-rail';
+$edit_ajax->ajax_edit();
+*/
 class Ajax {
 	function show(){ ?>
 		<script language="javascript">

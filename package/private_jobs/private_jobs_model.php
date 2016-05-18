@@ -1,14 +1,14 @@
 <?php
 class PrivateJob {
 	public static function category_name($id){
-		$query = DB::select_query('job_categories',array( 'id=' => $id ));
+		$query = Db::select('job_categories',array( 'id=' => $id ));
 		foreach($query as $q){ }
 		return $q['name'];
 	}
 
 	public static function featured_image($slug,$width='',$height='',$class=''){
 		if($slug!=404){
-			$query= DB::select_query('private_jobs',array( 'slug=' => $slug ));
+			$query= Db::select('private_jobs',array( 'slug=' => $slug ));
 			foreach($query as $q){
 				$page_featured_image = $q['featured_image'];
 			}
@@ -27,7 +27,7 @@ class PrivateJob {
 	}
 
 	public static function link($slug){
-		$query = DB::select_query('private_jobs',array('slug=' => $slug));
+		$query = Db::select('private_jobs',array('slug=' => $slug));
 		foreach($query as $q){
 			$row = $q['slug'];
 		}
@@ -37,7 +37,7 @@ class PrivateJob {
 
 	public static function description($slug){
 		if($slug!=404){
-			$query= DB::select_query('private_jobs',array( 'slug=' => $slug ));
+			$query= Db::select('private_jobs',array( 'slug=' => $slug ));
 			foreach($query as $q){
 				$page_content = $q['content'];
 			}
@@ -49,7 +49,7 @@ class PrivateJob {
 
 	public static function title($slug){
 		if($slug!=404){
-			$query= DB::select_query('private_jobs',array( 'slug=' => $slug ));
+			$query= Db::select('private_jobs',array( 'slug=' => $slug ));
 			foreach($query as $q){
 				$page_name = $q['title'];
 			}

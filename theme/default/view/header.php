@@ -1,5 +1,5 @@
 <?php echo Html::doc_type(); ?>
-<html <?php echo Html::xmlns(); ?>>
+<html <?php echo Html::lang(); ?>>
 <head>
 	<?php echo Html::content_type(); ?>
 	<?php echo Html::meta_title($page); ?>
@@ -35,14 +35,14 @@
 <div id="bg">
 	<div id="wrapper_sec">
 		<div id="masterhead">
-			<div class="logo"><a href="./"><img src="<?php echo THEME_PATH;?>/images/logo.png" width="300" /></a></div>
+			<div class="logo"><a href="./"><?php echo Html::img( array( 'src' => 'logo.png', 'width' => 300 ) ); ?></a></div>
 			<div class="topright_sec">
 				<div class="topnavigation">
                		<ul>
                   		<li class="first">&nbsp;</li>
                     	<li><a href="privacy-policy.html">Privacy Policy</a></li>
                         <li><a href="contact.html">Contact Us</a></li>
-                    	<li><a class="nobg" href="#"><img src="<?php echo THEME_PATH;?>/images/rss.gif" alt="" /></a></li>
+                    	<li><a class="nobg" href="#"><?php echo Html::img('rss.gif');?></a></li>
                     	<li class="last">&nbsp;</li>
                     </ul>
 				</div>
@@ -51,7 +51,7 @@
                 	<div class="advance_search"><a href="#"></a></div>
                 		<form method="GET">
 	                    	<ul>
-	                        	<li><input name="search" value="Search here" onfocus="if(this.value=='Search here') {this.value='';}" onblur="if(this.value=='') {this.value='Search here';}" type="text" /></li>
+	                        	<li><input name="search" placeholder="Search here..." type="text" /></li>
 	                            <li><input type="submit" value="Search" class="search"></li>
 	                     	</ul>
 	                    </form>
@@ -71,14 +71,14 @@
 		                    	'menu_name<>' => '',
 		                    	'menu_sort_order<>' => 0,
 		                    );
-							$query = DB::select_query('pages',$cond);
+							$query = Db::select('pages',$cond);
 							foreach($query as $top_nav){
 							?>
 							<li>
 								<a href="<?php echo Page::link($top_nav['slug']); ?>" class="<?php if($page_slug == $top_nav['slug']) echo 'selected'; else echo '';?>"><?php echo $top_nav['menu_name']; ?></a>
 								<?php
-								$find_query = DB::select_query('pages', array( 'menu_name<>' => '', 'status=' => 1, 'page_category_id=' => $top_nav['id']));
-								$find_res = DB::count_query('pages', array( 'menu_name<>' => '', 'status=' => 1, 'page_category_id=' => $top_nav['id']));
+								$find_query = Db::select('pages', array( 'menu_name<>' => '', 'status=' => 1, 'page_category_id=' => $top_nav['id']));
+								$find_res = Db::count('pages', array( 'menu_name<>' => '', 'status=' => 1, 'page_category_id=' => $top_nav['id']));
 								if($find_res <= 0){
 									echo '</li>';
 								} else {
@@ -90,13 +90,13 @@
 										'status=' => 1, 
 										'menu_name<>' =>'',
 									);
-									$query = DB::select_query('pages',$cond);
+									$query = Db::select('pages',$cond);
 									foreach($query as $top_submenu){
 									?>
 									<li>
 										<?php
-										$f_query = DB::select_query('pages', array( 'menu_name<>' => '', 'status=' => 1, 'page_category_id=' => $top_submenu['id']));
-										$f_res = DB::count_query('pages', array( 'menu_name<>' => '', 'status=' => 1, 'page_category_id=' => $top_submenu['id']));
+										$f_query = Db::select('pages', array( 'menu_name<>' => '', 'status=' => 1, 'page_category_id=' => $top_submenu['id']));
+										$f_res = Db::count('pages', array( 'menu_name<>' => '', 'status=' => 1, 'page_category_id=' => $top_submenu['id']));
 
 										if($f_res <= 0)
 											$class = '';
@@ -116,7 +116,7 @@
 												'status=' => 1, 
 												'menu_name<>' =>'' 
 											);
-											$query = DB::select_query('pages',$cond);
+											$query = Db::select('pages',$cond);
 											foreach($query as $top_submenu2){
 											?>
 											<li>
@@ -149,6 +149,6 @@
 					<span class="news_update">Latest Updates</span>
 					<span class="news_date"><em><?php echo $update_date; ?>: </em></span>
 					<span class="news_des"> <a href="<?php echo $update_link; ?>" title="<?php echo $update_news; ?>" class="colr"><?php echo $update_news; ?></a> </span> 
-					<a class="next" href="<?php echo $update_link; ?>"><img src="<?php echo THEME_PATH;?>/images/newsarrow.jpg" alt="" /></a> 
+					<a class="next" href="<?php echo $update_link; ?>"><?php echo Html::img('newsarrow.jpg'); ?></a> 
 				</div>
 				<div class="clear"></div>

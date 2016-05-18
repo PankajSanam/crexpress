@@ -1,36 +1,18 @@
 <div class="col1"> 
 	<div id="banner">
 		<div id="slider2">
-			<div class="contentdiv"> <a href="#"><img src="uploads/slider/home-slider1.jpg" alt="" /></a>
+			<?php
+			$sliders = Db::select('sliders',array( 'status='=> 1 ));
+			foreach($sliders as $slider){
+			?>
+			<div class="contentdiv">
+				<img src="uploads/slider/<?php echo $slider['image'];?>" alt="<?php echo $slider['name'];?>" />
 				<div class="banner_des">
-					<h4>Quality Education</h4>
-					<p>It is an essential part of our life to get quality education which can be achieved by proper study plannings and routines.</p>
+					<h4><?php echo $slider['name'];?></h4>
+					<p><?php echo $slider['description'];?></p>
 				</div>
 			</div>
-			<div class="contentdiv"> <a href="#"><img src="uploads/slider/home-slider2.jpg" alt="" /></a>
-				<div class="banner_des">
-					<h4>Career</h4>
-					<p>Seeking out for a job or trying to find a job for fresher is sometimes hard and time consuming process. We are here to help you to find a new and good job.</p>
-				</div>
-			</div>
-			<div class="contentdiv"> <a href="#"><img src="uploads/slider/home-slider3.jpg" alt="" /></a>
-				<div class="banner_des">
-					<h4>Jobs</h4>
-					<p>A successful person is one who has good job where he is satisfied with the work and money. It is not an easy task to find such a job which fulfills all your requirements. </p>
-				</div>
-			</div>
-			<div class="contentdiv"> <a href="#"><img src="uploads/slider/home-slider4.jpg" alt="" /></a>
-				<div class="banner_des">
-					<h4>Interview</h4>
-					<p>Every individual who is willing to get a job job, has to go through the process of interview where he/she has to face the interviewer and fear of interview.</p>
-				</div>
-			</div>
-			<div class="contentdiv"> <a href="#"><img src="uploads/slider/home-slider5.jpg" alt="" /></a>
-				<div class="banner_des">
-					<h4>Educate yourself</h4>
-					<p>Educate yourself by updating your knowledge with all the latest events and current happenings in the world.</p>
-				</div>
-			</div>
+			<?php } ?>
 		</div>
 		<div id="paginate-slider2" class="pagination"> </div>
 		<script type="text/javascript" src="<?php echo THEME_PATH;?>/js/slider.js"></script> 

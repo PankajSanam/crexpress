@@ -1,31 +1,28 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP 5.1.6 or newer
- *
- * @package		CodeIgniter
- * @author		ExpressionEngine Dev Team
- * @copyright	Copyright (c) 2008 - 2011, EllisLab, Inc.
- * @license		http://codeigniter.com/user_guide/license.html
- * @link		http://codeigniter.com
- * @since		Version 1.0
- * @filesource
- */
+<?php
+class Encrypt{
+	public static function lock($value){ 
+		if(!$value) { return false; }
+		$key = '<(o_O)>'; 
+		$text = $value;
+		$iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB);
+		$iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
+		$crypttext = mcrypt_encrypt(MCRYPT_RIJNDAEL_256, $key, $text, MCRYPT_MODE_ECB, $iv);
+		return trim(base64_encode($crypttext));
+	}
 
-// ------------------------------------------------------------------------
+	public static function unlock($value){ 
+		if(!$value) { return false; }
+		$key = '<(o_O)>';
+		$crypttext = base64_decode($value);
+		$iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB);
+		$iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
+		$decrypttext = mcrypt_decrypt(MCRYPT_RIJNDAEL_256, $key, $crypttext, MCRYPT_MODE_ECB, $iv);
+		return trim($decrypttext);
+	}
 
-/**
- * CodeIgniter Encryption Class
- *
- * Provides two-way keyed encoding using XOR Hashing and Mcrypt
- *
- * @package		CodeIgniter
- * @subpackage	Libraries
- * @category	Libraries
- * @author		ExpressionEngine Dev Team
- * @link		http://codeigniter.com/user_guide/libraries/encryption.html
- */
+}
+
+
 class CI_Encrypt {
 
 	var $CI;
@@ -540,8 +537,3 @@ class CI_Encrypt {
 	}
 
 }
-
-// END CI_Encrypt class
-
-/* End of file Encrypt.php */
-/* Location: ./system/libraries/Encrypt.php */

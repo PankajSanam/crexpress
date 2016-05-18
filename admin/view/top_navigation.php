@@ -6,15 +6,6 @@
 		<ul class='main-nav'>
 			<li class='active'><a href="dashboard.php"><span>Dashboard</span></a></li>
 			<li>
-				<a href="#" data-toggle="dropdown" class='dropdown-toggle'><span>Private Jobs</span><span class="caret"></span></a>
-				<ul class="dropdown-menu">
-					<li><a href="private-jobs.php">Private Jobs</a></li>
-					<li><a href="post-private-job.php">Post Private Jobs</a></li>
-					<li><a href="job-enquiries.php">Job Enquiries</a></li>
-					<li><a href="job-categories.php">Job Categories</a></li>
-				</ul>
-			</li>
-			<li>
 				<a href="#" data-toggle="dropdown" class='dropdown-toggle'><span>Users</span><span class="caret"></span></a>
 				<ul class="dropdown-menu">
 					<li><a href="users.php">Users</a></li>
@@ -26,6 +17,27 @@
 				<ul class="dropdown-menu">
 					<li><a href="gallery.php">Gallery</a></li>
 					<li><a href="manage-gallery.php">Add Gallery</a></li>
+				</ul>
+			</li>
+			<li>
+				<a href="#" data-toggle="dropdown" class='dropdown-toggle'><span>Packages</span><span class="caret"></span></a>
+				<ul class="dropdown-menu">
+					<?php
+					$packages = Db::select('packages',array('status=' => 1));
+					foreach($packages as $package){
+					?>
+					<li class='dropdown-submenu'>
+						<a href="#" data-toggle="dropdown" class='dropdown-toggle'><?php echo $package['name'];?></a>
+						<ul class="dropdown-menu">
+							<?php
+							$packs = Db::select('admin_menus',array('package_id='=>$package['id'], 'status=' => 1));
+							foreach($packs as $pack) {
+							?>
+							<li><a href="<?php echo $pack['url'] ?>"><?php echo $pack['name'] ?></a></li>
+							<?php } ?>
+						</ul>
+					</li>
+					<?php } ?>
 				</ul>
 			</li>
 			<li>
@@ -57,12 +69,8 @@
 					<span class="caret"></span>
 				</a>
 				<ul class="dropdown-menu">
-					<li>
-						<a href="plugins-charts.html">Charts</a>
-					</li>
-					<li>
-						<a href="plugins-calendar.html">Calendar</a>
-					</li>
+					<li><a href="plugins-charts.html">Charts</a></li>
+					<li><a href="plugins-calendar.html">Calendar</a></li>
 					<li>
 						<a href="plugins-filemanager.html">File manager</a>
 					</li>

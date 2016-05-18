@@ -16,13 +16,10 @@
 	</div>-->
 	<!-- Content Heading -->
 	<div class="content_heading">
-       	<div class="heading"><h2>Choose better job for you</h2> </div>
+       	<div class="heading"><h2>Find your dream job</h2> </div>
         <!--<div class="share"><a href="#">Share with friends</a></div>-->
     </div>
-	<!--<p>Nullam scelerisque cursus leo at volutpat. Etiam non faucibus ante. Ut eget leo placerat velit imperdiet 
-	suscipit. aliquam est. Proin eget laoreet lectus. Nullam scelerisque cursus leo at volutpat. Etiam non faucibus 
-	ante. placerat velit imperdiet suscipit.  at aliquam est. Proin eget laoreet lectus. Nullam scelerisque cursus 
-	leo at volutpat.</p>-->
+	<p>Select your job preferred city below-</p>
    	<div class="make_slection">
     	<span>Search job in </span> 
         <form method="POST">
@@ -40,9 +37,18 @@
    	<div class="clear"></div>
     <!-- Content Block -->
     <div class="listingblock">
-       	<div class="sheading">
+		<?php
+		if(isset($_POST['city_id'])) {
+			$query = Db::select('private_jobs', array('status=' => 1, 'city_id=' => $_POST['city_id']));
+			$res = Db::count('private_jobs', array('status=' => 1, 'city_id=' => $_POST['city_id']));
+
+			if($res <= 0){
+				echo 'No records found!';
+			} else {
+		?>
+		<div class="sheading">
         	<div class="sheadings">
-            	<h5>Jobs in <?php if(isset($_POST['city_id'])) echo Location::city_name($_POST['city_id']); else echo 'Jaipur'; ?></h5>
+            	<h5>Jobs in <?php if(isset($_POST['city_id'])) echo Location::name($_POST['city_id']); else echo 'Jaipur'; ?></h5>
             </div>
             <div class="sheading_action">
             	<!--<div class="share left"><a href="#">Share to your friends</a></div>
@@ -50,19 +56,6 @@
             </div>
         </div>
 		<div class="clear"></div>
-		<?php
-		if(isset($_POST['city_id']))
-			$city_id = $_POST['city_id'];
-		else
-			$city_id = 3;
-		
-		$query = DB::select_query('private_jobs', array('status=' => 1, 'city_id=' => $city_id));
-		$res = DB::count_query('private_jobs', array('status=' => 1, 'city_id=' => $city_id));
-
-		if($res <= 0){
-			echo 'No records found!';
-		} else {
-		?>
         <div class="job-listing">
             <table cellspacing="1" class="private-job-table">
             	<tr>
@@ -82,7 +75,7 @@
 	                	<?php echo $row['title']; ?></a>
 	                </td>
 	                <td class="pj-row2"><?php echo $row['vacancies']; ?></td>
-	                <td class="pj-row2"><?php if(isset($_POST['city_id'])) echo Location::city_name($_POST['city_id']); else echo 'Jaipur'; ?></td>
+	                <td class="pj-row2"><?php if(isset($_POST['city_id'])) echo Location::name($_POST['city_id']); else echo 'Jaipur'; ?></td>
 		        </tr>
 		        <?php
             	$i++;
@@ -91,7 +84,7 @@
 	        </table>
        		<div class="clear"></div>
         </div>
-        <?php } ?>
+        <?php } } ?>
    	</div>
     <!--<div class="note">
     	<a href="#" class="close">&nbsp;</a>
@@ -140,8 +133,8 @@
 				$city_id = 3;
 			}
 			
-			$query = DB::select_query('private_jobs', array('status=' => 1, 'slug=' => $page_slug));
-			$res = DB::count_query('private_jobs', array('status=' => 1, 'slug=' => $page_slug));
+			$query = Db::select('private_jobs', array('status=' => 1, 'slug=' => $page_slug));
+			$res = Db::count('private_jobs', array('status=' => 1, 'slug=' => $page_slug));
 
 			if($res <= 0){
 				echo '';
@@ -240,7 +233,7 @@
             		'mobile' => $_POST['mobile'],
             		'message' => $_POST['message']
             	);
-            	DB::insert_query('job_enquiries',$values);
+            	Db::insert('job_enquiries',$values);
             	Helper::redirect($page_slug.'.html');
             }
             ?>
