@@ -1,23 +1,15 @@
 <div class="col1"> 
 	<div id="banner">
 		<div id="slider2">
-			<?php
-			$sliders = Db::select('sliders',array( 'status='=> 1 ));
-			foreach($sliders as $slider){
-			?>
+			<?php foreach($sliders as $slider){ ?>
 			<div class="contentdiv">
-				<img src="<?php echo DATA_VISION; ?>/slider/<?php echo $slider['image'];?>" alt="<?php echo $slider['name'];?>" />
-				<div class="banner_des">
-					<h4><?php echo $slider['name'];?></h4>
-					<p><?php echo $slider['description'];?></p>
-				</div>
+				<?php echo $html->img('slider/'.$slider['image'], 2); ?>
+				<div class="banner_des"><h4><?php echo $slider['name'];?></h4><p><?php echo $slider['description'];?></p></div>
 			</div>
 			<?php } ?>
 		</div>
 		<div id="paginate-slider2" class="pagination"> </div>
-		<?php
-		Html::scripts(array( 'slider' ));
-		?>
+		<?php echo $slider_js; ?>
 	</div>
 	<!--<div class="content_links">
 		<ul>
@@ -30,10 +22,12 @@
 		</ul>
 	</div>-->
 	<div class="content_heading">
-		<div class="heading"><h2><?php echo Page::name($page_slug); ?></h2></div>
-		<div class="share"><a href="#">Share with friends</a></div>
+		<div class="heading"><h2><?php echo $page_title; ?></h2></div>
+		<div class="share">
+			<a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.careerask.com" target="_blank">Share with friends</a>
+		</div>
 	</div>
-	<p><?php echo Page::content($page_slug); ?><a class="readmore" href="#"></a> </p>
+	<p><?php echo $page_content; ?><a class="readmore" href="#"></a> </p>
 	<div class="clear"></div>
 	<?php /*?><div class="contentblock"> 
 		<div class="tabwrapper">

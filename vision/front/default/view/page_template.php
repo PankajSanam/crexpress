@@ -1,6 +1,6 @@
 <div class="col1"> 
 	<div id="banner1"> 
-		<a href="#"><img src="<?php echo SITE_ROOT; ?>/vision/data/slider/page-slider1.jpg" width="704" /></a>
+		<a href="#"><?php echo $html->img( array( 'src' => 'slider/page-slider1.jpg', 'width' => 704), 2 ); ?></a>
 		<div class="heading"><h1>Career Ask</h1></div>
 	</div>
 	<!-- Content Links 
@@ -18,47 +18,44 @@
 	<div id="content2"> 
 		<div class="blog_detail">
 			<div class="bloginfo">
-				<h2><?php echo Page::name($page_slug); ?></h2>
-				<a href="#"><?php echo Page::featured_image($page_slug,'225','219','blogimg'); ?></a>
+				<h2 class="pad8"><?php echo $page_title; ?></h2>
+				<a href="#"><?php echo $page->featured_image($page_slug,'225','219','blogimg'); ?></a>
 				<!--<div class="info info1">
 					<span class="postedby">Posted By: <a href="#">Admin</a></span>
-					<span class="lastupdte"> Last Update by:<i><?php echo Page::last_updated($page_slug); ?></i></span>
+					<span class="lastupdte"> Last Update by:<i><?php //echo Page::last_updated($page_slug); ?></i></span>
 					<span class="comments"><a href="./blogdetail.html"><strong>852</strong> Comments</a></span>
 					<div class="share1"><a href="./blogdetail.html">Share</a></div>
 				</div>-->
 				<div class="clear"></div>
 			</div>
-			<p><?php echo Page::content($page_slug); ?></p>
+			<p><?php echo $page_content; ?></p>
 			<!--<a href="#" class="link colr">88 Comments</a>-->
 		 	</div>
 		<div class="clear"></div>
 		<?php
-		$page_id = Page::id($page_slug);
-		$query = Db::select('pages',array('status=' => 1, 'page_category_id=' => $page_id));
-		$res = Db::count('pages',array('status=' => 1, 'page_category_id=' => $page_id));
-
-		if($res <= 0){
+		$page_id = $page->id($page_slug);
+		$Db = new Db;
+		$query = $Db->select('pages',array('status=' => 1, 'page_category_id=' => $page_id));
+		if(count($query) <= 0){
 			echo '';
 		} else {
 		?>
-		<h2 class="pad8"><?php echo Page::name($page_slug); ?></h2>
 		<ul class="listing">
-			<?php
-			foreach($query as $row) {
-			?>
+			<?php foreach($query as $row) { ?>
 			<li>
-				<div class="thumb"><a href="<?php echo Page::link($row['slug']); ?>" title="<?php echo $row['title'];?>"><?php echo Page::thumb($row['slug'],'126','106'); ?></a></div>
+				<div class="thumb">
+					<a href="<?php echo $page->link($row['slug']); ?>" title="<?php echo $row['title'];?>">
+					<?php echo $page->thumb($row['slug'],'126','106'); ?></a>
+				</div>
 				<div class="description">
-					<h6><a href="<?php echo Page::link($row['slug']); ?>" class="colr" title="<?php echo $row['title'];?>"><?php echo $row['title']; ?></a></h6>
-					<p><?php echo Validation::strip_html($row['content'],400,'...'); ?></p>
+					<h6><a href="<?php echo $page->link($row['slug']); ?>" class="colr" title="<?php echo $row['title'];?>"><?php echo $row['title']; ?></a></h6>
+					<p><?php echo $validation->strip_html($row['content'],400,'...'); ?></p>
 					<div class="clear"></div>
 					<!--<div class="info"> <span class="lastupdte"> Last Update by:<i>Tue, 26/01/11</i></span> <span class="tag">Tag: <a href="#">Business</a></span> <span class="comments"><a href="#"><strong>852</strong> Comments</a></span> <a class="moreinfo" href="#">:: Moreinfo</a> </div>-->
 				</div>
 				<div class="clear"></div>
 			</li>
-			<?php
-			}
-			?>
+			<?php } ?>
 		</ul>
 		<!--<div class="clear"></div>
 		<div class="pginaiton pad9">
@@ -78,20 +75,6 @@
 		<div class="clear"></div>
 		<?php } ?>
 		<?php /*?><div class="blog_comments">
-			<div class="blog_comment1">
-				<div class="thumb"> <a href="#"><img src="./images/comment1.jpg" alt="" /></a> </div>
-				<div class="description">
-					<div class="comment_top">
-						<div class="comment_topleft">
-							<h5>Peter Morgen</h5>
-							<div class="postdate"> <i class="poston">Post On  Tue, 26/01/11</i> <span class="blog_rating blg_rtng1"> <a href="#"><img src="./images/ratings.jpg" alt="" /> 55</a></span> </div>
-						</div>
-						<div class="comment_topright"> <a class="btn" href="#">Reply</a> </div>
-					</div>
-					<div class="clear"></div>
-					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque bibendum rutrum     		                                                consectetur. Vivamus et nulla ipsum. Nunc accumsan mauris eget nunc imperdiet commodo. Morbi                                                cursus viverra arcu nec dictum. Pellentesque venenatis, dui vel vestibulum suscipit, elit eros                                                egestas dolor, nec suscipit ligula risus ut tellus. Phasellus ante sem. </p>
-				</div>
-			</div>
 			<div class="blog_comment1">
 				<div class="thumb"> <a href="#"><img src="./images/comment2.jpg" alt="" /></a> </div>
 				<div class="description">
@@ -176,15 +159,9 @@
 			<div class="leave_reply_heading colr"> Leave a Reply </div>
 			<div class="leave_reply_form">
 				<ul>
-					<li><span>Name:</span>
-						<input name="txtName" type="text" />
-					</li>
-					<li><span>Email:</span>
-						<input name="txtEmail" type="text" />
-					</li>
-					<li><span>Messege:</span>
-						<textarea class="txtarea" name="txtMessege" cols="0" rows="0"></textarea>
-					</li>
+					<li><span>Name:</span><input name="txtName" type="text" /></li>
+					<li><span>Email:</span><input name="txtEmail" type="text" /></li>
+					<li><span>Messege:</span><textarea class="txtarea" name="txtMessege" cols="0" rows="0"></textarea></li>
 					<li>
 						<div class="replydiv">
 							<p>500 Character remaining </p>

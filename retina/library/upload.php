@@ -1,6 +1,13 @@
-<?php
+<?php if ( ! defined('RETINA_VERSION')) exit('No direct access allowed');
+
 class Upload {
-	public static function image($image,$destination) {
+	
+	private $sanitize;
+
+	public function __construct(){
+		$this->sanitize = new Sanitize;
+	}
+	public function image($image,$destination) {
 		$valid_mime_types = array(
 			'image/gif',
 			'image/png',
@@ -17,7 +24,7 @@ class Upload {
 		$rand = rand(0000,9999);
 		$file_ext = strrchr($filename, ".");
 		$file_basename = substr($filename, 0, strripos($filename, '.')); // strip extension
-		$new_name = Sanitize::clean($file_basename);
+		$new_name = $this->sanitize->clean($file_basename);
 		$newfilename = $new_name.$rand.$file_ext;
 		
 		if(in_array($file_ext, $valid_file_extensions)) {

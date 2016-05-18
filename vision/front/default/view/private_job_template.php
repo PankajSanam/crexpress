@@ -1,10 +1,9 @@
 <div class="col1"> 
 	<div id="banner1"> 
-		<a href="#"><img src="<?php echo SITE_ROOT; ?>/vision/data/slider/page-slider1.jpg" width="704" /></a>
+		<a href="#"><?php echo $html->img( array( 'src' => 'slider/page-slider1.jpg', 'width' => 704), 2 ); ?></a>
 		<div class="heading"><h1>Career Ask</h1></div>
 	</div>
-	<!-- Content Links 
-	<div class="content_links">
+	<!--<div class="content_links">
 		<ul>
 			<li><a class="our_university" href="#">Our University</a></li>
 			<li><a class="admission" href="#">Admissions</a></li>
@@ -14,20 +13,15 @@
 			<li class="last"><a class="take_tour" href="#">Take a Tour</a></li>
 		</ul>
 	</div>-->
-	<!-- Content Heading -->
 	<div class="content_heading">
-       	<div class="heading"><h2>Find your dream job</h2> </div>
-        <!--<div class="share"><a href="#">Share with friends</a></div>-->
+       	<div class="heading"><h2>Find your dream job</h2> </div><!--<div class="share"><a href="#">Share with friends</a></div>-->
     </div>
 	<p>Select your job preferred city below-</p>
    	<div class="make_slection">
     	<span>Search job in </span> 
         <form method="POST">
             <select name="city_id">
-				<?php 
-				$cities = Location::cities();
-				foreach($cities as $city) {
-				?>
+				<?php foreach($cities as $city) { ?>
 				<option value="<?php echo $city['id'];?>" <?php if(isset($_POST['city_id']) && $_POST['city_id']==$city['id']) { echo ' selected '; } ?>><?php echo $city['name'];?></option>
 				<?php } ?>
         	</select>
@@ -35,20 +29,18 @@
         </form>
     </div>
    	<div class="clear"></div>
-    <!-- Content Block -->
     <div class="listingblock">
 		<?php
 		if(isset($_POST['city_id'])) {
-			$query = Db::select('private_jobs', array('status=' => 1, 'city_id=' => $_POST['city_id']));
-			$res = Db::count('private_jobs', array('status=' => 1, 'city_id=' => $_POST['city_id']));
-
-			if($res <= 0){
+			$Db = new Db;
+			$query = $Db->select('private_jobs', array('status=' => 1, 'city_id=' => $_POST['city_id']));
+			if(count($query) <= 0){
 				echo 'No records found!';
 			} else {
 		?>
 		<div class="sheading">
         	<div class="sheadings">
-            	<h5>Jobs in <?php if(isset($_POST['city_id'])) echo Location::name($_POST['city_id']); else echo 'Jaipur'; ?></h5>
+            	<h5>Jobs in <?php if(isset($_POST['city_id'])) echo $location->name($_POST['city_id']); else echo 'Jaipur'; ?></h5>
             </div>
             <div class="sheading_action">
             	<!--<div class="share left"><a href="#">Share to your friends</a></div>
@@ -71,11 +63,11 @@
 	            <tr>
 		        	<td class="pj-row2"><?php echo $i; ?></td>
 		            <td class="pj-row2">
-		            	<a href="<?php echo PrivateJob::link($row['slug']); ?>" class="colr" title="<?php echo $row['title'];?>">
+		            	<a href="<?php echo $private_job->link($row['slug']); ?>" class="colr" title="<?php echo $row['title'];?>">
 	                	<?php echo $row['title']; ?></a>
 	                </td>
 	                <td class="pj-row2"><?php echo $row['vacancies']; ?></td>
-	                <td class="pj-row2"><?php if(isset($_POST['city_id'])) echo Location::name($_POST['city_id']); else echo 'Jaipur'; ?></td>
+	                <td class="pj-row2"><?php if(isset($_POST['city_id'])) echo $location->name($_POST['city_id']); else echo 'Jaipur'; ?></td>
 		        </tr>
 		        <?php
             	$i++;
@@ -114,10 +106,10 @@
 		<div class="blog_detail">
 			<?php // echo PrivateJob::featured_image($page_slug,'225','219','blogimg'); ?>
 			<div class="bloginfo">
-				<h1><?php echo PrivateJob::title($page_slug,'private_job'); ?></h1>
+				<h1><?php echo $page_title; ?></h1>
 				<!--<div class="info info1">
 					<span class="postedby">Posted By: <a href="#">Admin</a></span>
-					<span class="lastupdte"> Last Update by:<i><?php echo Page::last_updated($page_slug); ?></i></span>
+					<span class="lastupdte"> Last Update by:<i><?php //echo Page::last_updated($page_slug); ?></i></span>
 					<span class="comments"><a href="./blogdetail.html"><strong>852</strong> Comments</a></span>
 					<div class="share1"><a href="./blogdetail.html">Share</a></div>
 				</div>
@@ -132,11 +124,10 @@
 			} else {
 				$city_id = 3;
 			}
-			
-			$query = Db::select('private_jobs', array('status=' => 1, 'slug=' => $page_slug));
-			$res = Db::count('private_jobs', array('status=' => 1, 'slug=' => $page_slug));
+			$Db = new Db;
+			$query = $Db->select('private_jobs', array('status=' => 1, 'slug=' => $page_slug));
 
-			if($res <= 0){
+			if(count($query) <= 0){
 				echo '';
 			} else {
 			?>
@@ -167,15 +158,15 @@
 	            	</tr>
 	            	<tr>
 	            		<td class="pj-row">State : </td>
-	            		<td class="pj-row2"><?php echo Location::name($row['state_id']); ?></td>
+	            		<td class="pj-row2"><?php echo $location->name($row['state_id']); ?></td>
 	            	</tr>
 	            	<tr>
 	            		<td class="pj-row">City : </td>
-	            		<td class="pj-row2"><?php echo Location::name($row['city_id']); ?></td>
+	            		<td class="pj-row2"><?php echo $location->name($row['city_id']); ?></td>
 	            	</tr>
 	            	<tr>
 	            		<td class="pj-row">Locality : </td>
-	            		<td class="pj-row2"><?php echo Location::name($row['locality_id']); ?></td>
+	            		<td class="pj-row2"><?php echo $location->name($row['locality_id']); ?></td>
 	            	</tr>
 	            	<tr>
 	            		<td class="pj-row">Contact Number : </td>
@@ -191,7 +182,7 @@
 	            	</tr>
 	            	<tr>
 	            		<td class="pj-row">Salary : </td>
-	            		<td class="pj-row2"><?php echo Helper::from_to($row['salary_from'],$row['salary_to']); ?></td>
+	            		<td class="pj-row2"><?php echo from_to($row['salary_from'],$row['salary_to']); ?></td>
 	            	</tr>
 	            	<tr>
 	            		<td class="pj-row">Timings : </td>
@@ -203,7 +194,7 @@
 	            	</tr>
 	            	<tr>
 	            		<td class="pj-row">Required Experience : </td>
-	            		<td class="pj-row2"><?php echo Helper::from_to($row['minimum_experience'],$row['maximum_experience']); ?></td>
+	            		<td class="pj-row2"><?php echo from_to($row['minimum_experience'],$row['maximum_experience']); ?></td>
 	            	</tr>
 	            	<tr>
 	            		<td class="pj-row">Job Description : </td>
@@ -212,10 +203,10 @@
 	            </table>
            		<div class="clear"></div>
             </div>
-            <?php echo Html::br(2);?>
+            <?php echo $html->br(2);?>
             <form method="POST">
             	<h1>Apply Now</h1>
-            	<?php echo Html::br(2); ?>
+            	<?php echo $html->br(2); ?>
             	<p><label class="label-box">Name : </label><input type="text" name="name" class="text-box" /></p>
             	<p><label class="label-box">Email : </label><input type="text" name="email" class="text-box" /></p>
             	<p><label class="label-box">Mobile : </label><input type="text" name="mobile" class="text-box" /></p>
@@ -225,16 +216,17 @@
             <?php } ?>
             <?php
             if(isset($_POST['apply'])){
+            	$Db = new Db;
             	$values = array(
-            		'job_id' => $row['id'],
+            		'sub_id' => $row['id'],
             		'date' => date("Y-m-d"),
             		'name' => $_POST['name'],
             		'email' => $_POST['email'],
             		'mobile' => $_POST['mobile'],
             		'message' => $_POST['message']
             	);
-            	Db::insert('job_enquiries',$values);
-            	Helper::redirect($page_slug.'.html');
+            	$Db->insert('enquiries',$values);
+            	redirect($page_slug.'.html');
             }
             ?>
        	</div>

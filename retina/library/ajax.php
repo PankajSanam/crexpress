@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined('RETINA_VERSION')) exit('No direct access allowed');
 /*
 $edit_ajax = new ajaxClass;
 $edit_ajax->function_name='editBooking';

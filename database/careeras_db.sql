@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 31, 2013 at 11:24 AM
+-- Generation Time: Nov 19, 2013 at 11:25 AM
 -- Server version: 5.1.36
 -- PHP Version: 5.4.16
 
@@ -27,9 +27,13 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 CREATE TABLE IF NOT EXISTS `admin` (
   `id` int(20) NOT NULL AUTO_INCREMENT,
+  `color_theme` varchar(16) NOT NULL,
   `email` varchar(128) NOT NULL,
   `username` varchar(64) NOT NULL,
   `password` varchar(512) NOT NULL,
+  `avatar` varchar(64) NOT NULL,
+  `first_name` varchar(64) NOT NULL,
+  `last_name` varchar(64) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
@@ -37,33 +41,35 @@ CREATE TABLE IF NOT EXISTS `admin` (
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`id`, `email`, `username`, `password`) VALUES
-(1, 'pankaj@gitinfosys.com', 'Admin', 'git@9024551674');
+INSERT INTO `admin` (`id`, `color_theme`, `email`, `username`, `password`, `avatar`, `first_name`, `last_name`) VALUES
+(1, 'theme-satgreen', 'pankaj@gitinfosys.com', 'Admin', 'git@9024551674', '', '', '');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admin_menus`
+-- Table structure for table `enquiries`
 --
 
-CREATE TABLE IF NOT EXISTS `admin_menus` (
-  `id` mediumint(6) NOT NULL AUTO_INCREMENT,
-  `parent_id` mediumint(6) NOT NULL,
-  `package_id` mediumint(6) NOT NULL,
-  `name` varchar(128) NOT NULL,
-  `url` varchar(128) NOT NULL,
-  `status` tinyint(1) NOT NULL,
+CREATE TABLE IF NOT EXISTS `enquiries` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `sub_id` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `name` varchar(256) NOT NULL,
+  `email` varchar(256) NOT NULL,
+  `mobile` bigint(20) NOT NULL,
+  `message` text NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
--- Dumping data for table `admin_menus`
+-- Dumping data for table `enquiries`
 --
 
-INSERT INTO `admin_menus` (`id`, `parent_id`, `package_id`, `name`, `url`, `status`) VALUES
-(1, 0, 1, 'Private Jobs', 'private-jobs.php', 1),
-(2, 0, 1, 'Post Private Job', 'post-private-job.php', 1),
-(3, 0, 1, 'Job Enquiries', 'job-enquiries.php', 1);
+INSERT INTO `enquiries` (`id`, `sub_id`, `date`, `name`, `email`, `mobile`, `message`, `status`) VALUES
+(1, 2, '2013-11-01', 'enq', 'test@test.com', 986545, 'test', 0),
+(2, 2, '2013-11-09', 'pankaj ', 'pankaj@gitinfosys.com', 9876543210, 'testing message', 1),
+(3, 2, '2013-10-18', 'testing this', 'test@test.com', 3242343, 'hi how are you', 1);
 
 -- --------------------------------------------------------
 
@@ -79,7 +85,7 @@ CREATE TABLE IF NOT EXISTS `gallery` (
   `gallery_description` text NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `gallery`
@@ -87,7 +93,8 @@ CREATE TABLE IF NOT EXISTS `gallery` (
 
 INSERT INTO `gallery` (`id`, `gallery_category_id`, `gallery_name`, `gallery_image`, `gallery_description`, `status`) VALUES
 (1, 1, 'Gallery', '', '<p>image description</p>', 1),
-(2, 1, 'dfgdfgdfg', 'gallery370422.gif', '<p>testsdfsdf</p>', 1);
+(2, 1, 'dfgdfgdfg', 'gallery370422.gif', '<p>testsdfsdf</p>', 1),
+(3, 1, 'ghgfhgfh', '', '<p>bnnbvbnvbnbvn</p>', 1);
 
 -- --------------------------------------------------------
 
@@ -140,33 +147,6 @@ INSERT INTO `job_categories` (`id`, `name`) VALUES
 (13, 'IT'),
 (14, 'Engineer'),
 (15, 'Teacher');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `job_enquiries`
---
-
-CREATE TABLE IF NOT EXISTS `job_enquiries` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `job_id` int(11) NOT NULL,
-  `date` date NOT NULL,
-  `name` varchar(256) NOT NULL,
-  `email` varchar(256) NOT NULL,
-  `mobile` bigint(20) NOT NULL,
-  `message` text NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
-
---
--- Dumping data for table `job_enquiries`
---
-
-INSERT INTO `job_enquiries` (`id`, `job_id`, `date`, `name`, `email`, `mobile`, `message`, `status`) VALUES
-(1, 2, '0000-00-00', 'test', 'test@test.com', 986545, 'test', 1),
-(2, 2, '0000-00-00', 'pankaj', 'pankaj@gitinfosys.com', 9876543210, 'testing this message', 1),
-(3, 2, '2013-10-18', 'testing this', 'test@test.com', 3242343, 'hi how are you', 1);
 
 -- --------------------------------------------------------
 
@@ -1960,29 +1940,6 @@ INSERT INTO `locations` (`id`, `parent_id`, `sub_id`, `name`, `longitude`, `lati
 -- --------------------------------------------------------
 
 --
--- Table structure for table `packages`
---
-
-CREATE TABLE IF NOT EXISTS `packages` (
-  `id` mediumint(6) NOT NULL AUTO_INCREMENT,
-  `name` varchar(128) NOT NULL,
-  `description` varchar(500) NOT NULL,
-  `author` varchar(128) NOT NULL,
-  `url` varchar(512) NOT NULL,
-  `status` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
-
---
--- Dumping data for table `packages`
---
-
-INSERT INTO `packages` (`id`, `name`, `description`, `author`, `url`, `status`) VALUES
-(1, 'Private Jobs', 'This package is used to manage private job listing.', 'Pankaj Sanam', 'www.gitinfosys.com', 1);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `pages`
 --
 
@@ -2013,7 +1970,7 @@ CREATE TABLE IF NOT EXISTS `pages` (
 INSERT INTO `pages` (`id`, `page_category_id`, `page_template_id`, `menu_name`, `menu_position`, `menu_sort_order`, `slug`, `title`, `content`, `featured_image`, `meta_title`, `meta_description`, `meta_keywords`, `last_updated`, `status`) VALUES
 (1, 0, 1, 'Home', '', 0, 'index', 'Welcome to Career Ask', '<p>Greetings from the Career Ask.com. We are here to help. We provide a complete solution for a student to a job seeker individual. We have started this project with the aim of helping students with their studies and help other invdividuals to find a job.</p>\r\n\r\n<p>Our portal shall provide all the information regarding top colleges and schools in India. If you&#39;re confused and willing to find a best college for your next education then you&#39;re at right place.</p>\r\n\r\n<p>CareerAsk.com is being updated everyday with all the job openeings in not only Government sector but also private sectors. We are giving our visitors a chance to know about all openings for their suitable jobs.</p>\r\n\r\n<p>In this era, education is a very important part of our life and plays a vital role in everyones career. If you have good education with quality skills then you&#39;re definitely going to achieve your goals and get a really good job. Getting a job is not really that easy nowadays. Competition is tough and getting tougher day by day. So it is important to polish up your quality and skills so companies choose you over other people in the queue.</p>\r\n\r\n<p>CareerAsk does not only focuses on the higher studies but also students in schools. We are providing the study materails and many more other helping tools for the students. We&#39;ll also provide you the list of best coaching institutes in your area within your budget.</p>', '', 'Career Ask', 'Welcome to Career Ask', 'education,study,tutorials', '2013-10-18', 1),
 (2, 0, 7, 'About Us', 'top', 1, 'about', 'About Us', '<p>CareerAsk.com started in 2013 with the aim of helping students and job seekers.</p>\r\n\r\n<p><strong>Our Mission:</strong></p>\r\n\r\n<p>- Help students with their studies</p>\r\n\r\n<p>- Help job seekers to find a job</p>\r\n\r\n<p>- Help students to find their exam results</p>\r\n\r\n<p>- Help students to get information about various colleges</p>', '', 'About Us', 'About Us', 'education,study', '2013-10-13', 1),
-(3, 0, 3, 'Contact Us', 'top', 5, 'contact', 'Contact Us', '<p>If you have any query regarding our services then please feel free to contact us at the below information-</p>\r\n\r\n<p><strong>Address:</strong><br />\r\n42, A, Bhrigu Nagar,<br />\r\nNear Mangleshwar Temple,<br />\r\nAjmer Road,<br />\r\nJaipur - 302020 (Rajasthan)</p>\r\n\r\n<p><b>Mobile No:</b><br />\r\n+91 9024551674<br />\r\n&nbsp;</p>\r\n\r\n<p><strong>Email:</strong><br />\r\ninfo@careerask.com</p>', '', 'Contact N Tutorials Team', 'Contact Us', 'reach us,contact us', '2013-09-27', 1),
+(3, 0, 3, 'Contact Us', 'top', 5, 'contact', 'Contact Us', '<p>If you have any query regarding our services then please feel free to contact us at the below information-</p>\r\n\r\n<p><strong>Address:</strong><br />\r\n42, A, Bhrigu Nagar,<br />\r\nNear Mangleshwar Temple,<br />\r\nAjmer Road,<br />\r\nJaipur - 302020 (Rajasthan)</p>\r\n\r\n<p><b>Mobile No:</b><br />\r\n+91 9024551674<br />\r\n&nbsp;</p>\r\n\r\n<p><strong>Email:</strong><br />\r\ninfo@careerask.com</p>', '', 'Contact Us', 'Contact Us', 'reach us,contact us', '2013-09-27', 1),
 (4, 0, 5, 'Gallery', 'top', 2, 'gallery', 'Gallery', '<p><span style="color: rgb(35, 31, 32); font-family: HelveticaNeueLT-Light, Helvetica, Arial, sans-serif; font-size: 14px; line-height: 20.15625px;">N tutorials&nbsp;Holiday Seminars are Year 12 revision courses held in in the Term 1, 2 and 3 school holidays at St. Aloysius College. Each seminar summarises important theory, key concepts and practical skills essential to a wide variety of Year 12 SACE subjects. Each 3 hour session will focus on reviewing all key aspects of theory, followed by individual discussion and practical problem solving. You will also be provided with exclusive seminar notes, designed by Essentials authors.</span></p>', '', 'Gallery', 'Gallery', 'seminars,educational', '2013-09-26', 0),
 (5, 0, 2, 'Blog', 'top', 3, 'blog', 'Blog', '<p><strong style="margin: 0px; padding: 0px; border: 0px; font-family: HelveticaNeueLT-Light, Helvetica, Arial, sans-serif; font-size: 14px; line-height: 20.15625px; vertical-align: baseline; color: rgb(65, 64, 66);">Essentials Advantage</strong><span style="color: rgb(65, 64, 66); font-family: HelveticaNeueLT-Light, Helvetica, Arial, sans-serif; font-size: 14px; line-height: 20.15625px;">:</span><br style="color: rgb(65, 64, 66); font-family: HelveticaNeueLT-Light, Helvetica, Arial, sans-serif; font-size: 14px; line-height: 20.15625px;" />\r\n<span style="color: rgb(65, 64, 66); font-family: HelveticaNeueLT-Light, Helvetica, Arial, sans-serif; font-size: 14px; line-height: 20.15625px;">Seminar teachers are senior specialists with past SACE exam marking experience. They include authors of our Essentials workbooks and revision guides. Essentials authors also design our seminar notes &ndash; which link directly to your Essentials workbook.</span></p>\r\n\r\n<p><strong style="margin: 0px; padding: 0px; border: 0px; font-family: HelveticaNeueLT-Light, Helvetica, Arial, sans-serif; font-size: 14px; line-height: 20.15625px; vertical-align: baseline; color: rgb(65, 64, 66);">Smaller Classes</strong><span style="color: rgb(65, 64, 66); font-family: HelveticaNeueLT-Light, Helvetica, Arial, sans-serif; font-size: 14px; line-height: 20.15625px;">:</span></p>\r\n\r\n<p><span style="color: rgb(65, 64, 66); font-family: HelveticaNeueLT-Light, Helvetica, Arial, sans-serif; font-size: 14px; line-height: 20.15625px;">We are committed to keeping class sizes at a maximum of 18 students, to allow for more individual attention.</span></p>\r\n\r\n<p><strong style="margin: 0px; padding: 0px; border: 0px; font-family: HelveticaNeueLT-Light, Helvetica, Arial, sans-serif; font-size: 14px; line-height: 20.15625px; vertical-align: baseline; color: rgb(65, 64, 66);">Experience</strong><span style="color: rgb(65, 64, 66); font-family: HelveticaNeueLT-Light, Helvetica, Arial, sans-serif; font-size: 14px; line-height: 20.15625px;">:</span><br style="color: rgb(65, 64, 66); font-family: HelveticaNeueLT-Light, Helvetica, Arial, sans-serif; font-size: 14px; line-height: 20.15625px;" />\r\n<span style="color: rgb(65, 64, 66); font-family: HelveticaNeueLT-Light, Helvetica, Arial, sans-serif; font-size: 14px; line-height: 20.15625px;">We established the first Year 12 seminars in 1986 and have helped more than 40,000 students achieve their personal best.</span></p>', '', 'Career Ask Blog', 'Blog', 'blog,weblog', '2013-09-26', 0),
 (6, 0, 7, 'Courses', 'top', 4, 'courses', 'Courses', '<p>Our&nbsp;<span style="margin: 0px; padding: 0px; border: 0px; font-family: inherit; font-size: inherit; font-style: inherit; font-variant: inherit; line-height: inherit; vertical-align: baseline;">Essentials</span>&nbsp;series includes workbooks, Key Ideas textbooks and revision guides, specifically designed for the South Australian Subject Outline. These publications and their authors have a long-standing reputation for excellence.</p>', '', 'Courses', 'Courses', 'study,education,course', '2013-09-26', 1),
@@ -2211,7 +2168,7 @@ INSERT INTO `shop` (`id`, `parentid`, `name`, `image`, `description`, `metatitle
 
 CREATE TABLE IF NOT EXISTS `sliders` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `slider_category_id` mediumint(6) NOT NULL,
+  `slider_category_id` tinyint(2) NOT NULL,
   `name` varchar(128) NOT NULL,
   `image` varchar(128) NOT NULL,
   `description` text NOT NULL,
@@ -2237,17 +2194,19 @@ INSERT INTO `sliders` (`id`, `slider_category_id`, `name`, `image`, `description
 --
 
 CREATE TABLE IF NOT EXISTS `slider_categories` (
-  `id` mediumint(6) NOT NULL AUTO_INCREMENT,
+  `id` tinyint(2) NOT NULL AUTO_INCREMENT,
   `name` varchar(128) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `slider_categories`
 --
 
 INSERT INTO `slider_categories` (`id`, `name`) VALUES
-(1, 'home');
+(1, 'home'),
+(2, 'inner'),
+(3, 'footer');
 
 -- --------------------------------------------------------
 

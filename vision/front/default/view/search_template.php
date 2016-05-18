@@ -22,17 +22,19 @@
 		<ul class="listing">
 			<?php
 			if(isset($_GET['search'])){
+				$Db = new Db;
 				$errors = array();
 				if(empty($_GET['search'])){
 					$errors[] = 'Please enter a search term.';
 				} elseif(strlen($_GET['search']) < 3){
 					$errors[] = 'Your search term must be 3 or more characters.';
-				} elseif(Db::search($_GET['search']) === false){
+				} elseif($Db->search($_GET['search']) === false){
 					$errors[] = 'Your search for <strong>'.$_GET['search'].'</strong> returned no results';
 				}
 
 				if(empty($errors)){
-					$results = Db::search($_GET['search']);
+					
+					$results = $Db->search($_GET['search']);
 					$results_num = count($results);
 					$suffix = ($results_num != 1) ? 's' : '';
 					echo 'Your search for <strong>'.$_GET['search'].'</strong> returned '.$results_num.' result'.$suffix;
@@ -40,13 +42,16 @@
 					foreach($results as $result){
 			?>
 				<li>
-					<div class="thumb"><a href="<?php echo Page::link($result['slug']);?>"><?php echo Page::featured_image($result['featured_image'],120,120); ?></a></div>
+					<div class="thumb">
+						<a href="<?php echo $page->link($result['slug']); ?>" title="<?php echo $result['title'];?>">
+						<?php echo $page->thumb($result['slug'],'126','106'); ?></a>
+					</div>
 					<div class="description">
-						<h6><a href="<?php echo Page::link($result['slug']);?>" class="colr"><?php echo $result['title'];?></a></h6>
-						<p><?php echo Validation::strip_html($result['content'],220);?>...</p>
+						<h6><a href="<?php echo $page->link($result['slug']);?>" class="colr"><?php echo $result['title'];?></a></h6>
+						<p><?php echo $validation->strip_html($result['content'],220);?>...</p>
 						<div class="clear"></div>
 						<!--<div class="info"> 
-							<span class="lastupdte"> Last Updated On :<i><?php echo $result['last_updated'];?></i></span>
+							<span class="lastupdte"> Last Updated On :<i><?php //echo $result['last_updated'];?></i></span>
 							<span class="tag">Tag: <a href="#">Business</a></span> 
 							<span class="comments"><a href="#"><strong>852</strong> Comments</a></span> 
 							<a class="moreinfo" href="#">:: Moreinfo</a> 

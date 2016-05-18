@@ -1,6 +1,7 @@
-<?php
+<?php if ( ! defined('RETINA_VERSION')) exit('No direct access allowed');
+
 class Image {
-	public static function resize_image_crop($image,$width,$height) {
+	public function resize_image_crop($image,$width,$height) {
 	    $w = @imagesx($image); //current width
 	    $h = @imagesy($image); //current height
 	    if ((!$w) || (!$h)) { $GLOBALS['errors'][] = 'Image couldn\'t be resized because it wasn\'t a valid image.'; return false; }
@@ -42,7 +43,7 @@ class Image {
 	    }
 	}
 
-	public static function resize_image_max($image,$max_width,$max_height) {
+	public function resize_image_max($image,$max_width,$max_height) {
 	    $w = imagesx($image); //current width
 	    $h = imagesy($image); //current height
 	    if ((!$w) || (!$h)) { $GLOBALS['errors'][] = 'Image couldn\'t be resized because it wasn\'t a valid image.'; return false; }
@@ -66,7 +67,7 @@ class Image {
 	    return $new_image;
 	}
 
-	public static function resize_image_force($image,$width,$height) {
+	public function resize_image_force($image,$width,$height) {
 	    $w = @imagesx($image); //current width
 	    $h = @imagesy($image); //current height
 	    if ((!$w) || (!$h)) { $GLOBALS['errors'][] = 'Image couldn\'t be resized because it wasn\'t a valid image.'; return false; }
@@ -78,7 +79,7 @@ class Image {
 	    return $image2;
 	}
 
-	public static function resize($method,$image_loc,$new_loc,$width,$height) {
+	public function resize($method,$image_loc,$new_loc,$width,$height) {
 	    if (!is_array(@$GLOBALS['errors'])) { $GLOBALS['errors'] = array(); }
 	    
 	    if (!in_array($method,array('force','max','crop'))) { $GLOBALS['errors'][] = 'Invalid method selected.'; }
@@ -139,7 +140,7 @@ class Image {
 	    return true;
 	}
 
-	public static function echo_errors() {
+	public function echo_errors() {
 	    if (!is_array(@$GLOBALS['errors'])) { $GLOBALS['errors'] = array('Unknown error!'); }
 	    foreach ($GLOBALS['errors'] as $error) { echo '<p style="color:red;font-weight:bold;">Error: '.$error.'</p>'; }
 	}

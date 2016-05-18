@@ -44,7 +44,7 @@ class Db {
 	| Example:
 	|		Db::select('table_name',array('id='=>1),'id','asc','','5')
 	*/
-	public static function select($table_name,$conditions='',$sort_by='',$sort_order='',$start_limit='',$end_limit='') {
+	public function select($table_name,$conditions='',$sort_by='',$sort_order='',$start_limit='',$end_limit='') {
 		global $pdo;
 
 		$sql = NULL;
@@ -75,7 +75,7 @@ class Db {
 		return $query->fetchAll();
 	}
 
-	public static function count($table_name,$conditions="") {
+	public function count($table_name,$conditions="") {
 		global $pdo;
 
 		$sql = NULL;
@@ -95,7 +95,7 @@ class Db {
 		return $query->rowCount();
 	}
 
-	public static function insert($table_name,$values) {
+	public function insert($table_name,$values) {
 		global $pdo;
 		$data = array();
 		$columns = array_keys($values);
@@ -125,7 +125,7 @@ class Db {
 	}
 
 
-	public static function update($table_name,$values,$conditions){
+	public function update($table_name,$values,$conditions){
 		global $pdo;		
 		$data = array();
 
@@ -148,7 +148,7 @@ class Db {
 	}
 
 
-	public static function search($keywords) {
+	public function search($keywords) {
 		global $pdo;
 
 		$where = '';
@@ -193,7 +193,7 @@ class Db {
 		
 	}
 
-	public static function check_meta() {
+	public function check_meta() {
 		global $pdo;
 
 		$query = $pdo->prepare("SELECT distinct * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = '".DB_NAME."'  AND COLUMN_NAME = 'meta_title'");
@@ -206,7 +206,7 @@ class Db {
 		return $col;
 	}
 
-	public static function delete($table_name,$conditions){
+	public function delete($table_name,$conditions){
 		global $pdo;
 		
 		foreach($conditions as $key=>$condition) {

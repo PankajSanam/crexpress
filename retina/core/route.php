@@ -41,7 +41,7 @@ ini_set('date.timezone', 'Asia/Kolkata');
 | Sets the current version of system
 |
 */
-define('RETINA_VERSION', '0.0.8');
+define('RETINA_VERSION', '0.0.9');
 
 
 /*
@@ -56,28 +56,74 @@ define('THEME_NAME', 'default');
 
 /*
 | ---------------------------------------------------------------------
-|  Set All Paths
+|  Set essential site paths
 | ---------------------------------------------------------------------
 |
 */
 if($_SERVER['HTTP_HOST'] == 'localhost' ) {
-	define('SERVER_ROOT','D:/wamp/www/careerask.com');
-	define('SITE_ROOT','http://localhost/careerask.com');
+	$server_root = 'D:/wamp/www/careerask.com';
+	$site_root = 'http://localhost/careerask.com';
 } else {
-	define('SERVER_ROOT','/home/careeras/public_html');
-	define('SITE_ROOT','http://www.careerask.com');
+	$server_root = '/home/careeras/public_html';
+	$site_root = 'http://www.careerask.com';
 }
+
+define('SERVER_ROOT', $server_root);
+define('SITE_ROOT', $site_root);
+
+/*
+| ---------------------------------------------------------------------
+|  Path of Front end files
+| ---------------------------------------------------------------------
+*/
+define('FRONT_VISION', SITE_ROOT.'/vision/front/'.THEME_NAME);
 
 
 /*
 | ---------------------------------------------------------------------
-|  Set Theme Path
+|  Path of Back end files (admin panel)
 | ---------------------------------------------------------------------
-| Sets the path of theme where it is stored on server
-|
 */
-define('FRONT_VISION', SITE_ROOT.'/vision/front/'.THEME_NAME);
-define('BACK_VISION', SITE_ROOT.'/vision/back/'.THEME_NAME);
-define('DATA_VISION', SITE_ROOT.'/vision/data/');
+define('BACK_VISION', SITE_ROOT.'/vision/back');
 
+
+/*
+| ---------------------------------------------------------------------
+|  Path for accessing files from data folder
+| ---------------------------------------------------------------------
+*/
+define('DATA_VISION', SITE_ROOT.'/vision/data');
+
+
+/*
+| ---------------------------------------------------------------------
+|  Path of data files to be used in image upload and other functions
+| ---------------------------------------------------------------------
+*/
+define('DATA_PATH', SERVER_ROOT.'/vision/data');
+
+
+/*
+| ---------------------------------------------------------------------
+|  Path of Ajax files
+| ---------------------------------------------------------------------
+*/
+define('AJAX_PATH', SERVER_ROOT.'/vision/ajax');
+
+
+/*
+| ---------------------------------------------------------------------
+|  Loads core files
+| ---------------------------------------------------------------------
+| Loads all the core files required for the system
+| autoload.php 		=>	functions to load library and package classes
+| connection.php 	=>	defines connections strings and error reporting
+| db.php 			=>	mysql queries
+| helper.php 		=>	Useful functions which can be modified by users
+| 
+*/
+require_once SERVER_ROOT.'/retina/core/autoload.php';
+require_once SERVER_ROOT.'/retina/core/connection.php';
+require_once SERVER_ROOT.'/retina/core/db.php';
+require_once SERVER_ROOT.'/retina/core/helper.php';
 ?>

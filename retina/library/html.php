@@ -1,61 +1,65 @@
-<?php
+<?php if ( ! defined('RETINA_VERSION')) exit('No direct access allowed');
+
 class Html {
-	public static function doc_type(){
+	public function doc_type(){
 		return '<!DOCTYPE html>'."\n";
 	}
 
-	public static function lang(){
+	public function lang(){
 		return 'lang="en" xmlns="http://www.w3.org/1999/xhtml"';
 	}
 
-	public static function content_type(){
+	public function content_type(){
 		return '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />'."\n";
 	}
 
-	public static function meta_charset(){
+	public function charset(){
 		return '<meta charset=utf-8" />'."\n";
 	}
 
-	public static function author(){
+	public function author(){
 		return '<meta name="author" content="Pankaj Sanam" />'."\n";
 	}
 
-	public static function revisit(){
+	public function revisit(){
 		return '<meta name="revisit-after" content="3 days" />'."\n";
 	}
 	
-	public static function google_webmaster($var){
+	public function google_webmaster($var){
 		return '<meta name="google-site-verification" content="'.$var.'" />';
 	}
 	
-	public static function styles($styles, $type = 0){
+	public function styles($styles, $type = 0){
 		if($type == 0){
 			$path = FRONT_VISION;
 		} else {
 			$path = BACK_VISION;
 		}
-
+		$s = '';
 		foreach($styles as $style => $media){
-			echo '<link rel="stylesheet" type="text/css" href="'.$path.'/css/'.$style.'.css" media="'.$media.'" />';
-			echo "\n";
+			$s .= '<link rel="stylesheet" type="text/css" href="'.$path.'/css/'.$style.'.css" media="'.$media.'" />';
+			$s .= "\n";
 		}
+		return $s;
 	}
 
-	public static function scripts($scripts, $type = 0){
+	public function scripts($scripts, $type = 0){
 		if($type == 0){
 			$path = FRONT_VISION;
 		} else {
 			$path = BACK_VISION;
 		}
-
+		$s = '';
 		foreach($scripts as $script){
-			echo '<script type="text/javascript" src="'.$path.'/js/'.$script.'.js"></script>';
-			echo "\n";
+			$s .= '<script type="text/javascript" src="'.$path.'/js/'.$script.'.js"></script>';
+			$s .= "\n";
 		}
+		return $s;
 	}
 
-	public static function meta_title($page){
-		$meta_tables = Db::check_meta();
+	public function meta_title($page){
+		$Db = new Db;
+		$meta_tables = $Db->check_meta();
 		$count_tables = count($meta_tables);
 		$cond = array(
 			'slug=' => $page,
@@ -63,8 +67,8 @@ class Html {
 		);
 		
 		for($i = 0 ; $i <= $count_tables-1; $i++){
-			$result =  Db::select($meta_tables[$i], $cond);
-			$count = Db::count($meta_tables[$i], $cond);
+			$result =  $Db->select($meta_tables[$i], $cond);
+			$count = count($result);
 
 			if($count > 0){
 				$meta_title = $result[0]['meta_title'];
@@ -77,8 +81,9 @@ class Html {
 		return $meta_title;
 	}
 
-	public static function meta_description($page){
-		$meta_tables = Db::check_meta();
+	public function meta_description($page){
+		$Db = new Db;
+		$meta_tables = $Db->check_meta();
 		$count_tables = count($meta_tables);
 		$cond = array(
 			'slug=' => $page,
@@ -86,8 +91,8 @@ class Html {
 		);
 		
 		for($i = 0 ; $i <= $count_tables-1; $i++){
-			$result =  Db::select($meta_tables[$i], $cond);
-			$count = Db::count($meta_tables[$i], $cond);
+			$result =  $Db->select($meta_tables[$i], $cond);
+			$count = count($result);
 
 			if($count > 0){
 				$meta_description = $result[0]['meta_description'];
@@ -100,8 +105,9 @@ class Html {
 		return $meta_description;
 	}
 
-	public static function meta_keywords($page){
-		$meta_tables = Db::check_meta();
+	public function meta_keywords($page){
+		$Db = new Db;
+		$meta_tables = $Db->check_meta();
 		$count_tables = count($meta_tables);
 		$cond = array(
 			'slug=' => $page,
@@ -109,8 +115,8 @@ class Html {
 		);
 		
 		for($i = 0 ; $i <= $count_tables-1; $i++){
-			$result =  Db::select($meta_tables[$i], $cond);
-			$count = Db::count($meta_tables[$i], $cond);
+			$result =  $Db->select($meta_tables[$i], $cond);
+			$count = count($result);
 
 			if($count > 0){
 				$meta_keywords = $result[0]['meta_keywords'];
@@ -123,15 +129,15 @@ class Html {
 		return $meta_keywords;
 	}
 
-	public static function ul($list, $attributes = '') {
+	public function ul($list, $attributes = '') {
 		return Html::_list('ul', $list, $attributes);
 	}
 
-	public static function ol($list, $attributes = '') {
+	public function ol($list, $attributes = '') {
 		return _list('ol', $list, $attributes);
 	}
 
- 	public static function _list($type = 'ul', $list, $attributes = '', $depth = 0) {
+ 	public function _list($type = 'ul', $list, $attributes = '', $depth = 0) {
 		// If an array wasn't submitted there's nothing to do...
 		if ( ! is_array($list)) {
 			return $list;
@@ -186,16 +192,17 @@ class Html {
 
 
 	// Generates <img> tag
-	public static function img($src = '',$type = 0) {
+	public function img($src = '',$type = 0) {
+		
 		if($type == 0){
 			$path = FRONT_VISION.'/images/';
-		} else {
+		} elseif($type == 1) {
 			$path = BACK_VISION.'/img/';
+		} else {
+			$path = DATA_VISION.'/';
 		}
 
-		if ( ! is_array($src) ) {
-			$src = array('src' => $src);
-		}
+		if ( ! is_array($src) ) { $src = array('src' => $src); }
 
 		// If there is no alt attribute defined, set it to an empty string
 		if ( ! isset($src['alt'])) {
@@ -211,14 +218,12 @@ class Html {
 				$img .= " $k=\"$v\"";
 			}
 		}
-
 		$img .= '/>';
-
 		return $img;
 	}
 
 	//Creates the opening portion of the form.
-	public static function form_open($action = '', $attributes = '', $hidden = array()) {
+	public function form_open($action = '', $attributes = '', $hidden = array()) {
 		$CI =& get_instance();
 
 		if ($attributes == '')
@@ -256,12 +261,12 @@ class Html {
 	}
 
 	//Generates HTML BR tags based on number supplied
- 	public static function br($num = 1) {
+ 	public function br($num = 1) {
 		return str_repeat("<br />", $num);
 	}
 
 	// Creates the opening portion of the form, but with "multipart/form-data".
-	public static function form_open_multipart($action = '', $attributes = array(), $hidden = array()) {
+	public function form_open_multipart($action = '', $attributes = array(), $hidden = array()) {
 		if (is_string($attributes)) {
 			$attributes .= ' enctype="multipart/form-data"';
 		} else {

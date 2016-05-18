@@ -1,6 +1,7 @@
-<?php
+<?php if ( ! defined('RETINA_VERSION')) exit('No direct access allowed');
+
 class Validation {
-	public static function admin_auth(){
+	public function admin_auth(){
 		@session_start();
 		if(!isset($_SESSION['admin'])) header("location:index.html");
 	}
@@ -15,7 +16,7 @@ class Validation {
 		if(!isset($_SESSION['admin'])) { echo 'You do not have enough privileges to perform this action.'; exit(); }
 	}
 
-	public static function strip_html($string, $length = 300, $arg = ''){ 
+	public function strip_html($string, $length = 300, $arg = ''){ 
 		$search = array(
 			'@<script[^>]*?>.*?</script>@si',  	// Strip out javascript 
             '@<[\/\!]*?[^<>]*?>@si',           	// Strip out HTML tags 

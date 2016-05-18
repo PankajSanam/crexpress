@@ -48,9 +48,9 @@
 </div>
 <div id="bottom_Section"> 
 	<div id="pagebottom"> 
-		<div class="copyright"><?php echo Helper::copyright();?> <?php echo Helper::powered_by(); ?></div>
+		<div class="copyright"><?php echo copyright();?> <?php echo powered_by(); ?></div>
 		<a href="#" class="top">Top</a> 
-		<div class="social"><?php echo Helper::social_icons(); ?></div><div class="clear"></div>
+		<div class="social"><?php echo social_icons(); ?></div><div class="clear"></div>
 	</div>
 </div>
 </body>

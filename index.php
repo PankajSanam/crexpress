@@ -1,54 +1,29 @@
 <?php
 require_once 'retina/core/route.php';
 
-/*
-| ---------------------------------------------------------------------
-|  Loads core files
-| ---------------------------------------------------------------------
-| Loads all the core files required for the system
-| autoload.php 		=>	functions to load library and package classes
-| connection.php 	=>	defines connections strings and error reporting
-| 
-*/
-require_once SERVER_ROOT.'/retina/core/autoload.php';
-require_once SERVER_ROOT.'/retina/core/connection.php';
-require_once SERVER_ROOT.'/retina/core/db.php';
+// Remove magic quotes if it is enabled on server
+Autoload::remove_magic_quotes();
+
+// Unregister any available $GLOBALS
+Autoload::unregister_globals();
+
+// Load all libraries from retina/library
+Autoload::libraries();
+
+// Load controllers for front and back
+Autoload::front_controllers();
+Autoload::back_controllers();
+
+// Load models for front and back
+Autoload::front_models();
+Autoload::back_models();
+
+// Load all packages from retina/packages
+//Autoload::packages();
 
 
-/*
-| ---------------------------------------------------------------------
-|  Loads libraries
-| ---------------------------------------------------------------------
-| Loads all library files from library folder
-|
-*/
-Autoload::library();
-
-
-/*
-| ---------------------------------------------------------------------
-|  Loads packages
-| ---------------------------------------------------------------------
-| Loads all packages from package folder by selecting the package names
-| from packages table from db. It does so by converting the package name
-| to something like this "New Package Name" to "new_package_name"
-|
-*/
-$package_names = Db::select('packages',array('status=' => 1));
-foreach($package_names as $package_name){
-	$package = strtolower(preg_replace("/[ ]/", '_', $package_name['name']));
-	Autoload::package($package);
-}
-
-
-/*
-| ---------------------------------------------------------------------
-|  Load Template Functions
-| ---------------------------------------------------------------------
-|
-*/
+// Load Template Functions
 include SERVER_ROOT.'/vision/front/'.THEME_NAME.'/view/right_sidebar.php';
-
 
 /*
 | ---------------------------------------------------------------------
@@ -58,26 +33,21 @@ include SERVER_ROOT.'/vision/front/'.THEME_NAME.'/view/right_sidebar.php';
 | page template, page slug, page name etc.
 |
 */
-if(isset($_GET['page'])){
-	$page_template = Page::template($_GET['page']);
-	$page = $_GET['page'];
-	$page_slug = Page::slug($_GET['page'],$page_template);
+$page_template	= 	'';
+$page_url 		= 	'';
+$page_slug		= 	'';
+
+if(isset($_GET['page']) AND !isset($_GET['search'])){
+	$page_template = template($_GET['page']);
+	$page_url = $_GET['page'];
+	$page_slug = slug($_GET['page'],$page_template);
+} elseif (isset($_GET['search'])){
+	$page_template = 'search';
 } else {
-	$page = 'index';
+	$page_url = 'index';
 	$page_slug = 'index';
 	$page_template = 'home';
 }
-
-
-/*
-| ---------------------------------------------------------------------
-|  Search Template
-| ---------------------------------------------------------------------
-| If search is performed then this will override the template name and
-| set it to search template.
-|
-*/
-if(isset($_GET['search'])) { $page_template = 'search'; }
 
 
 /*
@@ -89,22 +59,38 @@ if(isset($_GET['search'])) { $page_template = 'search'; }
 |
 */
 if(isset($_GET['page2']) AND $_GET['page']=='admin') {
-	$_back	=	$_GET['page2'];
-	require_once SERVER_ROOT.'/vision/back/'.THEME_NAME.'/view/header.php';
 
-	$include_file = SERVER_ROOT.'/vision/back/'.THEME_NAME.'/view/'.$_back.'.php';
+	// Template files for admin
+	$_back	=	$_GET['page2'];
+
+	//Template Files
+	include SERVER_ROOT.'/vision/back/view/top_navigation.php';
+	include SERVER_ROOT.'/vision/back/view/left_sidebar.php';
+	include SERVER_ROOT.'/vision/back/view/sub_header.php';
 	
-	if(file_exists($include_file)) {
-		require_once SERVER_ROOT.'/vision/back/'.THEME_NAME.'/view/'.$_back.'.php';
+	$controller = ucfirst($_back).'_Controller';
+	$controller_name = 'Retina\Back\\'.ucfirst($_back).'_Controller';
+
+	if(file_exists('retina/back/controller/'.strtolower($controller).'.php')){
+		$$_back = new $controller_name($_back);
+		$$_back->index();
 	} else {
-		require_once SERVER_ROOT.'/vision/back/'.THEME_NAME.'/view/404.php';
+		$error = new Retina\Back\Error_Controller($_back);
+		$error->index();
 	}
 
-	require_once SERVER_ROOT.'/vision/back/'.THEME_NAME.'/view/footer.php';
-
 } else {
-	require_once SERVER_ROOT.'/vision/front/'.THEME_NAME.'/view/header.php';
-	include_once SERVER_ROOT.'/vision/front/'.THEME_NAME.'/view/'.$page_template.'_template.php';
-	require_once SERVER_ROOT.'/vision/front/'.THEME_NAME.'/view/footer.php';	
+
+// Template files for front end	
+	$controller = ucfirst($page_template).'_Controller';
+	$controller_name = 'Retina\Front\\'.ucfirst($page_template).'_Controller';
+
+	if(file_exists('retina/front/controller/'.strtolower($controller).'.php')){
+		$$page_template = new $controller_name($page_url,$page_slug,$page_template);
+		$$page_template->index();
+	} else {
+		echo '<span style="color:#FFFFFF;font-family:arial;font-size:17px;background-color:#F21C1C;padding:10px;position:absolute;left:40%;">';
+		die('Controller for <strong>'.$page_template.'</strong> is not found!</span>');
+	}
 }
 ?>

@@ -1,4 +1,4 @@
-<?php 
+<?php if ( ! defined('RETINA_VERSION')) exit('No direct access allowed');
 
 class Paginator implements ArrayAccess, Countable, IteratorAggregate {
 

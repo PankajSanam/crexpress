@@ -1,6 +1,7 @@
-<?php
+<?php if ( ! defined('RETINA_VERSION')) exit('No direct access allowed');
+
 class Encrypt{
-	public static function lock($value){ 
+	public function lock($value){ 
 		if(!$value) { return false; }
 		$key = '<(o_O)>'; 
 		$text = $value;
@@ -10,7 +11,7 @@ class Encrypt{
 		return trim(base64_encode($crypttext));
 	}
 
-	public static function unlock($value){ 
+	public function unlock($value){ 
 		if(!$value) { return false; }
 		$key = '<(o_O)>';
 		$crypttext = base64_decode($value);

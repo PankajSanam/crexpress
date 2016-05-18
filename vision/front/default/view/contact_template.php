@@ -17,12 +17,11 @@
 		</div>
 	</div>
 	<div class="clear"></div>
-	<!-- Note 
-	<div class="note1"> <a href="#" class="close close1">&nbsp;</a>
+	<!--<div class="note1"> <a href="#" class="close close1">&nbsp;</a>
 		<p> <strong> NOTE:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et dui dolor. Fusce auctor dolor a diam tincidunt quis malesuada tellus. </p>
 	</div>
 	<div class="clear"></div>-->
-	<p class="contact_text"><?php echo Page::content('contact'); ?></p>
+	<p class="contact_text"><?php echo $page->content('contact'); ?></p>
 	<!--<div class="contactblock"> 
 		<div class="block1">
 			<h5>Postal Adress</h5>

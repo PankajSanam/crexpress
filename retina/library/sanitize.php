@@ -1,8 +1,8 @@
-<?php
+<?php if ( ! defined('RETINA_VERSION')) exit('No direct access allowed');
 
 class Sanitize {
 	
-	public static function clean($string){
+	public function clean($string){
 		
 		$string = preg_replace("/[^a-zA-Z0-9 -]/", '', $string);
 		$string = preg_replace('/[\n\r\t]+/', '', $string);
@@ -20,7 +20,7 @@ class Sanitize {
 	 * array $allowed An array of additional characters that are not to be removed.
 	 */
 
-	public static function remove_special_chars($string, $allowed = array()) {
+	public function remove_special_chars($string, $allowed = array()) {
 		$allow = null;
 		if (!empty($allowed)) {
 			foreach ($allowed as $value) {
@@ -44,7 +44,7 @@ class Sanitize {
 	 * Strips image tags from output
 	 */
 
-	public static function strip_images($str) {
+	public function strip_images($str) {
 		$str = preg_replace('/(<a[^>]*>)(<img[^>]+alt=")([^"]*)("[^>]*>)(<\/a>)/i', '$1$3$5<br />', $str);
 		$str = preg_replace('/(<img[^>]+alt=")([^"]*)("[^>]*>)/i', '$2<br />', $str);
 		$str = preg_replace('/<img[^>]*>/i', '', $str);
@@ -55,14 +55,14 @@ class Sanitize {
 	 * Strips scripts and stylesheets from output
 	 */
 
-	public static function strip_scripts($str) {
+	public function strip_scripts($str) {
 		return preg_replace('/(<link[^>]+rel="[^"]*stylesheet"[^>]*>|<img[^>]*>|style="[^"]*")|<script[^>]*>.*?<\/script>|<style[^>]*>.*?<\/style>|<!--.*?-->/is', '', $str);
 	}
 
 	/**
 	 * Strips extra whitespace from output
 	  */
-	public static function strip_whitespaces($str) {
+	public function strip_whitespaces($str) {
 		$r = preg_replace('/[\n\r\t]+/', '', $str);
 		return preg_replace('/\s{2,}/u', ' ', $r);
 	}
@@ -79,7 +79,7 @@ class Sanitize {
 	 * string $tag Tag to remove (add more parameters as needed)
 	 */
 	
-	public static function strip_tags() {
+	public function strip_tags() {
 		$params = func_get_args();
 		$str = $params[0];
 
