@@ -1,7 +1,7 @@
 <?php
 namespace Retina\Back;
 
-class Slider_Model extends Base_Model{
+class Slider_Model extends _Model{
 
 	public function sliders(){
 		$Db = new \Db;

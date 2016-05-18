@@ -216,13 +216,7 @@ class Db {
 
 		$sql = "DELETE from ".$table_name." where ".$where_clause."";
 		$query = $pdo->prepare($sql);
-
-		foreach($condition as $c){
-			$data[] = $c;
-		}
-		$query->execute($data);
+		$query->execute();
 	}
-
-	
 }
 ?>

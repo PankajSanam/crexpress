@@ -1,7 +1,7 @@
 <?php
 namespace Retina\Back;
 
-class Error_Controller extends Base_Controller {
+class Error_Controller extends _Controller {
 	public $page;
 
 	public function __construct($page){

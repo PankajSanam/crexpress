@@ -1,12 +1,15 @@
 <?php
 namespace Retina\Back;
 
-class Pages_Controller extends Base_Controller {
+class Pages_Controller extends _Controller {
+	
 	public function __construct($page){
 		parent::__construct($page);
 
 		$this->model[$this->page] = $this->core['autoload']->back_model($this->page);
 		$this->library['validation']->admin_auth();
+		$this->library['upload'] = new \Upload;
+		$this->library['image'] = new \Image;
 	}
 
 	public function index(){

@@ -1,7 +1,7 @@
 <?php
 namespace Retina\Back;
 
-class Pages_Model extends Base_Model{
+class Pages_Model extends _Model{
 
 	public function pages(){
 		$Db = new \Db;
@@ -29,7 +29,6 @@ class Pages_Model extends Base_Model{
 		}
 		return $col;
 	}
-
 }
 
 ?>

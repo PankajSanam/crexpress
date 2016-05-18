@@ -1,8 +1,6 @@
 <?php
 @session_start();
-
 require_once '../../retina/core/route.php';
-
 ?>
 <?php
 $code = $_POST['code'];

@@ -1,7 +1,8 @@
 <?php
 namespace Retina\Back;
 
-class Messages_Controller extends Base_Controller {
+class Messages_Controller extends _Controller {
+	
 	public function __construct($page){
 		parent::__construct($page);
 

@@ -47,7 +47,7 @@
 				<div class="page-header"><h1>Welcome</h1></div>
 				<h4>Current Version:</h4>
 				<div class="alert alert-info">
-					0.0.9 <strong>Alpha</strong>
+					0.1.1 <strong>Alpha</strong>
 				</div>
 				<p>
 					Retina CMF (Content Management Framework) is a mix approach of a content management system and a 
@@ -102,6 +102,222 @@
 			</div>
 			<div id="overview-changelog">
 				<div class="page-header"><h1>Changelog</h1></div>
+				<p>
+					<strong>Version 0.1.1 (Under Development)</strong>
+					<ul>
+						<li>
+							Fixed Bugs:
+							<ul>
+								<li>...</li>
+							</ul>
+						</li>
+						<li>
+							Removed Features:
+							<ul>
+								<li>...</li>
+							</ul>
+						</li>
+						<li>
+							Improved Features:
+							<ul>
+								<li>...</li>
+							</ul>
+						</li>
+						<li>
+							New Features Added:
+							<ul>
+								<li>...</li>
+							</ul>
+						</li>
+						<li>
+							<u>Added/Modified Files/Database/Tables:</u>
+							<ul>
+								<li>...</li>
+							</ul>
+						</li>
+					</ul>
+				</p>
+				<p>
+					<strong>Version 0.1.0 (25.12.2013)</strong>
+					<ul>
+						<li>
+							Fixed Bugs:
+							<ul>
+								<li>Added ob_start in back vision header to avoid header warnings in back vision</li>
+								<li>Fixed unlock method in encrypt class by converting any blank space to '+' character because it was unable to take '+' from the encoded url, it always displayed it as a blank space.</li>
+								<li>Fixed delete method in db class.</li>
+								<li>Fixed pages view in back vision</li>
+								<li>Fixed social page in back vision</li>
+								<li>Fixed slider in back vision</li>
+								<li>Fixed navigation in front vision header</li>
+								<li>Home page and sitemap page cannot be deleted from back end for better stability of site</li>
+								<li>Removed ckeditor from slider description in back vision</li>
+							</ul>
+						</li>
+						<li>
+							Removed Features:
+							<ul>
+								<li>Moved front view folder to retina/front/view</li>
+								<li>Moved back view folder to retina/back/view</li>
+								<li>Removed ability to have multiple themes since it is not needed for now</li>
+								<li>Fixed uri_segment method in autoload class</li>
+								<li>Removed <code>revisit_after</code> method since this meta tag is not suppored by major search engines</li>
+								<li>Moved strip_html method from validation library to sanitize library</li>
+							</ul>
+						</li>
+						<li>
+							Improved Features:
+							<ul>
+								<li>Renamed url function in core/helper to page_url</li>
+								<li>Revamped the folder structure</li>
+								<li>Improved robots.txt</li>
+								<li>Improved <code>social_icons</code> in helper to take height attribute and open links in new tab</li>
+								<li>Improved favicon method in html class by adding type attribute.</li>
+								<li>Added bottom, left and right menu positions along with top position in back vision <code>pages</code></li>
+								<li>Complete revamp of back vision pages</li>
+								<li>Renamed Base_Model to _Model and Base_Controller to _Controller because if a model or controller name starts from a (letter before b (Base_Model has B)) then it will not find the class because it loads all classes in alphabetical order</li>
+								<li>Uploading a new image in slider will delete the old one</li>
+								<li>Separated styles and scripts data in individual controllers along with other optimizations</li>
+								<li>Complete revamp of front controller structure</li>
+								<li>Major revamp of index file to accept /folder/file.html structure</li>
+								<li>Optimized <code>page_url</code> function in helper file according to index revamp</li>
+								<li>Optimized <code>designed_by</code> function in helper</li>
+							</ul>
+						</li>
+						<li>
+							New Features Added:
+							<ul>
+								<li>Added home_url in front/base controller</li>
+								<li>Ability to add alternative name for menu_name in pages table</li>
+								<li>Added sort order in social icons</li>
+								<li>Added new default and 404 images in vision/data/general</li>
+								<li>Added shop controller and model in front vision</li>
+								<li>Ability to add new products in shop</li>
+								<li>Ability to add favicion, logo, google analytics, google webmaster, address, mobile, landline and mobile settings</li>
+								<li>Complete revamp of htaccess</li>
+								<li>Complete revampe of index</li>
+								<li>Added sidebar folder in retina/front/view and retina/back/view</li>
+								<li>Added front_sidebars and back_sidebars methods in autoload class</li>
+								<li>Added gallery category manager in back vision</li>
+								<li>Added slug in gallery categories back vision</li>
+								<li>Added gallery controller and model for front vision</li>
+								<li>Added <code>IS_LIVE</code> constant in route to check if site is hosted online</li>
+								<li>Added browser caching in htaccess</li>
+								<li>Added robots method in html library</li>
+								<li>Added canonical meta tag in html library</li>
+								<li>Added <code>favicon()</code> method in html library</li>
+								<li>Added <code>googlebot()</code> method in html library</li>
+								<li>Added SMS library</li>
+								<li>Added Mail library to send emails</li>
+								<li>Automatic html and xml sitemap creation feature</li>
+								<li>Automatic sitemap.xml creation feature</li>
+								<li>Added <code>today()</code> function in helper</li>
+								<li>Added <code>is_deletable()</code> function in helper for checking if a page can be deleted or not</li>
+								<li>Added <code>SITE_URL</code> constant in route file</li>
+								<li>Added <code>generate_sitemap</code> function in helper</li>
+								<li>Added general instructions on back vision dashboard</li>
+								<li>Added advertisement management in back vision</li>
+								<li>Added social library for facebook like box</li>
+								<li>Added page_id method in _model for fetching a page's like</li>
+								<li>Added new template college_detail</li>
+								<li>Ability to save file extension with slug</li>
+								<li>Better SEO friendly URL's while there are sub pages of pages</li>
+								<li>Ability to select multiple menu positions for pages</li>
+								<li>Added <code>bottom_menu</code> method in navigation library</li>
+								<li>Added pagination</li>
+							</ul>
+						</li>
+						<li>
+							<u>Added/Modified Files/Database/Tables:</u>
+							<ul>
+								<li>retina/core/route.php</li>
+								<li>retina/core/helper.php</li>
+								
+								<li>retina/back/controller/ads_controller.php</li>
+								<li>retina/back/controller/_controller.php</li>
+								<li>retina/back/controller/college_controller.php</li>
+								<li>retina/back/controller/dashboard_controller.php</li>
+								<li>retina/back/controller/error_controller.php</li>
+								<li>retina/back/controller/gallery_controller.php</li>
+								<li>retina/back/controller/index_controller.php</li>
+								<li>retina/back/controller/jobs_controller.php</li>
+								<li>retina/back/controller/messages_controller.php</li>
+								<li>retina/back/controller/pages_controller.php</li>
+								<li>retina/back/controller/settings_controller.php</li>
+								<li>retina/back/controller/shop_controller.php</li>
+								<li>retina/back/controller/slider_controller.php</li>
+								<li>retina/back/controller/social_controller.php</li>
+								<li>retina/back/controller/users_controller.php</li>
+
+								<li>retina/back/model/ads_model.php</li>
+								<li>retina/back/model/_model.php</li>
+								<li>retina/back/model/college_model.php</li>
+								<li>retina/back/model/dashboard_model.php</li>
+								<li>retina/back/model/error_model.php</li>
+								<li>retina/back/model/gallery_model.php</li>
+								<li>retina/back/model/index_model.php</li>
+								<li>retina/back/model/jobs_model.php</li>
+								<li>retina/back/model/messages_model.php</li>
+								<li>retina/back/model/pages_model.php</li>
+								<li>retina/back/model/settings_model.php</li>
+								<li>retina/back/model/shop_model.php</li>
+								<li>retina/back/model/slider_model.php</li>
+								<li>retina/back/model/social_model.php</li>
+								<li>retina/back/model/users_model.php</li>
+								
+								<li>retina/back/view/pages.php</li>
+								<li>retina/back/view/dashboard.php</li>
+								<li>retina/back/view/sidebar/top_navigation.php</li>
+								<li>retina/back/view/ads.php</li>
+								<li>retina/back/view/slider.php</li>
+
+								<li>retina/front/controller/sitemap_controller.php</li>
+								<li>retina/front/controller/_controller.php</li>
+								<li>retina/front/controller/college_controller.php</li>
+								<li>retina/front/controller/contact_controller.php</li>
+								<li>retina/front/controller/gallery_controller.php</li>
+								<li>retina/front/controller/home_controller.php</li>
+								<li>retina/front/controller/private_job_controller.php to jobs_controller.php</li>
+								<li>retina/front/controller/page_controller.php</li>
+								<li>retina/front/controller/search_controller.php</li>
+								<li>retina/front/controller/shop_controller.php</li>
+								<li>retina/front/controller/sitemap_controller.php</li>
+								<li>retina/front/controller/college_detail_controller.php</li>
+
+								<li>retina/front/model/sitemap_model.php</li>
+								<li>retina/front/model/_model.php</li>
+								<li>retina/front/model/college_model.php</li>
+								<li>retina/front/model/contact_model.php</li>
+								<li>retina/front/model/gallery_model.php</li>
+								<li>retina/front/model/home_model.php</li>
+								<li>retina/front/model/private_job_model.php to jobs_model.php</li>
+								<li>retina/front/model/location_model.php</li>
+								<li>retina/front/model/page_model.php</li>
+								<li>retina/front/model/search_model.php</li>
+								<li>retina/front/model/shop_model.php</li>
+								<li>retina/front/model/sitemap_model.php</li>
+								<li>retina/front/model/college_detail_model.php</li>
+
+								<li>retina/front/view/sitemap_template.php</li>
+								<li>retina/front/view/college_detail_template.php</li>
+								<li>retina/front/view/footer.php</li>
+								
+								<li>retina/library/sitemap.php</li>
+								<li>retina/library/social.php</li>
+								<li>retina/library/validation.php</li>
+								<li>retina/library/sanitize.php</li>
+								<li>retina/library/navigation.php</li>
+
+								<li>retina/vision/ajax/ajax_front_pagination.php</li>
+
+								<li>index.php</li>
+
+								<li>Added new table ads</li>
+								<li>New column deletable in pages table. 0 for non-deletable and 1 for deletable pages</li>
+							</ul>
+						</li>
+					</ul>
+				</p>
 				<p>
 					<strong>Version 0.0.9 (19.11.2013)</strong>
 					<ul>

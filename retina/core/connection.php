@@ -6,15 +6,33 @@
  * This file specifies all database strings including database name,
  * database username, password and error reporting.
  *
+ * Privileges List-
+ *	ALTER (Required)
+ *	DELETE (Required)
+ *	INSERT (Required)
+ *	SELECT (Required)
+ *	UPDATE (Required)
+ *	CREATE
+ *	CREATE ROUTINE
+ *	CREATE TEMPORARY TABLES
+ *	CREATE VIEW
+ *	DROP
+ *	EXECUTE
+ *	INDEX
+ *	LOCK TABLES
+ *	REFERENCES
+ *	SHOW VIEW
+ *	TRIGGER
+ *
  */
-
+ 
 
 if($_SERVER['HTTP_HOST']=='localhost') {
 	
 	//Error reporting is on when site is hosted on local server
 	Autoload::error(1);
 
-	define( "DB_NAME", "careeras_db" );
+	define( "DB_NAME", "newwayco_rf" );
 	define( "DB_DSN", "mysql:host=localhost;dbname=".DB_NAME."" );
 	define( "DB_USERNAME", "root" );
 	define( "DB_PASSWORD", "" );
@@ -23,10 +41,10 @@ if($_SERVER['HTTP_HOST']=='localhost') {
 	//Error reporting is off when site is online
 	Autoload::error(0);
 
-	define( "DB_NAME", "careeras_db" );
+	define( "DB_NAME", "newwayco_rf" );
 	define( "DB_DSN", "mysql:host=localhost;dbname=".DB_NAME."" );
-	define( "DB_USERNAME", "careeras_user" );
-	define( "DB_PASSWORD", "PgXm(?w?i%fZ" );
+	define( "DB_USERNAME", "newwayco_user" );
+	define( "DB_PASSWORD", "PT)?OnHa?t!T" );
 }
 
 
@@ -41,7 +59,7 @@ try {
 	//$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
 
 } catch (PDOException $e) {
-	exit('DB Halt');
+	exit('DB Connection Error!');
 }
 
 ?>

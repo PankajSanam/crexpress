@@ -1,7 +1,8 @@
 <?php
 namespace Retina\Back;
 
-class Social_Controller extends Base_Controller {
+class Social_Controller extends _Controller {
+	
 	public function __construct($page){
 		parent::__construct($page);
 
@@ -14,7 +15,7 @@ class Social_Controller extends Base_Controller {
 	public function index(){
 
 		$this->data['body_class']	=	'';
-		$this->data['meta_title'] 	=	$this->model['base']->meta_title('Pages - GIT BOX');
+		$this->data['meta_title'] 	=	$this->model['base']->meta_title('Social - GIT BOX');
 		$this->data['social_icons']		=	$this->model[$this->page]->social_icons();
 
 		$this->data['navigation']	=	top_navigation($this->library['encrypt'],$this->library['navigation']);

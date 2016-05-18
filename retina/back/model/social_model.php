@@ -1,7 +1,7 @@
 <?php
 namespace Retina\Back;
 
-class Social_Model extends Base_Model{
+class Social_Model extends _Model{
 
 	public function social_icons(){
 		$Db = new \Db;

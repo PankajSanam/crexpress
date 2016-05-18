@@ -45,6 +45,33 @@ class Autoload{
 	}
 
 
+	public static function front_sidebars(){
+	    foreach (glob("retina/front/view/sidebar/*.php") as $filename) {
+			include $filename;
+		}
+	}
+
+
+	public static function back_sidebars(){
+	    foreach (glob("retina/back/view/sidebar/*.php") as $filename) {
+			include $filename;
+		}
+	}
+
+
+	public static function uri_segment() {
+		$url_seg = $_SERVER['REQUEST_URI'];
+
+		$url = array();
+		$url = explode("/",$url_seg);
+
+		array_shift($url);
+		
+		if(IS_LIVE == 0) array_shift($url);
+
+		return $url;
+	}
+
 	/*
 	| ---------------------------------------------------------------------
 	|  Loads packages
@@ -89,9 +116,9 @@ class Autoload{
 		extract($model);
 		extract($data);
 		
-		require_once SERVER_ROOT.'/vision/front/'.THEME_NAME.'/view/header.php';
-		include_once SERVER_ROOT.'/vision/front/'.THEME_NAME.'/view/'.$view.'_template.php';
-		require_once SERVER_ROOT.'/vision/front/'.THEME_NAME.'/view/footer.php';
+		require_once SERVER_ROOT.'/retina/front/view/header.php';
+		include_once SERVER_ROOT.'/retina/front/view/'.$view.'_template.php';
+		require_once SERVER_ROOT.'/retina/front/view/footer.php';
 	}
 
 
@@ -100,9 +127,9 @@ class Autoload{
 		extract($model);
 		extract($data);
 		
-		require_once SERVER_ROOT.'/vision/back/view/header.php';
-		include_once SERVER_ROOT.'/vision/back/view/'.$view.'.php';
-		require_once SERVER_ROOT.'/vision/back/view/footer.php';
+		require_once SERVER_ROOT.'/retina/back/view/header.php';
+		include_once SERVER_ROOT.'/retina/back/view/'.$view.'.php';
+		require_once SERVER_ROOT.'/retina/back/view/footer.php';
 	}
 
 

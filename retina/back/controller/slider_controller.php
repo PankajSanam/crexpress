@@ -1,7 +1,7 @@
 <?php
 namespace Retina\Back;
 
-class Slider_Controller extends Base_Controller {
+class Slider_Controller extends _Controller {
 	public function __construct($page){
 		parent::__construct($page);
 

@@ -22,9 +22,6 @@ Autoload::back_models();
 //Autoload::packages();
 
 
-// Load Template Functions
-include SERVER_ROOT.'/vision/front/'.THEME_NAME.'/view/right_sidebar.php';
-
 /*
 | ---------------------------------------------------------------------
 |  Required Configurations
@@ -33,64 +30,122 @@ include SERVER_ROOT.'/vision/front/'.THEME_NAME.'/view/right_sidebar.php';
 | page template, page slug, page name etc.
 |
 */
-$page_template	= 	'';
-$page_url 		= 	'';
-$page_slug		= 	'';
+$uri_segment = Autoload::uri_segment();
 
-if(isset($_GET['page']) AND !isset($_GET['search'])){
-	$page_template = template($_GET['page']);
-	$page_url = $_GET['page'];
-	$page_slug = slug($_GET['page'],$page_template);
-} elseif (isset($_GET['search'])){
-	$page_template = 'search';
-} else {
-	$page_url = 'index';
-	$page_slug = 'index';
-	$page_template = 'home';
-}
-
-
-/*
-| ---------------------------------------------------------------------
-|  Load Template Files
-| ---------------------------------------------------------------------
-| Loads all necessary template files like header, footer and template
-| file.
-|
-*/
-if(isset($_GET['page2']) AND $_GET['page']=='admin') {
-
-	// Template files for admin
-	$_back	=	$_GET['page2'];
-
-	//Template Files
-	include SERVER_ROOT.'/vision/back/view/top_navigation.php';
-	include SERVER_ROOT.'/vision/back/view/left_sidebar.php';
-	include SERVER_ROOT.'/vision/back/view/sub_header.php';
-	
-	$controller = ucfirst($_back).'_Controller';
-	$controller_name = 'Retina\Back\\'.ucfirst($_back).'_Controller';
-
-	if(file_exists('retina/back/controller/'.strtolower($controller).'.php')){
-		$$_back = new $controller_name($_back);
-		$$_back->index();
+if(count($uri_segment) <= 1) {
+	if( $uri_segment[0]=='' ) {
+		$page_template = 'home';
+		$page_url = 'index.html';
+		$page_slug = 'index.html';
 	} else {
-		$error = new Retina\Back\Error_Controller($_back);
-		$error->index();
+		//$uri_seg = explode('.',$uri_segment[0]);
+		$uri_seg = $uri_segment;
+		$page_template = template($uri_seg[0]);
+		$page_url = $uri_seg[0];
+		$page_slug = slug($page_url,$page_template);
+	}
+	$page_category = '';
+	$page_category_name='';
+
+	$Db = new Db;
+	$page_cat_id = $Db->select('pages', array('slug=' => $page_slug));
+	foreach ($page_cat_id as $page_cat) {
+		$page_category = $page_cat['page_category_id'];
 	}
 
-} else {
+	if($page_slug!=404) {
+		$page_cat_names = $Db->select('pages', array('id=' => $page_category));
+		foreach ($page_cat_names as $page_cat_name) {
+			$page_category_name = $page_cat_name['slug'];
+		}
+	}
 
-// Template files for front end	
-	$controller = ucfirst($page_template).'_Controller';
-	$controller_name = 'Retina\Front\\'.ucfirst($page_template).'_Controller';
-
-	if(file_exists('retina/front/controller/'.strtolower($controller).'.php')){
-		$$page_template = new $controller_name($page_url,$page_slug,$page_template);
-		$$page_template->index();
+	if($page_category!=0) {
+		redirect(SITE_ROOT.'/404.html');
 	} else {
-		echo '<span style="color:#FFFFFF;font-family:arial;font-size:17px;background-color:#F21C1C;padding:10px;position:absolute;left:40%;">';
-		die('Controller for <strong>'.$page_template.'</strong> is not found!</span>');
+		$controller = ucfirst($page_template).'_Controller';
+		$controller_name = 'Retina\Front\\'.ucfirst($page_template).'_Controller';
+
+		if(file_exists('retina/front/controller/'.strtolower($controller).'.php')){
+			// Load sidebars for front vision
+			Autoload::front_sidebars();
+
+			$$page_template = new $controller_name($page_url,$page_slug,$page_template);
+			$$page_template->index();
+		} else {
+			echo '<span style="color:#FFFFFF;font-family:arial;font-size:17px;background-color:#F21C1C;padding:10px;position:absolute;left:40%;">';
+			die('Controller for <strong>'.$page_template.'</strong> is missing!</span>');
+		}
+	}
+} else {
+	if($uri_segment[0] == 'admin') {
+		if(!empty($uri_segment[1])) {
+			$uri_seg = explode('.',$uri_segment[1]);
+			$_back	= $uri_seg[0];
+		} else {
+			$_back = 'dashboard';
+		}
+
+		// Load sidebars for back vision
+		Autoload::back_sidebars();
+		
+		$controller = ucfirst($_back).'_Controller';
+		$controller_name = 'Retina\Back\\'.ucfirst($_back).'_Controller';
+
+		if(file_exists('retina/back/controller/'.strtolower($controller).'.php')){
+			$$_back = new $controller_name($_back);
+			$$_back->index();
+		} else {
+			$controller_name = 'Retina\Back\\Error_Controller';
+			$error = new $controller_name($_back);
+			$error->index();
+		}
+	} else {
+		if($uri_segment[0]!='' AND $uri_segment[1]!=''){
+			//$uri_seg = explode('.',$uri_segment[1]);
+			$uri_seg = $uri_segment[1];
+			//$page_template = template($uri_seg[0]);
+			$page_template = template($uri_seg);
+			$page_url = $uri_seg;
+			$page_slug = slug($page_url,$page_template);
+
+			$page_category = '';
+			$page_category_name='';
+
+			$Db = new Db;
+			$page_cat_id = $Db->select('pages', array('slug=' => $page_slug));
+			foreach ($page_cat_id as $page_cat) {
+				$page_category = $page_cat['page_category_id'];
+			}
+
+			if($page_slug!=404) {
+				$page_cat_names = $Db->select('pages', array('id=' => $page_category));
+				foreach ($page_cat_names as $page_cat_name) {
+					$page_category_name = $page_cat_name['slug'];
+				}
+			}
+			$_uri = $uri_segment[0].'.html';
+			if($page_category==0 OR $page_slug==404 OR $page_category_name!==$_uri) {
+				redirect(SITE_ROOT.'/404.html');
+			} else {
+				$controller = ucfirst($page_template).'_Controller';
+				$controller_name = 'Retina\Front\\'.ucfirst($page_template).'_Controller';
+
+				if(file_exists('retina/front/controller/'.strtolower($controller).'.php')){
+					// Load sidebars for front vision
+					Autoload::front_sidebars();
+
+					$$page_template = new $controller_name($page_url,$page_slug,$page_template);
+					$$page_template->index();
+				} else {
+					echo '<span style="color:#FFFFFF;font-family:arial;font-size:17px;background-color:#F21C1C;padding:10px;position:absolute;left:40%;">';
+					die('Controller for <strong>'.$page_template.'</strong> is missing!</span>');
+				}
+
+			}
+		} else {
+			redirect(SITE_ROOT.'/404.html');
+		}
 	}
 }
 ?>

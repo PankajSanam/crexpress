@@ -13,6 +13,7 @@ class Encrypt{
 
 	public function unlock($value){ 
 		if(!$value) { return false; }
+		$value = str_replace(' ','+',$value); 
 		$key = '<(o_O)>';
 		$crypttext = base64_decode($value);
 		$iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB);

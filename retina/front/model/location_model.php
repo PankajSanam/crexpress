@@ -1,7 +1,7 @@
 <?php
 namespace Retina\Front;
 
-class Location_Model extends Base_Model {
+class Location_Model extends _Model {
 	public function name($id) {
 		$Db = new \Db;
 		$query = $Db->select('locations',array('id=' => $id));

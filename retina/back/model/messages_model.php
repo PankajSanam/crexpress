@@ -1,7 +1,7 @@
 <?php
 namespace Retina\Back;
 
-class Messages_Model extends Base_Model{
+class Messages_Model extends _Model{
 
 	public function enquiries(){
 		$Db = new \Db;

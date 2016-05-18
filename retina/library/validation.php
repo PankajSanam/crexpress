@@ -15,18 +15,6 @@ class Validation {
 		session_start();
 		if(!isset($_SESSION['admin'])) { echo 'You do not have enough privileges to perform this action.'; exit(); }
 	}
-
-	public function strip_html($string, $length = 300, $arg = ''){ 
-		$search = array(
-			'@<script[^>]*?>.*?</script>@si',  	// Strip out javascript 
-            '@<[\/\!]*?[^<>]*?>@si',           	// Strip out HTML tags 
-            '@<style[^>]*?>.*?</style>@siU',  	// Strip style tags properly 
-            '@<![\s\S]*?--[ \t\n\r]*>@'       	// Strip multi-line comments including CDATA 
-		);
-		$text = preg_replace($search, '', $string);
-		$text = substr($text,0,$length);
-		return $text . $arg;
-	}
 }
 
 

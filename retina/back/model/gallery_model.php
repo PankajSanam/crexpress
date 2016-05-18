@@ -1,7 +1,7 @@
 <?php
 namespace Retina\Back;
 
-class Gallery_Model extends Base_Model{
+class Gallery_Model extends _Model{
 
 	public function galleries(){
 		$Db = new \Db;

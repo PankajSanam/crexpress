@@ -1,7 +1,7 @@
 <?php
 namespace Retina\Front;
 
-class Page_Model extends Base_Model{
+class Page_Model extends _Model{
 
 	public function page_title($slug) {
 		$Db = new \Db;
@@ -18,6 +18,17 @@ class Page_Model extends Base_Model{
 		return $data;
 	}
 
+	public function page_alt($slug) {
+		$Db = new \Db;
+		$rows = $Db->select('pages',array( 'slug=' => $slug ));
+
+		foreach($rows as $row){
+			$data = $row['menu_name_alt'];
+		}
+
+		if(empty($data)) return ''; else return $data;
+	}
+	
 	public function page_content($slug) {
 		$Db = new \Db;
 		$rows = $Db->select('pages',array( 'slug=' => $slug ));

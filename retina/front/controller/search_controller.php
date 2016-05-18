@@ -1,24 +1,48 @@
 <?php
 namespace Retina\Front;
 
-class Search_Controller extends Base_Controller {
+class Search_Controller extends _Controller {
+	
 	public function __construct($page,$slug,$page_template){
 		parent::__construct($page,$slug,$page_template);
+	}
 
-		$this->model[$this->page_template] = \Autoload::front_model($this->page_template);
+	public function header(){
+		$this->data['styles'] = $this->library['html']->styles( array( 
+			'style'	=>	'all',
+			'initcarousel' => 'all',
+			)
+		);
+		$this->data['scripts'] = $this->library['html']->scripts(array(
+				'jquery1.7.2',
+				'amazingcarousel',
+				'initcarousel',
+				'bjqs-1.3.min',
+			)
+		);
+
+		$this->data['meta_title'] = $this->model[$this->page_template]->meta_title('Search');
+		$this->data['meta_description'] = $this->model[$this->page_template]->meta_description('Search');
+		$this->data['meta_keywords'] = $this->model[$this->page_template]->meta_keywords('search');
+	}
+
+	public function content(){
+		$this->data['page_title'] = $this->model[$this->page_template]->page_title($this->slug);
+		$this->data['page_content'] = $this->model[$this->page_template]->page_content($this->slug);
+
+		$this->data['colleges'] = $this->model[$this->page_template]->colleges();
+		$this->data['sliders'] = $this->model[$this->page_template]->sliders();
+		$this->data['galleries'] = $this->model[$this->page_template]->galleries();
+	}
+
+	public function footer(){
+		//
 	}
 
 	public function index(){
-
-		$this->data['page_slug'] 		= 	$this->slug;
-
-		$this->data['meta_title'] 		=	$this->model[$this->page_template]->meta_title('Search Career Ask');
-		$this->data['meta_description'] = 	$this->model[$this->page_template]->meta_description('Search on Career Ask');
-		$this->data['meta_keywords'] 	= 	$this->model[$this->page_template]->meta_keywords('search,career');
-
-		$this->data['latest_page'] 		= 	$this->model[$this->page_template]->latest_page();
-		\Autoload::front_view($this->page_template, $this->data, $this->library, $this->model);
+		self::header();
+		self::content();
+		self::footer();
+		parent::load();
 	}
 }
-
-?>

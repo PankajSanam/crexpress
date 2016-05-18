@@ -1,7 +1,7 @@
 <?php
 namespace Retina\Front;
 
-class Home_Model extends Base_Model{
+class Home_Model extends _Model{
 
 	public function page_title($slug) {
 		$Db = new \Db;
@@ -25,21 +25,29 @@ class Home_Model extends Base_Model{
 		return $data;
 	}
 
-	public function latest_page(){
+	public function galleries(){
 		$Db = new \Db;
-		$rows = $Db->select('pages','','last_updated','DESC',0,1);
+		$rows = $Db->select('gallery',array('status=' => 1));
 		foreach($rows as $row){
 			$col[] = $row;
 		}
 		return $col;
 	}
 
-	public function slider(){
+	public function sliders(){
 		$Db = new \Db;
 		$sliders = $Db->select('sliders',array( 'status='=> 1 ));
 		return $sliders;
 	}
 
+	public function colleges(){
+		$Db = new \Db;
+		$rows = $Db->select('colleges',array('status=' => 1));
+		foreach($rows as $row){
+			$col[] = $row;
+		}
+		return $col;
+	}
 }
 
 ?>

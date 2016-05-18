@@ -2,9 +2,21 @@
 
 class Sanitize {
 	
+	public function strip_html($string, $length = 300, $arg = ''){ 
+		$search = array(
+			'@<script[^>]*?>.*?</script>@si',  	// Strip out javascript 
+            '@<[\/\!]*?[^<>]*?>@si',           	// Strip out HTML tags 
+            '@<style[^>]*?>.*?</style>@siU',  	// Strip style tags properly 
+            '@<![\s\S]*?--[ \t\n\r]*>@'       	// Strip multi-line comments including CDATA 
+		);
+		$text = preg_replace($search, '', $string);
+		$text = substr($text,0,$length);
+		return $text . $arg;
+	}
+	
 	public function clean($string){
 		
-		$string = preg_replace("/[^a-zA-Z0-9 -]/", '', $string);
+		$string = preg_replace("/[^a-zA-Z0-9 -.]/", '', $string);
 		$string = preg_replace('/[\n\r\t]+/', '', $string);
 		$string = preg_replace('/\s{2,}/u', ' ', $string);
 		$string = strtolower(trim($string));

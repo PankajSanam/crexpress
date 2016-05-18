@@ -8,7 +8,7 @@ function current_page(){
 }
 
 function redirect($url) {
-    header("Location: $url");
+    header("Location:$url");
     exit();
 }
 
@@ -29,13 +29,13 @@ function from_to($from, $to){
 	}
 }
 
-function social_icons($width = 28){
+function social_icons($width = '', $height = ''){
 	$Db = new Db;
 	$social = '<ul>';
 	$social_icons = $Db->select('social_icons');
 	foreach($social_icons as $social_icon){
-		$social .= '<li><a title="'.$social_icon['name'].'" href="'.$social_icon['url'].$social_icon['link'].'">
-				<img src="'.DATA_VISION.'/social/'.$social_icon['image'].'" width="'.$width.'" /></a></li>';
+		$social .= '<li><a target="_blank" title="'.$social_icon['name'].'" href="'.$social_icon['url'].$social_icon['link'].'">
+				<img title="'.$social_icon['name'].'" alt="'.$social_icon['name'].'" src="'.DATA_VISION.'/social/'.$social_icon['image'].'" width="'.$width.'" height="'.$height.'" /></a></li>';
 	}
 	$social .= '</ul>';
 
@@ -53,7 +53,7 @@ function powered_by( $title = 'Website Designing and Development' ){
 }
 
 function designed_by( $title = 'Website Designing and Development' ){
-	$powered = 'Designed &amp; Developed By <a href="http://www.gitinfosys.com" title="'.$title.'">GIT Infosys</a>';
+	$powered = '<a href="http://www.gitinfosys.com" title="'.$title.'">Designed &amp; Developed </a>By GIT Infosys';
 	return $powered;
 }
 
@@ -74,7 +74,7 @@ function slug($page,$page_template){
 			$slug = $result[0]['slug'];
 			break;
 		} else {
-			$slug = '404';
+			$slug = '404.html';
 		}
 	}
 
@@ -113,11 +113,6 @@ function template($page){
 	return $page_template;
 }
 
-function url($page){
-	$link = SITE_ROOT.'/'.$page.'.html';
-	return $link;
-}
-
 function category_name($table,$id){
 	$Db = new Db;
 	$cond = array( 'id=' => $id );
@@ -125,4 +120,92 @@ function category_name($table,$id){
 	foreach($query as $q){ }
 	return $q['name'];
 }
+
+function page_url($page_slug){
+	$page_category = '';
+	$page_category_name='';
+
+	$Db = new \Db;
+	$page_cat_id = $Db->select('pages', array('slug=' => $page_slug));
+	foreach ($page_cat_id as $page_cat) {
+		$page_category = $page_cat['page_category_id'];
+	}
+
+	$page_cat_names = $Db->select('pages', array('id=' => $page_category));
+	foreach ($page_cat_names as $page_cat_name) {
+		$page_category_name = $page_cat_name['slug'];
+	}
+
+	$page_category_name = explode('.',$page_category_name);
+	$page_category_name = $page_category_name[0];
+
+	if($page_category!=0) {
+		$link = SITE_ROOT.'/'.$page_category_name.'/'.$page_slug;
+	} else {
+		$link = SITE_ROOT.'/'.$page_slug;
+	}
+
+	return $link;
+}
+
+function today(){
+	return date("Y-m-d");
+}
+
+function is_deletable($table,$id){
+	$Db = new Db;
+	$cond = array( 'id=' => $id );
+	$query = $Db->select($table,$cond);
+
+	foreach($query as $q){ }
+	if($q['deletable'] == 0) {
+		return false;
+	} else {
+		$Db->delete($table,array( 'id=' => $id ));
+		return true;
+	}
+}
+
+function alert($message){
+	echo '<script>alert("'.$message.'");</script>';
+}
+
+function generate_sitemap(){
+	// Create a sitemap
+	$_sitemap = new Sitemap;
+	$_sitemap->generate();
+	$_sitemap->load(); // Load up sitemap.xml
+
+	$Db = new Db;
+	$rows = $Db->select('pages', array('status=' => 1));
+	foreach($rows as $row){
+		$active_pages[] = $row;
+	}
+	
+	foreach($active_pages as $active_page) {
+		$loc = SITE_URL.'/'.$active_page['slug'];
+		$lastmod = $active_page['last_updated'];
+		
+		$priorities = array( '0.7', '0.8', '0.9', '1.0');
+		$k = array_rand($priorities);
+		if($active_page['slug']=='index.html' OR $active_page['slug']=='index') {
+			$priority = '1.0';
+		} else {
+			$priority = $priorities[$k];
+		}
+		$changefreq = 'weekly';
+
+		$attr = array(
+			'loc'		=>	$loc,
+			'lastmod'	=>	$lastmod,
+			'priority' 	=>	$priority,
+			'changefreq'=>	$changefreq
+		);
+
+		$_sitemap->addrow($attr);
+	}
+	global $dom;
+	$dom->save('sitemap.xml'); // Save sitemap
+}
+
 ?>

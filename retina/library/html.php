@@ -21,14 +21,26 @@ class Html {
 		return '<meta name="author" content="Pankaj Sanam" />'."\n";
 	}
 
-	public function revisit(){
-		return '<meta name="revisit-after" content="3 days" />'."\n";
+	public function robots(){
+		return '<meta name="robots" content="index, follow">'."\n";
+	}
+
+	public function canonical(){
+		return '<link rel="canonical" href="'.SITE_ROOT.'"/>'."\n";
 	}
 	
-	public function google_webmaster($var){
-		return '<meta name="google-site-verification" content="'.$var.'" />';
+	public function alexa($content){
+		return '<meta name="alexaVerifyID" content="'.$content.'" />'."\n";
 	}
-	
+
+	public function favicon(){
+		return '<link rel="shortcut icon" href="'.FRONT_VISION.'/images/favicon.png" type="image/png" />'."\n";
+	}
+
+	public function googlebot(){
+		return '<meta name="googlebot" content="noodp">'."\n";
+	}
+
 	public function styles($styles, $type = 0){
 		if($type == 0){
 			$path = FRONT_VISION;

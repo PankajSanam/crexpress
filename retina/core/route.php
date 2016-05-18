@@ -41,17 +41,7 @@ ini_set('date.timezone', 'Asia/Kolkata');
 | Sets the current version of system
 |
 */
-define('RETINA_VERSION', '0.0.9');
-
-
-/*
-| ---------------------------------------------------------------------
-|  Set Theme Name
-| ---------------------------------------------------------------------
-| Sets the theme name which is being used on front-end
-|
-*/
-define('THEME_NAME', 'default');
+define('RETINA_VERSION', '0.1.1');
 
 
 /*
@@ -60,23 +50,28 @@ define('THEME_NAME', 'default');
 | ---------------------------------------------------------------------
 |
 */
+define('SITE_URL', 'http://www.newway.co.in');
+
 if($_SERVER['HTTP_HOST'] == 'localhost' ) {
-	$server_root = 'D:/wamp/www/careerask.com';
-	$site_root = 'http://localhost/careerask.com';
+	$server_root = 'D:/wamp/www/newway.co.in';
+	$site_root = 'http://localhost/newway.co.in';
+	define('IS_LIVE', 0);
 } else {
-	$server_root = '/home/careeras/public_html';
-	$site_root = 'http://www.careerask.com';
+	$server_root = '/home/newwayco/public_html';
+	$site_root = SITE_URL;
+	define('IS_LIVE', 1);
 }
 
 define('SERVER_ROOT', $server_root);
 define('SITE_ROOT', $site_root);
+
 
 /*
 | ---------------------------------------------------------------------
 |  Path of Front end files
 | ---------------------------------------------------------------------
 */
-define('FRONT_VISION', SITE_ROOT.'/vision/front/'.THEME_NAME);
+define('FRONT_VISION', SITE_ROOT.'/vision/front');
 
 
 /*

@@ -1,7 +1,7 @@
 <?php
 namespace Retina\Back;
 
-class Users_Model extends Base_Model{
+class Users_Model extends _Model{
 
 	public function users(){
 		$Db = new \Db;

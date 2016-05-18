@@ -1,7 +1,7 @@
 <?php
 namespace Retina\Back;
 
-class Jobs_Model extends Base_Model{
+class Jobs_Model extends _Model{
 
 	public function private_jobs(){
 		$Db = new \Db;

@@ -1,7 +1,7 @@
 <?php
 namespace Retina\Front;
 
-class Contact_Model extends Base_Model{
+class Contact_Model extends _Model{
 
 	public function page_title($slug) {
 		$Db = new \Db;

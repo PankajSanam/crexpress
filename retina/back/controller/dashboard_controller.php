@@ -1,7 +1,7 @@
 <?php
 namespace Retina\Back;
 
-class Dashboard_Controller extends Base_Controller {
+class Dashboard_Controller extends _Controller {
 
 	public function __construct($page){
 		parent::__construct($page);

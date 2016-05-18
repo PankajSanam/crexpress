@@ -1,7 +1,7 @@
 $(function(){
   
    //defaults
-   $.fn.editable.defaults.url = '/post'; 
+   $.fn.editable.defaults.url = '/possst'; 
 
     //enable / disable
    $('#enable').click(function() {
@@ -10,7 +10,7 @@ $(function(){
     
     //editables 
     $('#username').editable({
-           url: '/post',
+           url: '/pank',
            type: 'text',
            name: 'username',
            title: 'Enter username'
@@ -104,7 +104,7 @@ $(function(){
 
     
     $('#address').editable({
-        url: '/post',
+        url: '/podfdst',
         value: {
             city: "Moscow", 
             street: "Lenina", 

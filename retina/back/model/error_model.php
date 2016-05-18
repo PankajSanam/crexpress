@@ -1,7 +1,7 @@
 <?php
 namespace Retina\Back;
 
-class Error_Model extends Base_Model{
+class Error_Model extends _Model{
 
 	public function page_title($slug) {
 		$Db = new \Db;

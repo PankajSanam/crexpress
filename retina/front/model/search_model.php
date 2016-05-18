@@ -1,7 +1,7 @@
 <?php
 namespace Retina\Front;
 
-class Search_Model extends Base_Model{
+class Search_Model extends _Model{
 
 	public function latest_page(){
 		$Db = new \Db;
