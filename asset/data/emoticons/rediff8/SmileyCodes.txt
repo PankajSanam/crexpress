@@ -1,0 +1,21 @@
+angel.gif static/angel_static.gif Angel 0:) O:)
+angry.gif static/angry_static.gif Angry (X) >:(
+brokenheart.gif static/brokenheart_static.gif Broken%20Heart (B)
+confused.gif static/confused_static.gif Confused :-S :s
+cry.gif static/cry_static.gif Cry (C) :`(
+devil.gif static/devil_static.gif Devil (D) >:|
+donttellanyone.gif static/donttellanyone_static.gif Don't%20Tell%20Anyone :-*
+embarrassed.gif static/embarrassed_static.gif Embarrassed (E) :$ :-$
+eyerolling.gif static/eyerolling_static.gif Roll%20Eyes 8-) 8-|
+hot.gif static/hot_static.gif Hot (H) #:)
+idontknow.gif static/idontknow_static.gif I%20don't%20know (K) :^)
+laugh.gif static/laugh_static.gif Laugh :D
+sad.gif static/sad_static.gif Sad (S) :( :-(
+sarcastic.gif static/sarcastic_static.gif Sarcastic (R) ^O) ^o)
+sick.gif static/sick_static.gif Sick :((
+sleepy.gif static/sleepy_static.gif Sleepy :Z :z
+smile.gif static/smile_static.gif Smile :) :-)
+surprised.gif static/surprised_static.gif Surprised :O :-O
+thinking.gif static/thinking_static.gif Thinking (T) \:)
+tongueout.gif static/tongueout_static.gif Tongue%20out :-P :p
+wink.gif static/wink_static.gif Wink ;) ;-)

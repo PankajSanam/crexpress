@@ -1,0 +1,193 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Crexpress - Help Docs</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/bootstrap-responsive.min.css">
+	<link rel="stylesheet" href="css/style.css">
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+</head>
+<body data-spy="scroll" data-target=".spy-nav" onload="prettyPrint()" data-offset="60">
+<div class="navbar navbar-fixed-top navbar-inverse">
+	<div class="navbar-inner">
+		<div class="container">
+			<a href="index.html" class="brand">Crexpress</a>
+			<ul class="nav">
+				<li class="active"><a href="index.html">Overview</a></li>
+				<li><a href="guide.html">User Guide</a></li>
+				<li><a href="admin.html">Admin Guide</a></li>
+				<li><a href="libraries.html">Library Reference</a></li>
+				<li><a href="controllers.html">Controller Reference</a></li>
+				<li><a href="models.html">Model Reference</a></li>
+				<li><a href="faq.html">FAQ</a></li>
+				<li><a href="contact.html">Contact</a></li>
+				<li><a href="credits.html">Credits</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="container" id="main">
+	<div class="row">
+		<div class="span3 spy-nav">
+			<ul class="nav nav-list nav-left" data-spy="affix" data-offset-top="0">
+				<li class='active'><a href="#overview-welcome"><i class="icon-chevron-right"></i>Welcome</a></li>
+				<li><a href="#overview-features"><i class="icon-chevron-right"></i>Features</a></li>
+				<li><a href="#overview-changelog"><i class="icon-chevron-right"></i>Changelog</a></li>
+				<li><a href="#topbar"><i class="icon-chevron-right"></i>License</a></li>
+				<li><a href="#sidebar"><i class="icon-chevron-right"></i>Support</a></li>
+			</ul>
+		</div>
+		<div class="span9">
+			<div id="overview-welcome">
+				<div class="page-header"><h1>Welcome</h1></div>
+				<h4>Current Version:</h4>
+				<div class="alert alert-info">
+					0.1.1 <strong>Beta</strong>
+				</div>
+				<p>
+					Crexpress is a mixed approach of a content management system and a framework. Crexpress is not just another 
+					effort to beat other frameworks or content management systems on web. This is not authors intention to insist 
+					users to use this framework rather than using most popular CMS like Wordpress, Joomla, Drupal and Most popular 
+					PHP Frameworks like CodeIgniter, CakePHP and Yii.
+				</p>
+				<p>
+					Crexpress is nothing but a simple approach that author found suitable for himself and he thinks that it would 
+					also be helpful for other developers and website owners. Author is trying to make this CMF as friendly as 
+					possible with lot of functionality. That doesn't mean it will be bloated by useless tools just like other 
+					frameworks and CMS.
+				</p>
+				<p>
+					I have found myself uncomfortable working with other users code and approaches. I simply wanted to develop 
+					something on my own and here we are. I wanted to include all good features from different CMS and frameworks 
+					that makes my general development work faster than any other CMS or framework would make.
+				</p>
+				<h4>Need Help!</h4>
+				<p>
+					If you require any assistance or would like to give some suggestion or may be want to ask some questions, then 
+					feel free to contact me <a href="http://www.crexpress.com/">here</a>. Thanks you for showing interest in my 
+					hard work.
+				</p>
+				<p>
+					The documentation is about giving you an overview of the Crexpress and it's components. After reading the 
+					documentation you know how to use and customize elements of the Crexpress.
+				</p>
+			</div>
+			<div id="overview-features">
+				<div class="page-header"><h1>Core Features</h1></div>
+				<p>
+					<ol>
+						<li>
+							<strong>Search Engine friendly URL's</strong>>
+							<ul>
+								<li>URLs produced by Crexpress mimic the structure of static website as they appear as html files which is mostly 
+									likeable by the search engines.</li>
+							</ul>
+						</li>
+						<li>
+							<strong>Page and content management</strong>
+							<ul>
+								<li>Ability to add page templates and use them as master templates.</li>
+								<li>Add, edit, delete pages (There are some essential pages that cannot be deleted for site to be functional)</li>
+								<li>Enable / Disable pages and stop them showing on front end without deleting them.</li>
+								<li>Unlimited page hierarchies. A page can be used as a page category.</li>
+								<li>Rich text editor (ckeditor) for managing content</li>
+							</ul>
+						</li>
+						<li>
+							<strong>Robust Htaccess</strong>
+							<ul>
+								<li>Added 301 redirection in htaccess</li>
+								<li>Added gzip and deflate compression in htaccess</li>
+								<li>Added htaccess to force all non-images files as images in vision/data folder</li>
+								<li>Added browser caching in htaccess</li>
+								<li>Added Options -Indexes in htaccess file to prevent directory listing and removed index.html from folders.</li>
+								<li>Added hotlink protection in htaccess.</li>
+								<li>Added upload file limits in htaccess.</li>
+								<li>Skip the download dialogue for specific file types in htaccess.</li>
+								<li>Prevent viewing specific file or multiple file types in htaccess.</li>
+								<li>Block IPs in htaccess.</li>
+								<li>Deny any request for static files (images, css, etc) if referrer is not local site or empty in htaccess.</li>
+								<li>Block visitors referred from specific domains in htaccess.</li>
+								<li>Added 404, 403 and 500 custom error pages in htaccess.</li>
+								<li>Addition in htaccess to prevent hacking via website URL.</li>
+							</ul>
+						</li>
+						<li>
+							<strong>Admin Panel</strong>
+							<ul>
+								<li>Responsive and mobile friendly</li>
+								<li>Added gzip and deflate compression in htaccess</li>
+							</ul>
+						</li>
+						<li>User defined functions can be added in helper folder.</li>
+						<li>Auto image resize, cropping and thumbnails.</li>
+						<li>Added Gallery management</li>
+						<li>Added User management</li>
+						<li>Added Slider management</li>
+						<li>Uses PDO extensions for better support and security</li>
+						<li>Added general used methods in helper class to speed up work.</li>
+						<li>Easy to use html tags without writing lots of code.</li>
+						<li>Proper validation and sanitization.</li>
+						<li>Better error reporting and debugging</li>
+						<li>Lots of upload functionality for files with proper validation.</li>
+						<li>Ability to add social icons dynamically.</li>
+						<li>Added search functionality</li>
+						<li>Better navigation with in-built functionality</li>
+						<li>Autoloading of classes makes it faster by calling only those classes that are required.</li>
+						<li>Ability to use meta tags for each page differently. </li>
+						<li>Encryption functionality for locking and unlocking data with mcrypt.</li>
+						<li>Better 404 error page handling.</li>
+						<li>MVC approach by separating view from logic.</li>
+						<li>Automatic log file creation for errors.</li>
+						<li>Robust robot.txt file</li>
+						<li>Message and enquiry manager</li>
+						<li>Automatic html and xml sitemap creation feature</li>
+						<li>Supports SMS API functionality.</li>
+						<li>Supports email sending.</li>
+						<li>Ability to select multiple menu positions for pages</li>
+						<li>Added pagination</li>
+					</ol>
+				</p>
+			</div>
+			<div id="overview-changelog">
+				<div class="page-header"><h1>Changelog</h1></div>
+				<p>
+					<strong>Version 0.1.2 (Under Development)</strong>
+					<ul>
+						<li>
+							Fixed Bugs:
+							<ul>
+								<li>...</li>
+							</ul>
+						</li>
+						<li>
+							Removed Features:
+							<ul>
+								<li>...</li>
+							</ul>
+						</li>
+						<li>
+							Improved Features:
+							<ul>
+								<li>...</li>
+							</ul>
+						</li>
+						<li>
+							New Features Added:
+							<ul>
+								<li>...</li>
+							</ul>
+						</li>
+					</ul>
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

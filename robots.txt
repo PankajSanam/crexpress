@@ -1,8 +1,8 @@
 User-agent: *
-Disallow: /retina/
+Disallow: /system/
 
 User-agent: *
-Disallow: /vision/
+Disallow: /asset/
 
 User-agent: Aqua_Products
 Disallow: /

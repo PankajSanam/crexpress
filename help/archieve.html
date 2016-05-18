@@ -1,0 +1,602 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Crexpress - Archieve</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/bootstrap-responsive.min.css">
+	<link rel="stylesheet" href="css/style.css">
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+</head>
+<body data-spy="scroll" data-target=".spy-nav" onload="prettyPrint()" data-offset="60">
+<div class="navbar navbar-fixed-top navbar-inverse">
+	<div class="navbar-inner">
+		<div class="container">
+			<a href="index.html" class="brand">Crexpress</a>
+			<ul class="nav">
+				<li class="active"><a href="index.html">Overview</a></li>
+				<li><a href="guide.html">User Guide</a></li>
+				<li><a href="admin.html">Admin Guide</a></li>
+				<li><a href="libraries.html">Library Reference</a></li>
+				<li><a href="controllers.html">Controller Reference</a></li>
+				<li><a href="models.html">Model Reference</a></li>
+				<li><a href="faq.html">FAQ</a></li>
+				<li><a href="contact.html">Contact</a></li>
+				<li><a href="credits.html">Credits</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="container" id="main">
+	<div class="row">
+		<div class="span3 spy-nav">
+			<ul class="nav nav-list nav-left" data-spy="affix" data-offset-top="0">
+				<li class='active'><a href="#overview-welcome"><i class="icon-chevron-right"></i>Welcome</a></li>
+				<li><a href="#overview-features"><i class="icon-chevron-right"></i>Features</a></li>
+				<li><a href="#overview-changelog"><i class="icon-chevron-right"></i>Changelog</a></li>
+				<li><a href="#topbar"><i class="icon-chevron-right"></i>License</a></li>
+				<li><a href="#sidebar"><i class="icon-chevron-right"></i>Support</a></li>
+			</ul>
+		</div>
+		<div class="span9">
+			<div id="overview-welcome">
+				<div class="page-header"><h1>Archive</h1></div>
+				<p>
+					List of old features and work.
+				</p>
+			</div>
+			<div id="overview-features">
+				<div class="page-header"><h1>Core Features</h1></div>
+				<p>
+					<ol>
+						<li>
+							Search Engine friendly URL's
+							<ul>
+								<li>URLs produced by Retina CMF mimic the structure of static website as they appear
+								as html files which is mostly likeable by the search engines.</li>
+							</ul>
+						</li>
+						<li>
+							Pages Module
+							<ul>
+								<li>Ability to add new pages</li>
+								<li>Ability to edit any page</li>
+								<li>Ability to active/inactive any page</li>
+								<li>Ability to use pages as another pages category</li>
+							</ul>
+						</li>
+						<li>Image resizing and thumbnails</li>
+					</ol>
+				</p>
+			</div>
+			<div id="overview-changelog">
+				<div class="page-header"><h1>Changelog</h1></div>
+				<p>
+					<strong>Version 0.1.1 (Under Development)</strong>
+					<ul>
+						<li>
+							Fixed Bugs:
+							<ul>
+								<li>
+									Problem passing arguments in url so fixed this problem in html library and helper.
+									<ul>
+										<li>retina/library/html.php</li>
+										<li>retina/core/helper.php</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+						<li>
+							Removed Features:
+							<ul>
+								<li>...</li>
+							</ul>
+						</li>
+						<li>
+							Improved Features:
+							<ul>
+								<li>Complete revamp of folder and file structure.</li>
+								<li>Complete revamp of controller, model, library and view.</li>
+								<li>Renamed docs to help</li>
+							</ul>
+						</li>
+						<li>
+							New Features Added:
+							<ul>
+								<li>Added Options -Indexes in htaccess file to prevent directory listing and removed index.html from folders.</li>
+								<li>Added hotlink protection in htaccess.</li>
+								<li>Added upload file limits in htaccess.</li>
+								<li>Skip the download dialogue for specific file types in htaccess.</li>
+								<li>Prevent viewing specific file or multiple file types in htaccess.</li>
+								<li>Block IPs in htaccess.</li>
+								<li>Deny any request for static files (images, css, etc) if referrer is not local site or empty in htaccess.</li>
+								<li>Block visitors referred from specific domains in htaccess.</li>
+								<li>Added 404, 403 and 500 custom error pages in htaccess.</li>
+								<li>Addition in htaccess to prevent hacking via website URL.</li>
+								<li>Setup virtual host if anyone want to work on a localhost. Instructions are given in docs.</li>
+								<li>Added spl_autoload class to autoload all classes.</li>
+							</ul>
+						</li>
+					</ul>
+				</p>
+				<p>
+					<strong>Version 0.1.0 (25.12.2013)</strong>
+					<ul>
+						<li>
+							Fixed Bugs:
+							<ul>
+								<li>Added ob_start in back vision header to avoid header warnings in back vision</li>
+								<li>Fixed unlock method in encrypt class by converting any blank space to '+' character because it was unable to take '+' from the encoded url, it always displayed it as a blank space.</li>
+								<li>Fixed delete method in db class.</li>
+								<li>Fixed pages view in back vision</li>
+								<li>Fixed social page in back vision</li>
+								<li>Fixed slider in back vision</li>
+								<li>Fixed navigation in front vision header</li>
+								<li>Home page and sitemap page cannot be deleted from back end for better stability of site</li>
+								<li>Removed ckeditor from slider description in back vision</li>
+							</ul>
+						</li>
+						<li>
+							Removed Features:
+							<ul>
+								<li>Moved front view folder to retina/front/view</li>
+								<li>Moved back view folder to retina/back/view</li>
+								<li>Removed ability to have multiple themes since it is not needed for now</li>
+								<li>Fixed uri_segment method in autoload class</li>
+								<li>Removed <code>revisit_after</code> method since this meta tag is not suppored by major search engines</li>
+								<li>Moved strip_html method from validation library to sanitize library</li>
+							</ul>
+						</li>
+						<li>
+							Improved Features:
+							<ul>
+								<li>Renamed url function in core/helper to page_url</li>
+								<li>Revamped the folder structure</li>
+								<li>Improved robots.txt</li>
+								<li>Improved <code>social_icons</code> in helper to take height attribute and open links in new tab</li>
+								<li>Improved favicon method in html class by adding type attribute.</li>
+								<li>Added bottom, left and right menu positions along with top position in back vision <code>pages</code></li>
+								<li>Complete revamp of back vision pages</li>
+								<li>Renamed Base_Model to _Model and Base_Controller to _Controller because if a model or controller name starts from a (letter before b (Base_Model has B)) then it will not find the class because it loads all classes in alphabetical order</li>
+								<li>Uploading a new image in slider will delete the old one</li>
+								<li>Separated styles and scripts data in individual controllers along with other optimizations</li>
+								<li>Complete revamp of front controller structure</li>
+								<li>Major revamp of index file to accept /folder/file.html structure</li>
+								<li>Optimized <code>page_url</code> function in helper file according to index revamp</li>
+								<li>Optimized <code>designed_by</code> function in helper</li>
+							</ul>
+						</li>
+						<li>
+							New Features Added:
+							<ul>
+								<li>Added home_url in front/base controller</li>
+								<li>Ability to add alternative name for menu_name in pages table</li>
+								<li>Added sort order in social icons</li>
+								<li>Added new default and 404 images in vision/data/general</li>
+								<li>Added shop controller and model in front vision</li>
+								<li>Ability to add new products in shop</li>
+								<li>Ability to add favicion, logo, google analytics, google webmaster, address, mobile, landline and mobile settings</li>
+								<li>Complete revamp of htaccess</li>
+								<li>Complete revampe of index</li>
+								<li>Added sidebar folder in retina/front/view and retina/back/view</li>
+								<li>Added front_sidebars and back_sidebars methods in autoload class</li>
+								<li>Added gallery category manager in back vision</li>
+								<li>Added slug in gallery categories back vision</li>
+								<li>Added gallery controller and model for front vision</li>
+								<li>Added <code>IS_LIVE</code> constant in route to check if site is hosted online</li>
+								<li>Added browser caching in htaccess</li>
+								<li>Added robots method in html library</li>
+								<li>Added canonical meta tag in html library</li>
+								<li>Added <code>favicon()</code> method in html library</li>
+								<li>Added <code>googlebot()</code> method in html library</li>
+								<li>Added SMS library</li>
+								<li>Added Mail library to send emails</li>
+								<li>Automatic html and xml sitemap creation feature</li>
+								<li>Automatic sitemap.xml creation feature</li>
+								<li>Added <code>today()</code> function in helper</li>
+								<li>Added <code>is_deletable()</code> function in helper for checking if a page can be deleted or not</li>
+								<li>Added <code>SITE_URL</code> constant in route file</li>
+								<li>Added <code>generate_sitemap</code> function in helper</li>
+								<li>Added general instructions on back vision dashboard</li>
+								<li>Added advertisement management in back vision</li>
+								<li>Added social library for facebook like box</li>
+								<li>Added page_id method in _model for fetching a page's like</li>
+								<li>Added new template college_detail</li>
+								<li>Ability to save file extension with slug</li>
+								<li>Better SEO friendly URL's while there are sub pages of pages</li>
+								<li>Ability to select multiple menu positions for pages</li>
+								<li>Added <code>bottom_menu</code> method in navigation library</li>
+								<li>Added pagination</li>
+							</ul>
+						</li>
+						<li>
+							<u>Added/Modified Files/Database/Tables:</u>
+							<ul>
+								<li>retina/core/route.php</li>
+								<li>retina/core/helper.php</li>
+								
+								<li>retina/back/controller/ads_controller.php</li>
+								<li>retina/back/controller/_controller.php</li>
+								<li>retina/back/controller/college_controller.php</li>
+								<li>retina/back/controller/dashboard_controller.php</li>
+								<li>retina/back/controller/error_controller.php</li>
+								<li>retina/back/controller/gallery_controller.php</li>
+								<li>retina/back/controller/index_controller.php</li>
+								<li>retina/back/controller/jobs_controller.php</li>
+								<li>retina/back/controller/messages_controller.php</li>
+								<li>retina/back/controller/pages_controller.php</li>
+								<li>retina/back/controller/settings_controller.php</li>
+								<li>retina/back/controller/shop_controller.php</li>
+								<li>retina/back/controller/slider_controller.php</li>
+								<li>retina/back/controller/social_controller.php</li>
+								<li>retina/back/controller/users_controller.php</li>
+
+								<li>retina/back/model/ads_model.php</li>
+								<li>retina/back/model/_model.php</li>
+								<li>retina/back/model/college_model.php</li>
+								<li>retina/back/model/dashboard_model.php</li>
+								<li>retina/back/model/error_model.php</li>
+								<li>retina/back/model/gallery_model.php</li>
+								<li>retina/back/model/index_model.php</li>
+								<li>retina/back/model/jobs_model.php</li>
+								<li>retina/back/model/messages_model.php</li>
+								<li>retina/back/model/pages_model.php</li>
+								<li>retina/back/model/settings_model.php</li>
+								<li>retina/back/model/shop_model.php</li>
+								<li>retina/back/model/slider_model.php</li>
+								<li>retina/back/model/social_model.php</li>
+								<li>retina/back/model/users_model.php</li>
+								
+								<li>retina/back/view/pages.php</li>
+								<li>retina/back/view/dashboard.php</li>
+								<li>retina/back/view/sidebar/top_navigation.php</li>
+								<li>retina/back/view/ads.php</li>
+								<li>retina/back/view/slider.php</li>
+
+								<li>retina/front/controller/sitemap_controller.php</li>
+								<li>retina/front/controller/_controller.php</li>
+								<li>retina/front/controller/college_controller.php</li>
+								<li>retina/front/controller/contact_controller.php</li>
+								<li>retina/front/controller/gallery_controller.php</li>
+								<li>retina/front/controller/home_controller.php</li>
+								<li>retina/front/controller/private_job_controller.php to jobs_controller.php</li>
+								<li>retina/front/controller/page_controller.php</li>
+								<li>retina/front/controller/search_controller.php</li>
+								<li>retina/front/controller/shop_controller.php</li>
+								<li>retina/front/controller/sitemap_controller.php</li>
+								<li>retina/front/controller/college_detail_controller.php</li>
+
+								<li>retina/front/model/sitemap_model.php</li>
+								<li>retina/front/model/_model.php</li>
+								<li>retina/front/model/college_model.php</li>
+								<li>retina/front/model/contact_model.php</li>
+								<li>retina/front/model/gallery_model.php</li>
+								<li>retina/front/model/home_model.php</li>
+								<li>retina/front/model/private_job_model.php to jobs_model.php</li>
+								<li>retina/front/model/location_model.php</li>
+								<li>retina/front/model/page_model.php</li>
+								<li>retina/front/model/search_model.php</li>
+								<li>retina/front/model/shop_model.php</li>
+								<li>retina/front/model/sitemap_model.php</li>
+								<li>retina/front/model/college_detail_model.php</li>
+
+								<li>retina/front/view/sitemap_template.php</li>
+								<li>retina/front/view/college_detail_template.php</li>
+								<li>retina/front/view/footer.php</li>
+								
+								<li>retina/library/sitemap.php</li>
+								<li>retina/library/social.php</li>
+								<li>retina/library/validation.php</li>
+								<li>retina/library/sanitize.php</li>
+								<li>retina/library/navigation.php</li>
+
+								<li>retina/vision/ajax/ajax_front_pagination.php</li>
+
+								<li>index.php</li>
+
+								<li>Added new table ads</li>
+								<li>New column deletable in pages table. 0 for non-deletable and 1 for deletable pages</li>
+							</ul>
+						</li>
+					</ul>
+				</p>
+				<p>
+					<strong>Version 0.0.9 (19.11.2013)</strong>
+					<ul>
+						<li>
+							Fixed Bugs:
+							<ul>
+								<li>Fixed post thumbnails on search template</li>
+								<li>Removed additonal "/" from DATA_VISION constant in route</li>
+								<li>Fixed a bug in array_map in strip_all_slashes method of Autoload class</li>
+								<li>Fixed sign out admin auth method</li>
+								<li>Changed <code>DATA_VISION</code> to <code>DATA_PATH</code> in all image uploading codes</li>
+							</ul>
+						</li>
+						<li>
+							Removed Features:
+							<ul>
+								<li>Removed packages and admin_menus table from database</li>
+								<li>Removed packages functionality completely and moved all files to models</li>
+								<li>Removed error display statements from connection file and added them into autoload class in error method</li>
+								<li>Removed flot plugin completely from BACK VISION</li>
+								<li>Removed body class</li>
+								<li>Removed <code>default</code> folder from back vision and moved it to <code>back</code>folder directly</li>
+								<li>Removed static property from all methods</li>
+								<li>Removed pages and location classes from library and moved them into front models</li>
+								<li>Removed helper class from library and added it into core folder</li>
+								<li>Removed <code>slug</code>, <code>template</code> and <code>template_name</code> methods from page model and moved them into core/helper file</li>
+								<li>Removed gallery class from library and added its method into back/model</li>
+							</ul>
+						</li>
+						<li>
+							Improved Features:
+							<ul>
+								<li>Improved social_icons method in helper class to accept the width of image</li>
+								<li>Improved img method in html class to be used for data folder as well as front and back vision folder images</li>
+								<li><code>page_title</code> and <code>page_content</code> in page model are improved for 404 pages</li>
+								<li>Separated front and back controllers and models in retina folder</li>
+							</ul>
+						</li>
+						<li>
+							Optimized Features:
+							<ul>
+								<li>Merged the search template condition with other page conditions</li>
+								<li>Moved all core file loading from index to route file</li>
+								<li>Optimized styles and scripts methods in html class</li>
+								<li>Renamed library, package, model methods to libraries, packages, models</li>
+								<li>Optimized top_navigation function in back vision</li>
+								<li>Optimized navigation in header</li>
+								<li>Moved latest_page method from page class to home model</li>
+								<li>Optimized the loading of packages by merging it with autoload class and caling it directly in index</li>
+								<li>Optimized page template</li>
+								<li>Optimized all documentation with better navigation</li>
+								<li>Renamed meta_charset to charset in html class</li>
+								<li>Optimized top_menu method in navigation class for sorting by sort order of menu</li>
+								<li>Revamped 404 page</li>
+								<li>Changed <code>selected</code> to <code>active</code> in current_menu method in navigation</li>
+								<li>Revamped back vision dashboard</li>
+								<li>Revamped top navigation in back vision</li>
+								<li>Major revamp of coding standard</li>
+								<li>Major revamp of front framework</li>
+								<li>Major revamp of back framework</li>
+								<li>Replaced back vision login error with div from alert box</li>
+							</ul>
+						</li>
+						<li>
+							New Features Added:
+							<ul>
+								<li>Added designed_by method in helper class</li>
+								<li>Added log file functionality in error method in autoload class</li>
+								<li>Added strip_all_slashes and remove_magic_quotes method in autoload class</li>
+								<li>Added unregister_globals method to autoload class</li>
+								<li>Added remove_magic_quotes and unregister_globals method in index</li>
+								<li>Added gzip and deflate compression in htaccess</li>
+								<li>Added robot.txt file in root</li>
+								<li>Added controllers method in Autoload class and called it on index file to include all controllers</li>
+								<li>Added models method in Autoload class and called it on index file to include all models</li>
+								<li>Added facebook share link on homepage template</li>
+								<li>Added Home_Controller and Home_Model for home page templates</li>
+								<li>Added Base_Controller in for controlling basic functionality of a websites header template</li>
+								<li>Added model method in Autoload class to instantiate an object of a model class</li>
+								<li>Added empty Base_Model class in models for further future use</li>
+								<li>Added Navigation class in library</li>
+								<li>Added current_menu method in Navigation class for current active menu</li>
+								<li>Added page controller and page model</li>
+								<li>Added custom error in case a controller is missing in index file</li>
+								<li>Added contact controller and contact model</li>
+								<li>Added private job controller and private job model</li>
+								<li>Added htaccess to force all non-images files as images in vision/data folder</li>
+								<li>Ability to change admin password in back end</li>
+								<li>Added <code>DATA_PATH</code> constant in route file for image uploading paths</li>
+								<li>Hyperlink to page url in admin pages.html</li>
+								<li>Added <code>AJAX_PATH</code> constant in route for all ajax files</li>
+								<li>Added ajax folder in vision</li>
+								<li>Ability to change back vision theme color</li>
+								<li>Added <code>admin_current_menu</code> method in Navigation class for back vision</li>
+								<li>Added active current menu in back vision</li>
+								<li>Added message box feature where all enquiries from the website will be shown</li>
+								<li>Added namespace for front and back controllers and models</li>
+								<li>Added <code>back_model</code> and <code>front_model</code> in autoload class for loading single model file</li>
+								<li>Added <code>front_view</code> and <code>back_view</code> in autoload class</li>
+								<li>Added <code>link</code> function in core/helper</li>
+							</ul>
+						</li>
+					</ul>
+				</p>
+				<p>
+					<strong>Version 0.0.8 (31.10.2013)</strong>
+					<ul>
+						<li>
+							Fixed Bugs:
+							<ul>
+								<li>Fixed link method in page class so it doesn't show a directory with nav links</li>
+								<li>Completely removed elfinder plugin from admin due to some problem</li>
+							</ul>
+						</li>
+						<li>
+							New Features Added:
+							<ul>
+								<li>Revamped template method in page class to automatically select existing templates</li>
+								<li>Defined SERVER_ROOT and SITE_ROOT constants in index file</li>
+								<li>Added 301 redirection in htaccess</li>
+								<li>Made two folder structure front and back in theme folder</li>
+								<li>Added admin folder in back folder with default-theme name folder</li>
+								<li>Added website theme in default-theme folder in front folder</li>
+								<li>Added route file in core folder and added some of codes from index to it</li>
+								<li>Renamed THEME_PATH to FRONT_THEME and added BACK_THEME constant as well in route</li>
+								<li>Revamped all image, css, js and files path with constant value</li>
+								<li>Added a function to check if function exist before initializing it in admin</li>
+								<li>Added some functionality in htaccess to make admin folder work with the front index file</li>
+								<li>Moved all view files from admin root to view folder</li>
+								<li>Removed core folder from admin folder and using root core files in admin</li>
+								<li>Added a 404 page in admin</li>
+								<li>Revamped all admin files to make them compatible with new structure</li>
+								<li>Moved core, library and package folder to retina folder</li>
+								<li>Renamed theme folder to vision</li>
+								<li>Moved uploads folder to vision folder and renamed it to data</li>
+								<li>Added deny htacess and blank index file to retina</li>
+								<li>Added a docs folder and moved changelog and license file there</li>
+								<li>Added a model folder in retina folder</li>
+								<li>Added a controller folder in retina folder</li>
+								<li>Added new constant DATA_VISION in route for data folder which contains all uploads of site</li>
+								<li>Renamed FRONT_THEME and BACK_THEME constants to FRONT_VISION AND BACK_VISION</li>
+								<li>Revamped styles and scripts method in html class to use it in back end</li>
+								<li>Revamped img tag to be used in back end as well as front end</li>
+								<li>Revamped all css and js files in back end header with scripts and styles method</li>
+								<li>Revamped back end view files</li>
+								<li>Revamped data folder in vision folder</li>
+							</ul>
+						</li>
+					</ul>
+				</p>
+				<p>
+					<strong>Version 0.0.7 (26.10.2013)</strong>
+					<ul>
+						<li>
+							Fixed Bugs:
+							<ul>
+								<li>Fixed location method bug in private job template</li>
+							</ul>
+						</li>
+						<li>
+							New Features Added:
+							<ul>
+								<li>Added packages and admin_menus table in db</li>
+								<li>Added packages option in admin panel</li>
+								<li>Made minor changes in connection file</li>
+								<li>Added check meta method in db class for extracting the table names which contains meta tags</li>
+								<li>Revamped meta methods in html class where they can take as many as tables with meta meta tags</li>
+								<li>Changed xmlns method to lang in html class and theme header file</li>
+								<li>Retina class is updated to add libraries and packages automatically</li>
+								<li>Renamed job_portal package to private_jobs</li>
+								<li>Packages will be included automatically in autoload from packages database</li>
+								<li>Merged autoload configuration in index file</li>
+								<li>Changed Retina class to autoload class</li>
+								<li>Added documentation comments in index, autoload and connection file</li>
+								<li>Added meta_charset method in html class</li>
+								<li>Added img method in html class</li>
+								<li>Added social_icons method in helper class</li>
+								<li>Added copyright and powered_by methods in helper class</li>
+								<li>Secured select_query and update_query method from sql injection in db class</li>
+								<li>Renamed DB class to Db</li>
+								<li>Added a delete method in Db class</li>
+								<li>Added a confirm delete javascript function in admin footer</li>
+								<li>Added encrypt class in library with lock and unlock methods to encrypt data with mcrypt</li>
+								<li>Encrypted id is passed in url when deleting a record in admin users</li>
+								<li>Added delete functionality with confirmation in admin/users and pages</li>
+								<li>Parted header information into header file in admin</li>
+								<li>Removed *_query from all Db class methods</li>
+								<li>Commented unnecessary code in htaccess file</li>
+								<li>Optimized some data in mysql tables</li>
+								<li>Added a thumb method in page class</li>
+								<li>Removed default image from featured_image method in page class</li>
+							</ul>
+						</li>
+					</ul>
+				</p>
+				<p>
+					<strong>Version 0.0.6 (18.10.2013)</strong>
+					<ul>
+						<li>Fixed echo_error method in image library class</li>
+						<li>Removed spl autoload function because PHP on webhost does not support this feature</li>
+						<li>Added retina class</li>
+						<li>Revamped autoload file</li>
+						<li>Merged config file with index file by defining the variables</li>
+						<li>Added google webmaster code in html class</li>
+						<li>Improved private job page design</li>
+						<li>Added a new method in helper class for "from to" statements</li>
+						<li>Added ul and ol list methods in html library class</li>
+					</ul>
+				</p>
+				<p>
+					<strong>Version 0.0.5 (14.10.2013)</strong>
+					<ul>
+						<li>Added another error reporting function in connection file</li>
+						<li>Added Location class in library</li>
+						<li>Added Gallery class in library</li>
+						<li>Added slider class in library</li>
+						<li>Added Private job class in model</li>
+						<li>Replaced excerpt function with strip html method</li>
+						<li>Revamped Validation class</li>
+						<li>Added upload class in library</li>
+						<li>Added Social Icon feature</li>
+						<li>Added search functionality</li>
+						<li>Optimized table field names</li>
+						<li>Added image class for resizing and cropping images</li>
+						<li>Added a new autoload class with spl autoload function for autoloading classes in core and lib folder</li>
+						<li>Replaced model with package</li>
+						<li>Added license and changelog information in site root folder</li>
+						<li>Revamped and Updated config file with packages information</li>
+						<li>Added job enquiry model in job portal package</li>
+						<li>Added apply job feature on private job page template</li>
+						<li>Cleaned up webroot image folder</li>
+						<li>Improved Front-End css</li>
+						<li>Added ul and ol functions in html class</li>
+						<li>Cleaned up htaccess file</li>
+						<li>Added active menu class in top navigation</li>
+						<li> Removed mysql_real_escape_string from core database file due to compatibility issue with PDO</li>
+					</ul>
+				</p>
+				<p>
+					<strong>Version 0.0.4 (07.10.2013)</strong>
+					<ul>
+						<li>Added Slider feature in admin</li>
+						<li>Added Gallery feature in admin</li>
+						<li>Replaced Mysql* extensions with PDO</li>
+						<li>Re-constructed core folder</li>
+						<li>Added Lib folder with built-in functions</li>
+						<li>Added theme structure</li>
+						<li>Revamped htaccess file</li>
+						<li>Added helper class in library</li>
+						<li>Added html class in library</li>
+						<li>Added sanitize class with new methods in library</li>
+						<li>Added pages class in library</li>
+						<li>Added validation class in library</li>
+						<li>Revamped admin panel with all new changes</li>
+					</ul>
+				</p>
+				<p>
+					<strong>Version 0.0.3 (06.10.2013)</strong>
+					<ul>
+						<li>Added Private Job feature in admin</li>
+						<li>Added Gallery</li>
+						<li>Added User management in admin</li>
+						<li>Revamped SEO structure for Private job feature</li>
+					</ul>
+				</p>
+				<p>
+					<strong>Version 0.0.2 (03.10.2013)</strong>
+					<ul>
+						<li>Added File Manager</li>
+						<li>Revamped Page management in admin</li>
+						<li>Revamped Data Models and Core Files</li>
+						<li>Improved Admin Login</li>
+					</ul>
+				</p>
+				<p>
+					<strong>Version 0.0.1 (27.09.2013)</strong>
+					<ul>
+						<li>Wordpress removed and core PHP is being used</li>
+						<li>Ability to add pages</li>
+						<li>Search Engine friendly URLs</li>
+						<li>Responsive Admin Panel</li>
+						<li>Added Page Templates</li>
+					</ul>
+				</p>
+				<p>
+					<strong>Version 0.0.0 (25.09.2013)</strong>
+					<ul>
+						<li>Initial release with wordpress installed</li>
+					</ul>
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>
