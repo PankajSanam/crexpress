@@ -1,0 +1,1 @@
+smarty configuration folder, please do not remove this
