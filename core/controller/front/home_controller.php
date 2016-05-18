@@ -2,8 +2,6 @@
 
 class Home_Controller extends Controller
 {
-	private $table = 'pages';
-
 	public function process()
 	{
 		$this->template->assign(array(
@@ -65,25 +63,23 @@ class Home_Controller extends Controller
 			',
 		));
 		$model = new Model();
-		$product_menu = $model->product_navigation();
 		$pages_menu = $model->pages_navigation();
 		$meta = new Meta();
 		$navigation = new Navigation();
 
+		$table = 'page';
+
 		$this->template->assign(array(
-			'meta_title' => $meta->title($this->table,$this->slug,true),
-			'meta_description' => $meta->description($this->table,$this->slug,true),
-			'meta_keywords' => $meta->keywords($this->table,$this->slug,true),
+			'meta_title' => $meta->title($table,$this->slug),
+			'meta_description' => $meta->description($table,$this->slug),
+			'meta_keywords' => $meta->keywords($table,$this->slug),
 			'page_title' => Route::model($this->page_template)->page_title($this->slug),
 			'page_content' => Route::model($this->page_template)->page_content($this->slug),
-			'sliders' => Route::model($this->page_template)->sliders(),
-			'galleries' => Route::model($this->page_template)->galleries(),
 			'assets' => CONTENT_DIR,
 			'site_path' => SITE_PATH,
 			'images' => IMAGES,
 			'current' => $navigation->current_menu($this->slug,get_slug()),
 			'logo' => Html::img('logo.png'),
-			'product_navigation' => $navigation->buildMenu(0,$product_menu,'id="submenu2" class="ddsubmenustyle"'),
 			'pages_navigation' => $navigation->pageMenu(0,$pages_menu,'id="submenu3" class="ddsubmenustyle"'),
 		));
 

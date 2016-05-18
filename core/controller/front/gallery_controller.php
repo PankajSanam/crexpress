@@ -1,7 +1,7 @@
-<?php if (!defined('CREXO')) exit('No Trespassing!');
+<?php if (!defined('CREXO')) exit('<html><body><div style="position:fixed;top:35%;left:35%;"><img src="http://www.nathanfox.net/content/binary/WindowsLiveWriter/StrongnameaccessdeniederroronWindows.exe_15108/StrongNameAccessDeniedMessageBox_thumb.png"></div></body></html>');
 
-class Gallery_Controller extends Crexo_Controller {
-
+class Gallery_Controller extends Controller
+{
 	public $back_page;
 	public function __construct($slug){
 		$this->slug = $slug;

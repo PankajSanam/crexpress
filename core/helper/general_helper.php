@@ -1,4 +1,4 @@
-<?php if (!defined('CREXO')) exit('No Trespassing!');
+<?php if (!defined('CREXO')) exit('<html><body><div style="position:fixed;top:35%;left:35%;"><img src="http://www.nathanfox.net/content/binary/WindowsLiveWriter/StrongnameaccessdeniederroronWindows.exe_15108/StrongNameAccessDeniedMessageBox_thumb.png"></div></body></html>');
 
 function get_image($folder, $image='', $width='', $height='' )
 {
@@ -78,21 +78,6 @@ function status($status){
 		$page_status = '<span class="label label-lightred">Disabled</span>';
 	}
 	return $page_status;
-}
-
-function copyright( $year = '2014' ){
-	$copy = '&copy; '.$year.', All Rights Reserved.';
-	return $copy;
-}
-
-function powered_by( $title = 'Crexpress - Content Management Framework' ){
-	$powered = 'Powered By <a href="http://www.crexo.com" title="'.$title.'">Crexo.com</a>';
-	return $powered;
-}
-
-function designed_by( $title = 'Website Designing and Development' ){
-	$designed = '<a href="http://www.gitinfosys.com" title="'.$title.'">Website Designed &amp; Developed </a> by GIT Infosys';
-	return $designed;
 }
 
 function category_name($table,$id){

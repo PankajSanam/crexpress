@@ -1,206 +1,90 @@
-<?php if (!defined('CREXO')) exit('No Trespassing!');
+<?php if (!defined('CREXO')) exit('<html><body><div style="position:fixed;top:35%;left:35%;"><img src="http://www.nathanfox.net/content/binary/WindowsLiveWriter/StrongnameaccessdeniederroronWindows.exe_15108/StrongNameAccessDeniedMessageBox_thumb.png"></div></body></html>');
 
-class Product_Category_Controller extends Crexo_Controller {
-	
-	public $back_page;
-	public function __construct($slug){
-		$this->slug = $slug;
-	}
-	
-	public function back_index(){
-		parent::__construct($this->slug,'product');
+class Product_Category_Controller extends Controller
+{
+	private $table = 'pages';
 
-		$this->model[$this->slug] = Route::back_model($this->slug);
-		$this->library['validation']->admin_auth();
-		$this->library['upload'] = new Upload;
-		$this->data['controller'] = ucfirst($this->slug);
+	public function process()
+	{
+		$this->template->assign(array(
+			'resources' => '
+				<!-- begin CSS -->
+				<link href="'.FRONT_VIEW.'css/style.css" type="text/css" rel="stylesheet" id="main-style">
+				<link href="'.FRONT_VIEW.'css/responsive.css" type="text/css" rel="stylesheet">
+				<!--[if IE]> <link href="'.FRONT_VIEW.'css/ie.css" type="text/css" rel="stylesheet"> <![endif]-->
+				'.
+				/*<link href="'.FRONT_VIEW.'css/colors/green.css" type="text/css" rel="stylesheet" id="color-style">
+				<link href="'.FRONT_VIEW.'css/colors/indigo.css" type="text/css" rel="stylesheet" id="color-style">
+				<link href="'.FRONT_VIEW.'css/colors/orange.css" type="text/css" rel="stylesheet" id="color-style">
+				<link href="'.FRONT_VIEW.'css/colors/pink.css" type="text/css" rel="stylesheet" id="color-style">
+				<link href="'.FRONT_VIEW.'css/colors/purple.css" type="text/css" rel="stylesheet" id="color-style">
+				<link href="'.FRONT_VIEW.'css/colors/red.css" type="text/css" rel="stylesheet" id="color-style">
+				<link href="'.FRONT_VIEW.'css/colors/retro-green.css" type="text/css" rel="stylesheet" id="color-style">
+				<link href="'.FRONT_VIEW.'css/colors/teal.css" type="text/css" rel="stylesheet" id="color-style">
+				<link href="'.FRONT_VIEW.'css/colors/yellow.css" type="text/css" rel="stylesheet" id="color-style">*/
+				'<link href="'.FRONT_VIEW.'css/colors/blue.css" type="text/css" rel="stylesheet" id="color-style">
+			    <!-- end CSS -->
 
-		$this->data['styles']	=	$this->library['html']->styles(array(
-													//Bootstrap
-														'bootstrap.min.css' => '',
-													//Bootstrap responsive
-														'bootstrap-responsive.min.css' => '',
-													//jQuery UI
-														'plugins/jquery-ui/smoothness/jquery-ui.css' => '',
-														'plugins/jquery-ui/smoothness/jquery.ui.theme.css' => '',
-													//Tagsinput
-														'plugins/tagsinput/jquery.tagsinput.css' => '',
-													//multi select
-														'plugins/multiselect/multi-select.css' => '',
-													//chosen
-														'plugins/chosen/chosen.css' => '',
-													//PageGuide
-														'plugins/pageguide/pageguide.css' => '',
-													//select2
-														'plugins/select2/select2.css' => '',
-													//icheck
-														'plugins/icheck/all.css' => '',
-													//timepicker
-														'plugins/timepicker/bootstrap-timepicker.min.css' => '',
-													//colorpicker
-														'plugins/colorpicker/colorpicker.css' => '',
-													//Datepicker
-														'plugins/datepicker/datepicker.css' => '',
-													//Daterangepicker
-														'plugins/daterangepicker/daterangepicker.css' => '',
-													//Plupload
-														'plugins/plupload/jquery.plupload.queue.css' => '',
-													//dataTables
-														'plugins/datatable/TableTools.css' => '',
-													//XEditable
-														'plugins/xeditable/bootstrap-editable.css' => '',
-													//Theme CSS
-														'style.css' => '',
-													//Color CSS
-														'themes.css' => '',
-													),1);
+			    <link href="'.IMAGES.'favicon.ico" type="image/x-icon" rel="shortcut icon">
 
-		$this->data['scripts'] = $this->library['html']->scripts(array(
-													//jQuery
-														'jquery.min.js',
-													//Nice Scroll
-														'plugins/nicescroll/jquery.nicescroll.min.js',
-													//imagesLoaded
-														'plugins/imagesLoaded/jquery.imagesloaded.min.js',
-													//jQuery UI
-														'plugins/jquery-ui/jquery.ui.core.min.js',
-														'plugins/jquery-ui/jquery.ui.mouse.min.js',
-														'plugins/jquery-ui/jquery.ui.resizable.min.js',
-														'plugins/jquery-ui/jquery.ui.sortable.min.js',
-														'plugins/jquery-ui/jquery.ui.selectable.min.js',
-														'plugins/jquery-ui/jquery.ui.droppable.min.js',
-														'plugins/jquery-ui/jquery.ui.draggable.min.js',
-														'plugins/jquery-ui/jquery.ui.datepicker.min.js',
-														'plugins/jquery-ui/jquery.ui.spinner.js',
-														'plugins/jquery-ui/jquery.ui.slider.js',
-													//slimScroll
-														'plugins/slimscroll/jquery.slimscroll.min.js',
-													//Bootstrap
-														'bootstrap.min.js',
-													//Bootbox
-														'plugins/bootbox/jquery.bootbox.js',
-														'plugins/form/jquery.form.min.js',
-													//Touch enable for jquery UI
-														'plugins/touch-punch/jquery.touch-punch.min.js',
-													//vmap
-														'plugins/vmap/jquery.vmap.min.js',
-														'plugins/vmap/jquery.vmap.world.js',
-														'plugins/vmap/jquery.vmap.sampledata.js',
-													//dataTables
-														'plugins/datatable/jquery.dataTables.min.js',
-														'plugins/datatable/TableTools.min.js',
-														'plugins/datatable/ColReorderWithResize.js',
-														'plugins/datatable/ColVis.min.js',
-														'plugins/datatable/jquery.dataTables.columnFilter.js',
-														'plugins/datatable/jquery.dataTables.grouping.js',
-													//imagesLoaded
-														'plugins/imagesLoaded/jquery.imagesloaded.min.js',
-													//PageGuide
-														'plugins/pageguide/jquery.pageguide.js',
-													//Masked inputs
-														'plugins/maskedinput/jquery.maskedinput.min.js',
-													//TagsInput
-														'plugins/tagsinput/jquery.tagsinput.min.js',
-													//Datepicker
-														'plugins/datepicker/bootstrap-datepicker.js',
-													//Daterangepicker
-														'plugins/daterangepicker/daterangepicker.js',
-														'plugins/daterangepicker/moment.min.js',
-													//Timepicker
-														'plugins/timepicker/bootstrap-timepicker.min.js',
-													//Colorpicker
-														'plugins/colorpicker/bootstrap-colorpicker.js',
-													//MultiSelect
-														'plugins/multiselect/jquery.multi-select.js',
-													//CKEditor
-														'plugins/ckeditor/ckeditor.js',
-													//PLUpload
-														'plugins/plupload/plupload.full.js',
-														'plugins/plupload/jquery.plupload.queue.js',
-													//Custom file upload
-														'plugins/fileupload/bootstrap-fileupload.min.js',
-														'plugins/mockjax/jquery.mockjax.js',
-													//complexify
-														'plugins/complexify/jquery.complexify-banlist.min.js',
-														'plugins/complexify/jquery.complexify.min.js',
-													//Mockjax
-														'plugins/mockjax/jquery.mockjax.js',
-													//Chosen
-														'plugins/chosen/chosen.jquery.min.js',
-													//select2
-														'plugins/select2/select2.min.js',
-													//icheck
-														'plugins/icheck/jquery.icheck.min.js',
-													//Validation
-														'plugins/validation/jquery.validate.min.js',
-														'plugins/validation/additional-methods.min.js',
-													//Sparkline
-														'plugins/sparklines/jquery.sparklines.min.js',
-													//XEditable
-														//'plugins/momentjs/jquery.moment.js',
-														//'plugins/mockjax/jquery.mockjax.js',
-														//'plugins/xeditable/bootstrap-editable.min.js',
-														//'plugins/xeditable/demo.js',
-														//'plugins/xeditable/address.js',
-													//Theme framework
-														'eakroko.min.js',
-													//Theme scripts
-														'application.min.js',
-													//Just for demonstration
-														'demonstration.min.js',
-												),1);
-		$this->data['body_class']	=	'';
-		$this->data['meta_title'] 	=	$this->model['product']->meta_title('Products - GIT BOX');
-		$this->data['products']		=	$this->model[$this->slug]->products();
-		$this->data['breadcrumb'] = '
-			<li><a href="product.html">Product Management</a><i class="icon-angle-right"></i></li>
-			<li><a href="product.html?action=add">New Product</a></li>
-		';
+				<!-- begin JS -->
+			    <script src="'.FRONT_VIEW.'js/jquery-1.8.2.min.js" type="text/javascript"></script> <!-- jQuery -->
+			    <script src="'.FRONT_VIEW.'js/ie.js" type="text/javascript"></script> <!-- IE detection -->
+			    <script src="'.FRONT_VIEW.'js/jquery.easing.1.3.js" type="text/javascript"></script> <!-- jQuery easing -->
+				<script src="'.FRONT_VIEW.'js/modernizr.custom.js" type="text/javascript"></script> <!-- Modernizr -->
+			    <!--[if IE 8]>
+			    <script src="'.FRONT_VIEW.'js/respond.min.js" type="text/javascript"></script>
+			    <script src="'.FRONT_VIEW.'js/selectivizr-min.js" type="text/javascript"></script>
+			    <![endif]-->
+			    <script src="'.FRONT_VIEW.'js/ddlevelsmenu.js" type="text/javascript"></script> <!-- drop-down menu -->
+			    <script type="text/javascript"> <!-- drop-down menu -->
+			        ddlevelsmenu.setup("nav", "topbar");
+			    </script>
+			    <script src="'.FRONT_VIEW.'js/tinynav.min.js" type="text/javascript"></script> <!-- tiny nav -->
+			    <script src="'.FRONT_VIEW.'js/jquery.validate.min.js" type="text/javascript"></script> <!-- form validation -->
+			    <script src="'.FRONT_VIEW.'js/jquery.ui.totop.min.js" type="text/javascript"></script> <!-- scroll to top -->
+			    <script src="'.FRONT_VIEW.'js/jquery.fitvids.js" type="text/javascript"></script> <!-- responsive video embeds -->
+			    <script src="'.FRONT_VIEW.'js/jquery.tweet.js" type="text/javascript"></script> <!-- Twitter widget -->
+				<script type="text/javascript" src="'.FRONT_VIEW.'js/revslider.jquery.themepunch.plugins.min.js"></script> <!-- swipe gestures -->
+			    <script src="'.FRONT_VIEW.'js/jquery.tipsy.js" type="text/javascript"></script> <!-- tooltips -->
+			    <script src="'.FRONT_VIEW.'js/custom.js" type="text/javascript"></script> <!-- jQuery initialization -->
+			    <!-- end JS -->
+			',
+		));
+		$model = new Model();
+		$product_menu = $model->product_navigation();
+		$pages_menu = $model->pages_navigation();
+		$meta = new Meta();
+		$navigation = new Navigation();
 
-		if(isset($_GET['action']) AND $_GET['action'] == 'edit'){
-			$this->data['edit_data']	= 	$this->model[$this->slug]->edit_data($_GET['id']);
-		} else {
-			$this->data['edit_data'] 	= 	$this->model[$this->slug]->edit_data(1);
+		$page_title = Route::model($this->page_template)->page_title($this->slug);
+
+		if(!empty($page_title))
+		{
+			$category_id = Route::model($this->page_template)->category_id($this->slug);
+		}
+		else
+		{
+			$category_id = 0;
 		}
 
-		parent::load('back');
-	}
-
-	public function front_index(){
-		parent::__construct($this->slug,'product_category');
-
-		$this->model['crexo'] = new Crexo_Model;
-		$this->data['styles'] = Html::styles( array( 
-			'bootstrap.css'	=>	'all',
-			'bootstrap.min.css' => 'all',
-			'style.css' => 'all',
-			//contains the *essential* css needed for the slider to work
-			'bjqs.css' => 'all',
-			'initcarousel.css' => 'all',
-			//contains additional styles used to set up this demo page - not required for the slider
-			'demo.css' => 'all',
-			'lightbox.css' => 'screen',
+		$this->template->assign(array(
+			'meta_title' => $meta->title($this->table,$this->slug,true),
+			'meta_description' => $meta->description($this->table,$this->slug,true),
+			'meta_keywords' => $meta->keywords($this->table,$this->slug,true),
+			'page_title' => $page_title,
+			'page_content' => Route::model($this->page_template)->page_content($this->slug),
+			'categories' => Route::model($this->page_template)->categories(),
+			'category_id' => $category_id,
+			'assets' => CONTENT_DIR,
+			'site_path' => SITE_PATH,
+			'images' => IMAGES,
+			'current' => $navigation->current_menu($this->slug,get_slug()),
+			'logo' => Html::img('logo.png'),
+			'product_navigation' => $navigation->buildMenu(0,$product_menu,'id="submenu2" class="ddsubmenustyle"'),
+			'pages_navigation' => $navigation->pageMenu(0,$pages_menu,'id="submenu3" class="ddsubmenustyle"'),
 		));
 
-		$this->data['scripts'] = Html::scripts(array(
-			'jquery-1.10.2.min.js',
-			'lightbox-2.6.min.js',
-			'modernizr.custom.js',
-		));
-
-		$this->data['meta_title']		= 	$this->model['crexo']->meta_title($this->slug);
-		$this->data['meta_description'] = 	$this->model['crexo']->meta_description($this->slug);
-		$this->data['meta_keywords'] 	= 	$this->model['crexo']->meta_keywords($this->slug);
-		
-		$this->data['page_title'] = $this->model[$this->page_template]->page_title($this->slug);
-		$this->data['page_content'] = $this->model[$this->page_template]->page_content($this->slug);
-		
-		if(!empty($this->data['page_title'])) {
-			$this->data['category_id'] = $this->model[$this->page_template]->category_id($this->slug);
-		} else {
-			$this->data['category_id'] = 0;
-		}
-		
-		parent::load();
+		$this->load();
 	}
 }

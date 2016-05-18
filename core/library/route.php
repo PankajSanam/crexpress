@@ -1,4 +1,4 @@
-<?php if (!defined('CREXO')) exit('No Trespassing!');
+<?php if (!defined('CREXO')) exit('<html><body><div style="position:fixed;top:35%;left:35%;"><img src="http://www.nathanfox.net/content/binary/WindowsLiveWriter/StrongnameaccessdeniederroronWindows.exe_15108/StrongNameAccessDeniedMessageBox_thumb.png"></div></body></html>');
 
 class Route
 {
@@ -14,11 +14,11 @@ class Route
 	{
 		$db = new Db;
 		$slug = $db->select('*')
-					->from($db->getT('settings'))
-					->where("name='slug'")
+					->from($db->getT('setting'))
+					->where("title='slug'")
 					->run('getRows');
 
-		return $slug[0]['value'];
+		return $slug[0]['content'];
 	}
 
 	// Loading one model at a time.
@@ -32,7 +32,8 @@ class Route
 	public static function load()
 	{
 		/** Set error reporting begins */
-		$today = date('Y.m.d');
+		$today = date('d.m.Y');
+		$random = base_convert(microtime(true), 10, 36);
 		if(DEBUG_MODE === 0)
 		{
 			error_reporting(0);
@@ -44,7 +45,7 @@ class Route
 			ini_set('display_errors', 1);
 		}
 		ini_set('log_errors',1);
-		ini_set('error_log',SERVER_PATH.'/content/logs/error.log.'.$today);
+		ini_set('error_log',SERVER_PATH.'/content/logs/error'.$random.$today.'.log');
 		/** Set error reporting end */
 
 		Route::set();
@@ -53,14 +54,14 @@ class Route
 	public static function slug($page)
 	{
 		$slug = null;
-		$db = new Db;
-		
+
 		/** find the value of slug which is set in settings table */
 		$post_slug = self::get_slug();
 		
 		/** find and replace slugs value so it can be used to match in respective table */
 		$page = str_replace($post_slug,'',$page);
-		
+
+		$db = new Db;
 		$meta_tables = $db->check_meta();
 		$count_tables = count($meta_tables);
 
@@ -73,7 +74,11 @@ class Route
 		{
 			for($i = 0 ; $i <= $count_tables-1; $i++)
 			{
-				$result =  $db->select($meta_tables[$i], array( 'slug=' => $page, 'status=' => 1 ));
+				$result =  $db->select('*')
+							->from($meta_tables[$i])
+							->where("slug='$page' AND status= 1")
+							->run('getRows');
+
 				$count = count($result);
 
 				if($count > 0)
@@ -93,12 +98,12 @@ class Route
 	public static function template_name($id)
 	{
 		$db = new Db;
-		$query = $db->select('*')
-					->from($db->getT('page_templates'))
-					->where('id='.$id)
-					->run('getRows');
-		
-		return $query[0]['template_name'];
+		$title = $db->select('title')
+					->from($db->getT('page_template'))
+					->where('page_template_id='.$id)
+					->run('getField');
+
+		return $title;
 	}
 
 	public static function template($page)
@@ -108,49 +113,47 @@ class Route
 		
 		/** find the value of slug which is set in settings table */
 		$post_slug = self::get_slug();
-		
+
 		/** find and replace slugs value so it can be used to match in respective table */
 		$page = str_replace($post_slug,'',$page);
 
-		$meta_tables = $db->check_meta();
-		$count_tables = count($meta_tables);
-	
+		//$meta_tables = $db->check_meta();
+		//$count_tables = count($meta_tables);
+
 		if(strrchr($page, '?'))
 		{
 			$page = explode('?',$page);
 			$page = $page[0];
 		}
-	
-		for($i = 0; $i <= $count_tables-1; $i++)
+
+		$page_template_id =  $db->select('page_template_id')
+						->from($db->getT('page'))
+						->where("slug='$page' AND status=1")
+						->run('getField');
+
+		if($page_template_id)
 		{
-			$result =  $db->select($meta_tables[$i], array( 'slug=' => $page, 'status=' => 1 ));
-			$count = count($result);
-	
-			if($count > 0)
-			{
-				$page_template = Route::template_name($result[0]['page_template_id']);
-				break;
-			}
-			else
-			{
-				$page_template = 'page';
-			}
+			$page_template = Route::template_name($page_template_id);
 		}
-	
+		else
+		{
+			$page_template = 'e404';
+		}
+
 		return $page_template;
 	}
 
 	public static function set()
 	{
 		$uri_segment = explode("/",$_SERVER['REQUEST_URI']);
-		$uri_segment = array_values( array_filter( $uri_segment, 'strlen' ) );
+		$uri_segment = array_values(array_filter($uri_segment, 'strlen'));
 
 		$page_template = 'home';
 		$page_slug = 'index';
-		
+
 		$_back = 'dashboard';
 
-		if(count($uri_segment) > 0 && $uri_segment[0] != '' )
+		if(count($uri_segment) > 0 && $uri_segment[0] != '')
 		{
 			$page_url = $uri_segment[0];
 			$page_template = Route::template($page_url);
@@ -164,11 +167,10 @@ class Route
 			$page_slug = Route::slug($page_url,$page_template);
 
 			$_back = $uri_segment[1];
-
 		}
 
 		// This block is for back end admin panel
-		if( !empty($uri_segment) && $uri_segment[0] == 'admin') 
+		if(!empty($uri_segment) && $uri_segment[0] == 'admin')
 		{
 			$controller = explode('.',$_back);
 			$controller_name = ucfirst($controller[0]).'_Controller';
@@ -177,13 +179,13 @@ class Route
 			if(file_exists($file))
 			{
 				$$_back = new $controller_name($_back);
-				$$_back->back_index();
+				$$_back->process();
 			} 
 			else
 			{
 				$controller_name = 'Error_Controller';
 				$error = new $controller_name($_back);
-				$error->back_index();
+				$error->process();
 			}
 		}
 		else

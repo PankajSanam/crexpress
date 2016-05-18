@@ -1,16 +1,14 @@
-<?php if (!defined('CREXO')) exit('No Trespassing!');
+<?php if (!defined('CREXO')) exit('<html><body><div style="position:fixed;top:35%;left:35%;"><img src="http://www.nathanfox.net/content/binary/WindowsLiveWriter/StrongnameaccessdeniederroronWindows.exe_15108/StrongNameAccessDeniedMessageBox_thumb.png"></div></body></html>');
 
 /**
  * Autoload Class
  * 
  * Autoload all required classes when they are needed.
  * 
- * @package   
- * @author Crexo.com
- * @copyright Pankaj Sanam
- * @version 2014
- * @access public
- */
+ * @author Pankaj Sanam
+ * @copyright crex.com
+ * @version 2015
+  */
 class Autoload 
 {
 
@@ -24,9 +22,18 @@ class Autoload
 	 */
 	public static function controllers($class_name) 
 	{
+		// load controllers from front end
 		$file = FRONT_CONTROLLER_DIR . $class_name. '.php';
 		$file = strtolower($file);
-		if ( file_exists($file) ) 
+		if(file_exists($file))
+		{
+			require_once($file);
+		}
+
+		//load controllers for backend
+		$file = BACK_CONTROLLER_DIR . $class_name. '.php';
+		$file = strtolower($file);
+		if(file_exists($file))
 		{
 			require_once($file);
 		}
@@ -44,7 +51,15 @@ class Autoload
 	{
 		$file = FRONT_MODEL_DIR . $class_name. '.php';
 		$file = strtolower($file);
-		if ( file_exists($file) ) {
+		if(file_exists($file))
+		{
+			require_once($file);
+		}
+
+		$file = BACK_MODEL_DIR . $class_name. '.php';
+		$file = strtolower($file);
+		if(file_exists($file))
+		{
 			require_once($file);
 		}
 	}

@@ -1,6 +1,6 @@
 <?php if (!defined('CREXO')) exit('<html><body><div style="position:fixed;top:35%;left:35%;"><img src="http://www.nathanfox.net/content/binary/WindowsLiveWriter/StrongnameaccessdeniederroronWindows.exe_15108/StrongNameAccessDeniedMessageBox_thumb.png"></div></body></html>');
 
-class Contact_Controller extends Controller
+class E404_Controller extends Controller
 {
 	private $table = 'pages';
 
@@ -45,11 +45,8 @@ class Contact_Controller extends Controller
 			    <script src="'.FRONT_VIEW.'js/jquery.ui.totop.min.js" type="text/javascript"></script> <!-- scroll to top -->
 			    <script src="'.FRONT_VIEW.'js/jquery.fitvids.js" type="text/javascript"></script> <!-- responsive video embeds -->
 			    <script src="'.FRONT_VIEW.'js/jquery.tweet.js" type="text/javascript"></script> <!-- Twitter widget -->
-			    <script src="http://maps.googleapis.com/maps/api/js?sensor=false" type="text/javascript"></script> <!-- Google maps -->
-			    <script src="'.FRONT_VIEW.'js/jquery.gmap.min.js" type="text/javascript"></script> <!-- gMap -->
 			    <script type="text/javascript" src="'.FRONT_VIEW.'js/revslider.jquery.themepunch.plugins.min.js"></script> <!-- swipe gestures -->
 			    <script src="'.FRONT_VIEW.'js/jquery.tipsy.js" type="text/javascript"></script> <!-- tooltips -->
-			    <script src="'.FRONT_VIEW.'style-switcher/style-switcher.js" type="text/javascript"></script> <!-- style switcher -->
 			    <script src="'.FRONT_VIEW.'js/custom.js" type="text/javascript"></script> <!-- jQuery initialization -->
 			    <!-- end JS -->
 			',

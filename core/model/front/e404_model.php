@@ -1,6 +1,6 @@
 <?php if (!defined('CREXO')) exit('<html><body><div style="position:fixed;top:35%;left:35%;"><img src="http://www.nathanfox.net/content/binary/WindowsLiveWriter/StrongnameaccessdeniederroronWindows.exe_15108/StrongNameAccessDeniedMessageBox_thumb.png"></div></body></html>');
 
-class Page_Model extends Model
+class E404_Model extends Model
 {
 	public function page_title($slug)
 	{

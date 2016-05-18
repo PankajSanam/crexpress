@@ -1,31 +1,31 @@
-<?php if (!defined('CREXO')) exit('No Trespassing!');
+<?php if (!defined('CREXO')) exit('<html><body><div style="position:fixed;top:35%;left:35%;"><img src="http://www.nathanfox.net/content/binary/WindowsLiveWriter/StrongnameaccessdeniederroronWindows.exe_15108/StrongNameAccessDeniedMessageBox_thumb.png"></div></body></html>');
 
-class Contact_Model extends Crexo_Model{
+class Contact_Model extends Model
+{
+	public function __construct()
+	{
 
-	private $db;
-	
-	public function __construct(){
-		$this->db = new Db();
 	}
 
-	public function meta_title($content){
-		$meta_title = '<title>'.$content.'</title>'."\n";
-		return $meta_title;
-	}
-	
-	public function page_title($slug) {
-		$rows = $this->db->select('pages',array( 'slug=' => $slug ));
+	public function page_title($slug)
+	{
+		$db = new Db();
+		$rows = $db->select('pages',array( 'slug=' => $slug ));
 
-		foreach($rows as $row){
+		foreach($rows as $row)
+		{
 			$data = $row['title'];
 		}
 		return $data;
 	}
 
-	public function page_content($slug) {
-		$rows = $this->db->select('pages',array( 'slug=' => $slug ));
+	public function page_content($slug)
+	{
+		$db = new Db();
+		$rows = $db->select('pages',array( 'slug=' => $slug ));
 
-		foreach($rows as $row){
+		foreach($rows as $row)
+		{
 			$data = $row['content'];
 		}
 

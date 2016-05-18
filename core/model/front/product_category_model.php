@@ -1,71 +1,70 @@
-<?php if (!defined('CREXO')) exit('No Trespassing!');
+<?php if (!defined('CREXO')) exit('<html><body><div style="position:fixed;top:35%;left:35%;"><img src="http://www.nathanfox.net/content/binary/WindowsLiveWriter/StrongnameaccessdeniederroronWindows.exe_15108/StrongNameAccessDeniedMessageBox_thumb.png"></div></body></html>');
 
-class Product_Category_Model extends Crexo_Model{
-	private $db;
-	
-	public function __construct(){
-		$this->db = new Db();
-	}
-
-	public function meta_title($content){
-		$meta_title = '<title>'.$content.'</title>'."\n";
-		return $meta_title;
-	}
-	
-	public function products(){
-		$Db = new \Db;
-		$rows = $Db->select('product');
-		foreach($rows as $row){
+class Product_Category_Model extends Model
+{
+	public function products()
+	{
+		$db = new Db();
+		$rows = $db->select('product');
+		foreach($rows as $row)
+		{
 			$col[] = $row;
 		}
 		return $col;
 	}
 
-	public function edit_data($action_id){
-		$Db = new \Db;
-		$rows = $Db->select('product',array('product_id=' => $action_id));
-		foreach($rows as $row){
+	public function edit_data($action_id)
+	{
+		$db = new Db();
+		$rows = $db->select('product',array('product_id=' => $action_id));
+		foreach($rows as $row)
+		{
 			$col[] = $row;
 		}
 		return $col;
 	}
 	
-	public function page_title($slug) {
+	public function page_title($slug)
+	{
+		$db = new Db();
+		$rows = $db->select('product',array( 'slug=' => $slug ));
 
-		$rows = $this->db->select('product',array( 'slug=' => $slug ));
-
-		foreach($rows as $row){
+		foreach($rows as $row)
+		{
 			$data = $row['title'];
 		}
 
 		if(!empty($data)) return $data; else return '';
 	}
 	
-	public function page_content($slug) {
-		$rows = $this->db->select('product',array( 'slug=' => $slug ));
+	public function page_content($slug)
+	{
+		$db = new Db();
+		$rows = $db->select('product',array( 'slug=' => $slug ));
 
-		foreach($rows as $row){
+		foreach($rows as $row)
+		{
 			$data = $row['content'];
 		}
 
 		if(!empty($data)) return $data; else return '';
 	}
 	
-	public function categories(){
-		$cond = array(
-			'parent_id=' => 0,
-			'is_product=' => 0,
-		);
-		$rows = $this->db->select('product', $cond);
-		foreach($rows as $row){
-			$col[] = $row;
-		}
-		return $col;
+	public function categories()
+	{
+		$db = new Db();
+		$rows = $db->select('*')
+					->from($db->getT('product'))
+					->where("parent_id=0 AND is_product = 0")
+					->run('getRows');
+
+		return $rows;
 	}
 
-	public function category_id($slug){
-		$query = $this->db->select('product',array( 'slug=' => $slug ));
+	public function category_id($slug)
+	{
+		$db = new Db();
+		$query = $db->select('product',array( 'slug=' => $slug ));
 		return $query[0]['product_id'];
 	}
-
 }

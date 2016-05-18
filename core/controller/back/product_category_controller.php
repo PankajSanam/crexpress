@@ -1,6 +1,6 @@
 <?php if (!defined('CREXO')) exit('No Trespassing!');
 
-class Download_Controller extends Crexo_Controller {
+class Product_Category_Controller extends Crexo_Controller {
 	
 	public $back_page;
 	public function __construct($slug){
@@ -8,7 +8,7 @@ class Download_Controller extends Crexo_Controller {
 	}
 	
 	public function back_index(){
-		parent::__construct($this->slug,'','download');
+		parent::__construct($this->slug,'product');
 
 		$this->model[$this->slug] = Route::back_model($this->slug);
 		$this->library['validation']->admin_auth();
@@ -150,24 +150,24 @@ class Download_Controller extends Crexo_Controller {
 														'demonstration.min.js',
 												),1);
 		$this->data['body_class']	=	'';
-		$this->data['meta_title'] 	=	$this->model[$this->slug]->meta_title('Downloads - GIT BOX');
-		$this->data['software_list']=	$this->model[$this->slug]->downloads();
-
+		$this->data['meta_title'] 	=	$this->model['product']->meta_title('Products - GIT BOX');
+		$this->data['products']		=	$this->model[$this->slug]->products();
 		$this->data['breadcrumb'] = '
-			<li><a href="download.html">Download Management</a><i class="icon-angle-right"></i></li>
-			<li><a href="download.html?add">Add Download</a></li>';
+			<li><a href="product.html">Product Management</a><i class="icon-angle-right"></i></li>
+			<li><a href="product.html?action=add">New Product</a></li>
+		';
 
-		if(isset($_GET['add']) AND isset($_GET['id'])){
+		if(isset($_GET['action']) AND $_GET['action'] == 'edit'){
 			$this->data['edit_data']	= 	$this->model[$this->slug]->edit_data($_GET['id']);
 		} else {
-			$this->data['edit_data'] 	=	$this->model[$this->slug]->edit_data(1);
+			$this->data['edit_data'] 	= 	$this->model[$this->slug]->edit_data(1);
 		}
 
 		parent::load('back');
 	}
 
 	public function front_index(){
-		parent::__construct($this->slug);
+		parent::__construct($this->slug,'product_category');
 
 		$this->model['crexo'] = new Crexo_Model;
 		$this->data['styles'] = Html::styles( array( 
@@ -180,7 +180,6 @@ class Download_Controller extends Crexo_Controller {
 			//contains additional styles used to set up this demo page - not required for the slider
 			'demo.css' => 'all',
 			'lightbox.css' => 'screen',
-			'tab.css' => 'all',
 		));
 
 		$this->data['scripts'] = Html::scripts(array(
@@ -189,19 +188,18 @@ class Download_Controller extends Crexo_Controller {
 			'modernizr.custom.js',
 		));
 
-		$this->data['footer_scripts'] = Html::scripts(array(
-			'jquery-1.6.min.js',
-			'jquery-ui.min.js',
-			'skinable_tabs.min.js',
-		));
-
 		$this->data['meta_title']		= 	$this->model['crexo']->meta_title($this->slug);
 		$this->data['meta_description'] = 	$this->model['crexo']->meta_description($this->slug);
 		$this->data['meta_keywords'] 	= 	$this->model['crexo']->meta_keywords($this->slug);
 		
 		$this->data['page_title'] = $this->model[$this->page_template]->page_title($this->slug);
 		$this->data['page_content'] = $this->model[$this->page_template]->page_content($this->slug);
-		$this->data['inner_slider'] = $this->model[$this->page_template]->slider($this->slug);
+		
+		if(!empty($this->data['page_title'])) {
+			$this->data['category_id'] = $this->model[$this->page_template]->category_id($this->slug);
+		} else {
+			$this->data['category_id'] = 0;
+		}
 		
 		parent::load();
 	}

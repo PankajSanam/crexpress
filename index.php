@@ -7,7 +7,7 @@ define('CREXO', true);
 ini_set('date.timezone', 'Asia/Kolkata');
 
 /** Current version of Crexpress **/
-define('CREXPRESS_VERSION', '0.1.4');
+define('CREXPRESS_VERSION', '0.1.5');
 
 require_once 'config.php';
 

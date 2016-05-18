@@ -245,22 +245,18 @@ class Db extends PDO
 		$query = self::prepare($sql);
 		$query->execute();
 
-		return $query->fetchAll();
+		return $query->fetch();
 	}
 
 	/**
 	 * Returns one field from a row
-	 *
-	 * @param string $sql SQL query
-	 * @return resource SQL resource
 	 */
 	public function getField($sql)
 	{
-		//for now this is doing same as getRows
 		$query = self::prepare($sql);
 		$query->execute();
 
-		return $query->fetchAll();
+		return $query->fetchColumn();
 	}
 
 	public function getT($table)

@@ -28,7 +28,6 @@ class Navigation
 
 	public function pageMenu($parent, $menu,$ul_attr)
 	{
-
 		$html = "";
 		if (isset($menu['parents'][$parent]))
 		{

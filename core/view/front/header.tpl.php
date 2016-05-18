@@ -34,13 +34,6 @@
 		<!-- begin navigation -->
 		<nav id="nav">
 			<ul id="navlist" class="clearfix">
-				<li class="{$current}">
-					<a href="{$site_path}">Home</a>
-				</li>
-				<li>
-					<a href="{'our-products'|page_url}" rel="submenu2">Products</a>
-					{$product_navigation}
-				</li>
 				{$pages_navigation}
 			</ul>
 		</nav>

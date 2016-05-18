@@ -2,17 +2,13 @@
 
 class Meta
 {
-	private $db;
-
 	public function __construct()
 	{
 
 	}
 
-	public function title($table,$page,$useTable = TRUE)
+	public function title($table,$page,$useTable=true)
 	{
-		$db = new Db();
-
 		if($useTable)
 		{
 			$page = explode('.',$page);
@@ -24,6 +20,7 @@ class Meta
 				$page = $page[0];
 			}
 
+			$db = new Db();
 			$result = $db->select('*')
 						->from($db->getT($table))
 						->where("slug='$page' AND status = 1")
@@ -41,7 +38,7 @@ class Meta
 		return $meta_title;
 	}
 
-	public function description($table, $page, $useTable = true)
+	public function description($table, $page, $useTable=true)
 	{
 		$db = new Db();
 
@@ -73,7 +70,7 @@ class Meta
 		return $meta_description;
 	}
 
-	public function keywords($table, $page, $useTable = true)
+	public function keywords($table, $page, $useTable=true)
 	{
 		$db = new Db();
 

@@ -38,10 +38,11 @@ class Model
 	{
 		$db = new Db();
 
-		$items = $db->select('status, menu_position, page_category_id, slug, menu_name as title, menu_sort_order, id')
-			->from($db->getT('pages'))
-			->where("menu_position LIKE '%top%' AND status=1 AND page_category_id=0 AND menu_name<> '' AND menu_sort_order<>0")
-			->order('page_category_id, menu_sort_order, menu_name')
+		$items = $db->select('m.*,p.slug')
+			->from($db->getT('page_menu'),'m')
+			->join($db->getT('page'),'p','m.page_id=p.page_id')
+			->where("m.position LIKE '%0%' AND m.status=1 AND m.parent_id=0 AND m.title<> ''")
+			->order('m.sort_order, m.title')
 			->run('getRows');
 
 		// Create a multidimensional array to contain a list of items and parents
@@ -53,9 +54,9 @@ class Model
 		foreach($items as $item)
 		{
 			// Creates entry into items array with current menu item id ie. $menu['items'][1]
-			$menu['items'][$item['id']] = $item;
+			$menu['items'][$item['page_menu_id']] = $item;
 			// Creates entry into parents array. Parents array contains a list of all items with children
-			$menu['parents'][$item['page_category_id']][] = $item['id'];
+			$menu['parents'][$item['parent_id']][] = $item['page_menu_id'];
 		}
 
 		return $menu;
