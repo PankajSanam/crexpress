@@ -52,27 +52,6 @@ function revisit_after(){
 }
 $revisit_after = revisit_after();
 
-// Get page template name
-function page_template($page){
-	$db = new Db_query;
-	$count = $db->count_query('pages', array('page_slug' => $page, 'status' => 1 ));
-	$result = $db->select_query('pages', array('page_slug' => $page, 'status' => 1 ));
-	
-	$count1 = $db->count_query('private_jobs', array('job_slug' => $page, 'status' => 1 ));
-	$result1 = $db->select_query('private_jobs', array('job_slug' => $page, 'status' => 1 ));
-
-	if($count > 0 ) {
-		$page_template = get_page_template_name($result[0]['page_template_id']);
-	} else {
-		if($count1 > 0) {
-			$page_template = get_page_template_name($result1[0]['page_template_id']);
-		} else {
-			$page_template = 'page';	
-		}
-	}
-	return $page_template;
-}
-
 // Meta Title Tag
 function meta_title($page){
 	$db = new Db_query;
@@ -145,32 +124,6 @@ function meta_keywords($page){
 
 	$meta_keywords = '<meta name="keywords" content="'.$meta_keywords.'" />'."\n";
 	return $meta_keywords;
-}
-
-
-// Get page slug name
-function page_slug($page,$page_template){
-	$db = new Db_query;
-
-	if($page_template=='private_job') {
-		$count = $db->count_query('private_jobs', array('job_slug' => $page, 'status' => 1 ));
-		$result = $db->select_query('private_jobs', array('job_slug' => $page, 'status' => 1 ));
-
-		if($count > 0)
-			$page_slug = $result[0]['job_slug'];
-		else
-			$page_slug = 404;
-	} else {
-		$count = $db->count_query('pages', array('page_slug' => $page, 'status' => 1 ));
-		$result = $db->select_query('pages', array('page_slug' => $page, 'status' => 1 ));
-
-		if($count > 0)
-			$page_slug = $result[0]['page_slug'];
-		else
-			$page_slug = 404;
-	}
-
-	return $page_slug;
 }
 
 ?>

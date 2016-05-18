@@ -7,7 +7,7 @@
 	<!-- Apple devices fullscreen -->
 	<meta names="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-	<title>GIT BOX - Pages</title>
+	<title>GIT BOX - Gallery</title>
 
 	<!-- Bootstrap -->
 	<link rel="stylesheet" href="css/bootstrap.min.css">
@@ -84,7 +84,7 @@
 		<div id="main">
 			<div class="container-fluid">
 				<div class="page-header">
-					<div class="pull-left"><h1>Pages Management</h1></div>
+					<div class="pull-left"><h1>Gallery Management</h1></div>
 					<?php sub_header(); ?>
 				</div>
 				<div class="breadcrumbs">
@@ -93,59 +93,52 @@
 							<a href="dashboard.php">Home</a>
 							<i class="icon-angle-right"></i>
 						</li>
-						<li><a href="#">Content</a><i class="icon-angle-right"></i></li>
-						<li><a href="pages.php">Pages Management</a><i class="icon-angle-right"></i></li>
-						<li><a href="pages-new.php">Add Pages</a></li>
+						<li><a href="gallery.php">Gallery Management</a><i class="icon-angle-right"></i></li>
+						<li><a href="manager-gallery.php">Add Gallery</a></li>
 					</ul>
 					<div class="close-bread"><a href="#"><i class="icon-remove"></i></a></div>
 				</div>
 				<div class="row-fluid">
 					<div class="span12">
 						<div class="box box-color box-bordered">
-							<div class="box-title"><h3>Pages Management</h3></div>
+							<div class="box-title"><h3>Gallery Management</h3></div>
 							<div class="box-content nopadding">
 								<table class="table table-hover table-nomargin table-bordered dataTable-columnfilter dataTable dataTable-tools dataTable-reorder">
 									<thead>
 										<tr class='thefilter'>
 											<th class='with-checkbox'></th>
 											<th>ID</th>
-											<th>Template</th>
-											<th>Sort Order</th>
-											<th>Page Name</th>
-											<th>Page Slug</th>
+											<th>Category</th>
+											<th>Name</th>
+											<th>Image</th>
 											<th class='hidden-350'>Status</th>
-											<th class='hidden-1024'>Last Updated</th>
 											<th class='hidden-480'>Options</th>
 										</tr>
 										<tr>
 											<th class='with-checkbox'><input type="checkbox" name="check_all" id="check_all"></th>
 											<th>ID</th>
-											<th>Template</th>
-											<th>Sort Order</th>
-											<th>Page Name</th>
-											<th>Page Slug</th>
+											<th>Category</th>
+											<th>Name</th>
+											<th>Image</th>
 											<th class='hidden-350'>Status</th>
-											<th class='hidden-1024'>Last Updated</th>
 											<th class='hidden-480'>Options</th>
 										</tr>
 									</thead>
 									<tbody>
 										<?php
-										$pages = $db->select_query('pages');
-										foreach($pages as $page){
+										$galleries = $db->select_query('gallery');
+										foreach($galleries as $gallery){
 										?>
 										<tr>
 											<td class="with-checkbox"><input type="checkbox" name="check" value="1"></td>
-											<td><?php echo $page['id']; ?></td>
-											<td><?php echo get_page_template_name($page['page_template_id']); ?></td>
-											<td><?php echo $page['menu_sort_order']; ?></td>
-											<td><?php echo $page['page_name']; ?></td>
-											<td><?php echo $page['page_slug']; ?></td>
-											<td class='hidden-350'><?php echo get_status($page['status']); ?></td>
-											<td class='hidden-1024'><?php echo $page['last_updated'];?></td>
+											<td><?php echo $gallery['id']; ?></td>
+											<td><?php echo get_gallery_category_name($gallery['gallery_category_id']); ?></td>
+											<td><?php echo $gallery['gallery_name']; ?></td>
+											<td><?php echo $gallery['gallery_image']; ?></td>
+											<td class='hidden-350'><?php echo get_status($gallery['status']); ?></td>
 											<td class='hidden-480'>
 												<a href="#" class="btn" rel="tooltip" title="View"><i class="icon-search"></i></a>
-												<a href="pages-new.php?action=edit&id=<?php echo $page['id'];?>" class="btn" rel="tooltip" title="Edit"><i class="icon-edit"></i></a>
+												<a href="manage-gallery.php?action=edit&id=<?php echo $gallery['id'];?>" class="btn" rel="tooltip" title="Edit"><i class="icon-edit"></i></a>
 												<a href="#" class="btn" rel="tooltip" title="Delete"><i class="icon-remove"></i></a>
 											</td>
 										</tr>

@@ -6,6 +6,8 @@ require_once '../core/ajax.php';
 require_once '../core/helper.php';
 require_once '../model/pages_model.php';
 require_once '../model/private_jobs_model.php';
+require_once '../model/location_model.php';
+require_once '../model/gallery_model.php';
 
 include 'view/top_navigation.php';
 include 'view/left_sidebar.php';

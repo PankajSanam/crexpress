@@ -7,7 +7,7 @@
 <!-- Apple devices fullscreen -->
 <meta names="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-<title>GIT Admin Panel - Add Page</title>
+<title>GIT Box - Manage Gallery </title>
 
 <!-- Bootstrap -->
 <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -155,13 +155,13 @@
 				<div class="page-header">
 					<?php
 					if(isset($_GET['action']) && $_GET['action']=='edit'){
-						$page_action = 'Edit Page';
-						$pages_data = get_records('pages',array( 'id' => $_GET['id']));
+						$page_action = 'Edit Gallery';
+						$pages_data = get_records('gallery',array( 'id' => $_GET['id']));
 						foreach($pages_data as $page_data){
 							extract($page_data);
 						}
 					} else {
-						$page_action = 'Add New Page';
+						$page_action = 'Add Gallery';
 					}
 					?>
 					<div class="pull-left"><h1><?php echo $page_action; ?></h1></div>
@@ -170,8 +170,8 @@
 				<div class="breadcrumbs">
 					<ul>
 						<li><a href="dashboard.php">Home</a><i class="icon-angle-right"></i></li>
-						<li><a href="pages.php">Pages</a><i class="icon-angle-right"></i></li>
-						<li><a href="pages-new.php">Add Page</a></li>
+						<li><a href="gallery.php">Gallery</a><i class="icon-angle-right"></i></li>
+						<li><a href="manage-gallery.php">Manage Gallery</a></li>
 					</ul>
 					<div class="close-bread">
 						<a href="#"><i class="icon-remove"></i></a>
@@ -184,108 +184,36 @@
 							<div class="box-content nopadding">
 								<form method="POST" class='form-horizontal form-bordered form-wysiwyg ' enctype='multipart/form-data'>
 									<div class="control-group">
-										<label for="textfield" class="control-label">Parent Category</label>
+										<label for="textfield" class="control-label">Category</label>
 										<div class="controls">
 											<div class="input-xlarge">
-												<select name="page_category_id" id="select" class='chosen-select'>
+												<select name="gallery_category_id" id="gallery_category_id" class='chosen-select'>
 													<option value=""></option>
 													<?php 
-													$page_categories = get_records('pages');
-													foreach($page_categories as $page_category) {
+													$categories = get_records('gallery_categories');
+													foreach($categories as $category) {
 													?>
-													<option value="<?php echo $page_category['id'];?>" <?php if(isset($_GET['id']) && $page_category_id==$page_category['id']) echo ' selected ';  ?>><?php echo @$page_category['menu_name'];?></option>
+													<option value="<?php echo $category['id'];?>" <?php if(isset($_GET['id']) && $gallery_category_id==$category['id']) echo ' selected ';  ?>><?php echo @$category['name'];?></option>
 													<?php } ?>
 												</select>
 											</div>
 										</div>
 									</div>
 									<div class="control-group">
-										<label for="textfield" class="control-label">Page Template</label>
+										<label for="menu_name" class="control-label">Gallery Name</label>
 										<div class="controls">
-											<div class="input-xlarge">
-												<select name="page_template_id" id="page_template_id" class='chosen-select'>
-													<option value=""></option>
-													<?php 
-													$page_templates = get_records('page_templates');
-													foreach($page_templates as $page_template) {
-													?>
-													<option value="<?php echo $page_template['id'];?>" <?php if(isset($_GET['id']) && $page_template_id==$page_template['id']) echo ' selected ';  ?>><?php echo @$page_template['template_name'];?></option>
-													<?php } ?>
-												</select>
-											</div>
+											<input type="text" name="gallery_name" id="gallery_name" value="<?php if(isset($_GET['id'])) echo $gallery_name; ?>" class="input-large" data-rule-required="true" data-rule-minlength="2">
 										</div>
 									</div>
 									<div class="control-group">
-										<label for="menu_name" class="control-label">Menu Name</label>
-										<div class="controls">
-											<input type="text" name="menu_name" id="menu_name" value="<?php if(isset($_GET['id'])) echo $menu_name; ?>" class="input-large" data-rule-required="true" data-rule-minlength="2">
-										</div>
-									</div>
-									<div class="control-group">
-										<label for="menu_name" class="control-label">Menu Sort Order</label>
-										<div class="controls">
-											<input type="text" name="menu_sort_order" id="menu_sort_order" value="<?php if(isset($_GET['id'])) echo $menu_sort_order; ?>" class="input-small" data-rule-required="true" data-rule-minlength="2">
-										</div>
-									</div>
-									<div class="control-group">
-										<label for="textfield" class="control-label">Menu Position</label>
-										<div class="controls">
-											<div class="input-small">
-												<select name="menu_position" id="menu_position" class='chosen-select'>
-													<option value=""></option>
-													<option value="top" <?php if(isset($_GET['id']) && $menu_position=='top') echo ' selected ';  ?>>Top</option>
-												</select>
-											</div>
-										</div>
-									</div>
-									<div class="control-group">
-										<label for="textfield" class="control-label">Page Name</label>
-										<div class="controls">
-											<input type="text" name="page_name" id="page_name" value="<?php if(isset($_GET['id'])) echo $page_name; ?>" class="input-xlarge" data-rule-required="true" data-rule-minlength="2">
-											<span class="help-block">This will be shown on pages.</span>
-										</div>
-									</div>
-									<div class="control-group">
-										<label for="textfield" class="control-label">Page Slug</label>
-										<div class="controls">
-											<div class="input-append">
-												<input type="text" class='username-check' name="page_slug" value="<?php if(isset($_GET['id'])) echo $page_slug; ?>" data-rule-required="true" data-rule-minlength="2">
-												<a href="#" class="btn add-on username-check-force"><i class="icon-refresh"></i></a>
-											</div>
-											<span class="help-block">Please enter a page slug</span>
-										</div>
-									</div>
-									<div class="control-group">
-										<label for="textfield" class="control-label">Meta Title</label>
-										<div class="controls">
-											<input type="text" name="meta_title" id="meta_title" value="<?php if(isset($_GET['id'])) echo $meta_title; ?>" class="input-xlarge" data-rule-required="true" data-rule-minlength="2">
-											<span class="help-block">This will be shown on pages.</span>
-										</div>
-									</div>
-									<div class="control-group">
-										<label for="textarea" class="control-label">Meta Description</label>
-										<div class="controls">
-											<textarea name="meta_description" id="meta_description" rows="5" style="width:300px;" class="input-block-level" data-rule-required="true" data-rule-minlength="2"><?php if(isset($_GET['id'])) echo $page_name; ?></textarea>
-											<span class="help-block">Please enter meta description.</span>
-										</div>
-									</div>
-									<div class="control-group">
-										<label for="textfield" class="control-label">Meta Keywords</label>
-										<div class="controls">
-											<div class="span12">
-												<input type="text" name="meta_keywords" id="meta_keywords" value="<?php if(isset($_GET['id'])) echo $meta_keywords; ?>" class="tagsinput" value="tutorial,education" data-rule-required="true" data-rule-minlength="2">
-											</div>
-										</div>
-									</div>
-									<div class="control-group">
-										<label for="textfield" class="control-label">Featured Image</label>
+										<label for="textfield" class="control-label">Gallery Image</label>
 										<div class="controls">
 											<div class="fileupload fileupload-new" data-provides="fileupload">
 												<div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
 													<?php 
-													if(isset($_GET['id']) && $featured_image!='') {
+													if(isset($_GET['id']) && $gallery_image!='') {
 													?>
-													<img src="../uploads/pages/<?php echo $featured_image; ?>" />
+													<img src="../uploads/gallery/<?php echo $gallery_image; ?>" />
 													<?php
 													} else {
 													?>
@@ -297,18 +225,18 @@
 													<span class="btn btn-file">
 														<span class="fileupload-new">Select image</span>
 														<span class="fileupload-exists">Change</span>
-														<input type="file" name='featured_image' />
+														<input type="file" name='gallery_image' />
 													</span>
 													<a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
-													<?php if($featured_image!='') { ?>
+													<?php if(isset($gallery_image)) { ?>
 													<input class="btn" type="submit" name="remove_image" value="Remove Image" />
 													<?php } ?>
 													<?php
 													if(isset($_POST['remove_image'])){
-														$values = array( 'featured_image' => ''	);
+														$values = array( 'gallery_image' => ''	);
 														$cond = array( 'id' => $_GET['id'] );
-														$db->update_query('pages',$values,$cond);
-														$url ='pages-new.php?action=edit&id='.$_GET['id'];
+														$db->update_query('gallery',$values,$cond);
+														$url ='manage-gallery.php?action=edit&id='.$_GET['id'];
 														header("Location:$url");
 													}
 													?>
@@ -317,10 +245,10 @@
 										</div>
 									</div>
 									<div class="control-group">
-										<label for="textfield" class="control-label">Page Content</label>
+										<label for="textfield" class="control-label">Gallery Description</label>
 										<div class="controls">
 										<a href="#media-manager" data-toggle="modal" class="btn btn-primary"><i class="icon-picture"></i> Add Media</a><br/><br/>
-											<textarea name="page_content" class='ckeditor span12' rows="5" data-rule-required="true" data-rule-minlength="2"><?php if(isset($_GET['id'])) echo $page_content; ?></textarea>
+											<textarea name="gallery_description" class='ckeditor span12' rows="5" data-rule-required="true" data-rule-minlength="2"><?php if(isset($_GET['id'])) echo $gallery_description; ?></textarea>
 										</div>
 									</div>
 									<div class="control-group">
@@ -337,48 +265,39 @@
 										</div>
 									</div>
 									<div class="form-actions">
-										<button type="submit" class="btn btn-primary" name="add_page">Save changes</button>
+										<button type="submit" class="btn btn-primary" name="save">Save changes</button>
 										<button type="button" class="btn" onClick="history.go(-1);">Cancel</button>
 									</div>
 								</form>
 							</div>
 							<?php
-							if(isset($_POST['add_page'])){
+							if(isset($_POST['save'])){
 								if(isset($_GET['action'])) {
-									if($_FILES['featured_image']['name']!=''){
-										$featured_image = upload_image($_FILES['featured_image'],'../uploads/pages/','page');
+									if($_FILES['gallery_image']['name']!=''){
+										$gallery_image = upload_image($_FILES['gallery_image'],'../uploads/gallery/','gallery');
 									} else {
-										$featured_image = $featured_image;
+										$gallery_image = $gallery_image;
 									}
 								} else {
-									$featured_image = upload_image($_FILES['featured_image'],'../uploads/pages/','page');
+									$gallery_image = upload_image($_FILES['gallery_image'],'../uploads/gallery/','gallery');
 								}
 								
 								$values = array(
-									'page_category_id' => $_POST['page_category_id'],
-									'page_template_id' => $_POST['page_template_id'],
-									'menu_name' => $_POST['menu_name'],
-									'menu_position' => $_POST['menu_position'],
-									'menu_sort_order' => $_POST['menu_sort_order'],
-									'page_slug' => get_slug($_POST['page_slug']),
-									'page_name' => $_POST['page_name'],
-									'page_content' => $_POST['page_content'],
-									'featured_image' => $featured_image,
-									'meta_title' => $_POST['meta_title'],
-									'meta_description' => $_POST['meta_description'],
-									'meta_keywords' => strtolower($_POST['meta_keywords']),
-									'last_updated' => date("Y-m-d"),
+									'gallery_category_id' => $_POST['gallery_category_id'],
+									'gallery_name' => $_POST['gallery_name'],
+									'gallery_image' => $gallery_image,
+									'gallery_description' => $_POST['gallery_description'],
 									'status' => $_POST['status']
 								);
 
 								$cond = array( 'id' => $_GET['id'] );
 								if(isset($_GET['action'])){
-									$db->update_query('pages',$values,$cond);
+									$db->update_query('gallery',$values,$cond);
 								} else {
-									$db->insert_query('pages',$values);	
+									$db->insert_query('gallery',$values);	
 								}
 								
-								header("Location:pages.php");
+								header("Location:gallery.php");
 							}
 							?>
 						</div>

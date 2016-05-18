@@ -107,56 +107,6 @@ function get_latest_update(){
 	}
 	return $col;
 }
-function get_page_status($status){
-	if($status!=0){
-		$page_status = '<span class="label label-satgreen">Enabled</span>';
-	} else {
-		$page_status = '<span class="label label-lightred">Disabled</span>';
-	}
-	return $page_status;
-}
-
-function get_page_categories(){
-	$db = new Db_query;
-	$query = $db->select_query('pages');
-	foreach($query as $q){
-		$col[] = $q;
-	}
-
-	return $col;
-}
-
-function get_page_data($id){
-	$db = new Db_query;
-
-	$cond = array( 'id' => $id );
-	$query = $db->select_query('pages',$cond);
-	foreach($query as $q){
-		$page_data[] = $q;
-	}
-	return $page_data;
-}
-
-function get_page_templates(){
-	$db = new Db_query;
-
-	$query = $db->select_query('page_templates');
-	foreach($query as $q){
-		$row[] = $q;
-	}
-	return $row;
-}
-
-function get_page_template_data($id){
-	$db = new Db_query;
-
-	$cond = array( 'id' => $id );
-	$query = $db->select_query('page_templates',$cond);
-	foreach($query as $q){
-		$page_template_data[] = $q;
-	}
-	return $page_template_data;
-}
 
 function get_page_template_name($id){
 	$db = new Db_query;

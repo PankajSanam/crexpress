@@ -5,10 +5,7 @@ if($current_page=='index') {
 } else {
 ?>
 <div id="footer">
-	<p>
-		GIT Admin Panel By
-		<span class="font-grey-4">|</span> <a href="http://www.gitinfosys.com/">GIT Infosys</a> 
-	</p>
+	<p>GIT BOX <span class="font-grey-4">|</span> <a href="http://www.gitinfosys.com/">GIT Infosys</a> </p>
 	<a href="#" class="gototop"><i class="icon-arrow-up"></i></a>
 </div>
 <?php } ?>

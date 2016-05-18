@@ -139,7 +139,7 @@
 											<td><?php echo get_job_category_name($private_job['job_category_id']) ?></td>
 											<td><?php echo $private_job['job_title']; ?></td>
 											<td><?php echo $private_job['job_slug']; ?></td>
-											<td class='hidden-350'><?php echo get_page_status($private_job['status']); ?></td>
+											<td class='hidden-350'><?php echo get_status($private_job['status']); ?></td>
 											<td class='hidden-1024'><?php echo $private_job['post_date'];?></td>
 											<td class='hidden-1024'><?php echo $private_job['end_date'];?></td>
 											<td class='hidden-480'>

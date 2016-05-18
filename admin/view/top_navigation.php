@@ -9,8 +9,22 @@
 				<a href="#" data-toggle="dropdown" class='dropdown-toggle'><span>Private Jobs</span><span class="caret"></span></a>
 				<ul class="dropdown-menu">
 					<li><a href="private-jobs.php">Private Jobs</a></li>
-					<li><a href="post-private-jobs.php">Post Private Jobs</a></li>
+					<li><a href="post-private-job.php">Post Private Jobs</a></li>
 					<li><a href="job-categories.php">Job Categories</a></li>
+				</ul>
+			</li>
+			<li>
+				<a href="#" data-toggle="dropdown" class='dropdown-toggle'><span>Users</span><span class="caret"></span></a>
+				<ul class="dropdown-menu">
+					<li><a href="users.php">Users</a></li>
+					<li><a href="manage-users.php">Add User</a></li>
+				</ul>
+			</li>
+			<li>
+				<a href="#" data-toggle="dropdown" class='dropdown-toggle'><span>Gallery</span><span class="caret"></span></a>
+				<ul class="dropdown-menu">
+					<li><a href="gallery.php">Gallery</a></li>
+					<li><a href="manage-gallery.php">Add Gallery</a></li>
 				</ul>
 			</li>
 			<li>
@@ -31,23 +45,9 @@
 					<li><a href="forms-extended.html">Extended forms</a></li>
 					<li><a href="forms-validation.html">Validation</a></li>
 					<li><a href="forms-wizard.html">Wizard</a></li>
-				</ul>
-			</li>
-			<li>
-				<a href="#" data-toggle="dropdown" class='dropdown-toggle'>
-					<span>Tables</span>
-					<span class="caret"></span>
-				</a>
-				<ul class="dropdown-menu">
-					<li>
-						<a href="tables-basic.html">Basic tables</a>
-					</li>
-					<li>
-						<a href="tables-dynamic.html">Dynamic tables</a>
-					</li>
-					<li>
-						<a href="tables-large.html">Large tables</a>
-					</li>
+					<li><a href="tables-basic.html">Basic tables</a></li>
+					<li><a href="tables-dynamic.html">Dynamic tables</a></li>
+					<li><a href="tables-large.html">Large tables</a></li>
 				</ul>
 			</li>
 			<li>

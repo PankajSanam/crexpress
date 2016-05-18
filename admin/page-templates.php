@@ -114,7 +114,7 @@
 									<div class="span4">
 										<?php
 										if(isset($_GET['action'])){
-											$pages_template_data = get_page_template_data($_GET['id']);
+											$pages_template_data = get_records('page_templates',array( 'id' => $_GET['id']) );
 											foreach($pages_template_data as $template_data){
 												extract($template_data);
 											}

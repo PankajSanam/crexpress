@@ -156,7 +156,7 @@
 					<?php
 					if(isset($_GET['action']) && $_GET['action']=='edit'){
 						$page_action = 'Edit Job Posting';
-						$jobs_data = get_private_job_data($_GET['id']);
+						$jobs_data = get_records('private_jobs',array( 'id' => $_GET['id'] ));
 						foreach($jobs_data as $job_data){
 							extract($job_data);
 						}
@@ -190,7 +190,7 @@
 												<select name="job_category_id" id="job_category_id" class='chosen-select'>
 													<option value=""></option>
 													<?php 
-													$job_categories = get_job_categories();
+													$job_categories = get_records('job_categories');
 													foreach($job_categories as $job_category) {
 													?>
 													<option value="<?php echo $job_category['id'];?>" <?php if(isset($_GET['id']) && $job_category_id==$job_category['id']) echo ' selected ';  ?>><?php echo @$job_category['name'];?></option>
@@ -237,7 +237,6 @@
 											</div>
 										</div>
 									</div>
-									<div class="control-group" id="show-cities"></div>
 									<div class="control-group">
 										<label for="textfield" class="control-label">Locality</label>
 										<div class="controls">

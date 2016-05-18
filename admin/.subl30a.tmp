@@ -156,7 +156,7 @@
 					<?php
 					if(isset($_GET['action']) && $_GET['action']=='edit'){
 						$page_action = 'Edit Page';
-						$pages_data = get_records('pages',array( 'id' => $_GET['id']));
+						$pages_data = get_records($_GET['id']);
 						foreach($pages_data as $page_data){
 							extract($page_data);
 						}
@@ -206,7 +206,7 @@
 												<select name="page_template_id" id="page_template_id" class='chosen-select'>
 													<option value=""></option>
 													<?php 
-													$page_templates = get_records('page_templates');
+													$page_templates = get_page_templates();
 													foreach($page_templates as $page_template) {
 													?>
 													<option value="<?php echo $page_template['id'];?>" <?php if(isset($_GET['id']) && $page_template_id==$page_template['id']) echo ' selected ';  ?>><?php echo @$page_template['template_name'];?></option>
@@ -346,12 +346,12 @@
 							if(isset($_POST['add_page'])){
 								if(isset($_GET['action'])) {
 									if($_FILES['featured_image']['name']!=''){
-										$featured_image = upload_image($_FILES['featured_image'],'../uploads/pages/','page');
+										$featured_image = upload_image($_FILES['featured_image'],'../uploads/pages/','ntutorial_page');
 									} else {
 										$featured_image = $featured_image;
 									}
 								} else {
-									$featured_image = upload_image($_FILES['featured_image'],'../uploads/pages/','page');
+									$featured_image = upload_image($_FILES['featured_image'],'../uploads/pages/','ntutorial_page');
 								}
 								
 								$values = array(

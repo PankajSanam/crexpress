@@ -102,6 +102,80 @@ function truncate($text, $length = 60, $ending = '...', $exact = false, $conside
 	return $truncate;
 }
 
+// Get page template name
+function page_template($page){
+	$db = new Db_query;
+	$count = $db->count_query('pages', array('page_slug' => $page, 'status' => 1 ));
+	$result = $db->select_query('pages', array('page_slug' => $page, 'status' => 1 ));
+	
+	$count1 = $db->count_query('private_jobs', array('job_slug' => $page, 'status' => 1 ));
+	$result1 = $db->select_query('private_jobs', array('job_slug' => $page, 'status' => 1 ));
+
+	if($count > 0 ) {
+		$page_template = get_page_template_name($result[0]['page_template_id']);
+	} else {
+		if($count1 > 0) {
+			$page_template = get_page_template_name($result1[0]['page_template_id']);
+		} else {
+			$page_template = 'page';	
+		}
+	}
+	return $page_template;
+}
+
+// Get page slug name
+function page_slug($page,$page_template){
+	$db = new Db_query;
+
+	if($page_template=='private_job') {
+		$count = $db->count_query('private_jobs', array('job_slug' => $page, 'status' => 1 ));
+		$result = $db->select_query('private_jobs', array('job_slug' => $page, 'status' => 1 ));
+
+		if($count > 0)
+			$page_slug = $result[0]['job_slug'];
+		else
+			$page_slug = 404;
+	} else {
+		$count = $db->count_query('pages', array('page_slug' => $page, 'status' => 1 ));
+		$result = $db->select_query('pages', array('page_slug' => $page, 'status' => 1 ));
+
+		if($count > 0)
+			$page_slug = $result[0]['page_slug'];
+		else
+			$page_slug = 404;
+	}
+
+	return $page_slug;
+}
+
+function get_status($status){
+	if($status!=0){
+		$page_status = '<span class="label label-satgreen">Enabled</span>';
+	} else {
+		$page_status = '<span class="label label-lightred">Disabled</span>';
+	}
+	return $page_status;
+}
+
+function get_records($table_name,$cond=''){
+	$db = new Db_query;
+	if(!empty($cond))
+		$condition = $cond;
+	else
+		$condition = '';
+	
+	$query = $db->select_query($table_name,$condition);
+	foreach($query as $sql){
+		$row[] = $sql;
+	}
+	return $row;
+}
+
+
+
+
+
+
 function get_selected_value($type,$db,$user){
 	if($db==$user){
 		if($type == 'radio') return ' checked ';

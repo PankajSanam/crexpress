@@ -7,7 +7,7 @@
 <!-- Apple devices fullscreen -->
 <meta names="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-<title>GIT Admin Panel - Add Page</title>
+<title>GIT BOX - Manage Users</title>
 
 <!-- Bootstrap -->
 <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -155,13 +155,13 @@
 				<div class="page-header">
 					<?php
 					if(isset($_GET['action']) && $_GET['action']=='edit'){
-						$page_action = 'Edit Page';
-						$pages_data = get_records('pages',array( 'id' => $_GET['id']));
-						foreach($pages_data as $page_data){
-							extract($page_data);
+						$page_action = 'Edit User';
+						$users_data = get_records('users',array('id' => $_GET['id']));
+						foreach($users_data as $user_data){
+							extract($user_data);
 						}
 					} else {
-						$page_action = 'Add New Page';
+						$page_action = 'Add New User';
 					}
 					?>
 					<div class="pull-left"><h1><?php echo $page_action; ?></h1></div>
@@ -170,12 +170,10 @@
 				<div class="breadcrumbs">
 					<ul>
 						<li><a href="dashboard.php">Home</a><i class="icon-angle-right"></i></li>
-						<li><a href="pages.php">Pages</a><i class="icon-angle-right"></i></li>
-						<li><a href="pages-new.php">Add Page</a></li>
+						<li><a href="users.php">Users</a><i class="icon-angle-right"></i></li>
+						<li><a href="manage-users.php">Add User</a></li>
 					</ul>
-					<div class="close-bread">
-						<a href="#"><i class="icon-remove"></i></a>
-					</div>
+					<div class="close-bread"><a href="#"><i class="icon-remove"></i></a></div>
 				</div>
 				<div class="row-fluid">
 					<div class="span12">
@@ -184,143 +182,102 @@
 							<div class="box-content nopadding">
 								<form method="POST" class='form-horizontal form-bordered form-wysiwyg ' enctype='multipart/form-data'>
 									<div class="control-group">
-										<label for="textfield" class="control-label">Parent Category</label>
+										<label for="menu_name" class="control-label">Username</label>
+										<div class="controls">
+											<input type="text" name="username" id="username" value="<?php if(isset($_GET['id'])) echo $username; ?>" class="input-large" data-rule-required="true" data-rule-minlength="2">
+										</div>
+									</div>
+									<div class="control-group">
+										<label for="menu_name" class="control-label">Email</label>
+										<div class="controls">
+											<input type="text" name="email" id="email" value="<?php if(isset($_GET['id'])) echo $email; ?>" class="input-large" data-rule-required="true" data-rule-minlength="2">
+										</div>
+									</div>
+									<div class="control-group">
+										<label for="menu_name" class="control-label">Password</label>
+										<div class="controls">
+											<input type="text" name="password" id="password" value="<?php if(isset($_GET['id'])) echo $password; ?>" class="input-large" data-rule-required="true" data-rule-minlength="2">
+										</div>
+									</div>
+									<div class="control-group">
+										<label for="menu_name" class="control-label">First Name</label>
+										<div class="controls">
+											<input type="text" name="first_name" id="first_name" value="<?php if(isset($_GET['id'])) echo $first_name; ?>" class="input-large" data-rule-required="true" data-rule-minlength="2">
+										</div>
+									</div>
+									<div class="control-group">
+										<label for="menu_name" class="control-label">Last Name</label>
+										<div class="controls">
+											<input type="text" name="last_name" id="last_name" value="<?php if(isset($_GET['id'])) echo $last_name; ?>" class="input-large" data-rule-required="true" data-rule-minlength="2">
+										</div>
+									</div>
+									<div class="control-group">
+										<label for="textfield" class="control-label">State</label>
 										<div class="controls">
 											<div class="input-xlarge">
-												<select name="page_category_id" id="select" class='chosen-select'>
+												<select name="state_id" id="state_id" class='chosen-select' onchange="load_options(this.value,'state');">
 													<option value=""></option>
 													<?php 
-													$page_categories = get_records('pages');
-													foreach($page_categories as $page_category) {
+													$states = get_states();
+													foreach($states as $state) {
 													?>
-													<option value="<?php echo $page_category['id'];?>" <?php if(isset($_GET['id']) && $page_category_id==$page_category['id']) echo ' selected ';  ?>><?php echo @$page_category['menu_name'];?></option>
+													<option value="<?php echo $state['id'];?>" <?php if(isset($_GET['id']) && $state_id==$state['id']) echo ' selected ';  ?>><?php echo @$state['name'];?></option>
 													<?php } ?>
 												</select>
 											</div>
 										</div>
 									</div>
 									<div class="control-group">
-										<label for="textfield" class="control-label">Page Template</label>
+										<label for="textfield" class="control-label">City</label>
 										<div class="controls">
 											<div class="input-xlarge">
-												<select name="page_template_id" id="page_template_id" class='chosen-select'>
+												<select name="city_id"  id="city_id" class='chosen-select' onchange="load_options(this.value,'city');">
 													<option value=""></option>
 													<?php 
-													$page_templates = get_records('page_templates');
-													foreach($page_templates as $page_template) {
+													$cities = get_cities();
+													foreach($cities as $city) {
 													?>
-													<option value="<?php echo $page_template['id'];?>" <?php if(isset($_GET['id']) && $page_template_id==$page_template['id']) echo ' selected ';  ?>><?php echo @$page_template['template_name'];?></option>
+													<option value="<?php echo $city['id'];?>" <?php if(isset($_GET['id']) && $city_id==$city['id']) echo ' selected ';  ?>><?php echo @$city['name'];?></option>
 													<?php } ?>
 												</select>
 											</div>
 										</div>
 									</div>
 									<div class="control-group">
-										<label for="menu_name" class="control-label">Menu Name</label>
+										<label for="textfield" class="control-label">Pincode</label>
 										<div class="controls">
-											<input type="text" name="menu_name" id="menu_name" value="<?php if(isset($_GET['id'])) echo $menu_name; ?>" class="input-large" data-rule-required="true" data-rule-minlength="2">
+											<input type="text" name="pincode" id="pincode" value="<?php if(isset($_GET['id'])) echo $pincode; ?>" class="input-small" data-rule-required="true" data-rule-minlength="2">
 										</div>
 									</div>
 									<div class="control-group">
-										<label for="menu_name" class="control-label">Menu Sort Order</label>
+										<label for="textfield" class="control-label">Date of Birth</label>
 										<div class="controls">
-											<input type="text" name="menu_sort_order" id="menu_sort_order" value="<?php if(isset($_GET['id'])) echo $menu_sort_order; ?>" class="input-small" data-rule-required="true" data-rule-minlength="2">
+											<input type="text" name="dob" id="dob" class="input-medium datepick" value="<?php if(isset($_GET['id'])) echo $dob; ?>">
+											<span class="help-block">Birth date of user.</span>
 										</div>
 									</div>
 									<div class="control-group">
-										<label for="textfield" class="control-label">Menu Position</label>
+										<label for="textfield" class="control-label">Gender</label>
 										<div class="controls">
-											<div class="input-small">
-												<select name="menu_position" id="menu_position" class='chosen-select'>
+											<div class="input-large">
+												<select name="gender" id="gender" class='chosen-select'>
 													<option value=""></option>
-													<option value="top" <?php if(isset($_GET['id']) && $menu_position=='top') echo ' selected ';  ?>>Top</option>
+													<option value="Male" <?php if(isset($_GET['id']) && $gender=='Male') echo ' selected ';  ?>>Male</option>
+													<option value="Female" <?php if(isset($_GET['id']) && $gender=='Female') echo ' selected ';  ?>>Female</option>
 												</select>
 											</div>
 										</div>
 									</div>
 									<div class="control-group">
-										<label for="textfield" class="control-label">Page Name</label>
+										<label for="menu_name" class="control-label">Mobile</label>
 										<div class="controls">
-											<input type="text" name="page_name" id="page_name" value="<?php if(isset($_GET['id'])) echo $page_name; ?>" class="input-xlarge" data-rule-required="true" data-rule-minlength="2">
-											<span class="help-block">This will be shown on pages.</span>
+											<input type="text" name="mobile" id="mobile" value="<?php if(isset($_GET['id'])) echo $mobile; ?>" class="input-medium" data-rule-required="true" data-rule-minlength="2">
 										</div>
 									</div>
 									<div class="control-group">
-										<label for="textfield" class="control-label">Page Slug</label>
+										<label for="textarea" class="control-label">Address</label>
 										<div class="controls">
-											<div class="input-append">
-												<input type="text" class='username-check' name="page_slug" value="<?php if(isset($_GET['id'])) echo $page_slug; ?>" data-rule-required="true" data-rule-minlength="2">
-												<a href="#" class="btn add-on username-check-force"><i class="icon-refresh"></i></a>
-											</div>
-											<span class="help-block">Please enter a page slug</span>
-										</div>
-									</div>
-									<div class="control-group">
-										<label for="textfield" class="control-label">Meta Title</label>
-										<div class="controls">
-											<input type="text" name="meta_title" id="meta_title" value="<?php if(isset($_GET['id'])) echo $meta_title; ?>" class="input-xlarge" data-rule-required="true" data-rule-minlength="2">
-											<span class="help-block">This will be shown on pages.</span>
-										</div>
-									</div>
-									<div class="control-group">
-										<label for="textarea" class="control-label">Meta Description</label>
-										<div class="controls">
-											<textarea name="meta_description" id="meta_description" rows="5" style="width:300px;" class="input-block-level" data-rule-required="true" data-rule-minlength="2"><?php if(isset($_GET['id'])) echo $page_name; ?></textarea>
-											<span class="help-block">Please enter meta description.</span>
-										</div>
-									</div>
-									<div class="control-group">
-										<label for="textfield" class="control-label">Meta Keywords</label>
-										<div class="controls">
-											<div class="span12">
-												<input type="text" name="meta_keywords" id="meta_keywords" value="<?php if(isset($_GET['id'])) echo $meta_keywords; ?>" class="tagsinput" value="tutorial,education" data-rule-required="true" data-rule-minlength="2">
-											</div>
-										</div>
-									</div>
-									<div class="control-group">
-										<label for="textfield" class="control-label">Featured Image</label>
-										<div class="controls">
-											<div class="fileupload fileupload-new" data-provides="fileupload">
-												<div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
-													<?php 
-													if(isset($_GET['id']) && $featured_image!='') {
-													?>
-													<img src="../uploads/pages/<?php echo $featured_image; ?>" />
-													<?php
-													} else {
-													?>
-													<img src="img/no_image.gif" />
-													<?php } ?>
-												</div>
-												<div class="fileupload-preview fileupload-exists thumbnail" style="max-width:200px; max-height:150px; line-height:20px;"></div>
-												<div>
-													<span class="btn btn-file">
-														<span class="fileupload-new">Select image</span>
-														<span class="fileupload-exists">Change</span>
-														<input type="file" name='featured_image' />
-													</span>
-													<a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
-													<?php if($featured_image!='') { ?>
-													<input class="btn" type="submit" name="remove_image" value="Remove Image" />
-													<?php } ?>
-													<?php
-													if(isset($_POST['remove_image'])){
-														$values = array( 'featured_image' => ''	);
-														$cond = array( 'id' => $_GET['id'] );
-														$db->update_query('pages',$values,$cond);
-														$url ='pages-new.php?action=edit&id='.$_GET['id'];
-														header("Location:$url");
-													}
-													?>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="control-group">
-										<label for="textfield" class="control-label">Page Content</label>
-										<div class="controls">
-										<a href="#media-manager" data-toggle="modal" class="btn btn-primary"><i class="icon-picture"></i> Add Media</a><br/><br/>
-											<textarea name="page_content" class='ckeditor span12' rows="5" data-rule-required="true" data-rule-minlength="2"><?php if(isset($_GET['id'])) echo $page_content; ?></textarea>
+											<textarea name="address" id="address" rows="5" style="width:300px;" class="input-block-level" data-rule-required="true" data-rule-minlength="2"><?php if(isset($_GET['id'])) echo $address; ?></textarea>
 										</div>
 									</div>
 									<div class="control-group">
@@ -328,57 +285,61 @@
 										<div class="controls">
 											<div class="check-demo-col">
 												<div class="check-line">
-													<input type="radio" id="status" class='icheck-me' name="status" data-skin="square" data-color="blue" value="1" <?php if(isset($_GET['id']) && $status==1) echo ' checked ';  ?>> <label class='inline' for="status">Enable</label>
+													<input type="radio" id="status" name="status" class='icheck-me' data-skin="square" data-color="blue" value="1" <?php if(isset($_GET['id']) && $status==1) echo ' checked ';  ?>> <label class='inline' for="status">Enable</label>
 												</div>
 												<div class="check-line">
-													<input type="radio" id="status" class='icheck-me' name="status" data-skin="square" data-color="blue" value="0" <?php if(isset($_GET['id']) && $status==0) echo ' checked ';  ?>> <label class='inline' for="status">Disable</label>
+													<input type="radio" id="status" name="status" class='icheck-me' data-skin="square" data-color="blue" value="0" <?php if(isset($_GET['id']) && $status==0) echo ' checked ';  ?>> <label class='inline' for="status">Disable</label>
 												</div>
 											</div>
 										</div>
 									</div>
 									<div class="form-actions">
-										<button type="submit" class="btn btn-primary" name="add_page">Save changes</button>
+										<button type="submit" class="btn btn-primary" name="save">Save changes</button>
 										<button type="button" class="btn" onClick="history.go(-1);">Cancel</button>
 									</div>
 								</form>
 							</div>
 							<?php
-							if(isset($_POST['add_page'])){
+							if(isset($_POST['save'])){
 								if(isset($_GET['action'])) {
-									if($_FILES['featured_image']['name']!=''){
-										$featured_image = upload_image($_FILES['featured_image'],'../uploads/pages/','page');
-									} else {
-										$featured_image = $featured_image;
-									}
-								} else {
-									$featured_image = upload_image($_FILES['featured_image'],'../uploads/pages/','page');
-								}
-								
-								$values = array(
-									'page_category_id' => $_POST['page_category_id'],
-									'page_template_id' => $_POST['page_template_id'],
-									'menu_name' => $_POST['menu_name'],
-									'menu_position' => $_POST['menu_position'],
-									'menu_sort_order' => $_POST['menu_sort_order'],
-									'page_slug' => get_slug($_POST['page_slug']),
-									'page_name' => $_POST['page_name'],
-									'page_content' => $_POST['page_content'],
-									'featured_image' => $featured_image,
-									'meta_title' => $_POST['meta_title'],
-									'meta_description' => $_POST['meta_description'],
-									'meta_keywords' => strtolower($_POST['meta_keywords']),
-									'last_updated' => date("Y-m-d"),
-									'status' => $_POST['status']
-								);
+									$values = array(
+										'username' => $_POST['username'],
+										'email' => $_POST['email'],
+										'password' => $_POST['password'],
+										'first_name' => $_POST['first_name'],
+										'last_name' => $_POST['last_name'],
+										'dob' => $_POST['dob'],
+										'gender' => $_POST['gender'],
+										'mobile' => $_POST['mobile'],
+										'state_id' => $_POST['state_id'],
+										'city_id' => $_POST['city_id'],
+										'pincode' => $_POST['pincode'],
+										'address' => $_POST['address'],
+										'status' => $_POST['status'],
+									);
+									$cond = array( 'id' => $_GET['id'] );
+									$db->update_query('users',$values,$cond);
 
-								$cond = array( 'id' => $_GET['id'] );
-								if(isset($_GET['action'])){
-									$db->update_query('pages',$values,$cond);
 								} else {
-									$db->insert_query('pages',$values);	
+									$values = array(
+										'date' => date('Y-m-d'),
+										'username' => $_POST['username'],
+										'email' => $_POST['email'],
+										'password' => $_POST['password'],
+										'first_name' => $_POST['first_name'],
+										'last_name' => $_POST['last_name'],
+										'dob' => $_POST['dob'],
+										'gender' => $_POST['gender'],
+										'mobile' => $_POST['mobile'],
+										'state_id' => $_POST['state_id'],
+										'city_id' => $_POST['city_id'],
+										'pincode' => $_POST['pincode'],
+										'address' => $_POST['address'],
+										'status' => $_POST['status'],
+									);
+									$db->insert_query('users',$values);
 								}
-								
-								header("Location:pages.php");
+								header("Location:users.php");
 							}
 							?>
 						</div>

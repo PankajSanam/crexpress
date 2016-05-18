@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 3.2.0.1
+-- version 4.0.5
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 03, 2013 at 12:40 PM
--- Server version: 5.1.36
--- PHP Version: 5.4.16
+-- Generation Time: Oct 04, 2013 at 11:55 AM
+-- Server version: 5.1.61-rel13.2-log
+-- PHP Version: 5.3.17
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -1939,11 +1940,6 @@ CREATE TABLE IF NOT EXISTS `page_comments` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
---
--- Dumping data for table `page_comments`
---
-
-
 -- --------------------------------------------------------
 
 --
@@ -2162,3 +2158,7 @@ INSERT INTO `users` (`st_id`, `status`, `firstname`, `lastname`, `fathername`, `
 (13, 0, 'indian', 'rupees', 'dfasdfffff', '3-4-1999', 'Male', 'dsfsdf', 54654, 'Married', 'xxxloxdsf@hello.com', 'dsfas', 'fffddd', 55645, 'cxvxcv', '2013-01-10', '1234567', 'Indian_Symbol.jpg', 15, 'Python'),
 (14, 1, 'punisher', 'rocks', 'daddy punisher', '18-3-1988', 'Male', 'sdssdfsdfccvccccc', 6456456, 'Married', 'the@punisher.com', 'dhaal', 'helll', 99999, 'cccfgdgdfg', '2013-01-10', 'dsseekke', 'punisher_skull.jpg', 13, 'PHP,Ruby'),
 (15, 0, 'gopal', 'singh', 'fathername', '2012-01-09', 'Male', 'dcm ajmer road', 8822446677, 'Unmarried', 'gopalsingh@gmail.com', 'rajasthan', 'jaipur', 654564, 'jhotwara', '2013-01-11', '123456', '', 12, 'Python');
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
