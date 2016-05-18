@@ -10,6 +10,7 @@
 				<ul class="dropdown-menu">
 					<li><a href="private-jobs.php">Private Jobs</a></li>
 					<li><a href="post-private-job.php">Post Private Jobs</a></li>
+					<li><a href="job-enquiries.php">Job Enquiries</a></li>
 					<li><a href="job-categories.php">Job Categories</a></li>
 				</ul>
 			</li>
@@ -27,7 +28,6 @@
 					<li><a href="manage-gallery.php">Add Gallery</a></li>
 				</ul>
 			</li>
-			<li><a href="enquiry.php"><span>Enquiry</span></a></li>
 			<li>
 				<a href="#" data-toggle="dropdown" class='dropdown-toggle'><span>Extras</span><span class="caret"></span></a>
 				<ul class="dropdown-menu">

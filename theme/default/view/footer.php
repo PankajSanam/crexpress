@@ -60,11 +60,14 @@
 		<a href="#" class="top">Top</a> 
 		<div class="socail_networks">
 			<ul>
-				<li><a href="https://www.facebook.com/careeraskcom"><img src="uploads/social/facebook.png" width="28" /> </a></li>
-				<li><a href="http://www.linkedin.com/"><img src="uploads/social/linkedin.png" width="28" /> </a></li>
-				<li><a href="https://twitter.com/CareerAsk"><img src="uploads/social/twitter.png" width="28" /> </a></li>
-				<li><a href="https://plus.google.com/b/112417549825459125395/112417549825459125395/"><img src="uploads/social/gplus.png" width="28" /> </a></li>
-				<li><a href="http://pinterest.com/careerask/"><img src="uploads/social/pinterest.png" width="28" /> </a></li>
+				<?php
+				$social_icons = DB::select_query('social_icons');
+				foreach($social_icons as $social_icon){
+				?>
+				<li><a title="<?php echo $social_icon['name'];?>" href="<?php echo $social_icon['url'].$social_icon['link']; ?>"><img src="uploads/social/<?php echo $social_icon['image'];?>" width="28" /></a></li>
+				<?php
+				}
+				?>
 			</ul>
 		</div>
 		<div class="clear"></div>

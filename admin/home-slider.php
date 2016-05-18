@@ -129,7 +129,7 @@
 										<tr>
 											<td class="with-checkbox"><input type="checkbox" name="check" value="1"></td>
 											<td><?php echo $slider['id']; ?></td>
-											<td><?php echo get_slider_category_name($slider['slider_category_id']); ?></td>
+											<td><?php echo Slider::category_name($slider['slider_category_id']); ?></td>
 											<td><?php echo $slider['name']; ?></td>
 											<td><?php echo $slider['image']; ?></td>
 											<td class='hidden-350'><?php echo Helper::status($slider['status']); ?></td>

@@ -7,6 +7,7 @@
 	<?php echo $meta_keywords; ?>
 	<?php echo $author; ?>
 	<?php echo $revisit; ?>
+	<meta name="google-site-verification" content="XVMhOtez7yO_68PWdI2EnLd3mVMFv7q-42-c71AlbYE" />
 	
 	<?php
 	Html::styles(array(
@@ -50,18 +51,20 @@
                 <div class="clear"></div>
                	<div class="top_search">
                 	<div class="advance_search"><a href="#"></a></div>
-                    	<ul>
-                        	<li><input name="txt" value="Search here" onfocus="if(this.value=='Search here') {this.value='';}" onblur="if(this.value=='') {this.value='Search here';}" type="text" /></li>
-                            <li><a class="search" href="#">Search</a></li>
-                     	</ul>
+                		<form method="GET">
+	                    	<ul>
+	                        	<li><input name="search" value="Search here" onfocus="if(this.value=='Search here') {this.value='';}" onblur="if(this.value=='') {this.value='Search here';}" type="text" /></li>
+	                            <li><input type="submit" value="Search" class="search"></li>
+	                     	</ul>
+	                    </form>
                 	</div>
-                    <div class="clear"> </div>       	
+                    <div class="clear"> </div>
               	</div>
                 <div class="clear"></div>
                 <div class="navigation">
                     <div id="smoothmenu1" class="ddsmoothmenu">
               	  		<ul>
-                        	<li class="first"><a class="selected" href="./">Home</a></li>
+                        	<li class="first"><a class="<?php if($page_slug == 'index' OR $page_slug=='') echo 'selected'; else echo '';?>" href="./">Home</a></li>
 		                    <?php
 		                    $cond = array( 
 		                    	'status=' => 1, 
@@ -74,7 +77,7 @@
 							foreach($query as $top_nav){
 							?>
 							<li>
-								<a href="<?php echo $top_nav['page_slug']; ?>.html"><?php echo $top_nav['menu_name']; ?></a>
+								<a href="<?php echo Page::link($top_nav['slug']); ?>" class="<?php if($page_slug == $top_nav['slug']) echo 'selected'; else echo '';?>"><?php echo $top_nav['menu_name']; ?></a>
 								<?php
 								$find_query = DB::select_query('pages', array( 'menu_name<>' => '', 'status=' => 1, 'page_category_id=' => $top_nav['id']));
 								$find_res = DB::count_query('pages', array( 'menu_name<>' => '', 'status=' => 1, 'page_category_id=' => $top_nav['id']));
@@ -102,7 +105,7 @@
 										else
 											$class = 'class="dropdown"';
 										?>
-										<a <?php echo $class; ?> href="<?php echo $top_submenu['page_slug']; ?>.html"><?php echo $top_submenu['menu_name']; ?></a>
+										<a <?php echo $class; ?> href="<?php echo Page::link($top_submenu['slug']); ?>"><?php echo $top_submenu['menu_name']; ?></a>
 										<?php
 										if($f_res <= 0){
 											echo '</li>';
@@ -119,7 +122,7 @@
 											foreach($query as $top_submenu2){
 											?>
 											<li>
-												<a href="<?php echo $top_submenu2['page_slug']; ?>.html"><?php echo $top_submenu2['menu_name']; ?></a>
+												<a href="<?php echo Page::link($top_submenu2['slug']); ?>"><?php echo $top_submenu2['menu_name']; ?></a>
 											</li>
 											<?php } //foreach ending loop ?>
 		                                </ul>
@@ -138,11 +141,11 @@
 			<div id="content_section"> 
 				<div class="news_updates">
 					<?php
-					$latest_update = Pages::latest_page();
+					$latest_update = Page::latest_page();
 					foreach($latest_update as $updates) { 
 						$update_date = $updates['last_updated'];
-						$update_news = $updates['page_name'];
-						$update_link = Pages::page_link($updates['page_slug']);
+						$update_news = $updates['title'];
+						$update_link = Page::link($updates['slug']);
 					}
 					?>
 					<span class="news_update">Latest Updates</span>

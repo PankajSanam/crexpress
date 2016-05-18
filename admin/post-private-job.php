@@ -200,7 +200,7 @@
 									<div class="control-group">
 										<label for="menu_name" class="control-label">Job Title</label>
 										<div class="controls">
-											<input type="text" name="job_title" id="job_title" value="<?php if(isset($_GET['id'])) echo $job_title; ?>" class="input-large" data-rule-required="true" data-rule-minlength="2">
+											<input type="text" name="title" id="title" value="<?php if(isset($_GET['id'])) echo $title; ?>" class="input-large" data-rule-required="true" data-rule-minlength="2">
 										</div>
 									</div>
 									<div class="control-group">
@@ -210,7 +210,7 @@
 												<select name="state_id" id="state_id" class='chosen-select' onchange="load_options(this.value,'state');">
 													<option value=""></option>
 													<?php 
-													$states = get_states();
+													$states = Location::states();
 													foreach($states as $state) {
 													?>
 													<option value="<?php echo $state['id'];?>" <?php if(isset($_GET['id']) && $state_id==$state['id']) echo ' selected ';  ?>><?php echo @$state['name'];?></option>
@@ -226,7 +226,7 @@
 												<select name="city_id"  id="city_id" class='chosen-select' onchange="load_options(this.value,'city');">
 													<option value=""></option>
 													<?php 
-													$cities = get_cities();
+													$cities = Location::cities();
 													foreach($cities as $city) {
 													?>
 													<option value="<?php echo $city['id'];?>" <?php if(isset($_GET['id']) && $city_id==$city['id']) echo ' selected ';  ?>><?php echo @$city['name'];?></option>
@@ -242,7 +242,7 @@
 												<select name="locality_id" id="locality_id" class='chosen-select'>
 													<option value=""></option>
 													<?php 
-													$localities = get_localities();
+													$localities = Location::localities();
 													foreach($localities as $locality) {
 													?>
 													<option value="<?php echo $locality['id'];?>" <?php if(isset($_GET['id']) && $locality_id==$locality['id']) echo ' selected ';  ?>><?php echo @$locality['name'];?></option>
@@ -342,7 +342,7 @@
 									<div class="control-group">
 										<label for="textarea" class="control-label">Meta Description</label>
 										<div class="controls">
-											<textarea name="meta_description" id="meta_description" rows="5" style="width:300px;" class="input-block-level" data-rule-required="true" data-rule-minlength="2"><?php if(isset($_GET['id'])) echo $page_name; ?></textarea>
+											<textarea name="meta_description" id="meta_description" rows="5" style="width:300px;" class="input-block-level" data-rule-required="true" data-rule-minlength="2"><?php if(isset($_GET['id'])) echo $meta_description; ?></textarea>
 											<span class="help-block">Please enter meta description.</span>
 										</div>
 									</div>
@@ -383,8 +383,7 @@
 													<?php
 													if(isset($_POST['remove_image'])){
 														$values = array( 'featured_image' => ''	);
-														$cond = array( 'id=' => $_GET['id'] );
-														DB::update_query('private_jobs',$values,$cond);
+														DB::update_query('private_jobs',$values,array( 'id=' => $_GET['id'] ));
 														$url ='post-private-job.php?action=edit&id='.$_GET['id'];
 														Helper::redirect($url);
 													}
@@ -397,7 +396,7 @@
 										<label for="textfield" class="control-label">Job Description</label>
 										<div class="controls">
 										<a href="#media-manager" data-toggle="modal" class="btn btn-primary"><i class="icon-picture"></i> Add Media</a><br/><br/>
-											<textarea name="job_description" class='ckeditor span12' rows="5" data-rule-required="true" data-rule-minlength="2"><?php if(isset($_GET['id'])) echo $job_description; ?></textarea>
+											<textarea name="content" class='ckeditor span12' rows="5" data-rule-required="true" data-rule-minlength="2"><?php if(isset($_GET['id'])) echo $content; ?></textarea>
 										</div>
 									</div>
 									<div class="control-group">
@@ -448,9 +447,9 @@
 									'gender' => $_POST['gender'],
 									'minimum_experience' => $_POST['minimum_experience'],
 									'maximum_experience' => $_POST['maximum_experience'],
-									'job_slug' => Sanitize::clean_slug($_POST['job_title']),
-									'job_title' => $_POST['job_title'],
-									'job_description' => $_POST['job_description'],
+									'slug' => Sanitize::clean_slug($_POST['title']),
+									'title' => $_POST['title'],
+									'content' => $_POST['content'],
 									'featured_image' => $featured_image,
 									'meta_title' => $_POST['meta_title'],
 									'meta_description' => $_POST['meta_description'],

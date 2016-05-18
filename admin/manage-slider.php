@@ -187,7 +187,7 @@
 										<label for="textfield" class="control-label">Category</label>
 										<div class="controls">
 											<div class="input-xlarge">
-												<select name="gallery_category_id" id="gallery_category_id" class='chosen-select'>
+												<select name="slider_category_id" id="slider_category_id" class='chosen-select'>
 													<option value=""></option>
 													<?php 
 													$categories = DB::select_query('slider_categories');
@@ -297,7 +297,7 @@
 									DB::insert_query('slider',$values);	
 								}
 								
-								redirect("slider.php");
+								redirect("home-slider.php");
 							}
 							?>
 						</div>

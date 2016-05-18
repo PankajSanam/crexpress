@@ -134,10 +134,10 @@
 										<tr>
 											<td class="with-checkbox"><input type="checkbox" name="check" value="1"></td>
 											<td><?php echo $page['id']; ?></td>
-											<td><?php echo Pages::page_template_name($page['page_template_id']); ?></td>
+											<td><?php echo Page::template_name($page['page_template_id']); ?></td>
 											<td><?php echo $page['menu_sort_order']; ?></td>
-											<td><?php echo $page['page_name']; ?></td>
-											<td><?php echo $page['page_slug']; ?></td>
+											<td><?php echo $page['title']; ?></td>
+											<td><?php echo $page['slug']; ?></td>
 											<td class='hidden-350'><?php echo Helper::status($page['status']); ?></td>
 											<td class='hidden-1024'><?php echo $page['last_updated'];?></td>
 											<td class='hidden-480'>

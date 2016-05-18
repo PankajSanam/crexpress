@@ -17,23 +17,23 @@
 		<!-- Content Heading -->
 		<div id="content2"> 
 			<div class="blog_detail">
-				<a href="#"><?php echo Pages::page_featured_image($page_slug,'225','219','blogimg'); ?></a>
+				<a href="#"><?php echo Page::featured_image($page_slug,'225','219','blogimg'); ?></a>
 				<div class="bloginfo">
-					<h5><?php echo Pages::page_name($page_slug); ?></h5>
+					<h5><?php echo Page::name($page_slug); ?></h5>
 					<div class="info info1">
 						<span class="postedby">Posted By: <a href="#">Admin</a></span>
-						<span class="lastupdte"> Last Update by:<i><?php echo Pages::page_last_updated($page_slug); ?></i></span>
+						<span class="lastupdte"> Last Update by:<i><?php echo Page::last_updated($page_slug); ?></i></span>
 						<!--<span class="comments"><a href="./blogdetail.html"><strong>852</strong> Comments</a></span>-->
 						<!--<div class="share1"><a href="./blogdetail.html">Share</a></div>-->
 					</div>
 					<div class="clear"></div>
 				</div>
-				<p><?php echo Pages::page_content($page_slug); ?></p>
+				<p><?php echo Page::content($page_slug); ?></p>
 				<!--<a href="#" class="link colr">88 Comments</a>-->
 			 	</div>
 			<div class="clear"></div>
 			<?php
-			$page_id = Pages::page_id($page_slug);
+			$page_id = Page::id($page_slug);
 			$query = DB::select_query('pages',array('status=' => 1, 'page_category_id=' => $page_id));
 			$res = DB::count_query('pages',array('status=' => 1, 'page_category_id=' => $page_id));
 
@@ -41,16 +41,16 @@
 				echo '';
 			} else {
 			?>
-			<h2 class="pad8"><?php echo Pages::page_name($page_slug); ?></h2>
+			<h2 class="pad8"><?php echo Page::name($page_slug); ?></h2>
 			<ul class="listing">
 				<?php
 				foreach($query as $row) {
 				?>
 				<li>
-					<div class="thumb"><a href="<?php echo Pages::page_link($row['page_slug']); ?>" title="<?php echo $row['page_name'];?>"><?php echo Pages::page_featured_image($row['page_slug'],'126','106'); ?></a></div>
+					<div class="thumb"><a href="<?php echo Page::link($row['slug']); ?>" title="<?php echo $row['title'];?>"><?php echo Page::featured_image($row['slug'],'126','106'); ?></a></div>
 					<div class="description">
-						<h6><a href="<?php echo Pages::page_link($row['page_slug']); ?>" class="colr" title="<?php echo $row['page_name'];?>"><?php echo $row['page_name']; ?></a></h6>
-						<p><?php echo excerpt($row['page_content'], $length = 150, $ending = '...'); ?></p>
+						<h6><a href="<?php echo Page::link($row['slug']); ?>" class="colr" title="<?php echo $row['title'];?>"><?php echo $row['title']; ?></a></h6>
+						<p><?php echo Validation::strip_html($row['content'],400,'...'); ?></p>
 						<div class="clear"></div>
 						<!--<div class="info"> <span class="lastupdte"> Last Update by:<i>Tue, 26/01/11</i></span> <span class="tag">Tag: <a href="#">Business</a></span> <span class="comments"><a href="#"><strong>852</strong> Comments</a></span> <a class="moreinfo" href="#">:: Moreinfo</a> </div>-->
 					</div>

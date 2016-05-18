@@ -65,10 +65,10 @@
 	</div>
 	<div class="subnav">
 		<div class="subnav-title">
-			<a href="#" class='toggle-subnav'><i class="icon-angle-down"></i><span>Plugins</span></a>
+			<a href="#" class='toggle-subnav'><i class="icon-angle-down"></i><span>Settings</span></a>
 		</div>
 		<ul class="subnav-menu">
-			<li><a href="#">Social Icons</a></li>
+			<li><a href="social-icons.php">Social Icons</a></li>
 			<li class='dropdown'>
 				<a href="#" data-toggle="dropdown">Page settings</a>
 				<ul class="dropdown-menu">
@@ -84,12 +84,11 @@
 					</li>
 				</ul>
 			</li>
-			<li><a href="#">Security settings</a></li>
 		</ul>
 	</div>
 	<div class="subnav subnav-hidden">
 		<div class="subnav-title">
-			<a href="#" class='toggle-subnav'><i class="icon-angle-right"></i><span>Default hidden</span></a>
+			<a href="#" class='toggle-subnav'><i class="icon-angle-right"></i><span>Plugins</span></a>
 		</div>
 		<ul class="subnav-menu">
 			<li><a href="#">Menu</a></li>

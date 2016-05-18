@@ -46,10 +46,10 @@
 		</ul>
 	</div>-->
 	<div class="content_heading">
-		<div class="heading"><h2><?php echo Pages::page_name($page_slug); ?></h2></div>
+		<div class="heading"><h2><?php echo Page::name($page_slug); ?></h2></div>
 		<div class="share"><a href="#">Share with friends</a></div>
 	</div>
-	<p><?php echo Pages::page_content($page_slug); ?><a class="readmore" href="#"></a> </p>
+	<p><?php echo Page::content($page_slug); ?><a class="readmore" href="#"></a> </p>
 	<div class="clear"></div>
 	<?php /*?><div class="contentblock"> 
 		<div class="tabwrapper">

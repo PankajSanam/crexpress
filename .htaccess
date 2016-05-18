@@ -13,9 +13,6 @@ RewriteRule ^category/(.*).html$ category.php?catname=$1 [QSA,L]
 RewriteRule ^more/(.*)/([0-9]+)$ more.php?catname=$1&page=$2 
 RewriteRule ^more/(.*)$ more.php?catname=$1 [QSA,L]
 RewriteRule ^addtocart/(.*)/([0-9]+)/([0-9]+)$ shopingcart.php?cat=$1&cid=$2&pid=$3 [QSA,L]
-RewriteRule ^addtocart/(.*)/([0-9]+)$ shopingcart.php?cat=$1&pid=$2 [QSA,L]
-RewriteRule ^checkout/$ checkout.php?paymentid= [QSA,L]
-RewriteRule ^delete/([0-9]+)$ deleteItem.php?id=$1 [QSA,L]
 
 RewriteRule ^products/([a-zA-Z0-9_-]+).html$ view/products.php?id=$1
 RewriteRule ^products/([a-zA-Z0-9_-]+)/$ view/products.php?id=$1
