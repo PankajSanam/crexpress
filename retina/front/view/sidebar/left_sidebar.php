@@ -8,10 +8,10 @@ function left_sidebar($navigation,$html,$page_id) {
 	<div class="listing-menu">
 		<ul>
 			<?php
-			$top_menus = $navigation->top_menus();
-			foreach($top_menus as $top_menu){
+			$left_menus = $navigation->left_menus();
+			foreach($left_menus as $left_menu){
 			?>
-			<li><a href="<?php echo page_url($top_menu['slug']); ?>" class="<?php echo $navigation->current_menu($page_slug,$top_menu['slug']) ?>"><?php echo $top_menu['menu_name']; ?></a></li>
+			<li><a href="<?php echo page_url($left_menu['slug']); ?>" class="<?php echo $navigation->current_menu($page_slug,$left_menu['slug']) ?>"><?php echo $left_menu['menu_name']; ?></a></li>
 			<?php } ?>
 		</ul>
 	</div>

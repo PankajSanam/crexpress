@@ -16,9 +16,9 @@ class Home_Controller extends _Controller {
 			)
 		);
 		$this->data['scripts'] = $this->library['html']->scripts(array(
-				//'jquery1.7.2',
+				'jquery1.7.2',
 				//'jquery1.4.2.min',
-				'jquery-2.0.3.min',
+				//'jquery-2.0.3.min',
 				'amazingcarousel',
 				'initcarousel',
 				'bjqs-1.3.min',

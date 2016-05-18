@@ -22,7 +22,7 @@
 
           $('#banner-fade').bjqs({
             height      : 320,
-            width       : 716,
+            width       : 760,
             responsive  : true
           });
 
@@ -34,10 +34,12 @@
 	<div class="maindiv">
 		<div class="top-menu">
 			<ul>
-				<li><a href="<?php echo $home_url; ?>">Home</a></li>
-				<li><a href="<?php echo page_url('about'); ?>">About us </a></li>
-				<li><a href="<?php echo page_url('services'); ?>">Services</a></li>
-				<li><a href="<?php echo page_url('contact'); ?>">Contact us </a></li>
+				<?php
+				$bottom_menus = $navigation->bottom_menus();
+				foreach($bottom_menus as $bottom_menu){
+				?>
+				<li><a href="<?php echo page_url($bottom_menu['slug']); ?>"><?php echo $bottom_menu['menu_name']; ?></a></li>
+				<?php } ?>
 			</ul>
 		</div>
 		<div class="call-us">Call us now : <?php echo $landline; ?></div>

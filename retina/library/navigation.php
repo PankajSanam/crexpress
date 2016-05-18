@@ -80,5 +80,17 @@ class Navigation {
 		$query = $Db->select('pages',$cond);
 		return $query;
 	}
+
+	public function left_menus(){
+		$Db = new Db;
+		$cond = array( 
+			'status=' => 1, 
+			'menu_position LIKE' => '%left%',
+			'page_category_id=' => 0,
+			'menu_name<>' => '',
+		);
+		$query = $Db->select('pages',$cond);
+		return $query;
+	}
 }
 ?>

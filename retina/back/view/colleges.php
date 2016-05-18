@@ -245,7 +245,7 @@
 								'status' => $_POST['status'],
 							);
 							$Db = new Db;
-							if(isset($_GET['action'])){
+							if(isset($_GET['action']) AND $_GET['action']=='edit'){
 								$Db->update('colleges',$values,array( 'id=' => $_GET['id'] ));
 							} else {
 								$Db->insert('colleges',$values);	

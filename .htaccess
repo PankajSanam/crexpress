@@ -1,14 +1,14 @@
 <IfModule mod_rewrite.c>
 	RewriteEngine On
-	RewriteBase /academine.com/
+	RewriteBase /
 	RewriteRule ^index\.php$ - [L]
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteCond %{REQUEST_FILENAME} !-d
-	RewriteRule . /academine.com/index.php [L]
+	RewriteRule . /index.php [L]
 
 	ErrorDocument 404 /404.html
-	#RewriteCond %{HTTP_HOST} !^www.academine.com$ [NC]
-	#RewriteRule ^(.*)$ http://www.academine.com/$1 [L,R=301]
+	RewriteCond %{HTTP_HOST} !^www.academine.com$ [NC]
+	RewriteRule ^(.*)$ http://www.academine.com/$1 [L,R=301]
 </IfModule>
 
 # BEGIN GZIP

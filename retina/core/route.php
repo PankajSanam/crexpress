@@ -50,7 +50,7 @@ define('RETINA_VERSION', '0.1.1');
 | ---------------------------------------------------------------------
 |
 */
-define('SITE_URL', 'http://www.newway.co.in');
+define('SITE_URL', 'http://www.academine.com');
 
 if($_SERVER['HTTP_HOST'] == 'localhost' ) {
 	$server_root = 'D:/wamp/www/academine.com';
