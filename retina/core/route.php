@@ -53,11 +53,11 @@ define('RETINA_VERSION', '0.1.1');
 define('SITE_URL', 'http://www.newway.co.in');
 
 if($_SERVER['HTTP_HOST'] == 'localhost' ) {
-	$server_root = 'D:/wamp/www/newway.co.in';
-	$site_root = 'http://localhost/newway.co.in';
+	$server_root = 'D:/wamp/www/academine.com';
+	$site_root = 'http://localhost/academine.com';
 	define('IS_LIVE', 0);
 } else {
-	$server_root = '/home/newwayco/public_html';
+	$server_root = '/home/academin/public_html';
 	$site_root = SITE_URL;
 	define('IS_LIVE', 1);
 }

@@ -409,4 +409,4 @@ Disallow: /
 User-agent: Zeus Link Scout
 Disallow: /
 
-Sitemap: http://www.education.com/sitemap.xml
+Sitemap: http://www.academine.com/sitemap.xml

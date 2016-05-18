@@ -53,23 +53,28 @@
 		<div class="paging">
 			<div class="pagination">
 				<ul>
-					<li><a href="#">Prev</a></li>
-					<li><span class="current">1</span></li>
-					<li><a href="#">2</a></li>
-					<li><a href="#">3</a></li>
-					<li><a href="#">4</a></li>
-					<li><a href="#">5</a></li>
-					<li><a href="#">6</a></li>
-					<li><a href="#">7</a></li>
-					<li><a href="#">8</a></li>
-					<li><a href="#">9</a></li>
-					<li><a href="#">10</a></li>
-					<li><a href="#">11</a></li>
-					<li><a href="#">12</a></li>
-					<li><a href="#">13</a></li>
-					<li><a href="#">14</a></li>
-					<li><a href="#">15</a></li>
-					<li><a href="#">Next</a></li>
+					<li><a href="?from=0&to=5">Prev</a></li>
+					<li style="background:none;"><!-- <span class="current">&nbsp;</span> -->&nbsp;</li>
+					<li style="background:none;">&nbsp;</li>
+					<li style="background:none;">&nbsp;</li>
+					<li style="background:none;">&nbsp;</li>
+					<li style="background:none;">&nbsp;</li>
+					<li style="background:none;">&nbsp;</li>
+					<li style="background:none;">&nbsp;</li>
+					<li style="background:none;">&nbsp;</li>
+					<li style="background:none;">&nbsp;</li>
+					<li style="background:none;">&nbsp;</li>
+					<li style="background:none;">&nbsp;</li>
+					<li style="background:none;">&nbsp;</li>
+					<li style="background:none;">&nbsp;</li>
+					<li style="background:none;">&nbsp;</li>
+					<li style="background:none;">&nbsp;</li>
+					<li style="background:none;">&nbsp;</li>
+					<li style="background:none;">&nbsp;</li>
+					<li style="background:none;">&nbsp;</li>
+					<li style="background:none;">&nbsp;</li>
+					<li style="background:none;">&nbsp;</li>
+					<li><a href="?from=6&to=10">Next</a></li>
 				</ul>
 			</div>
 		</div>

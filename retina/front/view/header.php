@@ -16,6 +16,7 @@
 	<?php echo $styles; ?>
 	<link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300' rel='stylesheet' type='text/css'> 
 	<?php echo $scripts; ?>
+	
 	<script class="secret-source">
         jQuery(document).ready(function($) {
 

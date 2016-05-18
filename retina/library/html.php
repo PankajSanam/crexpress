@@ -73,6 +73,14 @@ class Html {
 		$Db = new Db;
 		$meta_tables = $Db->check_meta();
 		$count_tables = count($meta_tables);
+		
+		if(strrchr($page, '?')){
+			$p = explode('?',$page);
+			$page = $p[0];
+		} else {
+			$page = $page;
+		}
+
 		$cond = array(
 			'slug=' => $page,
 			'status=' => 1
@@ -97,6 +105,14 @@ class Html {
 		$Db = new Db;
 		$meta_tables = $Db->check_meta();
 		$count_tables = count($meta_tables);
+		
+		if(strrchr($page, '?')){
+			$p = explode('?',$page);
+			$page = $p[0];
+		} else {
+			$page = $page;
+		}
+		
 		$cond = array(
 			'slug=' => $page,
 			'status=' => 1
@@ -121,11 +137,19 @@ class Html {
 		$Db = new Db;
 		$meta_tables = $Db->check_meta();
 		$count_tables = count($meta_tables);
+
+		if(strrchr($page, '?')){
+			$p = explode('?',$page);
+			$page = $p[0];
+		} else {
+			$page = $page;
+		}
+
 		$cond = array(
 			'slug=' => $page,
 			'status=' => 1
 		);
-		
+	
 		for($i = 0 ; $i <= $count_tables-1; $i++){
 			$result =  $Db->select($meta_tables[$i], $cond);
 			$count = count($result);

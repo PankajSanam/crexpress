@@ -32,7 +32,7 @@ if($_SERVER['HTTP_HOST']=='localhost') {
 	//Error reporting is on when site is hosted on local server
 	Autoload::error(1);
 
-	define( "DB_NAME", "newwayco_rf" );
+	define( "DB_NAME", "academin_rf" );
 	define( "DB_DSN", "mysql:host=localhost;dbname=".DB_NAME."" );
 	define( "DB_USERNAME", "root" );
 	define( "DB_PASSWORD", "" );
@@ -41,10 +41,10 @@ if($_SERVER['HTTP_HOST']=='localhost') {
 	//Error reporting is off when site is online
 	Autoload::error(0);
 
-	define( "DB_NAME", "newwayco_rf" );
+	define( "DB_NAME", "academin_rf" );
 	define( "DB_DSN", "mysql:host=localhost;dbname=".DB_NAME."" );
-	define( "DB_USERNAME", "newwayco_user" );
-	define( "DB_PASSWORD", "PT)?OnHa?t!T" );
+	define( "DB_USERNAME", "academin_user" );
+	define( "DB_PASSWORD", "y-*U0yohT735" );
 }
 
 

@@ -68,7 +68,6 @@ $(document).ready(function(){
 				<div class="data"></div>
 				<div class="pagination"></div>
 			</div>
-			
 		</div>
 		<?php /*<div class="paging">
 			<div class="pagination">

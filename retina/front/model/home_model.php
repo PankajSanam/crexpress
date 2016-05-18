@@ -42,12 +42,13 @@ class Home_Model extends _Model{
 
 	public function colleges(){
 		$Db = new \Db;
-		$rows = $Db->select('colleges',array('status=' => 1));
+		$from = (isset($_GET['from']) ? $_GET['from'] : 0);
+		$to = (isset($_GET['to']) ? $_GET['to'] : 5);
+
+		$rows = $Db->select('colleges',array('status=' => 1),'id','asc',$from,$to);
 		foreach($rows as $row){
 			$col[] = $row;
 		}
-		return $col;
+		if(!empty($col)) return $col; else return array();
 	}
 }
-
-?>

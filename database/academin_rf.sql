@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 25, 2013 at 11:46 AM
+-- Generation Time: Dec 28, 2013 at 12:42 PM
 -- Server version: 5.1.36
 -- PHP Version: 5.4.16
 
@@ -16,7 +16,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `newwayco_rf`
+-- Database: `academin_rf`
 --
 
 -- --------------------------------------------------------
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `admin` (
 --
 
 INSERT INTO `admin` (`id`, `color_theme`, `email`, `username`, `password`, `avatar`, `first_name`, `last_name`) VALUES
-(1, '', 'pankaj@gitinfosys.com', 'Admin', 'git@9024551674', '', '', '');
+(1, '', 'pankaj@gitinfosys.com', 'Admin', 'git@123456', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -447,7 +447,7 @@ INSERT INTO `locations` (`id`, `parent_id`, `sub_id`, `name`, `longitude`, `lati
 (223, 85, 1, 'Gandhi Market', 0, 0, '', 1, 0),
 (224, 85, 1, 'Gole Market', 0, 0, '', 1, 0),
 (225, 85, 1, 'Guru Harkishan Nagar', 0, 0, '', 1, 0),
-(226, 184, 1, 'Alwar â€“ Bhiwadi Road', 0, 0, '', 1, 0),
+(226, 184, 1, 'Alwar Ã¢â‚¬â€œ Bhiwadi Road', 0, 0, '', 1, 0),
 (227, 85, 1, 'Haider quli', 0, 0, '', 1, 0),
 (228, 184, 1, 'Alwar Bypass Road', 0, 0, '', 1, 0),
 (229, 184, 1, 'Alwar Road', 0, 0, '', 1, 0),
@@ -1327,9 +1327,9 @@ INSERT INTO `locations` (`id`, `parent_id`, `sub_id`, `name`, `longitude`, `lati
 (1104, 175, 1, 'Ambedkar Nagar', 0, 0, '', 0, 0),
 (1105, 175, 1, 'Ambedkar Road', 0, 0, '', 0, 0),
 (1106, 175, 1, 'Ankur Vihar', 0, 0, '', 0, 0),
-(1107, 175, 1, 'Ansal Garden Enclave', 0, 0, '', 0, 0),
-(1108, 175, 1, 'Arya Nagar', 0, 0, '', 0, 0);
+(1107, 175, 1, 'Ansal Garden Enclave', 0, 0, '', 0, 0);
 INSERT INTO `locations` (`id`, `parent_id`, `sub_id`, `name`, `longitude`, `latitude`, `position`, `status`, `sortorder`) VALUES
+(1108, 175, 1, 'Arya Nagar', 0, 0, '', 0, 0),
 (1109, 175, 1, 'Ashok Nagar', 0, 0, '', 0, 0),
 (1110, 175, 1, 'Baghpat', 0, 0, '', 0, 0),
 (1111, 175, 1, 'Bapu Dham', 0, 0, '', 0, 0),
@@ -2254,7 +2254,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `address` text NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `users`
@@ -2262,5 +2262,4 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`id`, `date`, `username`, `email`, `password`, `first_name`, `last_name`, `dob`, `gender`, `mobile`, `state_id`, `city_id`, `pincode`, `address`, `status`) VALUES
 (1, '2013-10-04', 'kamlesh', 'kamlesh@gitinfosys.com', 'kamlesh', 'Kamlesh', 'Singh', '1958-10-01', 'Male', 8822446677, 2, 3, 302015, '32-a, jhotwara', 1),
-(2, '2013-10-04', 'rajiv', 'rajiv@gmail.com', 'rajiv', 'Rajiv', 'Tiwari', '1980-10-23', 'Male', 9786145432, 2, 3, 302011, '55, C block, ajmer road,', 1),
-(3, '2013-10-04', 'ram', 'ram@shyam.com', 'ram', 'ram', 'sharma', '1988-03-08', 'Male', 9876542310, 2, 3, 302018, 'address of ram', 1);
+(2, '2013-10-04', 'rajiv', 'rajiv@gmail.com', 'rajiv', 'Rajiv', 'Tiwari', '1980-10-23', 'Male', 9786145432, 2, 3, 302011, '55, C block, ajmer road,', 1);

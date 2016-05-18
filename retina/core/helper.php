@@ -65,16 +65,20 @@ function slug($page,$page_template){
 		'slug=' => $page,
 		'status=' => 1
 	);
-	
-	for($i = 0 ; $i <= $count_tables-1; $i++){
-		$result =  $Db->select($meta_tables[$i], $cond);
-		$count = count($result);
+	if(strrchr($page, '?')){
+		$p = explode('?',$page);
+		$slug = $p[0];
+	} else {
+		for($i = 0 ; $i <= $count_tables-1; $i++){
+			$result =  $Db->select($meta_tables[$i], $cond);
+			$count = count($result);
 
-		if($count > 0){
-			$slug = $result[0]['slug'];
-			break;
-		} else {
-			$slug = '404.html';
+			if($count > 0){
+				$slug = $result[0]['slug'];
+				break;
+			} else {
+				$slug = '404.html';
+			}
 		}
 	}
 
@@ -93,6 +97,14 @@ function template($page){
 	$Db = new Db;
 	$meta_tables = $Db->check_meta();
 	$count_tables = count($meta_tables);
+	
+	if(strrchr($page, '?')){
+		$p = explode('?',$page);
+		$page = $p[0];
+	} else {
+		$page = $page;
+	}
+
 	$cond = array(
 		'slug=' => $page,
 		'status=' => 1
