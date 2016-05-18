@@ -1,35 +1,23 @@
 <!DOCTYPE html>
-<html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-	<!-- Apple devices fullscreen -->
-	<meta name="apple-mobile-web-app-capable" content="yes" />
-	<!-- Apple devices fullscreen -->
-	<meta names="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+	<meta charset="utf-8">
+	{$meta_title}
 	<meta name="author" content="Pankaj Sanam" />
-	<?php echo $meta_title; ?>
-	<?php echo $styles; ?>
-	<?php echo $scripts; ?>
+	<meta name="robots" content="noindex, nofollow">
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0">
+	{$resources}
 
-	<!--[if lte IE 9]>
-	<?php $html->scripts(array( 'plugins/placeholder/jquery.placeholder.min'), 1); ?>
-	<script>
-		$(document).ready(function() {
-			$('input, textarea').placeholder();
-		});
-	</script>
-	<![endif]-->
-
-	<link rel="shortcut icon" href="<?php echo BACK_VIEW; ?>/img/favicon.ico" />
-	<!-- Apple devices Homescreen icon -->
-	<link rel="apple-touch-icon-precomposed" href="<?php echo BACK_VIEW; ?>/img/apple-touch-icon-precomposed.png" />
 	<script type="text/javascript">
-		function change_theme(code) {
+		function change_theme(code)
+		{
 			var dataString = 'code=' + code;
 			$.ajax({
 				type: "POST",
-				url: "<?php echo SITE_PATH; ?>/content/themes/back/ajax/back_theme_color.php",
+				url: "{$site_path}/content/themes/back/ajax/back_theme_color.php",
 				data: dataString,
 				cache: false,
 				success: function(html) {
@@ -40,337 +28,576 @@
 		}
 	</script>
 </head>
-<?php
-$data_theme = '';
-$Db = new Db;
-if(isset($_SESSION['id'])) {
-	$theme_colors = $Db->select('admin', array('id=' => $_SESSION['id']));
-	foreach($theme_colors as $theme_color) {
+<!-- Body -->
+<!-- Add the class .hide-side-content to <body> to hide side content by default -->
+<body>
+	<!-- Page Container -->
+	<div id="page-container" class="full-width">
+		<!-- Header -->
+		<!-- Add the class .navbar-fixed-top or .navbar-fixed-bottom for a fixed header on top or bottom respectively -->
+		<!-- If you add the class .navbar-fixed-top remember to add the class .header-fixed-top to <body> element! -->
+		<!-- If you add the class .navbar-fixed-bottom remember to add the class .header-fixed-bottom to <body> element! -->
+		<!-- <header class="navbar navbar-inverse navbar-fixed-top"> -->
+		<!-- <header class="navbar navbar-inverse navbar-fixed-bottom"> -->
+		<header class="navbar navbar-inverse">
+			<!-- Navbar Inner -->
+			<div class="navbar-inner">
+				<!-- div#row-fluid -->
+				<div class="row-fluid">
+					<!-- Sidebar Toggle Buttons (Desktop & Tablet) -->
+					<div class="span4 hidden-phone">
+						<ul class="nav pull-left">
+							<!-- Desktop Button (Visible only on desktop resolutions) -->
+							<li class="visible-desktop">
+								<a href="javascript:void(0)" id="toggle-side-content">
+									<i class="icon-reorder"></i>
+								</a>
+							</li>
+							<!-- END Desktop Button -->
 
-	}
-	$color_class = $theme_color['color_theme'];
-	$data_theme = $theme_color['color_theme'];
-}
-global $_back;
-if(isset($_SESSION['id'])) { $body_class = ''; } else { $body_class='login'; $color_class= ''; $data_theme = ''; }
-?>
-<body class="<?php echo $body_class . ' ' . $color_class; ?>" data-theme="<?php echo $data_theme; ?>" id="body" data-layout-sidebar="fixed" data-layout-topbar="fixed">
-	<?php if(isset($_SESSION['id'])) { ?>
-	<div id="navigation">
-		<div class="container-fluid">
-			<a href="#" id="brand">CrexPress</a>
-			<a href="#" class="toggle-nav" rel="tooltip" data-placement="bottom" title="Toggle navigation"><i class="icon-reorder"></i></a>
-			<ul class='main-nav'>
-				<li class="<?php echo $navigation->admin_current_menu($_back, 'dashboard'); ?>"><a href="<?php echo ADMIN_PATH; ?>dashboard/"><span>Dashboard</span></a></li>
-				<li class="<?php echo $navigation->admin_current_menu($_back, 'pages'); ?>">
-					<a href="#" data-toggle="dropdown" class='dropdown-toggle'><span>Content</span><span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="<?php echo ADMIN_PATH; ?>pages/">Pages</a></li>
-						<li><a href="<?php echo ADMIN_PATH; ?>pages/templates/">Page Templates</a></li>
-						<li><a href="#">Comments</a></li>
-					</ul>
-				</li>
-				<li class="<?php echo $navigation->admin_current_menu($_back, 'slider'); ?>">
-					<a href="#" data-toggle="dropdown" class='dropdown-toggle'><span>Media</span><span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="<?php echo ADMIN_PATH; ?>gallery/">Gallery</a></li>
-						<li class='dropdown-submenu'>
-							<a href="#" data-toggle="dropdown" class='dropdown-toggle'>Slider</a>
+							<!-- Tablet Button -->
+							<li class="visible-tablet">
+								<!-- It is set to open and close the left sidebar on tablets. The class .nav-collapse was added to aside#page-sidebar -->
+								<a href="javascript:void(0)" data-toggle="collapse" data-target=".nav-collapse">
+									<i class="icon-reorder"></i>
+								</a>
+							</li>
+							<!-- END Tablet Button -->
+
+							<!-- Divider -->
+							<li class="divider-vertical remove-margin"></li>
+						</ul>
+					</div>
+					<!-- END Sidebar Toggle Buttons -->
+
+					<!-- Brand and Search Section -->
+					<div class="span4 text-center">
+						<!-- Top search -->
+						<form id="top-search" class="pull-left" action="page_ready_search_results.html" method="post">
+							<input type="text" id="search-term" name="search-term" placeholder="Search..">
+						</form>
+						<!-- END Top search -->
+
+						<!-- Logo -->
+						<a href="{$site_path}" class="brand">
+							<img src="{$back_view}img/template/logo.png" alt="logo">
+						</a>
+						<!-- END Logo -->
+
+						<!-- Loading Indicator, Used for demostrating how loading of notifications could happen, check main.js - uiDemo() -->
+						<div id="loading" class="hide"><i class="icon-spinner icon-spin"></i></div>
+					</div>
+					<!-- END Brand and Search Section -->
+
+					<!-- Header Nav Section -->
+					<div id="header-nav-section" class="span4 clearfix">
+					<!-- Header Nav -->
+					<ul class="nav pull-right">
+						<!-- Theme Options, functionality initialized at main.js - templateOptions() -->
+						<li class="dropdown dropdown-theme-options">
+							<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">Theme Options</a>
 							<ul class="dropdown-menu">
-								<li><a href="<?php echo ADMIN_PATH; ?>slider/home/">Home Slider</a></li>
-								<li><a href="<?php echo ADMIN_PATH; ?>slider/inner/">Page Slider</a></li>
-								<li><a href="<?php echo ADMIN_PATH; ?>slider/footer/">Footer Slider</a></li>
-								<li><a href="<?php echo ADMIN_PATH; ?>slider/other/">Other Slider</a></li>
+								<!-- Page Options -->
+								<li class="theme-extra visible-desktop">
+									<label for="theme-page-full">
+										<input type="checkbox" id="theme-page-full" name="theme-page-full" class="input-themed">
+										Full width page
+									</label>
+								</li>
+								<!-- END Page Options -->
+
+								<!-- Divider -->
+								<li class="divider visible-desktop"></li>
+
+								<!-- Sidebar Options -->
+								<li class="theme-extra visible-desktop">
+									<label for="theme-sidebar-sticky">
+										<input type="checkbox" id="theme-sidebar-sticky" name="theme-sidebar-sticky" class="input-themed">
+										Sticky Sidebar
+									</label>
+								</li>
+								<!-- END Sidebar Options -->
+
+								<!-- Divider -->
+								<li class="divider visible-desktop"></li>
+
+								<!-- Header Options -->
+								<li class="theme-extra visible-desktop">
+									<label for="theme-header-top">
+										<input type="checkbox" id="theme-header-top" name="theme-header-top" class="input-themed">
+										Top fixed header
+									</label>
+									<label for="theme-header-bottom">
+										<input type="checkbox" id="theme-header-bottom" name="theme-header-bottom" class="input-themed">
+										Bottom fixed header
+									</label>
+								</li>
+								<!-- END Header Options -->
+
+								<!-- Divider -->
+								<li class="divider visible-desktop"></li>
+
+								<!-- Color Themes -->
+								<li>
+									<ul class="theme-colors clearfix">
+										<li class="active">
+											<a href="javascript:void(0)" class="img-circle themed-background-default themed-border-default" data-theme="default" data-toggle="tooltip" title="Default"></a>
+										</li>
+										<li>
+											<a href="javascript:void(0)" class="img-circle themed-background-amethyst themed-border-amethyst" data-theme="css/themes/amethyst.css" data-toggle="tooltip" title="Amethyst"></a>
+										</li>
+										<li>
+											<a href="javascript:void(0)" class="img-circle themed-background-army themed-border-army" data-theme="css/themes/army.css" data-toggle="tooltip" title="Army"></a>
+										</li>
+										<li>
+											<a href="javascript:void(0)" class="img-circle themed-background-asphalt themed-border-asphalt" data-theme="css/themes/asphalt.css" data-toggle="tooltip" title="Asphalt"></a>
+										</li>
+										<li>
+											<a href="javascript:void(0)" class="img-circle themed-background-autumn themed-border-autumn" data-theme="css/themes/autumn.css" data-toggle="tooltip" title="Autumn"></a>
+										</li>
+										<li>
+											<a href="javascript:void(0)" class="img-circle themed-background-cherry themed-border-cherry" data-theme="css/themes/cherry.css" data-toggle="tooltip" title="Cherry"></a>
+										</li>
+										<li>
+											<a href="javascript:void(0)" class="img-circle themed-background-city themed-border-city" data-theme="css/themes/city.css" data-toggle="tooltip" title="City"></a>
+										</li>
+										<li>
+											<a href="javascript:void(0)" class="img-circle themed-background-dawn themed-border-dawn" data-theme="css/themes/dawn.css" data-toggle="tooltip" title="Dawn"></a>
+										</li>
+										<li>
+											<a href="javascript:void(0)" class="img-circle themed-background-deepsea themed-border-deepsea" data-theme="css/themes/deepsea.css" data-toggle="tooltip" title="Deepsea"></a>
+										</li>
+										<li><a href="javascript:void(0)" class="img-circle themed-background-diamond themed-border-diamond" data-theme="css/themes/diamond.css" data-toggle="tooltip" title="Diamond"></a>
+										</li>
+										<li>
+											<a href="javascript:void(0)" class="img-circle themed-background-fire themed-border-fire" data-theme="css/themes/fire.css" data-toggle="tooltip" title="Fire"></a>
+										</li>
+										<li>
+											<a href="javascript:void(0)" class="img-circle themed-background-grass themed-border-grass" data-theme="css/themes/grass.css" data-toggle="tooltip" title="Grass"></a>
+										</li>
+										<li>
+											<a href="javascript:void(0)" class="img-circle themed-background-leaf themed-border-leaf" data-theme="css/themes/leaf.css" data-toggle="tooltip" title="Leaf"></a>
+										</li>
+										<li>
+											<a href="javascript:void(0)" class="img-circle themed-background-night themed-border-night" data-theme="css/themes/night.css" data-toggle="tooltip" title="Night"></a>
+										</li>
+										<li>
+											<a href="javascript:void(0)" class="img-circle themed-background-ocean themed-border-ocean" data-theme="css/themes/ocean.css" data-toggle="tooltip" title="Ocean"></a>
+										</li>
+										<li>
+											<a href="javascript:void(0)" class="img-circle themed-background-oil themed-border-oil" data-theme="css/themes/oil.css" data-toggle="tooltip" title="Oil"></a>
+										</li>
+										<li>
+											<a href="javascript:void(0)" class="img-circle themed-background-stone themed-border-stone" data-theme="css/themes/stone.css" data-toggle="tooltip" title="Stone"></a>
+										</li>
+										<li>
+											<a href="javascript:void(0)" class="img-circle themed-background-sun themed-border-sun" data-theme="css/themes/sun.css" data-toggle="tooltip" title="Sun"></a>
+										</li>
+										<li>
+											<a href="javascript:void(0)" class="img-circle themed-background-tulip themed-border-tulip" data-theme="css/themes/tulip.css" data-toggle="tooltip" title="Tulip"></a>
+										</li>
+										<li>
+											<a href="javascript:void(0)" class="img-circle themed-background-wood themed-border-wood" data-theme="css/themes/wood.css" data-toggle="tooltip" title="Wood"></a>
+										</li>
+									</ul>
+								</li>
+								<!-- END Color Themes -->
 							</ul>
 						</li>
-						<li><a href="<?php echo ADMIN_PATH; ?>social/">Social Icons</a></li>
-						<li><a href="<?php echo ADMIN_PATH; ?>client/">Client Logo</a></li>
-						<li><a href="<?php echo ADMIN_PATH; ?>software/">Softwares</a></li>
-						<li><a href="<?php echo ADMIN_PATH; ?>download/">Downloads</a></li>
+						<!-- END Theme Options -->
+
+						<!-- Divider -->
+						<li class="divider-vertical remove-margin"></li>
+
+						<!-- Notifications -->
+						<li class="dropdown dropdown-notifications">
+							<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+								<i class="icon-warning-sign"></i>
+								<span class="badge badge-neutral">4</span>
+							</a>
+							<ul class="dropdown-menu">
+								<li>
+									<div class="alert">
+										<i class="icon-bell"></i> <strong>App</strong> Please pay attention!
+									</div>
+									<div class="alert alert-error">
+										<i class="icon-bell-alt"></i> <strong>App</strong> There was an error!
+									</div>
+									<div class="alert alert-info">
+										<i class="icon-bolt"></i> <strong>App</strong> Info message!
+									</div>
+									<div class="alert alert-success">
+										<i class="icon-bullhorn"></i> <strong>App</strong> Service restarted!
+									</div>
+								</li>
+								<li class="divider"></li>
+								<li>
+									<a href="javascript:void(0)"><i class="icon-warning-sign pull-right"></i>Notification Center</a>
+								</li>
+							</ul>
+						</li>
+						<!-- END Notifications -->
+
+						<!-- Messages -->
+						<li class="dropdown dropdown-messages">
+							<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+								<i class="icon-envelope-alt"></i>
+								<span class="badge badge-neutral display-none"></span>
+							</a>
+							<ul class="dropdown-menu">
+								<li>
+									<div class="media">
+										<a class="pull-left" href="javascript:void(0)" data-toggle="tooltip" title="Newbie">
+											<img src="{$back_view}img/placeholders/image_64x64_dark.png" alt="fakeimg" class="img-circle">
+										</a>
+										<div class="media-body">
+											<h5 class="media-heading clearfix">
+												<span class="label label-success">1 min ago</span><a href="javascript:void(0)">Username</a>
+											</h5>
+											<div class="media">Lorem ipsum dolor sit amet, consectetur..</div>
+										</div>
+									</div>
+								</li>
+								<li class="divider"></li>
+								<li>
+									<div class="media">
+										<a class="pull-left" href="javascript:void(0)" data-toggle="tooltip" title="Pro">
+											<img src="{$back_view}img/placeholders/image_64x64_dark.png" alt="fakeimg" class="img-circle">
+										</a>
+										<div class="media-body">
+											<h5 class="media-heading clearfix"><span class="label label-success">2 hours ago</span><a href="javascript:void(0)">Username</a></h5>
+											<div class="media">Lorem ipsum dolor sit amet, consectetur..</div>
+										</div>
+									</div>
+								</li>
+								<li class="divider"></li>
+								<li>
+									<div class="media">
+										<a class="pull-left" href="javascript:void(0)" data-toggle="tooltip" title="VIP">
+											<img src="{$back_view}img/placeholders/image_64x64_dark.png" alt="fakeimg" class="img-circle">
+										</a>
+										<div class="media-body">
+											<h5 class="media-heading clearfix"><a href="javascript:void(0)">Username</a><span class="label label-success">3 days ago</span></h5>
+											<div class="media">Lorem ipsum dolor sit amet, consectetur..</div>
+										</div>
+									</div>
+								</li>
+								<li class="divider"></li>
+								<li>
+									<a href="page_comp_inbox.html"><i class="icon-envelope-alt pull-right"></i>Message Center</a>
+								</li>
+							</ul>
+						</li>
+						<!-- END Messages -->
 					</ul>
+					<!-- END Header Nav -->
+
+					<!-- Mobile Navigation, Shows up on mobile -->
+					<ul class="nav pull-left visible-phone">
+						<li>
+							<!-- It is set to open and close the main navigation on mobiles. The class .nav-collapse was added to aside#page-sidebar -->
+							<a href="javascript:void(0)" data-toggle="collapse" data-target=".nav-collapse">
+								<i class="icon-reorder"></i>
+							</a>
+						</li>
+						<li class="divider-vertical remove-margin"></li>
+					</ul>
+					<!-- END Mobile Navigation, Shows up on mobile -->
+				</div>
+				<!-- END Header Nav Section -->
+			</div>
+		<!-- END div#row-fluid -->
+		</div>
+	<!-- END Navbar Inner -->
+	</header>
+	<!-- END Header -->
+
+	<!-- Left Sidebar -->
+	<!-- Add the class .sticky for a sticky sidebar -->
+	<aside id="page-sidebar" class="nav-collapse collapse">
+	<!--
+	Wrapper for scrolling functionality
+	Used only if the .sticky class added above. You can remove it and you will have a sticky sidebar
+	without scrolling enabled when you set the sidebar to be sticky
+	-->
+	<div class="side-scrollable">
+		<!-- Mini Profile -->
+		<div class="mini-profile">
+			<div class="mini-profile-options">
+				<a href="javascript:void(0)" class="badge badge-info loading-on" data-toggle="tooltip" data-placement="right" title="Refresh">
+					<i class="icon-refresh"></i>
+				</a>
+				<a href="page_ready_shopping_cart.html" class="badge badge-warning" data-toggle="tooltip" data-placement="right" title="6 Products">
+					<i class="glyphicon-shopping_cart"></i>
+				</a>
+				<!-- Modal div is at the bottom of the page before including javascript code, we use .enable-tooltip class for the tooltip because data-toggle is used for modal -->
+				<a href="#modal-user-account" class="badge badge-success enable-tooltip" role="button" data-toggle="modal" data-placement="right" title="Settings">
+					<i class="glyphicon-cogwheel"></i>
+				</a>
+				<a href="page_login.html" class="badge badge-important" data-toggle="tooltip" data-placement="right" title="Log out">
+					<i class="icon-signout"></i>
+				</a>
+			</div>
+			<a href="page_ready_user_profile.html">
+				<img src="{$back_view}img/template/avatar2.jpg" alt="Avatar" class="img-circle">
+			</a>
+		</div>
+		<!-- END Mini Profile -->
+
+		<!-- Sidebar Tabs -->
+		<div class="sidebar-tabs-con">
+			<ul class="sidebar-tabs" data-toggle="tabs">
+				<li class="active">
+					<a href="#side-tab-menu"><i class="glyphicon-list"></i></a>
 				</li>
-				<li class="<?php echo $navigation->admin_current_menu($_back, 'product'); ?>">
-					<a href="#" data-toggle="dropdown" class='dropdown-toggle'><span>Products</span><span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="<?php echo ADMIN_PATH; ?>product/">Products</a></li>
-						<li><a href="<?php echo ADMIN_PATH; ?>product/add/">Add Product</a></li>
-						<li><a href="<?php echo ADMIN_PATH; ?>product/category/add/">Add Product Category</a></li>
-					</ul>
-				</li>
-				<li class="<?php echo $navigation->admin_current_menu($_back, 'jobs'); ?>">
-					<a href="#" data-toggle="dropdown" class='dropdown-toggle'><span>Jobs</span><span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="<?php echo ADMIN_PATH; ?>jobs/">Jobs</a></li>
-						<li><a href="<?php echo ADMIN_PATH; ?>jobs/add/">Post Job</a></li>
-						<li><a href="<?php echo ADMIN_PATH; ?>jobs/enquiry/">Job Enquiries</a></li>
-					</ul>
-				</li>
-				 <li class="<?php echo $navigation->admin_current_menu($_back, 'colleges'); ?>">
-					<a href="#" data-toggle="dropdown" class='dropdown-toggle'><span>Colleges</span><span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="<?php echo ADMIN_PATH; ?>colleges/">Colleges</a></li>
-						<li><a href="<?php echo ADMIN_PATH; ?>colleges/add/">Add New</a></li>
-					</ul>
-				</li>
-				<li class="<?php echo $navigation->admin_current_menu($_back, 'users'); ?>">
-					<a href="#" data-toggle="dropdown" class='dropdown-toggle'><span>Users</span><span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="<?php echo ADMIN_PATH; ?>users/">Users</a></li>
-						<li><a href="<?php echo ADMIN_PATH; ?>users/add/">Add User</a></li>
-					</ul>
-				</li>
-				<li class="<?php echo $navigation->admin_current_menu($_back, 'ads'); ?>">
-					<a href="#" data-toggle="dropdown" class='dropdown-toggle'><span>Ads</span><span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="<?php echo ADMIN_PATH; ?>ads/">Ads</a></li>
-						<li><a href="<?php echo ADMIN_PATH; ?>ads/add/">New Ad</a></li>
-					</ul>
+				<li>
+					<a href="#side-tab-extra"><i class="glyphicon-user"></i></a>
 				</li>
 			</ul>
-			<div class="user">
-				<ul class="icon-nav">
-					<li class='dropdown'>
-						<?php
-						$Db = new Db;
-						$messages = $Db->select('enquiries', array('status=' => 1));
-						$total_messages = count($messages);
-						?>
-						<a href="#" class='dropdown-toggle' data-toggle="dropdown"><i class="icon-envelope"></i><span class="label label-lightred"><?php echo $total_messages; ?></span></a>
-						<ul class="dropdown-menu pull-right message-ul">
-								<?php foreach($messages as $message) { ?>
-								<li>
-									<a href="messages.html">
-										<img src="<?php echo BACK_VIEW; ?>/img/demo/user-2.jpg" alt="">
-										<div class="details">
-											<div class="name"><?php echo $message['name']; ?></div>
-											<div class="message"><?php echo $message['email']; ?></div>
-										</div>
-										<!-- <div class="count"><i class="icon-comment"></i><span>3</span></div> -->
-									</a>
-								</li>
-								<?php } ?>
+			<div class="tab-content">
+				<div class="tab-pane active" id="side-tab-menu">
+					<!-- Primary Navigation -->
+					<nav id="primary-nav">
+						<ul>
 							<li>
-								<a href="messages.html" class='more-messages'>Go to Message Box <i class="icon-arrow-right"></i></a>
+								<a href="index.html" class=" active"><i class="glyphicon-display"></i>Dashboard</a>
+							</li>
+							<li>
+								<a href="#" class="menu-link"><i class="glyphicon-vector_path_curve"></i>User Interface</a>
+								<ul>
+									<li>
+										<a href="page_ui_blocks.html">Blocks</a>
+									</li>
+									<li>
+										<a href="page_ui_grid.html">Grid</a>
+									</li>
+									<li>
+										<a href="page_ui_typography.html">Typography</a>
+									</li>
+									<li>
+										<a href="page_ui_navigation.html">Navigation</a>
+									</li>
+									<li>
+										<a href="page_ui_tabs_accordions.html">Tabs &amp; Accordions</a>
+									</li>
+									<li>
+										<a href="page_ui_buttons_dropdowns.html">Buttons &amp; Dropdowns</a>
+									</li>
+									<li>
+										<a href="page_ui_progress_bars.html">Progress Bars</a>
+									</li>
+									<li>
+										<a href="page_ui_carousel.html">Carousel</a>
+									</li>
+									<li>
+										<a href="page_ui_extras.html">Extras</a>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#" class="menu-link"><i class="glyphicon-table"></i>Tables</a>
+								<ul>
+									<li>
+										<a href="page_tables_static.html">Static</a>
+									</li>
+									<li>
+										<a href="page_tables_dynamic.html">Dynamic</a>
+									</li>
+									<li>
+										<a href="page_tables_editable.html">Editable</a>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#" class="menu-link"><i class="glyphicon-more_windows"></i>Forms</a>
+								<ul>
+									<li>
+										<a href="page_forms_general.html">General</a>
+									</li>
+									<li>
+										<a href="page_forms_layouts_styles.html">Layouts &amp; Styles</a>
+									</li>
+									<li>
+										<a href="page_forms_pickers_grid.html">Pickers &amp; Grid</a>
+									</li>
+									<li>
+										<a href="page_forms_textareas_wysiwyg.html">Textareas &amp; WYSIWYG</a>
+									</li>
+									<li>
+										<a href="page_forms_upload_dropzone.html">File Upload &amp; Dropzone</a>
+									</li>
+									<li>
+										<a href="page_forms_validation.html">Validation</a>
+									</li>
+									<li>
+										<a href="page_forms_wizard.html">Wizard</a>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#" class="menu-link"><i class="glyphicon-fire"></i>Components</a>
+								<ul>
+									<li>
+										<a href="page_comp_inbox.html">Inbox</a>
+									</li>
+									<li>
+										<a href="page_comp_chat.html">Chat</a>
+									</li>
+									<li>
+										<a href="page_comp_timeline.html">Timeline</a>
+									</li>
+									<li>
+										<a href="page_comp_tiles.html">Tiles</a>
+									</li>
+									<li>
+										<a href="page_comp_gallery.html">Gallery</a>
+									</li>
+									<li>
+										<a href="page_comp_charts.html">Charts</a>
+									</li>
+									<li>
+										<a href="page_comp_calendar.html">Calendar</a>
+									</li>
+									<li>
+										<a href="#" class="submenu-link">Maps</a>
+										<ul>
+											<li>
+												<a href="page_comp_vector_maps.html">Vector Maps</a>
+											</li>
+											<li>
+												<a href="page_comp_google_maps.html">Google Maps</a>
+											</li>
+										</ul>
+									</li>
+									<li>
+										<a href="page_comp_syntax_highlighting.html">Syntax Highlighting</a>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#" class="menu-link"><i class="glyphicon-pizza"></i>Icon Packs</a>
+								<ul>
+									<li>
+										<a href="page_icons_glyphicons_pro.html">Glyphicons Pro</a>
+									</li>
+									<li>
+										<a href="page_icons_glyphicons_halflings_pro.html">Glyphicons Halflings Pro</a>
+									</li>
+									<li>
+										<a href="page_icons_fontawesome.html">FontAwesome</a>
+									</li>
+									<li>
+										<a href="page_icons_gemicon.html">Gemicon</a>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#" class="menu-link"><i class="glyphicon-certificate"></i>Ready UI</a>
+								<ul>
+									<li>
+										<a href="page_ready_search_results.html">Search Results</a>
+									</li>
+									<li>
+										<a href="page_ready_user_profile.html">User Profile</a>
+									</li>
+									<li>
+										<a href="page_ready_pricing_tables.html">Pricing Tables</a>
+									</li>
+									<li>
+										<a href="#" class="submenu-link">e-Shop</a>
+										<ul>
+											<li>
+												<a href="page_ready_product.html">Product</a>
+											</li>
+											<li>
+												<a href="page_ready_products_list.html">Products List</a>
+											</li>
+											<li>
+												<a href="page_ready_shopping_cart.html">Shopping Cart</a>
+											</li>
+										</ul>
+									</li>
+									<li>
+										<a href="page_ready_invoice.html">Invoice</a>
+									</li>
+									<li>
+										<a href="page_ready_article.html">Article</a>
+									</li>
+									<li>
+										<a href="page_ready_faq.html">FAQ</a>
+									</li>
+									<li>
+										<a href="#" class="submenu-link">Errors</a>
+										<ul>
+											<li>
+												<a href="page_ready_errors.html">In-Page</a>
+											</li>
+											<li>
+												<a href="page_ready_standalone_error.html">Standalone</a>
+											</li>
+										</ul>
+									</li>
+									<li>
+										<a href="page_ready_blank.html">Blank</a>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a href="page_landing.html"><i class="glyphicon-leaf"></i>Landing Page</a>
+							</li>
+							<li>
+								<a href="page_login.html"><i class="glyphicon-power"></i>Login Page</a>
 							</li>
 						</ul>
-					</li>
-					<li class="dropdown sett">
-						<a href="#" class='dropdown-toggle' data-toggle="dropdown"><i class="icon-cog"></i></a>
-						<ul class="dropdown-menu pull-right theme-settings">
-							<li>
-								<span>Layout-width</span>
-								<div class="version-toggle">
-									<a href="#" class='set-fixed'>Fixed</a>
-									<a href="#" class="active set-fluid">Fluid</a>
-								</div>
-							</li>
-							<li>
-								<span>Topbar</span>
-								<div class="topbar-toggle">
-									<a href="#" class='set-topbar-fixed'>Fixed</a>
-									<a href="#" class="active set-topbar-default">Default</a>
-								</div>
-							</li>
-							<li>
-								<span>Sidebar</span>
-								<div class="sidebar-toggle">
-									<a href="#" class='set-sidebar-fixed'>Fixed</a>
-									<a href="#" class="active set-sidebar-default">Default</a>
-								</div>
-							</li>
-						</ul>
-					</li>
-					<li class='dropdown colo'>
-						<a href="#" class='dropdown-toggle' data-toggle="dropdown"><i class="icon-tint"></i></a>
-						<ul class="dropdown-menu pull-right theme-colors">
-							<li class="subtitle">Choose color theme</li>
-							<li>
-								<span id="themeColor" class='red' onclick="change_theme('theme-red')"></span>
-								<span id="themeColor" class='orange' onclick="change_theme('theme-orange')"></span>
-								<span id="themeColor" class='green' onclick="change_theme('theme-green')"></span>
-								<span id="themeColor" class="brown" onclick="change_theme('theme-brown')"></span>
-								<span id="themeColor" class="blue" onclick="change_theme('theme-blue')"></span>
-								<span id="themeColor" class='lime' onclick="change_theme('theme-lime')"></span>
-								<span id="themeColor" class="teal" onclick="change_theme('theme-teal')"></span>
-								<span id="themeColor" class="purple" onclick="change_theme('theme-purple')"></span>
-								<span id="themeColor" class="pink" onclick="change_theme('theme-pink')"></span>
-								<span id="themeColor" class="magenta" onclick="change_theme('theme-magenta')"></span>
-								<span id="themeColor" class="grey" onclick="change_theme('theme-grey')"></span>
-								<span id="themeColor" class="darkblue" onclick="change_theme('theme-darkblue')"></span>
-								<span id="themeColor" class="lightred" onclick="change_theme('theme-lightred')"></span>
-								<span id="themeColor" class="lightgrey" onclick="change_theme('theme-lightgrey')"></span>
-								<span id="themeColor" class="satblue" onclick="change_theme('theme-satblue')"></span>
-								<span id="themeColor" class="satgreen" onclick="change_theme('theme-satgreen')"></span>
-							</li>
-						</ul>
-					</li>
-					<li class='dropdown language-select'>
-						<a href="#" class='dropdown-toggle' data-toggle="dropdown"><img src="<?php echo BACK_VIEW; ?>/img/demo/flags/us.gif" alt=""><span>US</span></a>
-						<ul class="dropdown-menu pull-right">
-							<li><a href="#"><img src="<?php echo BACK_VIEW; ?>/img/demo/flags/br.gif" alt=""><span>Brasil</span></a></li>
-							<li><a href="#"><img src="<?php echo BACK_VIEW; ?>/img/demo/flags/de.gif" alt=""><span>Deutschland</span></a></li>
-							<li><a href="#"><img src="<?php echo BACK_VIEW; ?>/img/demo/flags/es.gif" alt=""><span>España</span></a></li>
-							<li><a href="#"><img src="<?php echo BACK_VIEW; ?>/img/demo/flags/fr.gif" alt=""><span>France</span></a></li>
-						</ul>
-					</li>
-				</ul>
-				<div class="dropdown">
-					<a href="#" class='dropdown-toggle' data-toggle="dropdown">Admin<img src="<?php echo BACK_VIEW; ?>/img/demo/user-avatar.jpg" alt=""></a>
-					<ul class="dropdown-menu pull-right">
-						<li><a href="#">Edit profile</a></li>
-						<li><a href="#">Account settings</a></li>
-						<li><a href="<?php echo ADMIN_PATH; ?>logout/<?php echo $encrypt->lock(date("Y-m-d")); ?>">Sign out</a></li>
-					</ul>
+					</nav>
+					<!-- END Primary Navigation -->
 				</div>
-				<?php
-				if( get( 'logout') ) {
-					$var = $encrypt->unlock( get('logout') );
-					if(date("Y-m-d") == $var) {
-						@session_start();
-						session_destroy();
-						$url = ADMIN_PATH.'/index/';
-						redirect($url);
-					}
-				}
-				?>
-			</div>
-		</div>
-	</div>
+				<div class="tab-pane tab-pane-side" id="side-tab-extra">
+					<h5><i class="icon-briefcase pull-right"></i>Balance</h5>
+					<div class="side-stat text-center text-info"><strong>$25.230,<small>00</small></strong></div>
 
-	<div id="modal-user" class="modal hide">
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-			<h3 id="user-infos">Pankaj Sanam</h3>
-		</div>
-		<div class="modal-body">
-			<div class="row-fluid">
-				<div class="span2"><img src="<?php echo BACK_VIEW; ?>/img/demo/user-1.jpg" alt=""></div>
-				<div class="span10">
-					<dl class="dl-horizontal" style="margin-top:0;">
-						<dt>Full name:</dt>
-						<dd>Pankaj Sanam</dd>
-						<dt>Email:</dt>
-						<dd>pankaj@crexo.com</dd>
-						<dt>Address:</dt>
-						<dd>
-							<address>
-								<strong>Crexo.com</strong><br/>
-								24-A, Shanti Nagar, DCM<br/>
-								Ajmer Road, Jaipur, 302019<br/>
-								<abbr title="Phone">P:</abbr>(902) 455-1674
-							</address>
-						</dd>
-						<dt>Social:</dt>
-						<dd>
-							<a href="http://www.facebook.com/" class='btn'><i class="icon-facebook"></i></a>
-							<a href="http://www.twitter.com/" class='btn'><i class="icon-twitter"></i></a>
-							<a href="http://www.linkedin.com" class='btn'><i class="icon-linkedin"></i></a>
-							<a href="#" class='btn'><i class="icon-envelope"></i></a>
-							<a href="#" class='btn'><i class="icon-rss"></i></a>
-							<a href="#" class='btn'><i class="icon-github"></i></a>
-						</dd>
-					</dl>
+					<h5><i class="icon-dollar pull-right"></i>Earnings (today)</h5>
+					<div class="side-stat text-center text-info"><strong>$1.752,<small>00</small></strong></div>
+
+					<h5><i class="icon-shopping-cart pull-right"></i>Sales (today)</h5>
+					<div class="side-stat text-center text-info"><strong>368</strong></div>
+
+					<h5><i class="icon-shopping-cart pull-right"></i>Sales (this month)</h5>
+					<div class="side-stat text-center text-success"><strong>+38%</strong></div>
+
+					<h5><i class="icon-ticket pull-right"></i>Open Tickets</h5>
+					<div class="side-stat text-center text-warning"><strong>23</strong></div>
+
+					<h5><i class="icon-bug pull-right"></i>Bugs to fix</h5>
+					<div class="side-stat text-center text-error"><strong>1</strong> (important)</div>
+					<div class="side-stat text-center text-warning"><strong>3</strong> (normal)</div>
 				</div>
 			</div>
 		</div>
-		<div class="modal-footer"><button class="btn" data-dismiss="modal">Close</button></div>
+		<!-- END Sidebar Tabs -->
 	</div>
-	<div class="container-fluid" id="content">
-		<div id="left" class='force-full no-resize'>
-			<div class='search-form'><div class="search-pane"><marquee>Please make sure to check your messages.</marquee></div></div>
-			<div class="subnav">
-				<div class="subnav-title">
-					<a href="#" class='toggle-subnav'><i class="icon-angle-down"></i><span>Quick stats</span></a>
-				</div>
-				<div class="subnav-content">
-					<ul class="quickstats">
-						<li><span class="value">412</span><span class="name">User</span></li>
-						<li><span class="value">52</span><span class="name">Products</span></li>
-						<li><span class="value">951</span><span class="name">Purchases</span></li>
-						<li><span class="value">62</span><span class="name">Clicks</span></li>
-					</ul>
-				</div>
-			</div>
-			<div class="subnav">
-				<div class="subnav-title"><a href="#" class='toggle-subnav'><i class="icon-angle-down"></i><span>Progress</span></a></div>
-				<div class="subnav-content">
-					<div class="pagestats bar">
-						<span>Diskspace usage:</span><div class="progress small"><div class="bar" style="width:40%"></div></div>
-					</div>
-					<div class="pagestats bar">
-						<span>Traffic bandwidth:</span><div class="progress small"><div class="bar bar-lightred" style="width:80%"></div></div>
-					</div>
-					<div class="pagestats bar">
-						<span>Resources used:</span><div class="progress small"><div class="bar bar-green" style="width:20%"></div></div>
-					</div>
-				</div>
-			</div>
-			<div class="subnav">
-				<div class="subnav-title">
-					<a href="#" class='toggle-subnav'><i class="icon-angle-down"></i><span>Calendar</span></a>
-				</div>
-				<div class="subnav-content less"><div class="jq-datepicker"></div></div>
-			</div>
-			<div class="subnav">
-				<div class="subnav-title">
-					<a href="#" class='toggle-subnav'><i class="icon-angle-down"></i><span>Userlist</span></a>
-				</div>
-				<!-- <div class="subnav-content">
-					<ul class="userlist">
-						<li>
-							<a href="#"><img src="img/demo/user-1.jpg" alt=""></a>
-							<div class="user">
-								<span class="name">Jane Doe</span>
-								<span class="position">Team manager</span>
-							</div>
-							<div class="status active"><i class="icon-circle"></i></div>
-						</li>
-						<li>
-							<a href="#"><img src="img/demo/user-2.jpg" alt=""></a>
-							<div class="user">
-								<span class="name">John Doe</span>
-								<span class="position">Webdesign</span>
-							</div>
-							<div class="status"><i class="icon-circle"></i></div>
-						</li>
-						<li>
-							<a href="#"><img src="img/demo/user-3.jpg" alt=""></a>
-							<div class="user">
-								<span class="name">John Doe</span>
-								<span class="position">UI Design</span>
-							</div>
-							<div class="status afk"><i class="icon-circle"></i></div>
-						</li>
-					</ul>
-				</div> -->
-			</div>
-		</div>
-		<div id="main">
-			<div class="container-fluid">
-				<div class="page-header">
-					<div class="pull-left"><h1><?php echo $controller; ?></h1></div>
-					<div class="pull-right">
-						<ul class="minitiles">
-							<li class='grey'><a href="<?php echo ADMIN_PATH; ?>settings/"><i class="icon-cogs"></i></a></li>
-							<li class='lightgrey'><a href="<?php echo SITE_PATH; ?>" target="_blank"><i class="icon-globe"></i></a></li>
-						</ul>
-						<ul class="stats">
-							<li class='satgreen'>
-								<i class="icon-money"></i>
-								<div class="details"><span class="big">$0</span><span>Balance</span></div>
-							</li>
-							<li class='lightred'>
-								<i class="icon-calendar"></i>
-								<div class="details"><span class="big"><?php echo date('F d, Y'); ?></span><span><?php echo date('l, g:i A'); ?></span></div>
-							</li>
-						</ul>
-					</div>
-				</div>
-				<div class="breadcrumbs">
-					<ul>
-						<li><a href="<?php echo ADMIN_PATH; ?>dashboard/">Home</a><i class="icon-angle-right"></i></li>
-						<?php echo $breadcrumb; ?>
-					</ul>
-					<div class="close-bread"><a href="#"><i class="icon-remove"></i></a></div>
-				</div>
-	<?php } ?>
+	<!-- END Wrapper for scrolling functionality -->
+</aside>
+<!-- END Left Sidebar -->
+
+{*<li class="<?php echo $navigation->admin_current_menu($_back, 'dashboard'); ?>"><a href="<?php echo ADMIN_PATH; ?>dashboard/"><span>Dashboard</span></a></li>
+<li class="<?php echo $navigation->admin_current_menu($_back, 'pages'); ?>">
+	<a href="#" data-toggle="dropdown" class='dropdown-toggle'><span>Content</span><span class="caret"></span></a>
+	<ul class="dropdown-menu">
+		<li><a href="<?php echo ADMIN_PATH; ?>pages/templates/">Page Templates</a></li>
+	</ul>
+</li>
+<span id="themeColor" class="satgreen" onclick="change_theme('theme-satgreen')"></span>
+<?php
+if( get( 'logout') )
+{
+	$var = $encrypt->unlock( get('logout') );
+	if(date("Y-m-d") == $var)
+	{
+		@session_start();
+		session_destroy();
+		$url = ADMIN_PATH.'/index/';
+		redirect($url);
+	}
+}
+?>*}

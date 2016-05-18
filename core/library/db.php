@@ -241,7 +241,6 @@ class Db extends PDO
 	 */
 	public function getRow($sql)
 	{
-		//for now this is doing same as getRows
 		$query = self::prepare($sql);
 		$query->execute();
 

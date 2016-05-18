@@ -1,6 +1,7 @@
-<?php if (!defined('CREXO')) exit('No Trespassing!');
+<?php if (!defined('CREXO')) exit('<html><body><div style="position:fixed;top:35%;left:35%;"><img src="http://www.nathanfox.net/content/binary/WindowsLiveWriter/StrongnameaccessdeniederroronWindows.exe_15108/StrongNameAccessDeniedMessageBox_thumb.png"></div></body></html>');
 
-class Validation {
+class Validation
+{
 	protected $translator;
 	protected $presenceVerifier;
 	protected $failedRules = array();
@@ -25,17 +26,20 @@ class Validation {
 	protected $error_string			= '';
 	protected $_safe_form_data		= FALSE;
 
-	public function admin_auth(){
+	public function admin_auth()
+	{
 		@session_start();
 		if(!isset($_SESSION['admin'])) header("location:index.html");
 	}
 
-	function admin_user_auth(){
+	function admin_user_auth()
+	{
 		@session_start();
 		if(!isset($_SESSION['user']) && !isset($_SESSION['admin'])) header("location:index.html");
 	}
 
-	function check_auth(){
+	function check_auth()
+	{
 		session_start();
 		if(!isset($_SESSION['admin'])) { echo 'You do not have enough privileges to perform this action.'; exit(); }
 	}

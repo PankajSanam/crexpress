@@ -1,5 +1,6 @@
 <?php if (!defined('CREXO')) exit('No Trespassing!');
 
-class Dashboard_Model extends Crexo_Model{
+class Dashboard_Model extends Model
+{
 
 }

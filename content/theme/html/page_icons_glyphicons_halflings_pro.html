@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+
+        <title>FlatApp - Premium, Responsive and Flat Bootstrap Admin Dashboard Template</title>
+
+        <meta name="description" content="FlatApp is a Premium, Responsive and Flat Bootstrap Admin Dashboard Template created by pixelcave and published on Themeforest.">
+        <meta name="author" content="pixelcave">
+        <meta name="robots" content="noindex, nofollow">
+
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0">
+
+        <!-- Icons -->
+        <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
+        <link rel="shortcut icon" href="img/favicon.ico">
+        <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+        <link rel="apple-touch-icon" sizes="57x57" href="img/apple-touch-icon-57x57-precomposed.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="img/apple-touch-icon-72x72-precomposed.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="img/apple-touch-icon-114x114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-precomposed.png">
+        <!-- END Icons -->
+
+        <!-- Stylesheets -->
+        <!-- The roboto font is included from Google Web Fonts -->
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,400italic,700,700italic">
+
+        <!-- Bootstrap is included in its original form, unaltered -->
+        <link rel="stylesheet" href="css/bootstrap.css">
+
+        <!-- Related styles of various icon packs and javascript plugins -->
+        <link rel="stylesheet" href="css/plugins.css">
+
+        <!-- The main stylesheet of this template. All Bootstrap overwrites are defined in here -->
+        <link rel="stylesheet" href="css/main.css">
+
+        <!-- Load a specific file here from css/themes/ folder to alter the default theme of all the template -->
+
+        <!-- The themes stylesheet of this template (for using specific theme color in individual elements (must included last) -->
+        <link rel="stylesheet" href="css/themes.css">
+        <!-- END Stylesheets -->
+
+        <!-- Modernizr (Browser feature detection library) & Respond.js (Enable responsive CSS code on browsers that don't support it) -->
+        <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    </head>
+
+    <!-- Body -->
+    <!-- In the PHP version you can set the following options from the config file -->
+    <!-- Add the class .hide-side-content to <body> to hide side content by default -->
+    <body>
+        <!-- Page Container -->
+        <!-- In the PHP version you can set the following options from the config file -->
+        <!-- Add the class .full-width for a full width page -->
+        <div id="page-container" class="full-width">
+            <!-- Header -->
+            <!-- In the PHP version you can set the following options from the config file -->
+            <!-- Add the class .navbar-fixed-top or .navbar-fixed-bottom for a fixed header on top or bottom respectively -->
+            <!-- If you add the class .navbar-fixed-top remember to add the class .header-fixed-top to <body> element! -->
+            <!-- If you add the class .navbar-fixed-bottom remember to add the class .header-fixed-bottom to <body> element! -->
+            <!-- <header class="navbar navbar-inverse navbar-fixed-top"> -->
+            <!-- <header class="navbar navbar-inverse navbar-fixed-bottom"> -->
+            <header class="navbar navbar-inverse">
+                <!-- Navbar Inner -->
+                <div class="navbar-inner">
+                    <!-- div#row-fluid -->
+                    <div class="row-fluid">
+                        <!-- Sidebar Toggle Buttons (Desktop & Tablet) -->
+                        <div class="span4 hidden-phone">
+                            <ul class="nav pull-left">
+                                <!-- Desktop Button (Visible only on desktop resolutions) -->
+                                <li class="visible-desktop">
+                                    <a href="javascript:void(0)" id="toggle-side-content">
+                                        <i class="icon-reorder"></i>
+                                    </a>
+                                </li>
+                                <!-- END Desktop Button -->
+
+                                <!-- Tablet Button -->
+                                <li class="visible-tablet">
+                                    <!-- It is set to open and close the left sidebar on tablets. The class .nav-collapse was added to aside#page-sidebar -->
+                                    <a href="javascript:void(0)" data-toggle="collapse" data-target=".nav-collapse">
+                                        <i class="icon-reorder"></i>
+                                    </a>
+                                </li>
+                                <!-- END Tablet Button -->
+
+                                <!-- Divider -->
+                                <li class="divider-vertical remove-margin"></li>
+                            </ul>
+                        </div>
+                        <!-- END Sidebar Toggle Buttons -->
+
+                        <!-- Brand and Search Section -->
+                        <div class="span4 text-center">
+                            <!-- Top search -->
+                            <form id="top-search" class="pull-left" action="page_ready_search_results.html" method="post">
+                                <input type="text" id="search-term" name="search-term" placeholder="Search..">
+                            </form>
+                            <!-- END Top search -->
+
+                            <!-- Logo -->
+                            <a href="index.html" class="brand">
+                                <img src="img/template/logo.png" alt="logo">
+                            </a>
+                            <!-- END Logo -->
+
+                            <!-- Loading Indicator, Used for demostrating how loading of notifications could happen, check main.js - uiDemo() -->
+                            <div id="loading" class="hide"><i class="icon-spinner icon-spin"></i></div>
+                        </div>
+                        <!-- END Brand and Search Section -->
+
+                        <!-- Header Nav Section -->
+                        <div id="header-nav-section" class="span4 clearfix">
+                            <!-- Header Nav -->
+                            <ul class="nav pull-right">
+                                <!-- Theme Options, functionality initialized at main.js - templateOptions() -->
+                                <li class="dropdown dropdown-theme-options">
+                                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">Theme Options</a>
+                                    <ul class="dropdown-menu">
+                                        <!-- Page Options -->
+                                        <li class="theme-extra visible-desktop">
+                                            <label for="theme-page-full">
+                                                <input type="checkbox" id="theme-page-full" name="theme-page-full" class="input-themed">
+                                                Full width page
+                                            </label>
+                                        </li>
+                                        <!-- END Page Options -->
+
+                                        <!-- Divider -->
+                                        <li class="divider visible-desktop"></li>
+
+                                        <!-- Sidebar Options -->
+                                        <li class="theme-extra visible-desktop">
+                                            <label for="theme-sidebar-sticky">
+                                                <input type="checkbox" id="theme-sidebar-sticky" name="theme-sidebar-sticky" class="input-themed">
+                                                Sticky Sidebar
+                                            </label>
+                                        </li>
+                                        <!-- END Sidebar Options -->
+
+                                        <!-- Divider -->
+                                        <li class="divider visible-desktop"></li>
+
+                                        <!-- Header Options -->
+                                        <li class="theme-extra visible-desktop">
+                                            <label for="theme-header-top">
+                                                <input type="checkbox" id="theme-header-top" name="theme-header-top" class="input-themed">
+                                                Top fixed header
+                                            </label>
+                                            <label for="theme-header-bottom">
+                                                <input type="checkbox" id="theme-header-bottom" name="theme-header-bottom" class="input-themed">
+                                                Bottom fixed header
+                                            </label>
+                                        </li>
+                                        <!-- END Header Options -->
+
+                                        <!-- Divider -->
+                                        <li class="divider visible-desktop"></li>
+
+                                        <!-- Color Themes -->
+                                        <li>
+                                            <ul class="theme-colors clearfix">
+                                                <li class="active">
+                                                    <a href="javascript:void(0)" class="img-circle themed-background-default themed-border-default" data-theme="default" data-toggle="tooltip" title="Default"></a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0)" class="img-circle themed-background-amethyst themed-border-amethyst" data-theme="css/themes/amethyst.css" data-toggle="tooltip" title="Amethyst"></a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0)" class="img-circle themed-background-army themed-border-army" data-theme="css/themes/army.css" data-toggle="tooltip" title="Army"></a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0)" class="img-circle themed-background-asphalt themed-border-asphalt" data-theme="css/themes/asphalt.css" data-toggle="tooltip" title="Asphalt"></a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0)" class="img-circle themed-background-autumn themed-border-autumn" data-theme="css/themes/autumn.css" data-toggle="tooltip" title="Autumn"></a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0)" class="img-circle themed-background-cherry themed-border-cherry" data-theme="css/themes/cherry.css" data-toggle="tooltip" title="Cherry"></a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0)" class="img-circle themed-background-city themed-border-city" data-theme="css/themes/city.css" data-toggle="tooltip" title="City"></a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0)" class="img-circle themed-background-dawn themed-border-dawn" data-theme="css/themes/dawn.css" data-toggle="tooltip" title="Dawn"></a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0)" class="img-circle themed-background-deepsea themed-border-deepsea" data-theme="css/themes/deepsea.css" data-toggle="tooltip" title="Deepsea"></a>
+                                                </li>
+                                                <li><a href="javascript:void(0)" class="img-circle themed-background-diamond themed-border-diamond" data-theme="css/themes/diamond.css" data-toggle="tooltip" title="Diamond"></a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0)" class="img-circle themed-background-fire themed-border-fire" data-theme="css/themes/fire.css" data-toggle="tooltip" title="Fire"></a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0)" class="img-circle themed-background-grass themed-border-grass" data-theme="css/themes/grass.css" data-toggle="tooltip" title="Grass"></a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0)" class="img-circle themed-background-leaf themed-border-leaf" data-theme="css/themes/leaf.css" data-toggle="tooltip" title="Leaf"></a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0)" class="img-circle themed-background-night themed-border-night" data-theme="css/themes/night.css" data-toggle="tooltip" title="Night"></a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0)" class="img-circle themed-background-ocean themed-border-ocean" data-theme="css/themes/ocean.css" data-toggle="tooltip" title="Ocean"></a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0)" class="img-circle themed-background-oil themed-border-oil" data-theme="css/themes/oil.css" data-toggle="tooltip" title="Oil"></a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0)" class="img-circle themed-background-stone themed-border-stone" data-theme="css/themes/stone.css" data-toggle="tooltip" title="Stone"></a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0)" class="img-circle themed-background-sun themed-border-sun" data-theme="css/themes/sun.css" data-toggle="tooltip" title="Sun"></a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0)" class="img-circle themed-background-tulip themed-border-tulip" data-theme="css/themes/tulip.css" data-toggle="tooltip" title="Tulip"></a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0)" class="img-circle themed-background-wood themed-border-wood" data-theme="css/themes/wood.css" data-toggle="tooltip" title="Wood"></a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <!-- END Color Themes -->
+                                    </ul>
+                                </li>
+                                <!-- END Theme Options -->
+
+                                <!-- Divider -->
+                                <li class="divider-vertical remove-margin"></li>
+
+                                <!-- Notifications -->
+                                <li class="dropdown dropdown-notifications">
+                                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+                                        <i class="icon-warning-sign"></i>
+                                        <span class="badge badge-neutral">4</span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <div class="alert">
+                                                <i class="icon-bell"></i> <strong>App</strong> Please pay attention!
+                                            </div>
+                                            <div class="alert alert-error">
+                                                <i class="icon-bell-alt"></i> <strong>App</strong> There was an error!
+                                            </div>
+                                            <div class="alert alert-info">
+                                                <i class="icon-bolt"></i> <strong>App</strong> Info message!
+                                            </div>
+                                            <div class="alert alert-success">
+                                                <i class="icon-bullhorn"></i> <strong>App</strong> Service restarted!
+                                            </div>
+                                        </li>
+                                        <li class="divider"></li>
+                                        <li>
+                                            <a href="javascript:void(0)"><i class="icon-warning-sign pull-right"></i>Notification Center</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- END Notifications -->
+
+                                <!-- Messages -->
+                                <li class="dropdown dropdown-messages">
+                                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+                                        <i class="icon-envelope-alt"></i>
+                                        <span class="badge badge-neutral display-none"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <div class="media">
+                                                <a class="pull-left" href="javascript:void(0)" data-toggle="tooltip" title="Newbie">
+                                                    <img src="img/placeholders/image_64x64_dark.png" alt="fakeimg" class="img-circle">
+                                                </a>
+                                                <div class="media-body">
+                                                    <h5 class="media-heading clearfix"><span class="label label-success">1 min ago</span><a href="javascript:void(0)">Username</a></h5>
+                                                    <div class="media">Lorem ipsum dolor sit amet, consectetur..</div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="divider"></li>
+                                        <li>
+                                            <div class="media">
+                                                <a class="pull-left" href="javascript:void(0)" data-toggle="tooltip" title="Pro">
+                                                    <img src="img/placeholders/image_64x64_dark.png" alt="fakeimg" class="img-circle">
+                                                </a>
+                                                <div class="media-body">
+                                                    <h5 class="media-heading clearfix"><span class="label label-success">2 hours ago</span><a href="javascript:void(0)">Username</a></h5>
+                                                    <div class="media">Lorem ipsum dolor sit amet, consectetur..</div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="divider"></li>
+                                        <li>
+                                            <div class="media">
+                                                <a class="pull-left" href="javascript:void(0)" data-toggle="tooltip" title="VIP">
+                                                    <img src="img/placeholders/image_64x64_dark.png" alt="fakeimg" class="img-circle">
+                                                </a>
+                                                <div class="media-body">
+                                                    <h5 class="media-heading clearfix"><a href="javascript:void(0)">Username</a><span class="label label-success">3 days ago</span></h5>
+                                                    <div class="media">Lorem ipsum dolor sit amet, consectetur..</div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="divider"></li>
+                                        <li>
+                                            <a href="page_comp_inbox.html"><i class="icon-envelope-alt pull-right"></i>Message Center</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- END Messages -->
+                            </ul>
+                            <!-- END Header Nav -->
+
+                            <!-- Mobile Navigation, Shows up on mobile -->
+                            <ul class="nav pull-left visible-phone">
+                                <li>
+                                    <!-- It is set to open and close the main navigation on mobiles. The class .nav-collapse was added to aside#page-sidebar -->
+                                    <a href="javascript:void(0)" data-toggle="collapse" data-target=".nav-collapse">
+                                        <i class="icon-reorder"></i>
+                                    </a>
+                                </li>
+                                <li class="divider-vertical remove-margin"></li>
+                            </ul>
+                            <!-- END Mobile Navigation, Shows up on mobile -->
+                        </div>
+                        <!-- END Header Nav Section -->
+                    </div>
+                    <!-- END div#row-fluid -->
+                </div>
+                <!-- END Navbar Inner -->
+            </header>
+            <!-- END Header -->
+            <!-- Left Sidebar -->
+            <!-- In the PHP version you can set the following options from the config file -->
+            <!-- Add the class .sticky for a sticky sidebar -->
+            <aside id="page-sidebar" class="nav-collapse collapse">
+                <!--
+                Wrapper for scrolling functionality
+                Used only if the .sticky class added above. You can remove it and you will have a sticky sidebar
+                without scrolling enabled when you set the sidebar to be sticky
+                -->
+                <div class="side-scrollable">
+                    <!-- Mini Profile -->
+                    <div class="mini-profile">
+                        <div class="mini-profile-options">
+                            <a href="javascript:void(0)" class="badge badge-info loading-on" data-toggle="tooltip" data-placement="right" title="Refresh">
+                                <i class="icon-refresh"></i>
+                            </a>
+                            <a href="page_ready_shopping_cart.html" class="badge badge-warning" data-toggle="tooltip" data-placement="right" title="6 Products">
+                                <i class="glyphicon-shopping_cart"></i>
+                            </a>
+                            <!-- Modal div is at the bottom of the page before including javascript code, we use .enable-tooltip class for the tooltip because data-toggle is used for modal -->
+                            <a href="#modal-user-account" class="badge badge-success enable-tooltip" role="button" data-toggle="modal" data-placement="right" title="Settings">
+                                <i class="glyphicon-cogwheel"></i>
+                            </a>
+                            <a href="page_login.html" class="badge badge-important" data-toggle="tooltip" data-placement="right" title="Log out">
+                                <i class="icon-signout"></i>
+                            </a>
+                        </div>
+                        <a href="page_ready_user_profile.html">
+                            <img src="img/template/avatar2.jpg" alt="Avatar" class="img-circle">
+                        </a>
+                    </div>
+                    <!-- END Mini Profile -->
+
+                    <!-- Sidebar Tabs -->
+                    <div class="sidebar-tabs-con">
+                        <ul class="sidebar-tabs" data-toggle="tabs">
+                            <li class="active">
+                                <a href="#side-tab-menu"><i class="glyphicon-list"></i></a>
+                            </li>
+                            <li>
+                                <a href="#side-tab-extra"><i class="glyphicon-user"></i></a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="side-tab-menu">
+                                <!-- Primary Navigation -->
+                                <nav id="primary-nav">
+                                    <ul>
+                                        <li>
+                                            <a href="index.html"><i class="glyphicon-display"></i>Dashboard</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="menu-link"><i class="glyphicon-vector_path_curve"></i>User Interface</a>
+                                            <ul>
+                                                <li>
+                                                    <a href="page_ui_blocks.html">Blocks</a>
+                                                </li>
+                                                <li>
+                                                    <a href="page_ui_grid.html">Grid</a>
+                                                </li>
+                                                <li>
+                                                    <a href="page_ui_typography.html">Typography</a>
+                                                </li>
+                                                <li>
+                                                    <a href="page_ui_navigation.html">Navigation</a>
+                                                </li>
+                                                <li>
+                                                    <a href="page_ui_tabs_accordions.html">Tabs &amp; Accordions</a>
+                                                </li>
+                                                <li>
+                                                    <a href="page_ui_buttons_dropdowns.html">Buttons &amp; Dropdowns</a>
+                                                </li>
+                                                <li>
+                                                    <a href="page_ui_progress_bars.html">Progress Bars</a>
+                                                </li>
+                                                <li>
+                                                    <a href="page_ui_carousel.html">Carousel</a>
+                                                </li>
+                                                <li>
+                                                    <a href="page_ui_extras.html">Extras</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="menu-link"><i class="glyphicon-table"></i>Tables</a>
+                                            <ul>
+                                                <li>
+                                                    <a href="page_tables_static.html">Static</a>
+                                                </li>
+                                                <li>
+                                                    <a href="page_tables_dynamic.html">Dynamic</a>
+                                                </li>
+                                                <li>
+                                                    <a href="page_tables_editable.html">Editable</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="menu-link"><i class="glyphicon-more_windows"></i>Forms</a>
+                                            <ul>
+                                                <li>
+                                                    <a href="page_forms_general.html">General</a>
+                                                </li>
+                                                <li>
+                                                    <a href="page_forms_layouts_styles.html">Layouts &amp; Styles</a>
+                                                </li>
+                                                <li>
+                                                    <a href="page_forms_pickers_grid.html">Pickers &amp; Grid</a>
+                                                </li>
+                                                <li>
+                                                    <a href="page_forms_textareas_wysiwyg.html">Textareas &amp; WYSIWYG</a>
+                                                </li>
+                                                <li>
+                                                    <a href="page_forms_upload_dropzone.html">File Upload &amp; Dropzone</a>
+                                                </li>
+                                                <li>
+                                                    <a href="page_forms_validation.html">Validation</a>
+                                                </li>
+                                                <li>
+                                                    <a href="page_forms_wizard.html">Wizard</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="menu-link"><i class="glyphicon-fire"></i>Components</a>
+                                            <ul>
+                                                <li>
+                                                    <a href="page_comp_inbox.html">Inbox</a>
+                                                </li>
+                                                <li>
+                                                    <a href="page_comp_chat.html">Chat</a>
+                                                </li>
+                                                <li>
+                                                    <a href="page_comp_timeline.html">Timeline</a>
+                                                </li>
+                                                <li>
+                                                    <a href="page_comp_tiles.html">Tiles</a>
+                                                </li>
+                                                <li>
+                                                    <a href="page_comp_gallery.html">Gallery</a>
+                                                </li>
+                                                <li>
+                                                    <a href="page_comp_charts.html">Charts</a>
+                                                </li>
+                                                <li>
+                                                    <a href="page_comp_calendar.html">Calendar</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="submenu-link">Maps</a>
+                                                    <ul>
+                                                        <li>
+                                                            <a href="page_comp_vector_maps.html">Vector Maps</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="page_comp_google_maps.html">Google Maps</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <a href="page_comp_syntax_highlighting.html">Syntax Highlighting</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="active">
+                                            <a href="#" class="menu-link"><i class="glyphicon-pizza"></i>Icon Packs</a>
+                                            <ul>
+                                                <li>
+                                                    <a href="page_icons_glyphicons_pro.html">Glyphicons Pro</a>
+                                                </li>
+                                                <li>
+                                                    <a href="page_icons_glyphicons_halflings_pro.html" class=" active">Glyphicons Halflings Pro</a>
+                                                </li>
+                                                <li>
+                                                    <a href="page_icons_fontawesome.html">FontAwesome</a>
+                                                </li>
+                                                <li>
+                                                    <a href="page_icons_gemicon.html">Gemicon</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="menu-link"><i class="glyphicon-certificate"></i>Ready UI</a>
+                                            <ul>
+                                                <li>
+                                                    <a href="page_ready_search_results.html">Search Results</a>
+                                                </li>
+                                                <li>
+                                                    <a href="page_ready_user_profile.html">User Profile</a>
+                                                </li>
+                                                <li>
+                                                    <a href="page_ready_pricing_tables.html">Pricing Tables</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="submenu-link">e-Shop</a>
+                                                    <ul>
+                                                        <li>
+                                                            <a href="page_ready_product.html">Product</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="page_ready_products_list.html">Products List</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="page_ready_shopping_cart.html">Shopping Cart</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <a href="page_ready_invoice.html">Invoice</a>
+                                                </li>
+                                                <li>
+                                                    <a href="page_ready_article.html">Article</a>
+                                                </li>
+                                                <li>
+                                                    <a href="page_ready_faq.html">FAQ</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="submenu-link">Errors</a>
+                                                    <ul>
+                                                        <li>
+                                                            <a href="page_ready_errors.html">In-Page</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="page_ready_standalone_error.html">Standalone</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <a href="page_ready_blank.html">Blank</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="page_landing.html"><i class="glyphicon-leaf"></i>Landing Page</a>
+                                        </li>
+                                        <li>
+                                            <a href="page_login.html"><i class="glyphicon-power"></i>Login Page</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                                <!-- END Primary Navigation -->
+                            </div>
+                            <div class="tab-pane tab-pane-side" id="side-tab-extra">
+                                <h5><i class="icon-briefcase pull-right"></i>Balance</h5>
+                                <div class="side-stat text-center text-info"><strong>$25.230,<small>00</small></strong></div>
+
+                                <h5><i class="icon-dollar pull-right"></i>Earnings (today)</h5>
+                                <div class="side-stat text-center text-info"><strong>$1.752,<small>00</small></strong></div>
+
+                                <h5><i class="icon-shopping-cart pull-right"></i>Sales (today)</h5>
+                                <div class="side-stat text-center text-info"><strong>368</strong></div>
+
+                                <h5><i class="icon-shopping-cart pull-right"></i>Sales (this month)</h5>
+                                <div class="side-stat text-center text-success"><strong>+38%</strong></div>
+
+                                <h5><i class="icon-ticket pull-right"></i>Open Tickets</h5>
+                                <div class="side-stat text-center text-warning"><strong>23</strong></div>
+
+                                <h5><i class="icon-bug pull-right"></i>Bugs to fix</h5>
+                                <div class="side-stat text-center text-error"><strong>1</strong> (important)</div>
+                                <div class="side-stat text-center text-warning"><strong>3</strong> (normal)</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END Sidebar Tabs -->
+                </div>
+                <!-- END Wrapper for scrolling functionality -->
+            </aside>
+            <!-- END Left Sidebar -->
+            <!-- Pre Page Content -->
+            <div id="pre-page-content">
+                <h1><i class="halflingicon-glass themed-color"></i>Glyphicons Halflings Pro<br><small>Font and Image Sprite Versions!</small></h1>
+            </div>
+            <!-- END Pre Page Content -->
+
+            <!-- Page Content -->
+            <div id="page-content">
+                <!-- Breadcrumb -->
+                <!-- You can have the breadcrumb stick on scrolling just by adding the following attributes with their values (data-spy="affix" data-offset-top="250") -->
+                <!-- You can try it on other elements too :-), the sticky position and style can be adjusted in the css/main.css with .affix class -->
+                <ul class="breadcrumb" data-spy="affix" data-offset-top="250">
+                    <li>
+                        <a href="index.html"><i class="glyphicon-display"></i></a> <span class="divider"><i class="icon-angle-right"></i></span>
+                    </li>
+                    <li>
+                        <a href="#">Icons</a> <span class="divider"><i class="icon-angle-right"></i></span>
+                    </li>
+                    <li class="active"><a href="">Glyphicons Halflings Pro</a></li>
+                </ul>
+                <!-- END Breadcrumb -->
+
+                <!-- Glyphicons Halflings Pro -->
+                <!-- Info -->
+                <div class="block-section">
+                    <ul class="icons-ul list">
+                        <li><i class="icon-li icon-ok text-success"></i><span class="label label-success">PRO License</span> (for use with this template)</li>
+                        <li><i class="icon-li icon-ok text-success"></i><span class="label label-important">$59 Value</span> <span class="label label-success">FREE with this template!</span></li>
+                        <li><i class="icon-li icon-ok text-success"></i><strong>160 Unique Halflings</strong></li>
+                        <li>
+                            <i class="icon-li icon-ok text-success"></i><strong>2 versions</strong>
+                            <ul class="icons-ul list">
+                                <li>
+                                    <i class="icon-li icon-arrow-right text-black"></i><strong>Font Based</strong>
+                                    <ul class="icons-ul list">
+                                        <li><i class="icon-li icon-ok text-success"></i><strong>Any Color or Size you like</strong></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <i class="icon-li icon-arrow-right text-black"></i><strong>Image Sprite Based</strong>
+                                    <ul class="icons-ul list">
+                                        <li><i class="icon-li icon-ok text-success"></i><strong>Dark and Light versions</strong></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!-- END Info -->
+
+                <!-- Glyphicons Halflings Tabs -->
+                <div class="block-tabs block-themed">
+                    <ul class="nav nav-tabs" data-toggle="tabs">
+                        <li class="active"><a href="#font-based">Font Based</a></li>
+                        <li class="hidden-phone"><a href="#image-based-dark">Image Based (Dark)</a></li>
+                        <li class="hidden-phone"><a href="#image-based-light">Image Based (Light)</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <!-- Font Based -->
+                        <div class="tab-pane active" id="font-based">
+                            <ul class="iconset-list clearfix">
+                                <li><i class="halflingicon-glass"></i> <code>glass</code></li>
+                                <li><i class="halflingicon-music"></i> <code>music</code></li>
+                                <li><i class="halflingicon-search"></i> <code>search</code></li>
+                                <li><i class="halflingicon-envelope"></i> <code>envelope</code></li>
+                                <li><i class="halflingicon-heart"></i> <code>heart</code></li>
+                                <li><i class="halflingicon-star"></i> <code>star</code></li>
+                                <li><i class="halflingicon-star-empty"></i> <code>star-empty</code></li>
+                                <li><i class="halflingicon-user"></i> <code>user</code></li>
+                                <li><i class="halflingicon-film"></i> <code>film</code></li>
+                                <li><i class="halflingicon-th-large"></i> <code>th-large</code></li>
+                                <li><i class="halflingicon-th"></i> <code>th</code></li>
+                                <li><i class="halflingicon-th-list"></i> <code>th-list</code></li>
+                                <li><i class="halflingicon-ok"></i> <code>ok</code></li>
+                                <li><i class="halflingicon-remove"></i> <code>remove</code></li>
+                                <li><i class="halflingicon-zoom-in"></i> <code>zoom-in</code></li>
+                                <li><i class="halflingicon-zoom-out"></i> <code>zoom-out</code></li>
+                                <li><i class="halflingicon-off"></i> <code>off</code></li>
+                                <li><i class="halflingicon-signal"></i> <code>signal</code></li>
+                                <li><i class="halflingicon-cog"></i> <code>cog</code></li>
+                                <li><i class="halflingicon-trash"></i> <code>trash</code></li>
+                                <li><i class="halflingicon-home"></i> <code>home</code></li>
+                                <li><i class="halflingicon-file"></i> <code>file</code></li>
+                                <li><i class="halflingicon-time"></i> <code>time</code></li>
+                                <li><i class="halflingicon-road"></i> <code>road</code></li>
+                                <li><i class="halflingicon-download-alt"></i> <code>download-alt</code></li>
+                                <li><i class="halflingicon-download"></i> <code>download</code></li>
+                                <li><i class="halflingicon-upload"></i> <code>upload</code></li>
+                                <li><i class="halflingicon-inbox"></i> <code>inbox</code></li>
+                                <li><i class="halflingicon-play-circle"></i> <code>play-circle</code></li>
+                                <li><i class="halflingicon-repeat"></i> <code>repeat</code></li>
+                                <li><i class="halflingicon-refresh"></i> <code>refresh</code></li>
+                                <li><i class="halflingicon-list-alt"></i> <code>list-alt</code></li>
+                                <li><i class="halflingicon-lock"></i> <code>lock</code></li>
+                                <li><i class="halflingicon-flag"></i> <code>flag</code></li>
+                                <li><i class="halflingicon-headphones"></i> <code>headphones</code></li>
+                                <li><i class="halflingicon-volume-off"></i> <code>volume-off</code></li>
+                                <li><i class="halflingicon-volume-down"></i> <code>volume-down</code></li>
+                                <li><i class="halflingicon-volume-up"></i> <code>volume-up</code></li>
+                                <li><i class="halflingicon-qrcode"></i> <code>qrcode</code></li>
+                                <li><i class="halflingicon-barcode"></i> <code>barcode</code></li>
+                                <li><i class="halflingicon-tag"></i> <code>tag</code></li>
+                                <li><i class="halflingicon-tags"></i> <code>tags</code></li>
+                                <li><i class="halflingicon-book"></i> <code>book</code></li>
+                                <li><i class="halflingicon-bookmark"></i> <code>bookmark</code></li>
+                                <li><i class="halflingicon-print"></i> <code>print</code></li>
+                                <li><i class="halflingicon-camera"></i> <code>camera</code></li>
+                                <li><i class="halflingicon-font"></i> <code>font</code></li>
+                                <li><i class="halflingicon-bold"></i> <code>bold</code></li>
+                                <li><i class="halflingicon-italic"></i> <code>italic</code></li>
+                                <li><i class="halflingicon-text-height"></i> <code>text-height</code></li>
+                                <li><i class="halflingicon-text-width"></i> <code>text-width</code></li>
+                                <li><i class="halflingicon-align-left"></i> <code>align-left</code></li>
+                                <li><i class="halflingicon-align-center"></i> <code>align-center</code></li>
+                                <li><i class="halflingicon-align-right"></i> <code>align-right</code></li>
+                                <li><i class="halflingicon-align-justify"></i> <code>align-justify</code></li>
+                                <li><i class="halflingicon-list"></i> <code>list</code></li>
+                                <li><i class="halflingicon-indent-left"></i> <code>indent-left</code></li>
+                                <li><i class="halflingicon-indent-right"></i> <code>indent-right</code></li>
+                                <li><i class="halflingicon-facetime-video"></i> <code>facetime-video</code></li>
+                                <li><i class="halflingicon-picture"></i> <code>picture</code></li>
+                                <li><i class="halflingicon-pencil"></i> <code>pencil</code></li>
+                                <li><i class="halflingicon-map-marker"></i> <code>map-marker</code></li>
+                                <li><i class="halflingicon-adjust"></i> <code>adjust</code></li>
+                                <li><i class="halflingicon-tint"></i> <code>tint</code></li>
+                                <li><i class="halflingicon-edit"></i> <code>edit</code></li>
+                                <li><i class="halflingicon-share"></i> <code>share</code></li>
+                                <li><i class="halflingicon-check"></i> <code>check</code></li>
+                                <li><i class="halflingicon-move"></i> <code>move</code></li>
+                                <li><i class="halflingicon-step-backward"></i> <code>step-backward</code></li>
+                                <li><i class="halflingicon-fast-backward"></i> <code>fast-backward</code></li>
+                                <li><i class="halflingicon-backward"></i> <code>backward</code></li>
+                                <li><i class="halflingicon-play"></i> <code>play</code></li>
+                                <li><i class="halflingicon-pause"></i> <code>pause</code></li>
+                                <li><i class="halflingicon-stop"></i> <code>stop</code></li>
+                                <li><i class="halflingicon-forward"></i> <code>forward</code></li>
+                                <li><i class="halflingicon-fast-forward"></i> <code>fast-forward</code></li>
+                                <li><i class="halflingicon-step-forward"></i> <code>step-forward</code></li>
+                                <li><i class="halflingicon-eject"></i> <code>eject</code></li>
+                                <li><i class="halflingicon-chevron-left"></i> <code>chevron-left</code></li>
+                                <li><i class="halflingicon-chevron-right"></i> <code>chevron-right</code></li>
+                                <li><i class="halflingicon-plus-sign"></i> <code>plus-sign</code></li>
+                                <li><i class="halflingicon-minus-sign"></i> <code>minus-sign</code></li>
+                                <li><i class="halflingicon-remove-sign"></i> <code>remove-sign</code></li>
+                                <li><i class="halflingicon-ok-sign"></i> <code>ok-sign</code></li>
+                                <li><i class="halflingicon-question-sign"></i> <code>question-sign</code></li>
+                                <li><i class="halflingicon-info-sign"></i> <code>info-sign</code></li>
+                                <li><i class="halflingicon-screenshot"></i> <code>screenshot</code></li>
+                                <li><i class="halflingicon-remove-circle"></i> <code>remove-circle</code></li>
+                                <li><i class="halflingicon-ok-circle"></i> <code>ok-circle</code></li>
+                                <li><i class="halflingicon-ban-circle"></i> <code>ban-circle</code></li>
+                                <li><i class="halflingicon-arrow-left"></i> <code>arrow-left</code></li>
+                                <li><i class="halflingicon-arrow-right"></i> <code>arrow-right</code></li>
+                                <li><i class="halflingicon-arrow-up"></i> <code>arrow-up</code></li>
+                                <li><i class="halflingicon-arrow-down"></i> <code>arrow-down</code></li>
+                                <li><i class="halflingicon-share-alt"></i> <code>share-alt</code></li>
+                                <li><i class="halflingicon-resize-full"></i> <code>resize-full</code></li>
+                                <li><i class="halflingicon-resize-small"></i> <code>resize-small</code></li>
+                                <li><i class="halflingicon-plus"></i> <code>plus</code></li>
+                                <li><i class="halflingicon-minus"></i> <code>minus</code></li>
+                                <li><i class="halflingicon-asterisk"></i> <code>asterisk</code></li>
+                                <li><i class="halflingicon-exclamation-sign"></i> <code>exclamation-sign</code></li>
+                                <li><i class="halflingicon-gift"></i> <code>gift</code></li>
+                                <li><i class="halflingicon-leaf"></i> <code>leaf</code></li>
+                                <li><i class="halflingicon-fire"></i> <code>fire</code></li>
+                                <li><i class="halflingicon-eye-open"></i> <code>eye-open</code></li>
+                                <li><i class="halflingicon-eye-close"></i> <code>eye-close</code></li>
+                                <li><i class="halflingicon-warning-sign"></i> <code>warning-sign</code></li>
+                                <li><i class="halflingicon-plane"></i> <code>plane</code></li>
+                                <li><i class="halflingicon-calendar"></i> <code>calendar</code></li>
+                                <li><i class="halflingicon-random"></i> <code>random</code></li>
+                                <li><i class="halflingicon-comments"></i> <code>comments</code></li>
+                                <li><i class="halflingicon-magnet"></i> <code>magnet</code></li>
+                                <li><i class="halflingicon-chevron-up"></i> <code>chevron-up</code></li>
+                                <li><i class="halflingicon-chevron-down"></i> <code>chevron-down</code></li>
+                                <li><i class="halflingicon-retweet"></i> <code>retweet</code></li>
+                                <li><i class="halflingicon-shopping-cart"></i> <code>shopping-cart</code></li>
+                                <li><i class="halflingicon-folder-close"></i> <code>folder-close</code></li>
+                                <li><i class="halflingicon-folder-open"></i> <code>folder-open</code></li>
+                                <li><i class="halflingicon-resize-vertical"></i> <code>resize-vertical</code></li>
+                                <li><i class="halflingicon-resize-horizontal"></i> <code>resize-horizontal</code></li>
+                                <li><i class="halflingicon-hdd"></i> <code>hdd</code></li>
+                                <li><i class="halflingicon-bullhorn"></i> <code>bullhorn</code></li>
+                                <li><i class="halflingicon-bell"></i> <code>bell</code></li>
+                                <li><i class="halflingicon-certificate"></i> <code>certificate</code></li>
+                                <li><i class="halflingicon-thumbs-up"></i> <code>thumbs-up</code></li>
+                                <li><i class="halflingicon-thumbs-down"></i> <code>thumbs-down</code></li>
+                                <li><i class="halflingicon-hand-right"></i> <code>hand-right</code></li>
+                                <li><i class="halflingicon-hand-left"></i> <code>hand-left</code></li>
+                                <li><i class="halflingicon-hand-top"></i> <code>hand-top</code></li>
+                                <li><i class="halflingicon-hand-down"></i> <code>hand-down</code></li>
+                                <li><i class="halflingicon-circle-arrow-right"></i> <code>circle-arrow-right</code></li>
+                                <li><i class="halflingicon-circle-arrow-left"></i> <code>circle-arrow-left</code></li>
+                                <li><i class="halflingicon-circle-arrow-top"></i> <code>circle-arrow-top</code></li>
+                                <li><i class="halflingicon-circle-arrow-down"></i> <code>circle-arrow-down</code></li>
+                                <li><i class="halflingicon-globe"></i> <code>globe</code></li>
+                                <li><i class="halflingicon-wrench"></i> <code>wrench</code></li>
+                                <li><i class="halflingicon-tasks"></i> <code>tasks</code></li>
+                                <li><i class="halflingicon-filter"></i> <code>filter</code></li>
+                                <li><i class="halflingicon-briefcase"></i> <code>briefcase</code></li>
+                                <li><i class="halflingicon-fullscreen"></i> <code>fullscreen</code></li>
+                                <li><i class="halflingicon-dashboard"></i> <code>dashboard</code></li>
+                                <li><i class="halflingicon-paperclip"></i> <code>paperclip</code></li>
+                                <li><i class="halflingicon-heart-empty"></i> <code>heart-empty</code></li>
+                                <li><i class="halflingicon-link"></i> <code>link</code></li>
+                                <li><i class="halflingicon-phone"></i> <code>phone</code></li>
+                                <li><i class="halflingicon-pushpin"></i> <code>pushpin</code></li>
+                                <li><i class="halflingicon-euro"></i> <code>euro</code></li>
+                                <li><i class="halflingicon-usd"></i> <code>usd</code></li>
+                                <li><i class="halflingicon-gbp"></i> <code>gbp</code></li>
+                                <li><i class="halflingicon-sort"></i> <code>sort</code></li>
+                                <li><i class="halflingicon-sort-by-alphabet"></i> <code>sort-by-alphabet</code></li>
+                                <li><i class="halflingicon-sort-by-alphabet-alt"></i> <code>sort-by-alphabet-alt</code></li>
+                                <li><i class="halflingicon-sort-by-order"></i> <code>sort-by-order</code></li>
+                                <li><i class="halflingicon-sort-by-order-alt"></i> <code>sort-by-order-alt</code></li>
+                                <li><i class="halflingicon-sort-by-attributes"></i> <code>sort-by-attributes</code></li>
+                                <li><i class="halflingicon-sort-by-attributes-alt"></i> <code>sort-by-attributes-alt</code></li>
+                                <li><i class="halflingicon-unchecked"></i> <code>unchecked</code></li>
+                                <li><i class="halflingicon-expand"></i> <code>expand</code></li>
+                                <li><i class="halflingicon-collapse-down"></i> <code>collapse-down</code></li>
+                                <li><i class="halflingicon-collapse-top"></i> <code>collapse-top</code></li>
+                            </ul>
+                        </div>
+                        <!-- END Font Based -->
+
+                        <!-- Image Based (Dark) -->
+                        <div class="tab-pane hidden-phone" id="image-based-dark">
+                            <ul class="iconset-list clearfix">
+                                <li><i class="halflingimg-glass"></i> <code>glass</code></li>
+                                <li><i class="halflingimg-music"></i> <code>music</code></li>
+                                <li><i class="halflingimg-search"></i> <code>search</code></li>
+                                <li><i class="halflingimg-envelope"></i> <code>envelope</code></li>
+                                <li><i class="halflingimg-heart"></i> <code>heart</code></li>
+                                <li><i class="halflingimg-star"></i> <code>star</code></li>
+                                <li><i class="halflingimg-star-empty"></i> <code>star-empty</code></li>
+                                <li><i class="halflingimg-user"></i> <code>user</code></li>
+                                <li><i class="halflingimg-film"></i> <code>film</code></li>
+                                <li><i class="halflingimg-th-large"></i> <code>th-large</code></li>
+                                <li><i class="halflingimg-th"></i> <code>th</code></li>
+                                <li><i class="halflingimg-th-list"></i> <code>th-list</code></li>
+                                <li><i class="halflingimg-ok"></i> <code>ok</code></li>
+                                <li><i class="halflingimg-remove"></i> <code>remove</code></li>
+                                <li><i class="halflingimg-zoom-in"></i> <code>zoom-in</code></li>
+                                <li><i class="halflingimg-zoom-out"></i> <code>zoom-out</code></li>
+                                <li><i class="halflingimg-off"></i> <code>off</code></li>
+                                <li><i class="halflingimg-signal"></i> <code>signal</code></li>
+                                <li><i class="halflingimg-cog"></i> <code>cog</code></li>
+                                <li><i class="halflingimg-trash"></i> <code>trash</code></li>
+                                <li><i class="halflingimg-home"></i> <code>home</code></li>
+                                <li><i class="halflingimg-file"></i> <code>file</code></li>
+                                <li><i class="halflingimg-time"></i> <code>time</code></li>
+                                <li><i class="halflingimg-road"></i> <code>road</code></li>
+                                <li><i class="halflingimg-download-alt"></i> <code>download-alt</code></li>
+                                <li><i class="halflingimg-download"></i> <code>download</code></li>
+                                <li><i class="halflingimg-upload"></i> <code>upload</code></li>
+                                <li><i class="halflingimg-inbox"></i> <code>inbox</code></li>
+                                <li><i class="halflingimg-play-circle"></i> <code>play-circle</code></li>
+                                <li><i class="halflingimg-repeat"></i> <code>repeat</code></li>
+                                <li><i class="halflingimg-refresh"></i> <code>refresh</code></li>
+                                <li><i class="halflingimg-list-alt"></i> <code>list-alt</code></li>
+                                <li><i class="halflingimg-lock"></i> <code>lock</code></li>
+                                <li><i class="halflingimg-flag"></i> <code>flag</code></li>
+                                <li><i class="halflingimg-headphones"></i> <code>headphones</code></li>
+                                <li><i class="halflingimg-volume-off"></i> <code>volume-off</code></li>
+                                <li><i class="halflingimg-volume-down"></i> <code>volume-down</code></li>
+                                <li><i class="halflingimg-volume-up"></i> <code>volume-up</code></li>
+                                <li><i class="halflingimg-qrcode"></i> <code>qrcode</code></li>
+                                <li><i class="halflingimg-barcode"></i> <code>barcode</code></li>
+                                <li><i class="halflingimg-tag"></i> <code>tag</code></li>
+                                <li><i class="halflingimg-tags"></i> <code>tags</code></li>
+                                <li><i class="halflingimg-book"></i> <code>book</code></li>
+                                <li><i class="halflingimg-bookmark"></i> <code>bookmark</code></li>
+                                <li><i class="halflingimg-print"></i> <code>print</code></li>
+                                <li><i class="halflingimg-camera"></i> <code>camera</code></li>
+                                <li><i class="halflingimg-font"></i> <code>font</code></li>
+                                <li><i class="halflingimg-bold"></i> <code>bold</code></li>
+                                <li><i class="halflingimg-italic"></i> <code>italic</code></li>
+                                <li><i class="halflingimg-text-height"></i> <code>text-height</code></li>
+                                <li><i class="halflingimg-text-width"></i> <code>text-width</code></li>
+                                <li><i class="halflingimg-align-left"></i> <code>align-left</code></li>
+                                <li><i class="halflingimg-align-center"></i> <code>align-center</code></li>
+                                <li><i class="halflingimg-align-right"></i> <code>align-right</code></li>
+                                <li><i class="halflingimg-align-justify"></i> <code>align-justify</code></li>
+                                <li><i class="halflingimg-list"></i> <code>list</code></li>
+                                <li><i class="halflingimg-indent-left"></i> <code>indent-left</code></li>
+                                <li><i class="halflingimg-indent-right"></i> <code>indent-right</code></li>
+                                <li><i class="halflingimg-facetime-video"></i> <code>facetime-video</code></li>
+                                <li><i class="halflingimg-picture"></i> <code>picture</code></li>
+                                <li><i class="halflingimg-pencil"></i> <code>pencil</code></li>
+                                <li><i class="halflingimg-map-marker"></i> <code>map-marker</code></li>
+                                <li><i class="halflingimg-adjust"></i> <code>adjust</code></li>
+                                <li><i class="halflingimg-tint"></i> <code>tint</code></li>
+                                <li><i class="halflingimg-edit"></i> <code>edit</code></li>
+                                <li><i class="halflingimg-share"></i> <code>share</code></li>
+                                <li><i class="halflingimg-check"></i> <code>check</code></li>
+                                <li><i class="halflingimg-move"></i> <code>move</code></li>
+                                <li><i class="halflingimg-step-backward"></i> <code>step-backward</code></li>
+                                <li><i class="halflingimg-fast-backward"></i> <code>fast-backward</code></li>
+                                <li><i class="halflingimg-backward"></i> <code>backward</code></li>
+                                <li><i class="halflingimg-play"></i> <code>play</code></li>
+                                <li><i class="halflingimg-pause"></i> <code>pause</code></li>
+                                <li><i class="halflingimg-stop"></i> <code>stop</code></li>
+                                <li><i class="halflingimg-forward"></i> <code>forward</code></li>
+                                <li><i class="halflingimg-fast-forward"></i> <code>fast-forward</code></li>
+                                <li><i class="halflingimg-step-forward"></i> <code>step-forward</code></li>
+                                <li><i class="halflingimg-eject"></i> <code>eject</code></li>
+                                <li><i class="halflingimg-chevron-left"></i> <code>chevron-left</code></li>
+                                <li><i class="halflingimg-chevron-right"></i> <code>chevron-right</code></li>
+                                <li><i class="halflingimg-plus-sign"></i> <code>plus-sign</code></li>
+                                <li><i class="halflingimg-minus-sign"></i> <code>minus-sign</code></li>
+                                <li><i class="halflingimg-remove-sign"></i> <code>remove-sign</code></li>
+                                <li><i class="halflingimg-ok-sign"></i> <code>ok-sign</code></li>
+                                <li><i class="halflingimg-question-sign"></i> <code>question-sign</code></li>
+                                <li><i class="halflingimg-info-sign"></i> <code>info-sign</code></li>
+                                <li><i class="halflingimg-screenshot"></i> <code>screenshot</code></li>
+                                <li><i class="halflingimg-remove-circle"></i> <code>remove-circle</code></li>
+                                <li><i class="halflingimg-ok-circle"></i> <code>ok-circle</code></li>
+                                <li><i class="halflingimg-ban-circle"></i> <code>ban-circle</code></li>
+                                <li><i class="halflingimg-arrow-left"></i> <code>arrow-left</code></li>
+                                <li><i class="halflingimg-arrow-right"></i> <code>arrow-right</code></li>
+                                <li><i class="halflingimg-arrow-up"></i> <code>arrow-up</code></li>
+                                <li><i class="halflingimg-arrow-down"></i> <code>arrow-down</code></li>
+                                <li><i class="halflingimg-share-alt"></i> <code>share-alt</code></li>
+                                <li><i class="halflingimg-resize-full"></i> <code>resize-full</code></li>
+                                <li><i class="halflingimg-resize-small"></i> <code>resize-small</code></li>
+                                <li><i class="halflingimg-plus"></i> <code>plus</code></li>
+                                <li><i class="halflingimg-minus"></i> <code>minus</code></li>
+                                <li><i class="halflingimg-asterisk"></i> <code>asterisk</code></li>
+                                <li><i class="halflingimg-exclamation-sign"></i> <code>exclamation-sign</code></li>
+                                <li><i class="halflingimg-gift"></i> <code>gift</code></li>
+                                <li><i class="halflingimg-leaf"></i> <code>leaf</code></li>
+                                <li><i class="halflingimg-fire"></i> <code>fire</code></li>
+                                <li><i class="halflingimg-eye-open"></i> <code>eye-open</code></li>
+                                <li><i class="halflingimg-eye-close"></i> <code>eye-close</code></li>
+                                <li><i class="halflingimg-warning-sign"></i> <code>warning-sign</code></li>
+                                <li><i class="halflingimg-plane"></i> <code>plane</code></li>
+                                <li><i class="halflingimg-calendar"></i> <code>calendar</code></li>
+                                <li><i class="halflingimg-random"></i> <code>random</code></li>
+                                <li><i class="halflingimg-comments"></i> <code>comments</code></li>
+                                <li><i class="halflingimg-magnet"></i> <code>magnet</code></li>
+                                <li><i class="halflingimg-chevron-up"></i> <code>chevron-up</code></li>
+                                <li><i class="halflingimg-chevron-down"></i> <code>chevron-down</code></li>
+                                <li><i class="halflingimg-retweet"></i> <code>retweet</code></li>
+                                <li><i class="halflingimg-shopping-cart"></i> <code>shopping-cart</code></li>
+                                <li><i class="halflingimg-folder-close"></i> <code>folder-close</code></li>
+                                <li><i class="halflingimg-folder-open"></i> <code>folder-open</code></li>
+                                <li><i class="halflingimg-resize-vertical"></i> <code>resize-vertical</code></li>
+                                <li><i class="halflingimg-resize-horizontal"></i> <code>resize-horizontal</code></li>
+                                <li><i class="halflingimg-hdd"></i> <code>hdd</code></li>
+                                <li><i class="halflingimg-bullhorn"></i> <code>bullhorn</code></li>
+                                <li><i class="halflingimg-bell"></i> <code>bell</code></li>
+                                <li><i class="halflingimg-certificate"></i> <code>certificate</code></li>
+                                <li><i class="halflingimg-thumbs-up"></i> <code>thumbs-up</code></li>
+                                <li><i class="halflingimg-thumbs-down"></i> <code>thumbs-down</code></li>
+                                <li><i class="halflingimg-hand-right"></i> <code>hand-right</code></li>
+                                <li><i class="halflingimg-hand-left"></i> <code>hand-left</code></li>
+                                <li><i class="halflingimg-hand-top"></i> <code>hand-top</code></li>
+                                <li><i class="halflingimg-hand-down"></i> <code>hand-down</code></li>
+                                <li><i class="halflingimg-circle-arrow-right"></i> <code>circle-arrow-right</code></li>
+                                <li><i class="halflingimg-circle-arrow-left"></i> <code>circle-arrow-left</code></li>
+                                <li><i class="halflingimg-circle-arrow-top"></i> <code>circle-arrow-top</code></li>
+                                <li><i class="halflingimg-circle-arrow-down"></i> <code>circle-arrow-down</code></li>
+                                <li><i class="halflingimg-globe"></i> <code>globe</code></li>
+                                <li><i class="halflingimg-wrench"></i> <code>wrench</code></li>
+                                <li><i class="halflingimg-tasks"></i> <code>tasks</code></li>
+                                <li><i class="halflingimg-filter"></i> <code>filter</code></li>
+                                <li><i class="halflingimg-briefcase"></i> <code>briefcase</code></li>
+                                <li><i class="halflingimg-fullscreen"></i> <code>fullscreen</code></li>
+                                <li><i class="halflingimg-dashboard"></i> <code>dashboard</code></li>
+                                <li><i class="halflingimg-paperclip"></i> <code>paperclip</code></li>
+                                <li><i class="halflingimg-heart-empty"></i> <code>heart-empty</code></li>
+                                <li><i class="halflingimg-link"></i> <code>link</code></li>
+                                <li><i class="halflingimg-phone"></i> <code>phone</code></li>
+                                <li><i class="halflingimg-pushpin"></i> <code>pushpin</code></li>
+                                <li><i class="halflingimg-euro"></i> <code>euro</code></li>
+                                <li><i class="halflingimg-usd"></i> <code>usd</code></li>
+                                <li><i class="halflingimg-gbp"></i> <code>gbp</code></li>
+                                <li><i class="halflingimg-sort"></i> <code>sort</code></li>
+                                <li><i class="halflingimg-sort-by-alphabet"></i> <code>sort-by-alphabet</code></li>
+                                <li><i class="halflingimg-sort-by-alphabet-alt"></i> <code>sort-by-alphabet-alt</code></li>
+                                <li><i class="halflingimg-sort-by-order"></i> <code>sort-by-order</code></li>
+                                <li><i class="halflingimg-sort-by-order-alt"></i> <code>sort-by-order-alt</code></li>
+                                <li><i class="halflingimg-sort-by-attributes"></i> <code>sort-by-attributes</code></li>
+                                <li><i class="halflingimg-sort-by-attributes-alt"></i> <code>sort-by-attributes-alt</code></li>
+                                <li><i class="halflingimg-unchecked"></i> <code>unchecked</code></li>
+                                <li><i class="halflingimg-expand"></i> <code>expand</code></li>
+                                <li><i class="halflingimg-collapse-down"></i> <code>collapse-down</code></li>
+                                <li><i class="halflingimg-collapse-top"></i> <code>collapse-top</code></li>
+                            </ul>
+                        </div>
+                        <!-- END Image Based (Dark) -->
+
+                        <!-- Image Base (Light) -->
+                        <div class="tab-pane hidden-phone" id="image-based-light">
+                            <ul class="iconset-list iconset-list-dark clearfix">
+                                <li><i class="halflingimg-white halflingimg-glass"></i> <code>glass</code></li>
+                                <li><i class="halflingimg-white halflingimg-music"></i> <code>music</code></li>
+                                <li><i class="halflingimg-white halflingimg-search"></i> <code>search</code></li>
+                                <li><i class="halflingimg-white halflingimg-envelope"></i> <code>envelope</code></li>
+                                <li><i class="halflingimg-white halflingimg-heart"></i> <code>heart</code></li>
+                                <li><i class="halflingimg-white halflingimg-star"></i> <code>star</code></li>
+                                <li><i class="halflingimg-white halflingimg-star-empty"></i> <code>star-empty</code></li>
+                                <li><i class="halflingimg-white halflingimg-user"></i> <code>user</code></li>
+                                <li><i class="halflingimg-white halflingimg-film"></i> <code>film</code></li>
+                                <li><i class="halflingimg-white halflingimg-th-large"></i> <code>th-large</code></li>
+                                <li><i class="halflingimg-white halflingimg-th"></i> <code>th</code></li>
+                                <li><i class="halflingimg-white halflingimg-th-list"></i> <code>th-list</code></li>
+                                <li><i class="halflingimg-white halflingimg-ok"></i> <code>ok</code></li>
+                                <li><i class="halflingimg-white halflingimg-remove"></i> <code>remove</code></li>
+                                <li><i class="halflingimg-white halflingimg-zoom-in"></i> <code>zoom-in</code></li>
+                                <li><i class="halflingimg-white halflingimg-zoom-out"></i> <code>zoom-out</code></li>
+                                <li><i class="halflingimg-white halflingimg-off"></i> <code>off</code></li>
+                                <li><i class="halflingimg-white halflingimg-signal"></i> <code>signal</code></li>
+                                <li><i class="halflingimg-white halflingimg-cog"></i> <code>cog</code></li>
+                                <li><i class="halflingimg-white halflingimg-trash"></i> <code>trash</code></li>
+                                <li><i class="halflingimg-white halflingimg-home"></i> <code>home</code></li>
+                                <li><i class="halflingimg-white halflingimg-file"></i> <code>file</code></li>
+                                <li><i class="halflingimg-white halflingimg-time"></i> <code>time</code></li>
+                                <li><i class="halflingimg-white halflingimg-road"></i> <code>road</code></li>
+                                <li><i class="halflingimg-white halflingimg-download-alt"></i> <code>download-alt</code></li>
+                                <li><i class="halflingimg-white halflingimg-download"></i> <code>download</code></li>
+                                <li><i class="halflingimg-white halflingimg-upload"></i> <code>upload</code></li>
+                                <li><i class="halflingimg-white halflingimg-inbox"></i> <code>inbox</code></li>
+                                <li><i class="halflingimg-white halflingimg-play-circle"></i> <code>play-circle</code></li>
+                                <li><i class="halflingimg-white halflingimg-repeat"></i> <code>repeat</code></li>
+                                <li><i class="halflingimg-white halflingimg-refresh"></i> <code>refresh</code></li>
+                                <li><i class="halflingimg-white halflingimg-list-alt"></i> <code>list-alt</code></li>
+                                <li><i class="halflingimg-white halflingimg-lock"></i> <code>lock</code></li>
+                                <li><i class="halflingimg-white halflingimg-flag"></i> <code>flag</code></li>
+                                <li><i class="halflingimg-white halflingimg-headphones"></i> <code>headphones</code></li>
+                                <li><i class="halflingimg-white halflingimg-volume-off"></i> <code>volume-off</code></li>
+                                <li><i class="halflingimg-white halflingimg-volume-down"></i> <code>volume-down</code></li>
+                                <li><i class="halflingimg-white halflingimg-volume-up"></i> <code>volume-up</code></li>
+                                <li><i class="halflingimg-white halflingimg-qrcode"></i> <code>qrcode</code></li>
+                                <li><i class="halflingimg-white halflingimg-barcode"></i> <code>barcode</code></li>
+                                <li><i class="halflingimg-white halflingimg-tag"></i> <code>tag</code></li>
+                                <li><i class="halflingimg-white halflingimg-tags"></i> <code>tags</code></li>
+                                <li><i class="halflingimg-white halflingimg-book"></i> <code>book</code></li>
+                                <li><i class="halflingimg-white halflingimg-bookmark"></i> <code>bookmark</code></li>
+                                <li><i class="halflingimg-white halflingimg-print"></i> <code>print</code></li>
+                                <li><i class="halflingimg-white halflingimg-camera"></i> <code>camera</code></li>
+                                <li><i class="halflingimg-white halflingimg-font"></i> <code>font</code></li>
+                                <li><i class="halflingimg-white halflingimg-bold"></i> <code>bold</code></li>
+                                <li><i class="halflingimg-white halflingimg-italic"></i> <code>italic</code></li>
+                                <li><i class="halflingimg-white halflingimg-text-height"></i> <code>text-height</code></li>
+                                <li><i class="halflingimg-white halflingimg-text-width"></i> <code>text-width</code></li>
+                                <li><i class="halflingimg-white halflingimg-align-left"></i> <code>align-left</code></li>
+                                <li><i class="halflingimg-white halflingimg-align-center"></i> <code>align-center</code></li>
+                                <li><i class="halflingimg-white halflingimg-align-right"></i> <code>align-right</code></li>
+                                <li><i class="halflingimg-white halflingimg-align-justify"></i> <code>align-justify</code></li>
+                                <li><i class="halflingimg-white halflingimg-list"></i> <code>list</code></li>
+                                <li><i class="halflingimg-white halflingimg-indent-left"></i> <code>indent-left</code></li>
+                                <li><i class="halflingimg-white halflingimg-indent-right"></i> <code>indent-right</code></li>
+                                <li><i class="halflingimg-white halflingimg-facetime-video"></i> <code>facetime-video</code></li>
+                                <li><i class="halflingimg-white halflingimg-picture"></i> <code>picture</code></li>
+                                <li><i class="halflingimg-white halflingimg-pencil"></i> <code>pencil</code></li>
+                                <li><i class="halflingimg-white halflingimg-map-marker"></i> <code>map-marker</code></li>
+                                <li><i class="halflingimg-white halflingimg-adjust"></i> <code>adjust</code></li>
+                                <li><i class="halflingimg-white halflingimg-tint"></i> <code>tint</code></li>
+                                <li><i class="halflingimg-white halflingimg-edit"></i> <code>edit</code></li>
+                                <li><i class="halflingimg-white halflingimg-share"></i> <code>share</code></li>
+                                <li><i class="halflingimg-white halflingimg-check"></i> <code>check</code></li>
+                                <li><i class="halflingimg-white halflingimg-move"></i> <code>move</code></li>
+                                <li><i class="halflingimg-white halflingimg-step-backward"></i> <code>step-backward</code></li>
+                                <li><i class="halflingimg-white halflingimg-fast-backward"></i> <code>fast-backward</code></li>
+                                <li><i class="halflingimg-white halflingimg-backward"></i> <code>backward</code></li>
+                                <li><i class="halflingimg-white halflingimg-play"></i> <code>play</code></li>
+                                <li><i class="halflingimg-white halflingimg-pause"></i> <code>pause</code></li>
+                                <li><i class="halflingimg-white halflingimg-stop"></i> <code>stop</code></li>
+                                <li><i class="halflingimg-white halflingimg-forward"></i> <code>forward</code></li>
+                                <li><i class="halflingimg-white halflingimg-fast-forward"></i> <code>fast-forward</code></li>
+                                <li><i class="halflingimg-white halflingimg-step-forward"></i> <code>step-forward</code></li>
+                                <li><i class="halflingimg-white halflingimg-eject"></i> <code>eject</code></li>
+                                <li><i class="halflingimg-white halflingimg-chevron-left"></i> <code>chevron-left</code></li>
+                                <li><i class="halflingimg-white halflingimg-chevron-right"></i> <code>chevron-right</code></li>
+                                <li><i class="halflingimg-white halflingimg-plus-sign"></i> <code>plus-sign</code></li>
+                                <li><i class="halflingimg-white halflingimg-minus-sign"></i> <code>minus-sign</code></li>
+                                <li><i class="halflingimg-white halflingimg-remove-sign"></i> <code>remove-sign</code></li>
+                                <li><i class="halflingimg-white halflingimg-ok-sign"></i> <code>ok-sign</code></li>
+                                <li><i class="halflingimg-white halflingimg-question-sign"></i> <code>question-sign</code></li>
+                                <li><i class="halflingimg-white halflingimg-info-sign"></i> <code>info-sign</code></li>
+                                <li><i class="halflingimg-white halflingimg-screenshot"></i> <code>screenshot</code></li>
+                                <li><i class="halflingimg-white halflingimg-remove-circle"></i> <code>remove-circle</code></li>
+                                <li><i class="halflingimg-white halflingimg-ok-circle"></i> <code>ok-circle</code></li>
+                                <li><i class="halflingimg-white halflingimg-ban-circle"></i> <code>ban-circle</code></li>
+                                <li><i class="halflingimg-white halflingimg-arrow-left"></i> <code>arrow-left</code></li>
+                                <li><i class="halflingimg-white halflingimg-arrow-right"></i> <code>arrow-right</code></li>
+                                <li><i class="halflingimg-white halflingimg-arrow-up"></i> <code>arrow-up</code></li>
+                                <li><i class="halflingimg-white halflingimg-arrow-down"></i> <code>arrow-down</code></li>
+                                <li><i class="halflingimg-white halflingimg-share-alt"></i> <code>share-alt</code></li>
+                                <li><i class="halflingimg-white halflingimg-resize-full"></i> <code>resize-full</code></li>
+                                <li><i class="halflingimg-white halflingimg-resize-small"></i> <code>resize-small</code></li>
+                                <li><i class="halflingimg-white halflingimg-plus"></i> <code>plus</code></li>
+                                <li><i class="halflingimg-white halflingimg-minus"></i> <code>minus</code></li>
+                                <li><i class="halflingimg-white halflingimg-asterisk"></i> <code>asterisk</code></li>
+                                <li><i class="halflingimg-white halflingimg-exclamation-sign"></i> <code>exclamation-sign</code></li>
+                                <li><i class="halflingimg-white halflingimg-gift"></i> <code>gift</code></li>
+                                <li><i class="halflingimg-white halflingimg-leaf"></i> <code>leaf</code></li>
+                                <li><i class="halflingimg-white halflingimg-fire"></i> <code>fire</code></li>
+                                <li><i class="halflingimg-white halflingimg-eye-open"></i> <code>eye-open</code></li>
+                                <li><i class="halflingimg-white halflingimg-eye-close"></i> <code>eye-close</code></li>
+                                <li><i class="halflingimg-white halflingimg-warning-sign"></i> <code>warning-sign</code></li>
+                                <li><i class="halflingimg-white halflingimg-plane"></i> <code>plane</code></li>
+                                <li><i class="halflingimg-white halflingimg-calendar"></i> <code>calendar</code></li>
+                                <li><i class="halflingimg-white halflingimg-random"></i> <code>random</code></li>
+                                <li><i class="halflingimg-white halflingimg-comments"></i> <code>comments</code></li>
+                                <li><i class="halflingimg-white halflingimg-magnet"></i> <code>magnet</code></li>
+                                <li><i class="halflingimg-white halflingimg-chevron-up"></i> <code>chevron-up</code></li>
+                                <li><i class="halflingimg-white halflingimg-chevron-down"></i> <code>chevron-down</code></li>
+                                <li><i class="halflingimg-white halflingimg-retweet"></i> <code>retweet</code></li>
+                                <li><i class="halflingimg-white halflingimg-shopping-cart"></i> <code>shopping-cart</code></li>
+                                <li><i class="halflingimg-white halflingimg-folder-close"></i> <code>folder-close</code></li>
+                                <li><i class="halflingimg-white halflingimg-folder-open"></i> <code>folder-open</code></li>
+                                <li><i class="halflingimg-white halflingimg-resize-vertical"></i> <code>resize-vertical</code></li>
+                                <li><i class="halflingimg-white halflingimg-resize-horizontal"></i> <code>resize-horizontal</code></li>
+                                <li><i class="halflingimg-white halflingimg-hdd"></i> <code>hdd</code></li>
+                                <li><i class="halflingimg-white halflingimg-bullhorn"></i> <code>bullhorn</code></li>
+                                <li><i class="halflingimg-white halflingimg-bell"></i> <code>bell</code></li>
+                                <li><i class="halflingimg-white halflingimg-certificate"></i> <code>certificate</code></li>
+                                <li><i class="halflingimg-white halflingimg-thumbs-up"></i> <code>thumbs-up</code></li>
+                                <li><i class="halflingimg-white halflingimg-thumbs-down"></i> <code>thumbs-down</code></li>
+                                <li><i class="halflingimg-white halflingimg-hand-right"></i> <code>hand-right</code></li>
+                                <li><i class="halflingimg-white halflingimg-hand-left"></i> <code>hand-left</code></li>
+                                <li><i class="halflingimg-white halflingimg-hand-top"></i> <code>hand-top</code></li>
+                                <li><i class="halflingimg-white halflingimg-hand-down"></i> <code>hand-down</code></li>
+                                <li><i class="halflingimg-white halflingimg-circle-arrow-right"></i> <code>circle-arrow-right</code></li>
+                                <li><i class="halflingimg-white halflingimg-circle-arrow-left"></i> <code>circle-arrow-left</code></li>
+                                <li><i class="halflingimg-white halflingimg-circle-arrow-top"></i> <code>circle-arrow-top</code></li>
+                                <li><i class="halflingimg-white halflingimg-circle-arrow-down"></i> <code>circle-arrow-down</code></li>
+                                <li><i class="halflingimg-white halflingimg-globe"></i> <code>globe</code></li>
+                                <li><i class="halflingimg-white halflingimg-wrench"></i> <code>wrench</code></li>
+                                <li><i class="halflingimg-white halflingimg-tasks"></i> <code>tasks</code></li>
+                                <li><i class="halflingimg-white halflingimg-filter"></i> <code>filter</code></li>
+                                <li><i class="halflingimg-white halflingimg-briefcase"></i> <code>briefcase</code></li>
+                                <li><i class="halflingimg-white halflingimg-fullscreen"></i> <code>fullscreen</code></li>
+                                <li><i class="halflingimg-white halflingimg-dashboard"></i> <code>dashboard</code></li>
+                                <li><i class="halflingimg-white halflingimg-paperclip"></i> <code>paperclip</code></li>
+                                <li><i class="halflingimg-white halflingimg-heart-empty"></i> <code>heart-empty</code></li>
+                                <li><i class="halflingimg-white halflingimg-link"></i> <code>link</code></li>
+                                <li><i class="halflingimg-white halflingimg-phone"></i> <code>phone</code></li>
+                                <li><i class="halflingimg-white halflingimg-pushpin"></i> <code>pushpin</code></li>
+                                <li><i class="halflingimg-white halflingimg-euro"></i> <code>euro</code></li>
+                                <li><i class="halflingimg-white halflingimg-usd"></i> <code>usd</code></li>
+                                <li><i class="halflingimg-white halflingimg-gbp"></i> <code>gbp</code></li>
+                                <li><i class="halflingimg-white halflingimg-sort"></i> <code>sort</code></li>
+                                <li><i class="halflingimg-white halflingimg-sort-by-alphabet"></i> <code>sort-by-alphabet</code></li>
+                                <li><i class="halflingimg-white halflingimg-sort-by-alphabet-alt"></i> <code>sort-by-alphabet-alt</code></li>
+                                <li><i class="halflingimg-white halflingimg-sort-by-order"></i> <code>sort-by-order</code></li>
+                                <li><i class="halflingimg-white halflingimg-sort-by-order-alt"></i> <code>sort-by-order-alt</code></li>
+                                <li><i class="halflingimg-white halflingimg-sort-by-attributes"></i> <code>sort-by-attributes</code></li>
+                                <li><i class="halflingimg-white halflingimg-sort-by-attributes-alt"></i> <code>sort-by-attributes-alt</code></li>
+                                <li><i class="halflingimg-white halflingimg-unchecked"></i> <code>unchecked</code></li>
+                                <li><i class="halflingimg-white halflingimg-expand"></i> <code>expand</code></li>
+                                <li><i class="halflingimg-white halflingimg-collapse-down"></i> <code>collapse-down</code></li>
+                                <li><i class="halflingimg-white halflingimg-collapse-top"></i> <code>collapse-top</code></li>
+                            </ul>
+                        </div>
+                        <!-- END Image Base (Light) -->
+                    </div>
+                </div>
+                <!-- END Glyphicons Halflings Tabs -->
+                <!-- END Glyphicons Halflings Pro -->
+            </div>
+            <!-- END Page Content -->
+
+            <!-- Footer -->
+            <footer>
+                <div class="pull-right">
+                    Crafted with <i class="icon-heart"></i> by <strong><a href="http://goo.gl/vNS3I" target="_blank">pixelcave</a></strong>
+                </div>
+                <div class="pull-left">
+                    <span id="year-copy"></span> &copy; <strong><a href="http://goo.gl/mssAH" target="_blank">FlatApp 1.2.1</a></strong>
+                </div>
+            </footer>
+            <!-- END Footer -->
+        </div>
+        <!-- END Page Container -->
+
+        <!-- Scroll to top link, check main.js - scrollToTop() -->
+        <a href="#" id="to-top"><i class="icon-chevron-up"></i></a>
+
+        <!-- User Modal Account, appears when clicking on 'User Settings' link found on user dropdown menu (header, top right) -->
+        <div id="modal-user-account" class="modal hide fade">
+            <!-- Modal Body -->
+            <div class="modal-body remove-padding">
+                <!-- Modal Tabs -->
+                <div class="block-tabs">
+                    <div class="block-options">
+                        <a href="javascript:void(0)" class="btn btn-danger" data-dismiss="modal"><i class="icon-remove"></i></a>
+                    </div>
+                    <ul class="nav nav-tabs" data-toggle="tabs">
+                        <li class="active"><a href="#modal-user-account-account"><i class="icon-cog"></i> Account</a></li>
+                        <li><a href="#modal-user-account-profile"><i class="icon-user"></i> Profile</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <!-- Account Tab Content -->
+                        <div class="tab-pane active" id="modal-user-account-account">
+                            <form action="index.html" method="post" class="form-horizontal" onsubmit="return false;">
+                                <div class="control-group">
+                                    <label class="control-label" for="modal-account-username">Username</label>
+                                    <div class="controls">
+                                        <input type="text" id="modal-account-username" name="modal-account-username" value="admin" class="disabled" disabled>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="modal-account-email">Email</label>
+                                    <div class="controls">
+                                        <input type="text" id="modal-account-email" name="modal-account-email" value="admin@exampleapp.com">
+                                    </div>
+                                </div>
+                                <h4 class="sub-header">Change Password</h4>
+                                <div class="control-group">
+                                    <label class="control-label" for="modal-account-pass">Current Password</label>
+                                    <div class="controls">
+                                        <input type="password" id="modal-account-pass" name="modal-account-pass">
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="modal-account-newpass">New Password</label>
+                                    <div class="controls">
+                                        <input type="password" id="modal-account-newpass" name="modal-account-newpass">
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="modal-account-newrepass">Retype New Password</label>
+                                    <div class="controls">
+                                        <input type="password" id="modal-account-newrepass" name="modal-account-newrepass">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- END Account Tab Content -->
+
+                        <!-- Profile Tab Content -->
+                        <div class="tab-pane" id="modal-user-account-profile">
+                            <form action="index.html" method="post" class="form-horizontal" onsubmit="return false;">
+                                <div class="control-group">
+                                    <label class="control-label" for="modal-profile-name">Name</label>
+                                    <div class="controls">
+                                        <input type="text" id="modal-profile-name" name="modal-profile-name" value="John Doe">
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="modal-profile-gender">Gender</label>
+                                    <div class="controls">
+                                        <select id="modal-profile-gender" name="modal-profile-name">
+                                            <option value="m">Male</option>
+                                            <option value="f">Female</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="modal-profile-birthdate">Birthdate</label>
+                                    <div class="controls">
+                                        <div class="input-append">
+                                            <input type="text" id="modal-profile-birthdate" name="modal-profile-birthdate" class="input-small input-datepicker">
+                                            <span class="add-on"><i class="icon-calendar"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="modal-profile-skills">Skills</label>
+                                    <div class="controls">
+                                        <select id="modal-profile-skills" name="modal-profile-skills" class="select-chosen" multiple>
+                                            <option value="html" selected>html</option>
+                                            <option value="css" selected>css</option>
+                                            <option value="javascript">javascript</option>
+                                            <option value="php">php</option>
+                                            <option value="mysql">mysql</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="modal-profile-bio">Bio</label>
+                                    <div class="controls">
+                                        <textarea id="modal-profile-bio" name="modal-profile-bio" class="textarea-elastic" rows="3">Bio Information..</textarea>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- END Profile Tab Content -->
+                    </div>
+                </div>
+                <!-- END Modal Tabs -->
+            </div>
+            <!-- END Modal Body -->
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button class="btn btn-success" data-dismiss="modal"><i class="icon-save"></i> Save</button>
+            </div>
+            <!-- END Modal footer -->
+        </div>
+        <!-- END User Modal Settings -->
+
+        <!-- Excanvas for Flot (Charts plugin) support on IE8 -->
+        <!--[if lte IE 8]><script src="js/helpers/excanvas.min.js"></script><![endif]-->
+
+        <!-- Get Jquery library from Google ... -->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <!-- ... but if something goes wrong get Jquery from local file -->
+        <script>!window.jQuery && document.write(unescape('%3Cscript src="js/vendor/jquery-1.9.1.min.js"%3E%3C/script%3E'));</script>
+
+        <!-- Bootstrap.js -->
+        <script src="js/vendor/bootstrap.min.js"></script>
+
+        <!--
+        Include Google Maps API for global use.
+        If you don't want to use  Google Maps API globally, just remove this line and the gmaps.js plugin from js/plugins.js (you can put it in a seperate file)
+        Then iclude them both in the pages you would like to use the google maps functionality
+        -->
+        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+
+        <!-- Jquery plugins and custom javascript code -->
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+    </body>
+</html>
