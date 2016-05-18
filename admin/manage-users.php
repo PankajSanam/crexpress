@@ -143,9 +143,7 @@
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 			<h3 id="myModalLabel">Media Manager</h3>
 		</div>
-		<div class="modal-body nopadding">
-			<div class="file-manager"></div>
-		</div>
+		<div class="modal-body nopadding"><div class="file-manager"></div></div>
 	</div>
 	<?php top_navigation(); ?>
 	<div class="container-fluid" id="content">
@@ -156,7 +154,7 @@
 					<?php
 					if(isset($_GET['action']) && $_GET['action']=='edit'){
 						$page_action = 'Edit User';
-						$users_data = get_records('users',array('id' => $_GET['id']));
+						$users_data = DB::select_query('users',array('id=' => $_GET['id']));
 						foreach($users_data as $user_data){
 							extract($user_data);
 						}
@@ -317,8 +315,7 @@
 										'address' => $_POST['address'],
 										'status' => $_POST['status'],
 									);
-									$cond = array( 'id' => $_GET['id'] );
-									$db->update_query('users',$values,$cond);
+									DB::update_query('users',$values,array( 'id=' => $_GET['id'] ));
 
 								} else {
 									$values = array(
@@ -337,9 +334,9 @@
 										'address' => $_POST['address'],
 										'status' => $_POST['status'],
 									);
-									$db->insert_query('users',$values);
+									DB::insert_query('users',$values);
 								}
-								header("Location:users.php");
+								Helper::redirect("users.php");
 							}
 							?>
 						</div>

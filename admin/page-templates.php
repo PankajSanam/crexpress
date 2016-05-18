@@ -7,7 +7,7 @@
 	<!-- Apple devices fullscreen -->
 	<meta names="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-	<title>GIT Admin Panel - Page Templates</title>
+	<title>GIT BOX - Page Templates</title>
 
 	<!-- Bootstrap -->
 	<link rel="stylesheet" href="css/bootstrap.min.css">
@@ -93,14 +93,8 @@
 				</div>
 				<div class="breadcrumbs">
 					<ul>
-						<li>
-							<a href="dashboard.php">Home</a>
-							<i class="icon-angle-right"></i>
-						</li>
-						<li>
-							<a href="#">Content</a>
-							<i class="icon-angle-right"></i>
-						</li>
+						<li><a href="dashboard.php">Home</a><i class="icon-angle-right"></i></li>
+						<li><a href="pages.php">Pages</a><i class="icon-angle-right"></i></li>
 						<li><a href="page-templates.php">Page Template Manager</a></li>
 					</ul>
 					<div class="close-bread"><a href="#"><i class="icon-remove"></i></a></div>
@@ -114,7 +108,7 @@
 									<div class="span4">
 										<?php
 										if(isset($_GET['action'])){
-											$pages_template_data = get_records('page_templates',array( 'id' => $_GET['id']) );
+											$pages_template_data = DB::select_query('page_templates',array( 'id=' => $_GET['id']) );
 											foreach($pages_template_data as $template_data){
 												extract($template_data);
 											}
@@ -132,14 +126,15 @@
 									</div>
 									<?php
 									if(isset($_POST['save'])){
-										$values = array( 'template_name' => get_slug($_POST['template_name']) );
-										$cond = array( 'id' => $_GET['id'] );
+										$values = array( 'template_name' => Sanitize::clean_slug($_POST['template_name']) );
+										$cond = array( 'id=' => $_GET['id'] );
 										if(isset($_GET['action'])){
 											$db->update_query('page_templates',$values,$cond);
 										} else {
 											$db->insert_query('page_templates',$values);	
 										}
-										header("Location:page-templates.php");
+
+										Helper::redirect('page-templates.php');
 									}
 									?>
 									<div class="span8">
@@ -160,7 +155,7 @@
 											</thead>
 											<tbody>
 												<?php
-												$page_templates = get_page_templates();
+												$page_templates = DB::select_query('page_templates');
 												foreach($page_templates as $page_template){
 												?>
 												<tr>

@@ -3,32 +3,29 @@
 ini_set('date.timezone', 'Asia/Kolkata');
 
 if($_SERVER['HTTP_HOST']=='localhost') {
-	define('DBHOST','localhost');
-	define('USERNAME','root');
-	define('PASSWORD','');
-	define('DB_DATABASE','careeras_db');
+	
+	//Error reporting is on when site is hosted on local server
+	error_reporting(E_ALL);
+	ini_set('display_errors', 1);
+
+	define( "DB_DSN", "mysql:host=localhost;dbname=careeras_db" );
+	define( "DB_USERNAME", "root" );
+	define( "DB_PASSWORD", "" );
 } else {
-	define('DBHOST','localhost');
-	define('USERNAME','careeras_user');
-	define('PASSWORD','PgXm(?w?i%fZ');
-	define('DB_DATABASE','careeras_db');
+
+	//Error reporting is off when site is online
+	error_reporting(0);
+	ini_set('display_errors', 0);
+
+	define( "DB_DSN", "mysql:host=localhost;dbname=careeras_db" );
+	define( "DB_USERNAME", "careeras_user" );
+	define( "DB_PASSWORD", "PgXm(?w?i%fZ" );
 }
 
-class conn {
-	var $dbhost;
-	var $username;
-	var $pass;
-	var $dbs;
-	var $link;
+try{
+	$pdo = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
+} catch (PDOException $e){
+	exit('DB Error');
+}
 
-	function conn() {
-		$this->dbhost=DBHOST;
-		$this->username=USERNAME;
-		$this->pass=PASSWORD;
-		$this->dbs=DB_DATABASE;
- 		$this->link = mysql_connect($this->dbhost,$this->username,$this->pass)or die("Connection couldn't established");
-		mysql_select_db($this->dbs,$this->link);
-	}
-}   
-$obconn = new conn;
 ?>

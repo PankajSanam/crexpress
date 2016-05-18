@@ -1,8 +1,8 @@
 <?php
 function get_city_name($id) {
-	$db = new Db_query;
+	$db = new DB;
 
-	$condition = array('id' => $id);
+	$condition = array('id=' => $id);
 	$query = $db-> select_query('locations',$condition);
 	foreach($query as $q){
 		$row = $q['name'];
@@ -11,7 +11,7 @@ function get_city_name($id) {
 }
 
 function get_states(){
-	$db = new Db_query;
+	$db = new DB;
 	
 	$query = $db->select_query('locations');
 
@@ -24,7 +24,7 @@ function get_states(){
 }
 
 function get_cities(){
-	$db = new Db_query;
+	$db = new DB;
 	$query = $db->select_query('locations');
 	foreach($query as $q){
 		if($q['sub_id']==0 AND $q['parent_id']!=1 AND $q['parent_id']!=0 ) {
@@ -35,8 +35,8 @@ function get_cities(){
 }
 
 function get_localities(){
-	$db = new Db_query;
-	$cond = array( 'sub_id' => 1);
+	$db = new DB;
+	$cond = array( 'sub_id=' => 1);
 	$query = $db->select_query('locations',$cond,'name','asc');
 	foreach($query as $q){
 		$row[] = $q;

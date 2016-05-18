@@ -2,27 +2,27 @@
 include 'core/autoload.php';
 
 if(isset($_GET['page'])){
-	$page_template = page_template($_GET['page']);
+	$page_template = Pages::page_template($_GET['page']);
 
-	$meta_title = meta_title($_GET['page']);
-	$meta_description = meta_description($_GET['page']);
-	$meta_keywords = meta_keywords($_GET['page']);
+	$page = $_GET['page'];
 
-	$page_slug = page_slug($_GET['page'],$page_template);
+	$page_slug = Pages::page_slug($_GET['page'],$page_template);
 	
 
 } else {
-	$meta_title = meta_title('index');
-	$meta_description = meta_description('index');
-	$meta_keywords = meta_keywords('index');
+	$page = 'index';
 
 	$page_slug = 'index';
 	$page_template = 'home';
 }
 
-require_once 'view/header.php';
+$meta_title = Html::meta_title($page);
+$meta_description = Html::meta_description($page);
+$meta_keywords = Html::meta_keywords($page);
 
-include_once "view/".$page_template."_template.php";
+require_once 'theme/'.$config['theme_name'].'/view/header.php';
 
-require_once 'view/footer.php'; 
+include_once 'theme/'.$config['theme_name'].'/view/'.$page_template.'_template.php';
+
+require_once 'theme/'.$config['theme_name'].'/view/footer.php'; 
 ?>

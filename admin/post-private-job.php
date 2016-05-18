@@ -7,7 +7,7 @@
 <!-- Apple devices fullscreen -->
 <meta names="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-<title>GIT BOX - Post</title>
+<title>GIT BOX - Manage Private Job</title>
 
 <!-- Bootstrap -->
 <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -143,9 +143,7 @@
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 			<h3 id="myModalLabel">Media Manager</h3>
 		</div>
-		<div class="modal-body nopadding">
-			<div class="file-manager"></div>
-		</div>
+		<div class="modal-body nopadding"><div class="file-manager"></div></div>
 	</div>
 	<?php top_navigation(); ?>
 	<div class="container-fluid" id="content">
@@ -156,7 +154,7 @@
 					<?php
 					if(isset($_GET['action']) && $_GET['action']=='edit'){
 						$page_action = 'Edit Job Posting';
-						$jobs_data = get_records('private_jobs',array( 'id' => $_GET['id'] ));
+						$jobs_data = DB::select_query('private_jobs',array( 'id=' => $_GET['id'] ));
 						foreach($jobs_data as $job_data){
 							extract($job_data);
 						}
@@ -190,7 +188,7 @@
 												<select name="job_category_id" id="job_category_id" class='chosen-select'>
 													<option value=""></option>
 													<?php 
-													$job_categories = get_records('job_categories');
+													$job_categories = DB::select_query('job_categories');
 													foreach($job_categories as $job_category) {
 													?>
 													<option value="<?php echo $job_category['id'];?>" <?php if(isset($_GET['id']) && $job_category_id==$job_category['id']) echo ' selected ';  ?>><?php echo @$job_category['name'];?></option>
@@ -385,10 +383,10 @@
 													<?php
 													if(isset($_POST['remove_image'])){
 														$values = array( 'featured_image' => ''	);
-														$cond = array( 'id' => $_GET['id'] );
-														$db->update_query('private_jobs',$values,$cond);
+														$cond = array( 'id=' => $_GET['id'] );
+														DB::update_query('private_jobs',$values,$cond);
 														$url ='post-private-job.php?action=edit&id='.$_GET['id'];
-														header("Location:$url");
+														Helper::redirect($url);
 													}
 													?>
 												</div>
@@ -450,7 +448,7 @@
 									'gender' => $_POST['gender'],
 									'minimum_experience' => $_POST['minimum_experience'],
 									'maximum_experience' => $_POST['maximum_experience'],
-									'job_slug' => get_slug($_POST['job_title']),
+									'job_slug' => Sanitize::clean_slug($_POST['job_title']),
 									'job_title' => $_POST['job_title'],
 									'job_description' => $_POST['job_description'],
 									'featured_image' => $featured_image,
@@ -461,14 +459,14 @@
 									'status' => $_POST['status'],
 								);
 
-								$cond = array( 'id' => $_GET['id'] );
+								$cond = array( 'id=' => $_GET['id'] );
 								if(isset($_GET['action'])){
-									$db->update_query('private_jobs',$values,$cond);
+									DB::update_query('private_jobs',$values,$cond);
 								} else {
-									$db->insert_query('private_jobs',$values);	
+									DB::insert_query('private_jobs',$values);	
 								}
-								
-								header("Location:private-jobs.php");
+
+								Helper::redirect("private-jobs.php");
 							}
 							?>
 						</div>

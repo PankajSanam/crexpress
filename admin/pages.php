@@ -89,10 +89,7 @@
 				</div>
 				<div class="breadcrumbs">
 					<ul>
-						<li>
-							<a href="dashboard.php">Home</a>
-							<i class="icon-angle-right"></i>
-						</li>
+						<li><a href="dashboard.php">Home</a><i class="icon-angle-right"></i></li>
 						<li><a href="#">Content</a><i class="icon-angle-right"></i></li>
 						<li><a href="pages.php">Pages Management</a><i class="icon-angle-right"></i></li>
 						<li><a href="pages-new.php">Add Pages</a></li>
@@ -131,17 +128,17 @@
 									</thead>
 									<tbody>
 										<?php
-										$pages = $db->select_query('pages');
+										$pages = DB::select_query('pages');
 										foreach($pages as $page){
 										?>
 										<tr>
 											<td class="with-checkbox"><input type="checkbox" name="check" value="1"></td>
 											<td><?php echo $page['id']; ?></td>
-											<td><?php echo get_page_template_name($page['page_template_id']); ?></td>
+											<td><?php echo Pages::page_template_name($page['page_template_id']); ?></td>
 											<td><?php echo $page['menu_sort_order']; ?></td>
 											<td><?php echo $page['page_name']; ?></td>
 											<td><?php echo $page['page_slug']; ?></td>
-											<td class='hidden-350'><?php echo get_status($page['status']); ?></td>
+											<td class='hidden-350'><?php echo Helper::status($page['status']); ?></td>
 											<td class='hidden-1024'><?php echo $page['last_updated'];?></td>
 											<td class='hidden-480'>
 												<a href="#" class="btn" rel="tooltip" title="View"><i class="icon-search"></i></a>

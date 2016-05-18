@@ -89,12 +89,9 @@
 				</div>
 				<div class="breadcrumbs">
 					<ul>
-						<li>
-							<a href="dashboard.php">Home</a>
-							<i class="icon-angle-right"></i>
-						</li>
+						<li><a href="dashboard.php">Home</a><i class="icon-angle-right"></i></li>
 						<li><a href="gallery.php">Gallery Management</a><i class="icon-angle-right"></i></li>
-						<li><a href="manager-gallery.php">Add Gallery</a></li>
+						<li><a href="manage-gallery.php">Add Gallery</a></li>
 					</ul>
 					<div class="close-bread"><a href="#"><i class="icon-remove"></i></a></div>
 				</div>
@@ -126,7 +123,7 @@
 									</thead>
 									<tbody>
 										<?php
-										$galleries = $db->select_query('gallery');
+										$galleries = DB::select_query('gallery');
 										foreach($galleries as $gallery){
 										?>
 										<tr>
@@ -135,7 +132,7 @@
 											<td><?php echo get_gallery_category_name($gallery['gallery_category_id']); ?></td>
 											<td><?php echo $gallery['gallery_name']; ?></td>
 											<td><?php echo $gallery['gallery_image']; ?></td>
-											<td class='hidden-350'><?php echo get_status($gallery['status']); ?></td>
+											<td class='hidden-350'><?php echo Helper::status($gallery['status']); ?></td>
 											<td class='hidden-480'>
 												<a href="#" class="btn" rel="tooltip" title="View"><i class="icon-search"></i></a>
 												<a href="manage-gallery.php?action=edit&id=<?php echo $gallery['id'];?>" class="btn" rel="tooltip" title="Edit"><i class="icon-edit"></i></a>

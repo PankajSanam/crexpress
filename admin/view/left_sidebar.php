@@ -29,26 +29,43 @@
 			<li class='dropdown'>
 				<a href="#" data-toggle="dropdown">Slider</a>
 				<ul class="dropdown-menu">
-					<li><a href="#">Home Slider</a></li>
+					<li class='dropdown-submenu'>
+						<a href="#" data-toggle="dropdown" class='dropdown-toggle'>Home Slider</a>
+						<ul class="dropdown-menu">
+							<li><a href="home-slider.php">Home Slider</a></li>
+							<li><a href="manage-slider.php">Add Slider</a></li>
+						</ul>
+					</li>
 					<li><a href="#">Pages Slider</a></li>
 					<li><a href="#">Footer Slider</a></li>
 					<li><a href="#">Other Slider</a></li>
+				</ul>
+			</li>
+			<li><a href="#">Site Logo</a></li>
+			<li class='dropdown'>
+				<a href="#" data-toggle="dropdown">Gallery</a>
+				<ul class="dropdown-menu">
 					<li class='dropdown-submenu'>
-						<a href="#" data-toggle="dropdown" class='dropdown-toggle'>Gallery</a>
+						<a href="#" data-toggle="dropdown" class='dropdown-toggle'>Photo Gallery</a>
 						<ul class="dropdown-menu">
-							<li><a href="#">Photo Gallery</a></li>
-							<li><a href="#">Video Gallery</a></li>
+							<li><a href="gallery.php">Gallery</a></li>
+							<li><a href="manage-gallery.php">Add Gallery</a></li>
+						</ul>
+					</li>
+					<li class='dropdown-submenu'>
+						<a href="#" data-toggle="dropdown" class='dropdown-toggle'>Video Gallery</a>
+						<ul class="dropdown-menu">
+							<li><a href="video-gallery.php">Gallery</a></li>
+							<li><a href="manage-video-gallery.php">Add Gallery</a></li>
 						</ul>
 					</li>
 				</ul>
 			</li>
-			<li><a href="#">Site Logo</a></li>
-			<li><a href="#">Site Background</a></li>
 		</ul>
 	</div>
 	<div class="subnav">
 		<div class="subnav-title">
-			<a href="#" class='toggle-subnav'><i class="icon-angle-down"></i><span>Settings</span></a>
+			<a href="#" class='toggle-subnav'><i class="icon-angle-down"></i><span>Plugins</span></a>
 		</div>
 		<ul class="subnav-menu">
 			<li><a href="#">Social Icons</a></li>

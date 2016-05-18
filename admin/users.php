@@ -89,12 +89,9 @@
 				</div>
 				<div class="breadcrumbs">
 					<ul>
-						<li>
-							<a href="dashboard.php">Home</a>
-							<i class="icon-angle-right"></i>
-						</li>
+						<li><a href="dashboard.php">Home</a><i class="icon-angle-right"></i></li>
 						<li><a href="users.php">User Management</a><i class="icon-angle-right"></i></li>
-						<li><a href="manager-users.php">Add Users</a></li>
+						<li><a href="manage-users.php">Add Users</a></li>
 					</ul>
 					<div class="close-bread"><a href="#"><i class="icon-remove"></i></a></div>
 				</div>
@@ -128,7 +125,7 @@
 									</thead>
 									<tbody>
 										<?php
-										$users = $db->select_query('users');
+										$users = DB::select_query('users');
 										foreach($users as $user){
 										?>
 										<tr>
@@ -137,7 +134,7 @@
 											<td><?php echo $user['username']; ?></td>
 											<td><?php echo $user['email']; ?></td>
 											<td><?php echo $user['mobile']; ?></td>
-											<td class='hidden-350'><?php echo get_status($user['status']); ?></td>
+											<td class='hidden-350'><?php echo Helper::status($user['status']); ?></td>
 											<td class='hidden-1024'><?php echo $user['date'];?></td>
 											<td class='hidden-480'>
 												<a href="#" class="btn" rel="tooltip" title="View"><i class="icon-search"></i></a>

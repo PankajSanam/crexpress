@@ -27,6 +27,7 @@
 					<li><a href="manage-gallery.php">Add Gallery</a></li>
 				</ul>
 			</li>
+			<li><a href="enquiry.php"><span>Enquiry</span></a></li>
 			<li>
 				<a href="#" data-toggle="dropdown" class='dropdown-toggle'><span>Extras</span><span class="caret"></span></a>
 				<ul class="dropdown-menu">
@@ -117,14 +118,6 @@
 							<li><a href="more-blog-post.html">Post</a></li>
 						</ul>
 					</li>
-				</ul>
-			</li>
-			<li>
-				<a href="#" data-toggle="dropdown" class='dropdown-toggle'>
-					<span>Layouts</span>
-					<span class="caret"></span>
-				</a>
-				<ul class="dropdown-menu">
 					<li><a href="layouts-sidebar-hidden.html">Default hidden sidebar</a></li>
 					<li><a href="layouts-sidebar-right.html">Sidebar right side</a></li>
 					<li><a href="layouts-color.html">Different default color</a></li>

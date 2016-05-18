@@ -7,7 +7,7 @@
 <!-- Apple devices fullscreen -->
 <meta names="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-<title>GIT Box - Manage Gallery </title>
+<title>GIT BOX - Manage Gallery </title>
 
 <!-- Bootstrap -->
 <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -156,7 +156,7 @@
 					<?php
 					if(isset($_GET['action']) && $_GET['action']=='edit'){
 						$page_action = 'Edit Gallery';
-						$pages_data = get_records('gallery',array( 'id' => $_GET['id']));
+						$pages_data = DB::select_query('gallery',array( 'id=' => $_GET['id']));
 						foreach($pages_data as $page_data){
 							extract($page_data);
 						}
@@ -190,7 +190,7 @@
 												<select name="gallery_category_id" id="gallery_category_id" class='chosen-select'>
 													<option value=""></option>
 													<?php 
-													$categories = get_records('gallery_categories');
+													$categories = DB::select_query('gallery_categories');
 													foreach($categories as $category) {
 													?>
 													<option value="<?php echo $category['id'];?>" <?php if(isset($_GET['id']) && $gallery_category_id==$category['id']) echo ' selected ';  ?>><?php echo @$category['name'];?></option>
@@ -234,10 +234,10 @@
 													<?php
 													if(isset($_POST['remove_image'])){
 														$values = array( 'gallery_image' => ''	);
-														$cond = array( 'id' => $_GET['id'] );
-														$db->update_query('gallery',$values,$cond);
+														$cond = array( 'id=' => $_GET['id'] );
+														DB::update_query('gallery',$values,$cond);
 														$url ='manage-gallery.php?action=edit&id='.$_GET['id'];
-														header("Location:$url");
+														Helper::redirect($url);
 													}
 													?>
 												</div>
@@ -290,14 +290,14 @@
 									'status' => $_POST['status']
 								);
 
-								$cond = array( 'id' => $_GET['id'] );
+								$cond = array( 'id=' => $_GET['id'] );
 								if(isset($_GET['action'])){
-									$db->update_query('gallery',$values,$cond);
+									DB::update_query('gallery',$values,$cond);
 								} else {
-									$db->insert_query('gallery',$values);	
+									DB::insert_query('gallery',$values);	
 								}
 								
-								header("Location:gallery.php");
+								Helper::redirect("gallery.php");
 							}
 							?>
 						</div>

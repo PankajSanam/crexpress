@@ -1,43 +1,75 @@
 <?php
-class Db_query{
-	public $tablename;
-	public $values;
-	public $columns;
-	public $query;
-	public $sortby;
-	public $sorttype;
-	public $startlimit;
-	public $endlimit;
-	public $conditions;
-	public $sql;
-	public $result;
+class DB {
+	public static function select_query($table_name,$conditions='',$sort_by='',$sort_order='',$start_limit='',$end_limit='') {
+		global $pdo;
 
-	public function run_query($query){
-		$this->result = mysql_query($this->query) or die(db_error());
-		return $this->result;
+		$sql = NULL;
+
+		if($conditions!='') {
+			foreach($conditions as $key=>$value) {
+				$where[] = $key." '".mysql_real_escape_string(stripslashes(trim($value)))."'";
+			}
+			$sql.= implode(' AND ', $where);
+		} else {
+			$sql.= ' 1 = 1 ';
+		}
+
+		if($sort_by!='' AND $sort_order!='') {
+			$sql.= ' ORDER BY ' . $sort_by." ".$sort_order;
+		}
+
+		if($start_limit!='') {
+			$sql.= " LIMIT $start_limit";
+		}
+		if($end_limit!=''){
+			$sql .= ",$end_limit ";
+		}
+		
+		$query = $pdo->prepare("select *from $table_name where $sql");
+		$query->execute();
+
+		return $query->fetchAll();
 	}
 
-	public function insert_query($tablename,$values) {
+	public static function count_query($table_name,$conditions="") {
+		global $pdo;
 
-		$this->tablename = $tablename;
-		$this->columns = array_keys($values);
-		$this->columns = implode(", ", $this->columns);
+		$sql = NULL;
 
-		//Sanitizing user inputs
+		if($conditions!='') {
+			foreach($conditions as $key=>$value) {
+				$where[] = $key." '".$value."'";
+			}
+			$sql.= implode(' AND ', $where);
+		} else {
+			$sql.= ' 1 = 1 ';
+		}
+
+		$query = $pdo->prepare("select *from $table_name where $sql");
+		$query->execute();
+
+		return $query->rowCount();
+	}
+
+	public static function insert_query($table_name,$values) {
+		global $pdo;
+
+		$columns = array_keys($values);
+		$columns = implode(", ", $columns);
+
+		//Sanitizing user input
 		foreach($values as $val){
 			$value[] = mysql_real_escape_string(stripslashes(trim($val)));
 		}
 
-		$this->values = $value;
-		$this->values = implode("','", $this->values);
-		
-		$this->query = "INSERT into ".$this->tablename." (".$this->columns.") VALUES ('".$this->values."')";
-		$this->run_query($this->query);
+		$values = implode("','", $value);
+
+		$query = $pdo->prepare("INSERT into ".$table_name." (".$columns.") VALUES ('".$values."')");
+		$query->execute();
 	}
 
-	public function update_query($tablename,$values,$conditions){
-		
-		$this->tablename = $tablename;
+	public static function update_query($table_name,$values,$conditions){
+		global $pdo;		
 
 		foreach($values as $key1=>$value) {
 			$set[] = " ".$key1." = '".mysql_real_escape_string(stripslashes(trim($value)))."'";
@@ -45,65 +77,15 @@ class Db_query{
 		$set_clause = implode(', ', $set);
 		
 		foreach($conditions as $key2=>$condition) {
-			$where[] = " ".$key2." = '".$condition."'";
+			$where[] = $key2." '".$condition."'";
 		}
 		$where_clause = implode(', ', $where);
 		
-		$this->query = "UPDATE ".$this->tablename." set ".$set_clause." where ".$where_clause."";
-		$this->run_query($this->query);
+		$query = $pdo->prepare("UPDATE $table_name SET $set_clause WHERE $where_clause");
+		$query->execute();
 	}
 
-	public function select_query($tablename,$conditions="",$sortby="",$sorttype="",$startlimit="",$endlimit="") {
-		$this->tablename = $tablename;
-		$sql='';
-
-		if($conditions!='') {
-			foreach($conditions as $key=>$value) {
-				$where[] = " ".$key." = '".$value."'";
-			}
-			$sql.= implode(' AND ', $where);
-		} else {
-			$sql.= ' 1 = 1 ';
-		}
-		if($sortby!='' AND $sorttype!='') {
-			$sql.= ' ORDER BY ' . $sortby." ".$sorttype;
-		}
-		if($startlimit!='' AND $endlimit!='') {
-			$sql.= " LIMIT $startlimit,$endlimit";
-		}
-		$this->sql = $sql;
-		$this->query = "SELECT * from $this->tablename where $this->sql ";
-		$this->result = $this->run_query($this->query);
-
-		while($this->row = mysql_fetch_array($this->result)){
-			$this->col[] = $this->row;
-		}
-		return @$this->col;
-	}
-
-	public function count_query($tablename,$conditions="") {
-		$this->tablename = $tablename;
-		$sql='';
-
-		if($conditions!='') {
-			foreach($conditions as $key=>$value) {
-				$where[] = " ".$key." = '".$value."'";
-			}
-			$sql.= implode(' AND ', $where);
-		} else {
-			$sql.= ' 1 = 1 ';
-		}
-
-		$this->sql = $sql;
-		$this->query = "SELECT * from $this->tablename where $this->sql ";
-		$this->result = $this->run_query($this->query);
-
-		$this->row = mysql_num_rows($this->result);
-		
-		return $this->row;
-	}
-
-	public function delete_me($tblname,$values,$onSuccess="",$onFailure=""){
+	public static function delete_me($tblname,$values,$onSuccess="",$onFailure=""){
 		if($values!='') {
 			foreach($values as $key=>$value) {
 				$where[] = " ".$key." = '".mysql_real_escape_string($value)."'";
@@ -118,7 +100,4 @@ class Db_query{
 		echo $process_msg;
 	}
 }
-$db = new Db_query;
-$db1 = new Db_query;
-$db2 = new Db_query;
 ?>

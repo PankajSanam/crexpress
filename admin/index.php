@@ -7,7 +7,7 @@
 	<!-- Apple devices fullscreen -->
 	<meta names="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 	
-	<title>GIT Box - Login</title>
+	<title>GIT BOX - Login</title>
 
 	<!-- Bootstrap -->
 	<link rel="stylesheet" href="css/bootstrap.min.css">
@@ -78,22 +78,19 @@
 	</div>
 	<?php
 	if(isset($_POST['login'])){
-		$email = mysql_real_escape_string(stripslashes(trim($_POST['email'])));
-		$password = mysql_real_escape_string(stripslashes(trim($_POST['password'])));
-
-		$sql = mysql_query("select * from admin where email='$email' AND password='$password' ") or die('Error');
+		$sql = DB::select_query('admin', array( 'email=' => $_POST['email'], 'password=' => $_POST['password']));
+		$count = DB::count_query('admin', array( 'email=' => $_POST['email'], 'password=' => $_POST['password']));
 		
-		if(mysql_num_rows($sql)!=0) {
-			$row=mysql_fetch_array($sql);
+		if($count!=0) {
+			foreach($sql as $row){}
 		
 			@session_start();
-			$_SESSION['id']=$row['id'];
-		
-			$_SESSION['admin']=$row['username'];
+			$_SESSION['id'] = $row['id'];
+			$_SESSION['admin'] = $row['username'];
 			
-			header("location:dashboard.php");
+			Helper::redirect('dashboard.php');
 		} else {
-			/*echo '<script> document.getElementById("login_error").style.display="block"; </script>'; */
+			//echo '<script> document.getElementById("login_error").style.display="block"; </script>';
 			echo '<script> alert("Wrong username or password"); </script>';
 		}
 	}

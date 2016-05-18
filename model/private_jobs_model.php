@@ -1,18 +1,18 @@
 <?php
 
 function get_job_category_name($id){
-	$db = new Db_query;
+	$db = new DB;
 
-	$cond = array( 'id' => $id );
+	$cond = array( 'id=' => $id );
 	$query = $db->select_query('job_categories',$cond);
 	foreach($query as $q){ }
 	return $q['name'];
 }
 
 function get_private_job_featured_image($slug,$width='',$height='',$class=''){
-	$db = new Db_query;
+	$db = new DB;
 	if($slug!=404){
-		$conditions = array( 'job_slug' => $slug );
+		$conditions = array( 'job_slug=' => $slug );
 		$query= $db->select_query('private_jobs',$conditions);
 		foreach($query as $q){
 			$page_featured_image = $q['featured_image'];
@@ -31,8 +31,8 @@ function get_private_job_featured_image($slug,$width='',$height='',$class=''){
 }
 
 function get_private_job_link($slug){
-	$db = new Db_query;
-	$condition = array('job_slug' => $slug);
+	$db = new DB;
+	$condition = array('job_slug=' => $slug);
 	$query = $db->select_query('private_jobs',$condition);
 	foreach($query as $q){
 		$row = $q['job_slug'];
@@ -42,9 +42,9 @@ function get_private_job_link($slug){
 }
 
 function get_private_job_description($slug){
-	$db = new Db_query;
+	$db = new DB;
 	if($slug!=404){
-		$conditions = array( 'job_slug' => $slug );
+		$conditions = array( 'job_slug=' => $slug );
 		$query= $db->select_query('private_jobs',$conditions);
 		foreach($query as $q){
 			$page_content = $q['job_description'];
@@ -56,9 +56,9 @@ function get_private_job_description($slug){
 }
 
 function get_private_job_title($slug){
-	$db = new Db_query;
+	$db = new DB;
 	if($slug!=404){
-		$conditions = array( 'job_slug' => $slug );
+		$conditions = array( 'job_slug=' => $slug );
 		$query= $db->select_query('private_jobs',$conditions);
 		foreach($query as $q){
 			$page_name = $q['job_title'];

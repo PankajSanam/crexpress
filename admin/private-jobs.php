@@ -89,10 +89,7 @@
 				</div>
 				<div class="breadcrumbs">
 					<ul>
-						<li>
-							<a href="dashboard.php">Home</a>
-							<i class="icon-angle-right"></i>
-						</li>
+						<li><a href="dashboard.php">Home</a><i class="icon-angle-right"></i>			</li>
 						<li><a href="private-jobs.php">Private Jobs</a><i class="icon-angle-right"></i></li>
 						<li><a href="post-private-job.php">Post Private Job</a></li>
 					</ul>
@@ -130,7 +127,7 @@
 									</thead>
 									<tbody>
 										<?php
-										$private_jobs = $db->select_query('private_jobs');
+										$private_jobs = DB::select_query('private_jobs');
 										foreach($private_jobs as $private_job){
 										?>
 										<tr>
@@ -139,7 +136,7 @@
 											<td><?php echo get_job_category_name($private_job['job_category_id']) ?></td>
 											<td><?php echo $private_job['job_title']; ?></td>
 											<td><?php echo $private_job['job_slug']; ?></td>
-											<td class='hidden-350'><?php echo get_status($private_job['status']); ?></td>
+											<td class='hidden-350'><?php echo Helper::status($private_job['status']); ?></td>
 											<td class='hidden-1024'><?php echo $private_job['post_date'];?></td>
 											<td class='hidden-1024'><?php echo $private_job['end_date'];?></td>
 											<td class='hidden-480'>

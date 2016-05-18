@@ -7,7 +7,7 @@
 <!-- Apple devices fullscreen -->
 <meta names="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-<title>GIT Admin Panel - Add Page</title>
+<title>GIT BOX - Manage Pages</title>
 
 <!-- Bootstrap -->
 <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -143,9 +143,7 @@
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 			<h3 id="myModalLabel">Media Manager</h3>
 		</div>
-		<div class="modal-body nopadding">
-			<div class="file-manager"></div>
-		</div>
+		<div class="modal-body nopadding"><div class="file-manager"></div></div>
 	</div>
 	<?php top_navigation(); ?>
 	<div class="container-fluid" id="content">
@@ -156,7 +154,7 @@
 					<?php
 					if(isset($_GET['action']) && $_GET['action']=='edit'){
 						$page_action = 'Edit Page';
-						$pages_data = get_records('pages',array( 'id' => $_GET['id']));
+						$pages_data = DB::select_query('pages',array( 'id=' => $_GET['id']));
 						foreach($pages_data as $page_data){
 							extract($page_data);
 						}
@@ -190,7 +188,7 @@
 												<select name="page_category_id" id="select" class='chosen-select'>
 													<option value=""></option>
 													<?php 
-													$page_categories = get_records('pages');
+													$page_categories = DB::select_query('pages');
 													foreach($page_categories as $page_category) {
 													?>
 													<option value="<?php echo $page_category['id'];?>" <?php if(isset($_GET['id']) && $page_category_id==$page_category['id']) echo ' selected ';  ?>><?php echo @$page_category['menu_name'];?></option>
@@ -206,7 +204,7 @@
 												<select name="page_template_id" id="page_template_id" class='chosen-select'>
 													<option value=""></option>
 													<?php 
-													$page_templates = get_records('page_templates');
+													$page_templates = DB::select_query('page_templates');
 													foreach($page_templates as $page_template) {
 													?>
 													<option value="<?php echo $page_template['id'];?>" <?php if(isset($_GET['id']) && $page_template_id==$page_template['id']) echo ' selected ';  ?>><?php echo @$page_template['template_name'];?></option>
@@ -300,16 +298,16 @@
 														<input type="file" name='featured_image' />
 													</span>
 													<a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
-													<?php if($featured_image!='') { ?>
+													<?php if(isset($featured_image)) { ?>
 													<input class="btn" type="submit" name="remove_image" value="Remove Image" />
 													<?php } ?>
 													<?php
 													if(isset($_POST['remove_image'])){
-														$values = array( 'featured_image' => ''	);
-														$cond = array( 'id' => $_GET['id'] );
+														$values = array( 'featured_image=' => ''	);
+														$cond = array( 'id=' => $_GET['id'] );
 														$db->update_query('pages',$values,$cond);
 														$url ='pages-new.php?action=edit&id='.$_GET['id'];
-														header("Location:$url");
+														Helper::redirect($url);
 													}
 													?>
 												</div>
@@ -360,7 +358,7 @@
 									'menu_name' => $_POST['menu_name'],
 									'menu_position' => $_POST['menu_position'],
 									'menu_sort_order' => $_POST['menu_sort_order'],
-									'page_slug' => get_slug($_POST['page_slug']),
+									'page_slug' => Sanitize::clean_slug($_POST['page_slug']),
 									'page_name' => $_POST['page_name'],
 									'page_content' => $_POST['page_content'],
 									'featured_image' => $featured_image,
@@ -371,14 +369,13 @@
 									'status' => $_POST['status']
 								);
 
-								$cond = array( 'id' => $_GET['id'] );
+								$cond = array( 'id=' => $_GET['id'] );
 								if(isset($_GET['action'])){
-									$db->update_query('pages',$values,$cond);
+									$res = DB::update_query('pages',$values,$cond);
 								} else {
-									$db->insert_query('pages',$values);	
+									$res = DB::insert_query('pages',$values);	
 								}
-								
-								header("Location:pages.php");
+								Helper::redirect('pages.php');
 							}
 							?>
 						</div>

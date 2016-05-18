@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.5
+-- version 3.2.0.1
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 04, 2013 at 11:55 AM
--- Server version: 5.1.61-rel13.2-log
--- PHP Version: 5.3.17
+-- Generation Time: Oct 07, 2013 at 04:57 AM
+-- Server version: 5.1.36
+-- PHP Version: 5.4.16
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -40,6 +39,77 @@ CREATE TABLE IF NOT EXISTS `admin` (
 
 INSERT INTO `admin` (`id`, `email`, `username`, `password`) VALUES
 (1, 'pankaj@gitinfosys.com', 'Admin', 'git@9024551674');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `enquiries`
+--
+
+CREATE TABLE IF NOT EXISTS `enquiries` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `date` date NOT NULL,
+  `constituency` varchar(256) NOT NULL,
+  `name` varchar(128) NOT NULL,
+  `address` text NOT NULL,
+  `dob` date NOT NULL,
+  `email` varchar(256) NOT NULL,
+  `mobile` bigint(20) NOT NULL,
+  `state` varchar(128) NOT NULL,
+  `city` varchar(128) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `enquiries`
+--
+
+INSERT INTO `enquiries` (`id`, `date`, `constituency`, `name`, `address`, `dob`, `email`, `mobile`, `state`, `city`, `status`) VALUES
+(1, '2013-10-05', 'constitu', 'silas', 'address of silas', '1985-10-09', 'silas@vamp.com', 9876542132, 'Rajasthan', 'Jaipur', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `gallery`
+--
+
+CREATE TABLE IF NOT EXISTS `gallery` (
+  `id` int(8) NOT NULL AUTO_INCREMENT,
+  `gallery_category_id` int(8) NOT NULL,
+  `gallery_name` varchar(64) NOT NULL,
+  `gallery_image` varchar(128) NOT NULL,
+  `gallery_description` text NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `gallery`
+--
+
+INSERT INTO `gallery` (`id`, `gallery_category_id`, `gallery_name`, `gallery_image`, `gallery_description`, `status`) VALUES
+(1, 1, 'Gallery', '', '<p>image description</p>', 1),
+(2, 1, 'dfgdfgdfg', 'gallery370422.gif', '<p>testsdfsdf</p>', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `gallery_categories`
+--
+
+CREATE TABLE IF NOT EXISTS `gallery_categories` (
+  `id` smallint(4) NOT NULL AUTO_INCREMENT,
+  `name` varchar(128) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `gallery_categories`
+--
+
+INSERT INTO `gallery_categories` (`id`, `name`) VALUES
+(1, 'General');
 
 -- --------------------------------------------------------
 
@@ -1940,6 +2010,11 @@ CREATE TABLE IF NOT EXISTS `page_comments` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
+--
+-- Dumping data for table `page_comments`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -2090,31 +2165,48 @@ INSERT INTO `shop` (`id`, `parentid`, `name`, `image`, `description`, `metatitle
 -- --------------------------------------------------------
 
 --
--- Table structure for table `shopgallery`
+-- Table structure for table `sliders`
 --
 
-CREATE TABLE IF NOT EXISTS `shopgallery` (
-  `id` bigint(10) NOT NULL AUTO_INCREMENT,
-  `parentid` int(11) NOT NULL,
-  `imagesmall` varchar(512) NOT NULL,
-  `imagebig` varchar(512) NOT NULL,
+CREATE TABLE IF NOT EXISTS `sliders` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `slider_category_id` mediumint(6) NOT NULL,
+  `name` varchar(128) NOT NULL,
+  `image` varchar(128) NOT NULL,
+  `description` text NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
--- Dumping data for table `shopgallery`
+-- Dumping data for table `sliders`
 --
 
-INSERT INTO `shopgallery` (`id`, `parentid`, `imagesmall`, `imagebig`) VALUES
-(1, 3, '13-495x371.jpg', '13-495x371.jpg'),
-(2, 3, '13-495x371.jpg', '13-495x371.jpg'),
-(3, 3, '1310257226-68.jpg', '1310257226-68.jpg'),
-(4, 3, 'slider1.JPG', 'slider1.JPG'),
-(5, 4, 'home-header.jpg', 'home-header.jpg'),
-(6, 4, 'products-06img.jpg', 'products-06img.jpg'),
-(7, 20, 'Sad Shayari.jpg', 'Sad Shayari.jpg'),
-(8, 20, 'image2_thumb.jpg', 'image2_large.jpg'),
-(9, 21, 'image3_thumb.jpg', 'image3_large.jpg');
+INSERT INTO `sliders` (`id`, `slider_category_id`, `name`, `image`, `description`, `status`) VALUES
+(1, 1, 'slider 1', '1.jpg', 'slider 1', 1),
+(2, 1, 'slider 2', '2.jpg', 'slider 2', 1),
+(3, 1, 'slider 3', '3.jpg', 'slider 3', 1),
+(4, 1, 'slider 4', '4.jpg', 'slider 4', 1),
+(5, 1, 'slider 5', '5.jpg', 'slider 5', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `slider_categories`
+--
+
+CREATE TABLE IF NOT EXISTS `slider_categories` (
+  `id` mediumint(6) NOT NULL AUTO_INCREMENT,
+  `name` varchar(128) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `slider_categories`
+--
+
+INSERT INTO `slider_categories` (`id`, `name`) VALUES
+(1, 'home');
 
 -- --------------------------------------------------------
 
@@ -2123,42 +2215,29 @@ INSERT INTO `shopgallery` (`id`, `parentid`, `imagesmall`, `imagebig`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `users` (
-  `st_id` int(5) NOT NULL AUTO_INCREMENT,
-  `status` tinyint(1) NOT NULL,
-  `firstname` varchar(128) NOT NULL,
-  `lastname` varchar(128) NOT NULL,
-  `fathername` varchar(128) NOT NULL,
-  `dob` varchar(15) NOT NULL,
-  `gender` varchar(7) NOT NULL,
-  `p_address` varchar(256) NOT NULL,
-  `mobile` bigint(15) NOT NULL,
-  `marital` varchar(15) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `date` date NOT NULL,
+  `username` varchar(64) NOT NULL,
   `email` varchar(256) NOT NULL,
-  `state` varchar(30) NOT NULL,
-  `city` varchar(30) NOT NULL,
-  `pincode` int(10) NOT NULL,
-  `c_address` varchar(256) NOT NULL,
-  `reg_date` varchar(15) NOT NULL,
-  `password` varchar(256) NOT NULL,
-  `photoname` varchar(256) NOT NULL,
-  `center_id` int(5) NOT NULL,
-  `course` varchar(128) NOT NULL,
-  PRIMARY KEY (`st_id`),
-  UNIQUE KEY `id` (`st_id`),
-  UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+  `password` varchar(512) NOT NULL,
+  `first_name` varchar(128) NOT NULL,
+  `last_name` varchar(128) NOT NULL,
+  `dob` date NOT NULL,
+  `gender` varchar(16) NOT NULL,
+  `mobile` bigint(20) NOT NULL,
+  `state_id` int(5) NOT NULL,
+  `city_id` int(5) NOT NULL,
+  `pincode` mediumint(6) NOT NULL,
+  `address` text NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`st_id`, `status`, `firstname`, `lastname`, `fathername`, `dob`, `gender`, `p_address`, `mobile`, `marital`, `email`, `state`, `city`, `pincode`, `c_address`, `reg_date`, `password`, `photoname`, `center_id`, `course`) VALUES
-(10, 1, 'soul', 'extractor', 'dfsdf', '01-01-1913', 'Male', 'dsfsad', 223423432432, 'Unmarried', 'aaaaa@gmai.com', 'sfssss', 'dfsdfsdf', 454546545, 'cvzxcv', '2013-01-09', 'aasfdf', '4e1f81529a_.jpg', 14, 'PHP,Java,.Net,C,C++,Ruby,Python'),
-(11, 1, 'Pankaj', 'Sanam', 'G. S. Sanam', '8-4-1990', 'Male', 'ggdfgdfgfd', 9887148462, 'Unmarried', 'pankajsanam@gmail.com', 'Rajasthan', 'jaipur', 302021, 'tyiitit', '2013-01-10', '123456', '022.JPG', 13, ''),
-(13, 0, 'indian', 'rupees', 'dfasdfffff', '3-4-1999', 'Male', 'dsfsdf', 54654, 'Married', 'xxxloxdsf@hello.com', 'dsfas', 'fffddd', 55645, 'cxvxcv', '2013-01-10', '1234567', 'Indian_Symbol.jpg', 15, 'Python'),
-(14, 1, 'punisher', 'rocks', 'daddy punisher', '18-3-1988', 'Male', 'sdssdfsdfccvccccc', 6456456, 'Married', 'the@punisher.com', 'dhaal', 'helll', 99999, 'cccfgdgdfg', '2013-01-10', 'dsseekke', 'punisher_skull.jpg', 13, 'PHP,Ruby'),
-(15, 0, 'gopal', 'singh', 'fathername', '2012-01-09', 'Male', 'dcm ajmer road', 8822446677, 'Unmarried', 'gopalsingh@gmail.com', 'rajasthan', 'jaipur', 654564, 'jhotwara', '2013-01-11', '123456', '', 12, 'Python');
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+INSERT INTO `users` (`id`, `date`, `username`, `email`, `password`, `first_name`, `last_name`, `dob`, `gender`, `mobile`, `state_id`, `city_id`, `pincode`, `address`, `status`) VALUES
+(1, '2013-10-04', 'kamlesh', 'kamlesh@gitinfosys.com', 'kamlesh', 'Kamlesh', 'Singh', '1958-10-01', 'Male', 8822446677, 2, 3, 302015, '32-a, jhotwara', 1),
+(2, '2013-10-04', 'rajiv', 'rajiv@gmail.com', 'rajiv', 'Rajiv', 'Tiwari', '1980-10-23', 'Male', 9786145432, 2, 3, 302011, '55, C block, ajmer road,', 1),
+(3, '2013-10-04', 'ram', 'ram@shyam.com', 'ram', 'ram', 'sharma', '1988-03-08', 'Male', 9876542310, 2, 3, 302018, 'address of ram', 1);
