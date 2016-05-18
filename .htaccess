@@ -1,0 +1,41 @@
+RewriteEngine On
+RewriteBase /careerask.com/
+
+#RewriteCond %{HTTP_HOST} !^www.reewazdesignerstudio.com$ [NC]
+#RewriteRule ^(.*)$ http://www.reewazdesignerstudio.com/$1 [L,R=301]
+
+ErrorDocument 404 /index.php?page=404
+RewriteRule ^([a-zA-Z0-9_-]+).html$ index.php?page=$1 [QSA,L]
+
+RewriteRule ^contact.html$ index.php?page=contact [QSA,L]
+RewriteRule ^login/(.*)$ login.php?retry=$1 [QSA,L]
+
+RewriteRule ^register/(.*).html$ newuser.php?user=$1 [QSA,L]
+RewriteRule ^register/(.*)/(.*).html$ newuser.php?newemail=$1&task=$2 [QSA,L]
+RewriteRule ^forgotpassword/(.*).html$ forgotpassword.php?error=$1 [QSA,L]
+
+RewriteRule ^editprofile/(.*)$ Updateuser.php?newemail=$1 [QSA,L]
+RewriteRule ^editprofile$ Updateuser.php
+
+RewriteRule ^category/(.*).html$ category.php?catname=$1 [QSA,L]
+RewriteRule ^more/(.*)/([0-9]+)$ more.php?catname=$1&page=$2 
+RewriteRule ^more/(.*)$ more.php?catname=$1 [QSA,L]
+
+RewriteRule ^addtocart/(.*)/([0-9]+)/([0-9]+)$ shopingcart.php?cat=$1&cid=$2&pid=$3 [QSA,L]
+RewriteRule ^addtocart/(.*)/([0-9]+)$ shopingcart.php?cat=$1&pid=$2 [QSA,L]
+RewriteRule ^shoppingcart/(.*)$ yourproducts.php?paymentid=$1 [QSA,L]
+RewriteRule ^shoppingcart/$ yourproducts.php?paymentid= [QSA,L]
+
+RewriteRule ^checkout/(.*)$ checkout.php?paymentid=$1 [QSA,L]
+RewriteRule ^checkout/$ checkout.php?paymentid= [QSA,L]
+RewriteRule ^delete/([0-9]+)$ deleteItem.php?id=$1 [QSA,L]
+
+RewriteEngine On
+RewriteBase /careerask.com/
+RewriteRule ^products/([a-zA-Z0-9_-]+).html$ view/products.php?id=$1
+RewriteRule ^products/([a-zA-Z0-9_-]+)/$ view/products.php?id=$1
+
+RewriteEngine On
+RewriteBase /careerask.com/
+RewriteRule ^products/([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+).html$ view/products.php?id=$1&sid=$2
+RewriteRule ^products/([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/$ view/products.php?id=$1&sid=$2
