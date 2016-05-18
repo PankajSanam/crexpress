@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 26, 2013 at 01:11 PM
+-- Generation Time: Oct 31, 2013 at 11:24 AM
 -- Server version: 5.1.36
 -- PHP Version: 5.4.16
 
@@ -2189,7 +2189,7 @@ CREATE TABLE IF NOT EXISTS `shop` (
   `type` char(1) NOT NULL,
   `sortorder` int(3) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `shop`
@@ -2197,11 +2197,11 @@ CREATE TABLE IF NOT EXISTS `shop` (
 
 INSERT INTO `shop` (`id`, `parentid`, `name`, `image`, `description`, `metatitle`, `metakeyword`, `metadescription`, `status`, `type`, `sortorder`) VALUES
 (1, 0, 'Ethinic', '', 'i''m', 'ethinic', 'ethinic', 'ethini', 1, '', 4),
-(3, 0, 'Salwar Kameez', 'Product03_resized.png', '&lt;h1&gt;salwar kameez&lt;/h1&gt;\r\n', 'salwar kameez', 'salwar kameez', 'salwar kameez', 1, '', 3),
-(7, 3, 'dummy', 'home-header.jpg', '&lt;p&gt;dfgdgf&lt;/p&gt;\r\n', 'd', 'dsdf', 'sdaf', 1, 'p', 0),
-(8, 3, 'new dummy', '', '&lt;p&gt;sdf&lt;/p&gt;\r\n', '', 'sdfd', 'gfgfg', 1, 'p', 0),
-(9, 3, 'aani', '', '&lt;p&gt;ff&lt;/p&gt;\r\n', '', '', '', 1, 'p', 0),
-(14, 0, 'Lehangas', '', 'you''re', 'lehangas', 'lehangas', 'lehangas', 1, '', 0);
+(2, 0, 'Salwar Kameez', 'Product03_resized.png', '&lt;h1&gt;salwar kameez&lt;/h1&gt;\r\n', 'salwar kameez', 'salwar kameez', 'salwar kameez', 1, '', 3),
+(3, 2, 'dummy', 'home-header.jpg', '&lt;p&gt;dfgdgf&lt;/p&gt;\r\n', 'd', 'dsdf', 'sdaf', 1, 'p', 0),
+(4, 2, 'new dummy', '', '&lt;p&gt;sdf&lt;/p&gt;\r\n', '', 'sdfd', 'gfgfg', 1, 'p', 0),
+(5, 2, 'aani', '', '&lt;p&gt;ff&lt;/p&gt;\r\n', '', '', '', 1, 'p', 0),
+(6, 0, 'Lehangas', '', 'you''re', 'lehangas', 'lehangas', 'lehangas', 1, '', 0);
 
 -- --------------------------------------------------------
 

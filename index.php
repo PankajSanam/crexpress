@@ -1,73 +1,5 @@
 <?php
-/*
- * ---------------------------------------------------------------------
- * Front Route
- * ---------------------------------------------------------------------
- * This file specifies the theme name, theme path and system version. It
- * is also used to autoload all required classes and function. This file
- * is used to set meta tags on all pages.
- *
- */
-
-
-/*
-| ---------------------------------------------------------------------
-|  Output Buffering
-| ---------------------------------------------------------------------
-| Output buffering is on so no output is sent from the script (other 
-| than headers), instead the output is stored in an internal buffer.
-|
-| @	=>	Surpressing any warnings from the function
-|
-*/
-@ob_start();
-
-
-/*
-| ---------------------------------------------------------------------
-|  Set Timezone
-| ---------------------------------------------------------------------
-| Sets the default timezone in php ini file. If it is not set then it
-| will use the default timezone already set in php ini file.
-|
-*/
-ini_set('date.timezone', 'Asia/Kolkata');
-
-
-/*
-| ---------------------------------------------------------------------
-|  Set Version
-| ---------------------------------------------------------------------
-| Sets the current version of system
-|
-*/
-define('RETINA_VERSION', '0.0.7');
-
-
-/*
-| ---------------------------------------------------------------------
-|  Set Theme Name
-| ---------------------------------------------------------------------
-| Sets the theme name which is being used on front-end
-|
-*/
-define('THEME_NAME', 'default');
-
-
-/*
-| ---------------------------------------------------------------------
-|  Set Theme Path
-| ---------------------------------------------------------------------
-| Sets the path of theme where it is stored on server
-|
-*/
-if($_SERVER['HTTP_HOST']=='localhost')
-	// Defines the theme path when system is hosted in local computer.
-	define('THEME_PATH', 'http://localhost/careerask.com/theme/'.THEME_NAME);
-else
-	// Defines the theme path when system is online.
-	define('THEME_PATH', 'http://www.careerask.com/theme/'.THEME_NAME);
-
+require_once 'retina/core/route.php';
 
 /*
 | ---------------------------------------------------------------------
@@ -78,9 +10,9 @@ else
 | connection.php 	=>	defines connections strings and error reporting
 | 
 */
-require_once 'core/autoload.php';
-require_once 'core/connection.php';
-require_once 'core/db.php';
+require_once SERVER_ROOT.'/retina/core/autoload.php';
+require_once SERVER_ROOT.'/retina/core/connection.php';
+require_once SERVER_ROOT.'/retina/core/db.php';
 
 
 /*
@@ -113,10 +45,9 @@ foreach($package_names as $package_name){
 | ---------------------------------------------------------------------
 |  Load Template Functions
 | ---------------------------------------------------------------------
-| Loads template files from theme/view folder.
 |
 */
-include 'theme/'.THEME_NAME.'/view/right_sidebar.php';
+include SERVER_ROOT.'/vision/front/'.THEME_NAME.'/view/right_sidebar.php';
 
 
 /*
@@ -157,7 +88,23 @@ if(isset($_GET['search'])) { $page_template = 'search'; }
 | file.
 |
 */
-require_once 'theme/'.THEME_NAME.'/view/header.php';
-include_once 'theme/'.THEME_NAME.'/view/'.$page_template.'_template.php';
-require_once 'theme/'.THEME_NAME.'/view/footer.php'; 
+if(isset($_GET['page2']) AND $_GET['page']=='admin') {
+	$_back	=	$_GET['page2'];
+	require_once SERVER_ROOT.'/vision/back/'.THEME_NAME.'/view/header.php';
+
+	$include_file = SERVER_ROOT.'/vision/back/'.THEME_NAME.'/view/'.$_back.'.php';
+	
+	if(file_exists($include_file)) {
+		require_once SERVER_ROOT.'/vision/back/'.THEME_NAME.'/view/'.$_back.'.php';
+	} else {
+		require_once SERVER_ROOT.'/vision/back/'.THEME_NAME.'/view/404.php';
+	}
+
+	require_once SERVER_ROOT.'/vision/back/'.THEME_NAME.'/view/footer.php';
+
+} else {
+	require_once SERVER_ROOT.'/vision/front/'.THEME_NAME.'/view/header.php';
+	include_once SERVER_ROOT.'/vision/front/'.THEME_NAME.'/view/'.$page_template.'_template.php';
+	require_once SERVER_ROOT.'/vision/front/'.THEME_NAME.'/view/footer.php';	
+}
 ?>
