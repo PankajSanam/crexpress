@@ -17,15 +17,15 @@
 		<!-- Content Heading -->
 		<div id="content2"> 
 			<div class="blog_detail">
-				<a href="#"><?php echo Page::featured_image($page_slug,'225','219','blogimg'); ?></a>
 				<div class="bloginfo">
-					<h5><?php echo Page::name($page_slug); ?></h5>
-					<div class="info info1">
+					<h2><?php echo Page::name($page_slug); ?></h2>
+					<a href="#"><?php echo Page::featured_image($page_slug,'225','219','blogimg'); ?></a>
+					<!--<div class="info info1">
 						<span class="postedby">Posted By: <a href="#">Admin</a></span>
 						<span class="lastupdte"> Last Update by:<i><?php echo Page::last_updated($page_slug); ?></i></span>
-						<!--<span class="comments"><a href="./blogdetail.html"><strong>852</strong> Comments</a></span>-->
-						<!--<div class="share1"><a href="./blogdetail.html">Share</a></div>-->
-					</div>
+						<span class="comments"><a href="./blogdetail.html"><strong>852</strong> Comments</a></span>
+						<div class="share1"><a href="./blogdetail.html">Share</a></div>
+					</div>-->
 					<div class="clear"></div>
 				</div>
 				<p><?php echo Page::content($page_slug); ?></p>

@@ -2,7 +2,7 @@ Project		: GIT BOX
 Description : GIT BOX is a CMF (Content Management Framework). Project is still in beta phase.
 Author 		: Pankaj Sanam
 Company		: GIT Infosys
-Version 	: 0.5 (Beta)
+Version 	: 0.6 (Beta)
 History 	:
 	GIT BOX 0.0
 		Release Date : 25/09/2013
@@ -79,3 +79,17 @@ History 	:
 			- Added ul and ol functions in html class.
 			- Cleaned up htaccess file.
 			- Added active menu class in top navigation.
+
+	GIT BOX 0.6
+		Release Date : 18/10/2013
+		Bug Fixes:
+			- Fixed echo_error method in image library class.
+		Features List :
+			- Removed spl autoload function because host was using old version of php which does not support this feature.
+			- Added retina class.
+			- Revamped autoload file.
+			- Merged config file with index file by defining the variables.
+			- Added google webmaster code in html class.
+			- Improved private job page design.
+			- Added a new method in helper class for "from to" statements.
+			- Added ul and ol list methods in html library class.

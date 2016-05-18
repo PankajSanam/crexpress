@@ -103,7 +103,7 @@ class Image {
 	    $height = abs(intval($height));
 	    if (!$height) { $GLOBALS['errors'][] = 'No height specified!'; }
 	    
-	    if (count($GLOBALS['errors']) > 0) { echo_errors(); return false; }
+	    if (count($GLOBALS['errors']) > 0) { Image::echo_errors(); return false; }
 	    
 	    if (in_array($extension,array('.jpg','.jpeg'))) { $image = @imagecreatefromjpeg($image_loc); }
 	    elseif ($extension == '.png') { $image = @imagecreatefrompng($image_loc); }
@@ -116,14 +116,14 @@ class Image {
 	        $current_height = imagesy($image);
 	        if ((!$current_width) || (!$current_height)) { $GLOBALS['errors'][] = 'Generated image has invalid dimensions!'; }
 	    }
-	    if (count($GLOBALS['errors']) > 0) { @imagedestroy($image); echo_errors(); return false; }
+	    if (count($GLOBALS['errors']) > 0) { @imagedestroy($image); Image::echo_errors(); return false; }
 
 	    if ($method == 'force') { $new_image = Image::resize_image_force($image,$width,$height); }
 	    elseif ($method == 'max') { $new_image = Image::resize_image_max($image,$width,$height); }
 	    elseif ($method == 'crop') { $new_image = Image::resize_image_crop($image,$width,$height); }
 	    
 	    if ((!$new_image) && (count($GLOBALS['errors'] == 0))) { $GLOBALS['errors'][] = 'New image could not be generated!'; }
-	    if (count($GLOBALS['errors']) > 0) { @imagedestroy($image); echo_errors(); return false; }
+	    if (count($GLOBALS['errors']) > 0) { @imagedestroy($image); Image::echo_errors(); return false; }
 	    
 	    $save_error = false;
 	    if (in_array($extension,array('.jpg','.jpeg'))) { imagejpeg($new_image,$new_loc) or ($save_error = true); }
@@ -131,7 +131,7 @@ class Image {
 	    elseif ($extension == '.gif') { imagegif($new_image,$new_loc) or ($save_error = true); }
 	    elseif ($extension == '.bmp') { imagewbmp($new_image,$new_loc) or ($save_error = true); }
 	    if ($save_error) { $GLOBALS['errors'][] = 'New image could not be saved!'; }
-	    if (count($GLOBALS['errors']) > 0) { @imagedestroy($image); @imagedestroy($new_image); echo_errors(); return false; }
+	    if (count($GLOBALS['errors']) > 0) { @imagedestroy($image); @imagedestroy($new_image); Image::echo_errors(); return false; }
 
 	    imagedestroy($image);
 	    imagedestroy($new_image);
@@ -139,7 +139,7 @@ class Image {
 	    return true;
 	}
 
-	function echo_errors() {
+	public static function echo_errors() {
 	    if (!is_array(@$GLOBALS['errors'])) { $GLOBALS['errors'] = array('Unknown error!'); }
 	    foreach ($GLOBALS['errors'] as $error) { echo '<p style="color:red;font-weight:bold;">Error: '.$error.'</p>'; }
 	}

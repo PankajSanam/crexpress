@@ -20,14 +20,14 @@ class Html {
 		return '<meta name="revisit-after" content="3 days" />'."\n";
 	}
 	
-	public static function google_webmaster(){
-		return '<meta name="google-site-verification" content="XVMhOtez7yO_68PWdI2EnLd3mVMFv7q-42-c71AlbYE" />';
+	public static function google_webmaster($var){
+		return '<meta name="google-site-verification" content="'.$var.'" />';
 	}
 	
 	public static function styles($styles){
-		global $config;
+		
 		foreach($styles as $style => $media){
-			echo '<link rel="stylesheet" type="text/css" href="'.$config['theme_path'].'/css/'.$style.'.css" media="'.$media.'" />';
+			echo '<link rel="stylesheet" type="text/css" href="'.THEME_PATH.'/'.$style.'.css" media="'.$media.'" />';
 			echo "\n";
 		}
 	}
@@ -35,7 +35,7 @@ class Html {
 	public static function scripts($scripts){
 		global $config;
 		foreach($scripts as $script){
-			echo '<script type="text/javascript" src="'.$config['theme_path'].'/js/'.$script.'.js"></script>';
+			echo '<script type="text/javascript" src="'.THEME_PATH.'/js/'.$script.'.js"></script>';
 			echo "\n";
 		}
 	}

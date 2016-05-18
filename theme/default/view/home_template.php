@@ -33,7 +33,7 @@
 			</div>
 		</div>
 		<div id="paginate-slider2" class="pagination"> </div>
-		<script type="text/javascript" src="<?php echo $config['theme_path'];?>/js/slider.js"></script> 
+		<script type="text/javascript" src="<?php echo THEME_PATH;?>/js/slider.js"></script> 
 	</div>
 	<!--<div class="content_links">
 		<ul>

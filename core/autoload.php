@@ -1,18 +1,30 @@
 <?php
-class Autoload{
-	
-	public static function core($class_name) {
-		$file = 'core/' . $class_name. '.php';
-		if (file_exists($file)) {
-			require_once($file);
-		}
-	}
+//Core Files
+require_once 'core/retina.php';
+require_once 'core/connection.php';
+require_once 'core/db.php';
 
-	public static function library($class_name) {
-		$file = 'library/' . $class_name. '.php';
-		if (file_exists($file)) {
-			require_once($file);
-		}
-	}
-}
+Retina::library(array(
+	'helper',
+	'validation',
+	'sanitize',
+	'location',
+	'gallery',
+	'slider',
+	'upload',
+	'ajax',
+	'html',
+	'image',
+	'page'
+));
+
+Retina::package( array(
+	'job_portal' => array (
+		'private_jobs_model'
+	)
+));
+
+
+//Template Files
+include 'theme/'.THEME_NAME.'/view/right_sidebar.php';
 ?>

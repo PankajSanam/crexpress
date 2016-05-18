@@ -21,5 +21,13 @@ class Helper {
 		return $page_status;
 	}
 
+	public static function from_to($from, $to){
+		if($from == $to){
+			return $from;
+		} else {
+			return $from . ' from ' . $to;
+		}
+	}
+
 }
 ?>

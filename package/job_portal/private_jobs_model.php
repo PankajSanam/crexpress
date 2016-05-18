@@ -13,10 +13,11 @@ class PrivateJob {
 				$page_featured_image = $q['featured_image'];
 			}
 		
-			if($page_featured_image!=''){
+			if(isset($page_featured_image) && $page_featured_image!=''){
 				$featured_image = '<img class="'.$class.'" src="uploads/privatejobs/'.$page_featured_image.'" width="'.$width.'" height="'.$height.'" />';
 			} else {
-				$featured_image = '<img class="'.$class.'" src="uploads/general/default-image.jpg" width="'.$width.'" height="'.$height.'" />';
+				//$featured_image = '<img class="'.$class.'" src="uploads/general/default-image.jpg" width="'.$width.'" height="'.$height.'" />';
+				$featured_image = '';
 			}
 			return $featured_image;
 		} else {

@@ -34,7 +34,7 @@
 				<option value="<?php echo $city['id'];?>" <?php if(isset($_POST['city_id']) && $_POST['city_id']==$city['id']) { echo ' selected '; } ?>><?php echo $city['name'];?></option>
 				<?php } ?>
         	</select>
-        	<input type="submit" name="Search" name="search" />
+        	<input type="submit" value="Search" name="search" class="btn-primary"/>
         </form>
     </div>
    	<div class="clear"></div>
@@ -63,41 +63,41 @@
 			echo 'No records found!';
 		} else {
 		?>
-        <div class="course_listing">
-            <ul class="listheading">
-            	<li class="code colr">S.N.</li>
-                <li class="coursename colr">Job Category</li>
-                <li class="time colr">City</li>
-                <!--<li class="location colr">Location</li>
-                <li class="instructor colr">Instructor</li>-->
-            </ul>
-            <?php
-            $i = 1;
-			foreach($query as $row){
-			?>
-            <ul class="courselisting">
-            	<li class="code"><?php echo $i; ?></li>
-                <li class="coursename">
-                	<a href="<?php echo PrivateJob::link($row['slug']); ?>" class="colr" <?php echo $row['title'];?>>
-                	<?php echo $row['title']; ?></a>
-                </li>
-                <li class="time"><?php if(isset($_POST['city_id'])) echo Location::city_name($_POST['city_id']); else echo 'Jaipur'; ?> </li>
-                <!--<li class="location"><a href="#">Abc Campus</a></li>
-                <li class="instructor">Pablo Montagnes</li>-->
-            </ul>
-            <?php
-            $i++;
-			}
-			?>
+        <div class="job-listing">
+            <table cellspacing="1" class="private-job-table">
+            	<tr>
+	            	<td class="pj-row">S.N.</td>
+	            	<td class="pj-row">Job Category</td>
+	            	<td class="pj-row">Vacancies</td>
+	            	<td class="pj-row">City</td>
+	            </tr>
+	            <?php
+	            $i = 1;
+				foreach($query as $row){
+				?>
+	            <tr>
+		        	<td class="pj-row2"><?php echo $i; ?></td>
+		            <td class="pj-row2">
+		            	<a href="<?php echo PrivateJob::link($row['slug']); ?>" class="colr" title="<?php echo $row['title'];?>">
+	                	<?php echo $row['title']; ?></a>
+	                </td>
+	                <td class="pj-row2"><?php echo $row['vacancies']; ?></td>
+	                <td class="pj-row2"><?php if(isset($_POST['city_id'])) echo Location::city_name($_POST['city_id']); else echo 'Jaipur'; ?></td>
+		        </tr>
+		        <?php
+            	$i++;
+				}
+				?>
+	        </table>
        		<div class="clear"></div>
         </div>
         <?php } ?>
    	</div>
-    <div class="note">
-    	<!--<a href="#" class="close">&nbsp;</a>
+    <!--<div class="note">
+    	<a href="#" class="close">&nbsp;</a>
         <p><strong> NOTE:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et dui dolor. Fusce auctor dolor 
-        a diam tincidunt quis malesuada tellus Integer sit amet lorem ac ligula interdum elementum. </p>-->
-    </div>
+        a diam tincidunt quis malesuada tellus Integer sit amet lorem ac ligula interdum elementum. </p>
+    </div>-->
   	<div class="clear"></div>
 	<div id="content2"> 
 		<div class="description"><h6></h6></div>
@@ -119,18 +119,17 @@
 		<div class="clear"></div>
 
 		<div class="blog_detail">
-			<a href="#"><?php echo PrivateJob::featured_image($page_slug,'225','219','blogimg'); ?></a>
+			<?php // echo PrivateJob::featured_image($page_slug,'225','219','blogimg'); ?>
 			<div class="bloginfo">
-				<h5><?php echo PrivateJob::title($page_slug,'private_job'); ?></h5>
-				<div class="info info1">
+				<h1><?php echo PrivateJob::title($page_slug,'private_job'); ?></h1>
+				<!--<div class="info info1">
 					<span class="postedby">Posted By: <a href="#">Admin</a></span>
-					<!--<span class="lastupdte"> Last Update by:<i><?php echo Page::last_updated($page_slug); ?></i></span>
+					<span class="lastupdte"> Last Update by:<i><?php echo Page::last_updated($page_slug); ?></i></span>
 					<span class="comments"><a href="./blogdetail.html"><strong>852</strong> Comments</a></span>
-					<div class="share1"><a href="./blogdetail.html">Share</a></div>-->
+					<div class="share1"><a href="./blogdetail.html">Share</a></div>
 				</div>
-				<div class="clear"></div>
+				<div class="clear"></div>-->
 			</div>
-			<p><?php echo PrivateJob::description($page_slug); ?></p>
 			<!--<a href="#" class="link colr">88 Comments</a>-->
 		 </div>
 		 <div class="listingblock">
@@ -148,45 +147,87 @@
 				echo '';
 			} else {
 			?>
-            <div class="course_listing">
+            <div class="job-listing">
 	            <!--<ul class="listheading">
 	                <li class="coursename colr">Job Category</li>
 	                <li class="time colr">City</li>
 	                <li class="location colr">Location</li>
 	                <li class="instructor colr">Instructor</li>
 	            </ul>-->
-	            <?php
-				foreach($query as $row)
-				
-				$attributes = array( 'class' => 'courselisting' );
-				echo Html::ul( array( 'Category : ', $row['job_category_id'] ), $attributes );
-				echo Html::ul( array( 'Job Title : ', $row['title'] ), $attributes );
-				echo Html::ul( array( 'Posting Date :', $row['post_date'] ), $attributes );
-				echo Html::ul( array( 'Ending Date : ', $row['end_date'] ), $attributes );
-				echo Html::ul( array( 'State : ', Location::name($row['state_id']) ), $attributes );
-				echo Html::ul( array( 'City : ', Location::name($row['city_id']) ), $attributes );
-				echo Html::ul( array( 'Locality : ', $row['locality_id'] ), $attributes );
-				echo Html::ul( array( 'Contact Number : ', $row['contact_number'] ), $attributes );
-				echo Html::ul( array( 'Contact Address : ', $row['address'] ), $attributes );
-				echo Html::ul( array( 'No. of Positions : ', $row['vacancies'] ), $attributes );
-				echo Html::ul( array( 'Salary : ', $row['salary_from'].' to '.$row['salary_to'] ), $attributes );
-				echo Html::ul( array( 'Timings : ', $row['timings'] ), $attributes );
-				echo Html::ul( array( 'Preferred Gender : ', $row['gender'] ), $attributes );
-				echo Html::ul( array( 'Required Experience : ', $row['minimum_experience'].' - '. $row['maximum_experience'] ), $attributes );
-				echo Html::ul( array( 'Job Description : ', $row['content'] ), $attributes );
-				?>
+	            <?php foreach($query as $row); ?>
+	            <table cellspacing="1" class="private-job-table">
+	            	<tr>
+	            		<td class="pj-row">Category : </td>
+	            		<td class="pj-row2"><?php echo $row['job_category_id']; ?></td>
+	            	</tr>
+	            	<tr>
+	            		<td class="pj-row">Job Title : </td>
+	            		<td class="pj-row2"><?php echo $row['title']; ?></td>
+	            	</tr>
+	            	<tr>
+	            		<td class="pj-row">Posting Date : </td>
+	            		<td class="pj-row2"><?php echo $row['post_date']; ?></td>
+	            	</tr>
+	            	<tr>
+	            		<td class="pj-row">Ending Date : </td>
+	            		<td class="pj-row2"><?php echo $row['end_date']; ?></td>
+	            	</tr>
+	            	<tr>
+	            		<td class="pj-row">State : </td>
+	            		<td class="pj-row2"><?php echo Location::name($row['state_id']); ?></td>
+	            	</tr>
+	            	<tr>
+	            		<td class="pj-row">City : </td>
+	            		<td class="pj-row2"><?php echo Location::name($row['city_id']); ?></td>
+	            	</tr>
+	            	<tr>
+	            		<td class="pj-row">Locality : </td>
+	            		<td class="pj-row2"><?php echo Location::name($row['locality_id']); ?></td>
+	            	</tr>
+	            	<tr>
+	            		<td class="pj-row">Contact Number : </td>
+	            		<td class="pj-row2"><?php echo $row['contact_number']; ?></td>
+	            	</tr>
+	            	<tr>
+	            		<td class="pj-row">Contact Address : </td>
+	            		<td class="pj-row2"><?php echo $row['address']; ?></td>
+	            	</tr>
+	            	<tr>
+	            		<td class="pj-row">No. of Positions : </td>
+	            		<td class="pj-row2"><?php echo $row['vacancies']; ?></td>
+	            	</tr>
+	            	<tr>
+	            		<td class="pj-row">Salary : </td>
+	            		<td class="pj-row2"><?php echo Helper::from_to($row['salary_from'],$row['salary_to']); ?></td>
+	            	</tr>
+	            	<tr>
+	            		<td class="pj-row">Timings : </td>
+	            		<td class="pj-row2"><?php echo $row['timings']; ?></td>
+	            	</tr>
+	            	<tr>
+	            		<td class="pj-row">Preferred Gender : </td>
+	            		<td class="pj-row2"><?php echo $row['gender']; ?></td>
+	            	</tr>
+	            	<tr>
+	            		<td class="pj-row">Required Experience : </td>
+	            		<td class="pj-row2"><?php echo Helper::from_to($row['minimum_experience'],$row['maximum_experience']); ?></td>
+	            	</tr>
+	            	<tr>
+	            		<td class="pj-row">Job Description : </td>
+	            		<td class="pj-row2"><?php echo $row['content']; ?></td>
+	            	</tr>
+	            </table>
            		<div class="clear"></div>
             </div>
             <?php echo Html::br(2);?>
             <form method="POST">
             	<h1>Apply Now</h1>
             	<?php echo Html::br(2); ?>
-            	Name : <input type="text" name="name" />
-            	Email : <input type="text" name="email" />
-            	Mobile : <input type="text" name="mobile" />
-            	Message : <input type="text" name="message" />
-            	<?php echo Html::br(2); ?>
-            	<input type="submit" name="apply" value="Apply Now" />
+            	<p><label class="label-box">Name : </label><input type="text" name="name" class="text-box" /></p>
+            	<p><label class="label-box">Email : </label><input type="text" name="email" class="text-box" /></p>
+            	<p><label class="label-box">Mobile : </label><input type="text" name="mobile" class="text-box" /></p>
+            	<p><label class="label-box">Message : </label><textarea name="message" class="text-area"></textarea></p>
+            	<input type="submit" name="apply" value="Apply Now" class="btn-primary" />
             </form>
             <?php } ?>
             <?php

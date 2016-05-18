@@ -1,19 +1,17 @@
-<?php echo $doctype; ?>
-<html <?php echo $html;?>>
+<?php echo Html::doc_type(); ?>
+<html <?php echo Html::xmlns(); ?>>
 <head>
-	<?php echo $content_type; ?>
-	<?php echo $meta_title; ?>
-	<?php echo $meta_description; ?>
-	<?php echo $meta_keywords; ?>
-	<?php echo $author; ?>
-	<?php echo $revisit; ?>
-	<meta name="google-site-verification" content="XVMhOtez7yO_68PWdI2EnLd3mVMFv7q-42-c71AlbYE" />
+	<?php echo Html::content_type(); ?>
+	<?php echo Html::meta_title($page); ?>
+	<?php echo Html::meta_description($page); ?>
+	<?php echo Html::meta_keywords($page); ?>
+	<?php echo Html::author(); ?>
+	<?php echo Html::revisit(); ?>
+	<?php echo Html::google_webmaster('XVMhOtez7yO_68PWdI2EnLd3mVMFv7q-42-c71AlbYE'); ?>
 	
 	<?php
 	Html::styles(array(
-		'style' => '',
-		'ddsmoothmenu' => '',
-		'jquery.fancybox-1.3.4' => 'screen'
+		'style' => ''
 	));
 	?>
 	
@@ -37,14 +35,14 @@
 <div id="bg">
 	<div id="wrapper_sec">
 		<div id="masterhead">
-			<div class="logo"><a href="./"><img src="<?php echo $config['theme_path'];?>/images/logo.png" width="300" /></a></div>
+			<div class="logo"><a href="./"><img src="<?php echo THEME_PATH;?>/images/logo.png" width="300" /></a></div>
 			<div class="topright_sec">
 				<div class="topnavigation">
                		<ul>
                   		<li class="first">&nbsp;</li>
                     	<li><a href="privacy-policy.html">Privacy Policy</a></li>
                         <li><a href="contact.html">Contact Us</a></li>
-                    	<li><a class="nobg" href="#"><img src="<?php echo $config['theme_path'];?>/images/rss.gif" alt="" /></a></li>
+                    	<li><a class="nobg" href="#"><img src="<?php echo THEME_PATH;?>/images/rss.gif" alt="" /></a></li>
                     	<li class="last">&nbsp;</li>
                     </ul>
 				</div>
@@ -151,6 +149,6 @@
 					<span class="news_update">Latest Updates</span>
 					<span class="news_date"><em><?php echo $update_date; ?>: </em></span>
 					<span class="news_des"> <a href="<?php echo $update_link; ?>" title="<?php echo $update_news; ?>" class="colr"><?php echo $update_news; ?></a> </span> 
-					<a class="next" href="<?php echo $update_link; ?>"><img src="<?php echo $config['theme_path'];?>/images/newsarrow.jpg" alt="" /></a> 
+					<a class="next" href="<?php echo $update_link; ?>"><img src="<?php echo THEME_PATH;?>/images/newsarrow.jpg" alt="" /></a> 
 				</div>
 				<div class="clear"></div>

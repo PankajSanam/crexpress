@@ -1,21 +1,28 @@
 <?php
-
 //Core Files
-require_once '../core/config.php';
+require_once 'retina.php';
 require_once '../core/connection.php';
 require_once '../core/db.php';
 
-function library($class_name) {
-    $file = '../library/' . $class_name. '.php';
-    if (file_exists($file)) {
-        require_once($file);
-    }
-}
+Retina::library(array(
+	'helper',
+	'validation',
+	'sanitize',
+	'location',
+	'gallery',
+	'slider',
+	'upload',
+	'ajax',
+	'html',
+	'image',
+	'page'
+));
 
-spl_autoload_register('library');
-
-//Model Files
-require_once '../package/'.$package['job'].'/private_jobs_model.php';
+Retina::package( array(
+	'job_portal' => array (
+		'private_jobs_model'
+	)
+));
 
 
 //Template Files
