@@ -14,6 +14,9 @@ class Page_Model extends Crexo_Model{
 	}
 	
 	public function page_title($slug) {
+		$slug = explode('.',$slug);
+		$slug = $slug[0];
+
 		$rows = $this->db->select('pages',array( 'slug=' => $slug ));
 
 		if(!empty($rows)) {
@@ -38,6 +41,9 @@ class Page_Model extends Crexo_Model{
 	}
 	
 	public function page_content($slug) {
+		$slug = explode('.',$slug);
+		$slug = $slug[0];
+		
 		$rows = $this->db->select('pages',array( 'slug=' => $slug ));
 
 		if(!empty($rows)){
@@ -49,14 +55,6 @@ class Page_Model extends Crexo_Model{
 		}
 
 		return $data;
-	}
-
-	public function latest_page(){
-		$rows = $this->db->select('pages','','last_updated','DESC',0,1);
-		foreach($rows as $row){
-			$col[] = $row;
-		}
-		return $col;
 	}
 
 	public function name($slug,$page_template=''){
@@ -114,13 +112,13 @@ class Page_Model extends Crexo_Model{
 			}
 		
 			if(isset($page_featured_image) && $page_featured_image!=''){
-				$featured_image = '<img class="'.$class.'" src="'.DATA_VISION.'/pages/'.$page_featured_image.'" width="'.$width.'" height="'.$height.'" />';
+				$featured_image = '<img class="'.$class.'" src="'.DATA_VIEW.'/pages/'.$page_featured_image.'" width="'.$width.'" height="'.$height.'" />';
 			} else {
-				$featured_image = '<img class="'.$class.'" src="'.DATA_VISION.'/general/default-image.jpg" width="'.$width.'" height="'.$height.'" />';
+				$featured_image = '<img class="'.$class.'" src="'.DATA_VIEW.'/general/default-image.jpg" width="'.$width.'" height="'.$height.'" />';
 				//$featured_image = '';
 			}
 		} else {
-			$featured_image = '<img class="'.$class.'" src="'.DATA_VISION.'/general/404.png" width="'.$width.'" height="'.$height.'" />';
+			$featured_image = '<img class="'.$class.'" src="'.DATA_VIEW.'/general/404.png" width="'.$width.'" height="'.$height.'" />';
 		}
 
 		return $featured_image;
@@ -164,14 +162,24 @@ class Page_Model extends Crexo_Model{
 			}
 		
 			if(isset($page_featured_image) && $page_featured_image!=''){
-				$featured_image = '<img class="'.$class.'" src="'.DATA_VISION.'/pages/'.$page_featured_image.'" width="'.$width.'" height="'.$height.'" />';
+				$featured_image = '<img class="'.$class.'" src="'.DATA_VIEW.'/pages/'.$page_featured_image.'" width="'.$width.'" height="'.$height.'" />';
 			} else {
 				$featured_image = '';
 			}
 		} else {
-			$featured_image = '<img class="'.$class.'" src="'.DATA_VISION.'/general/404.png" width="'.$width.'" height="'.$height.'" />';
+			$featured_image = '<img class="'.$class.'" src="'.DATA_VIEW.'/general/404.png" width="'.$width.'" height="'.$height.'" />';
 		}
 
 		return $featured_image;
+	}
+	
+	public function slider($slug){
+		$condition = array('slug=' => $slug);
+		$query = $this->db->select('pages',$condition);
+		foreach($query as $q){
+			$row = $q['featured_image'];
+		}
+		
+		if (!empty($row)) return $row; else return '';
 	}
 }

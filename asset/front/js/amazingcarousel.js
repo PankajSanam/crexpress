@@ -1,6 +1,6 @@
 /** Amazing Carousel - Responsive jQuery Carousel and Image Scroller
  * Copyright 2013 Magic Hills Pty Ltd All Rights Reserved
- * Website: http://amazingcarousel.com
+ * Website:
  * Version 1.2 
  */
 (function($){$.fn.html5lightbox=function(options){var inst=this;inst.options=jQuery.extend({autoplay:true,html5player:false,closepos:"bottom",titlepos:"inside",overlaybgcolor:"#000000",overlayopacity:0.9,bgcolor:"#ffffff",bordersize:8,barheight:36,loadingwidth:64,loadingheight:64,resizespeed:400,fadespeed:400,jsfolder:"",skinsfoldername:"skins",loadingimage:"lightbox-loading.gif",nextimage:"lightbox-next.png",previmage:"lightbox-prev.png",closeimage:"lightbox-close.png",playvideoimage:"lightbox-playvideo.png",

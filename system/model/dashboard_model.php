@@ -2,9 +2,4 @@
 
 class Dashboard_Model extends Crexo_Model{
 
-	public function meta_title($content){
-		$meta_title = '<title>'.$content.'</title>'."\n";
-		return $meta_title;
-	}
-
 }

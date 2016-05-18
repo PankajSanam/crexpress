@@ -3,18 +3,24 @@
 class Search_Controller extends Crexo_Controller {
 	
 	public function front_index(){
-		$this->data['styles'] = $this->library['html']->styles( array( 
-			'style'	=>	'all',
-			'initcarousel' => 'all',
-			)
-		);
-		$this->data['scripts'] = $this->library['html']->scripts(array(
-				'jquery1.7.2',
-				'amazingcarousel',
-				'initcarousel',
-				'bjqs-1.3.min',
-			)
-		);
+		$this->data['styles'] = Html::styles( array( 
+			'bootstrap.css'	=>	'all',
+			'bootstrap.min.css' => 'all',
+			'style.css' => 'all',
+			//contains the *essential* css needed for the slider to work
+			'bjqs.css' => 'all',
+			'initcarousel.css' => 'all',
+			//contains additional styles used to set up this demo page - not required for the slider
+			'demo.css' => 'all',
+		));
+
+		$this->data['scripts'] = Html::scripts(array(
+			'jquery.min.js',
+			'jquery.js?ver=1.7.2',
+			'amazingcarousel.js?ver=1.2',
+			'initcarousel.js',
+			'bjqs-1.3.min.js'
+		));
 
 		$this->data['meta_title'] = $this->model[$this->page_template]->meta_title('Search');
 		$this->data['meta_description'] = $this->model[$this->page_template]->meta_description('Search');

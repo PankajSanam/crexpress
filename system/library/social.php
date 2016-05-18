@@ -8,7 +8,7 @@ class Social {
 		$social_icons = $Db->select('social_icons');
 		foreach($social_icons as $social_icon){
 			$social .= '<li><a target="_blank" title="'.$social_icon['name'].'" href="'.$social_icon['url'].$social_icon['link'].'">
-					<img title="'.$social_icon['name'].'" alt="'.$social_icon['name'].'" src="'.DATA_VISION.'/social/'.$social_icon['image'].'" width="'.$width.'" height="'.$height.'" /></a></li>';
+					<img title="'.$social_icon['name'].'" alt="'.$social_icon['name'].'" src="'.DATA_VIEW.'/social/'.$social_icon['image'].'" width="'.$width.'" height="'.$height.'" /></a></li>';
 		}
 		$social .= '</ul>';
 

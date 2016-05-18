@@ -42,6 +42,7 @@ class Navigation {
 			'page_category_id=' => $id,
 			'status=' => 1,
 			'menu_name<>' => '',
+			'menu_position=' => 'top',
 		);
 		$query = $Db->select('pages',$cond);
 		return $query;

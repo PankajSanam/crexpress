@@ -2,153 +2,104 @@
 
 class Dashboard_Controller extends Crexo_Controller {
 
-	public function __construct($page){
-		parent::__construct($page,'','dashboard');
+	public function __construct($slug){
+	
+		parent::__construct($slug);
 		
-		$this->model[$this->page] = Route::back_model($this->page);
+		$this->model[$this->slug] = Route::back_model($this->slug);
 		$this->library['validation']->admin_auth();
+		$this->data['controller'] = ucfirst($slug);
 		
-		$this->data['styles']			=	$this->library['html']->styles(array(
-													//Bootstrap
-														'bootstrap.min' => '',
-													//Bootstrap responsive
-														'bootstrap-responsive.min' => '',
-													//jQuery UI
-														'plugins/jquery-ui/smoothness/jquery-ui' => '',
-														'plugins/jquery-ui/smoothness/jquery.ui.theme' => '',
-													//Tagsinput
-														'plugins/tagsinput/jquery.tagsinput' => '',
-													//multi select
-														'plugins/multiselect/multi-select' => '',
-													//chosen
-														'plugins/chosen/chosen' => '',
-													//PageGuide
-														'plugins/pageguide/pageguide' => '',
-													//select2
-														'plugins/select2/select2' => '',
-													//icheck
-														'plugins/icheck/all' => '',
-													//timepicker
-														'plugins/timepicker/bootstrap-timepicker.min' => '',
-													//colorpicker
-														'plugins/colorpicker/colorpicker' => '',
-													//Datepicker
-														'plugins/datepicker/datepicker' => '',
-													//Daterangepicker
-														'plugins/daterangepicker/daterangepicker' => '',
-													//Plupload
-														'plugins/plupload/jquery.plupload.queue' => '',
-													//dataTables
-														'plugins/datatable/TableTools' => '',
-													//XEditable
-														'plugins/xeditable/bootstrap-editable' => '',
-													//Theme CSS
-														'style' => '',
-													//Color CSS
-														'themes' => '',
-													),1);
-
-		$this->data['scripts'] = $this->library['html']->scripts(array(
-													//jQuery
-														'jquery.min',
-													//Nice Scroll
-														'plugins/nicescroll/jquery.nicescroll.min',
-													//imagesLoaded
-														'plugins/imagesLoaded/jquery.imagesloaded.min',
-													//jQuery UI
-														'plugins/jquery-ui/jquery.ui.core.min',
-														'plugins/jquery-ui/jquery.ui.mouse.min',
-														'plugins/jquery-ui/jquery.ui.resizable.min',
-														'plugins/jquery-ui/jquery.ui.sortable.min',
-														'plugins/jquery-ui/jquery.ui.selectable.min',
-														'plugins/jquery-ui/jquery.ui.droppable.min',
-														'plugins/jquery-ui/jquery.ui.draggable.min',
-														'plugins/jquery-ui/jquery.ui.datepicker.min',
-														'plugins/jquery-ui/jquery.ui.spinner',
-														'plugins/jquery-ui/jquery.ui.slider',
-													//slimScroll
-														'plugins/slimscroll/jquery.slimscroll.min',
-													//Bootstrap
-														'bootstrap.min',
-													//Bootbox
-														'plugins/bootbox/jquery.bootbox',
-														'plugins/form/jquery.form.min',
-													//Touch enable for jquery UI
-														'plugins/touch-punch/jquery.touch-punch.min',
-													//vmap
-														'plugins/vmap/jquery.vmap.min',
-														'plugins/vmap/jquery.vmap.world',
-														'plugins/vmap/jquery.vmap.sampledata',
-													//dataTables
-														'plugins/datatable/jquery.dataTables.min',
-														'plugins/datatable/TableTools.min',
-														'plugins/datatable/ColReorderWithResize',
-														'plugins/datatable/ColVis.min',
-														'plugins/datatable/jquery.dataTables.columnFilter',
-														'plugins/datatable/jquery.dataTables.grouping',
-													//imagesLoaded
-														'plugins/imagesLoaded/jquery.imagesloaded.min',
-													//PageGuide
-														'plugins/pageguide/jquery.pageguide',
-													//Masked inputs
-														'plugins/maskedinput/jquery.maskedinput.min',
-													//TagsInput
-														'plugins/tagsinput/jquery.tagsinput.min',
-													//Datepicker
-														'plugins/datepicker/bootstrap-datepicker',
-													//Daterangepicker
-														'plugins/daterangepicker/daterangepicker',
-														'plugins/daterangepicker/moment.min',
-													//Timepicker
-														'plugins/timepicker/bootstrap-timepicker.min',
-													//Colorpicker
-														'plugins/colorpicker/bootstrap-colorpicker',
-													//MultiSelect
-														'plugins/multiselect/jquery.multi-select',
-													//CKEditor
-														'plugins/ckeditor/ckeditor',
-													//PLUpload
-														'plugins/plupload/plupload.full',
-														'plugins/plupload/jquery.plupload.queue',
-													//Custom file upload
-														'plugins/fileupload/bootstrap-fileupload.min',
-														'plugins/mockjax/jquery.mockjax',
-													//complexify
-														'plugins/complexify/jquery.complexify-banlist.min',
-														'plugins/complexify/jquery.complexify.min',
-													//Mockjax
-														'plugins/mockjax/jquery.mockjax',
-													//Chosen
-														'plugins/chosen/chosen.jquery.min',
-													//select2
-														'plugins/select2/select2.min',
-													//icheck
-														'plugins/icheck/jquery.icheck.min',
-													//Validation
-														'plugins/validation/jquery.validate.min',
-														'plugins/validation/additional-methods.min',
-													//Sparkline
-														'plugins/sparklines/jquery.sparklines.min',
-													//XEditable
-														//'plugins/momentjs/jquery.moment',
-														//'plugins/mockjax/jquery.mockjax',
-														//'plugins/xeditable/bootstrap-editable.min',
-														//'plugins/xeditable/demo',
-														//'plugins/xeditable/address',
-													//Theme framework
-														'eakroko.min',
-													//Theme scripts
-														'application.min',
-													//Just for demonstration
-														'demonstration.min',
-												),1);
+		$styles = array(
+			//Bootstrap
+				'bootstrap.min.css' => '',
+			//Bootstrap responsive
+				'bootstrap-responsive.min.css' => '',
+			//jQuery UI
+				'plugins/jquery-ui/smoothness/jquery-ui.css' => '',
+				'plugins/jquery-ui/smoothness/jquery.ui.theme.css' => '',
+			//PageGuide
+				'plugins/pageguide/pageguide.css' => '',
+			//Fullcalendar
+				'plugins/fullcalendar/fullcalendar.css' => '',
+				'plugins/fullcalendar/fullcalendar.print.css' => 'print',
+			//chosen
+				'plugins/chosen/chosen.css' => '',
+			//select2
+				'plugins/select2/select2.css' => '',
+			//icheck
+				'plugins/icheck/all.css' => '',
+			//Theme CSS
+				'style.css' => '',
+			//Color CSS
+				'themes.css' => '',
+		);
+		
+		$scripts = array(
+			//jQuery
+				'jquery.min.js',
+			//Nice Scroll
+				'plugins/nicescroll/jquery.nicescroll.min.js',
+			//jQuery UI
+				'plugins/jquery-ui/jquery.ui.core.min.js',
+				'plugins/jquery-ui/jquery.ui.widget.min.js',
+				'plugins/jquery-ui/jquery.ui.mouse.min.js',
+				'plugins/jquery-ui/jquery.ui.draggable.min.js',
+				'plugins/jquery-ui/jquery.ui.resizable.min.js',
+				'plugins/jquery-ui/jquery.ui.sortable.min.js',
+			//Touch enable for jquery UI
+				'plugins/touch-punch/jquery.touch-punch.min.js',
+			//slimScroll
+				'plugins/slimscroll/jquery.slimscroll.min.js',
+			//Bootstrap
+				'bootstrap.min.js',
+			//vmap
+				'plugins/vmap/jquery.vmap.min.js',
+				'plugins/vmap/jquery.vmap.world.js',
+				'plugins/vmap/jquery.vmap.sampledata.js',
+			//Bootbox
+				'plugins/bootbox/jquery.bootbox.js',
+			//Flot
+				'plugins/flot/jquery.flot.min.js',
+				'plugins/flot/jquery.flot.bar.order.min.js',
+				'plugins/flot/jquery.flot.pie.min.js',
+				'plugins/flot/jquery.flot.resize.min.js',
+			//imagesLoaded
+				'plugins/imagesLoaded/jquery.imagesloaded.min.js',
+			//PageGuide
+				'plugins/pageguide/jquery.pageguide.js',
+			//FullCalendar
+				'plugins/fullcalendar/fullcalendar.min.js',
+			//Chosen
+				'plugins/chosen/chosen.jquery.min.js',
+			//select2
+				'plugins/select2/select2.min.js',
+			//icheck
+				'plugins/icheck/jquery.icheck.min.js',
+			//Theme framework
+				'eakroko.min.js',
+			//Theme scripts
+				'application.min.js',
+			//Just for demonstration
+				'demonstration.min.js',
+		);
+		$this->data['styles']	=	$this->library['html']->styles($styles,1);
+		$this->data['scripts'] = $this->library['html']->scripts($scripts,1);
 	}
 
 	public function back_index(){
 
-		$this->data['meta_title'] 	=	$this->model['dashboard']->meta_title('Dashboard - GIT BOX');
+		$this->data['meta_title'] 	=	meta_title('Dashboard - CrexPress');
 		$this->data['body_class']	=	'';
+		$this->data['breadcrumb']	=	'
+			<li><a href="'.back_url('dashboard/').'">Dashboard</a></li>
+		';
 		
 		parent::load('back');
 	}
+	
+	public function front_index()
+	{
+		//
+	}		
 }

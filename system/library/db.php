@@ -57,26 +57,29 @@ class Db extends PDO {
         $this->engine = 'mysql'; 
         $this->host = 'localhost'; 
         $this->database = DB_NAME; 
-        $this->user = 'root'; 
-        $this->pass = ''; 
+        $this->user = DB_USER; 
+        $this->pass = DB_PASSWORD; 
         $dns = $this->engine.':dbname='.$this->database.";host=".$this->host; 
-        parent::__construct( $dns, $this->user, $this->pass ); 
+        parent::__construct( $dns, $this->user, $this->pass );
+		/*try {
+			$this->pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD);
+			//$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_SILENT);
+			//$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
+			//$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		} catch (PDOException $e) {
+			//throw new Exception($e->getMessage());
+			exit('Connection Error!');
+		}*/
     }
 	
-//	public function db() {
-//		try {
-//			$this->pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD);
-//			//$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_SILENT);
-//			//$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
-//			//$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-//		} catch (PDOException $e) {
-//			//throw new Exception($e->getMessage());
-//			exit('Connection Error!');
-//		}
-//		print_r($this->pdo);
-//	}
 	public function select($table_name,$conditions='',$sort_by='',$sort_order='',$start_limit='',$end_limit='') {
 		$sql = NULL;
+		
+		if (strstr($table_name,TABLE_PREFIX)) {
+			$table_name = $table_name;
+		} else {
+			$table_name = TABLE_PREFIX.$table_name;
+		}
 
 		if($conditions!='') {
 			foreach($conditions as $key=>$value) {
@@ -106,6 +109,7 @@ class Db extends PDO {
 
 	public function count($table_name,$conditions="") {
 		$sql = NULL;
+		$table_name = TABLE_PREFIX.$table_name;
 
 		if($conditions!='') {
 			foreach($conditions as $key=>$value) {
@@ -116,13 +120,14 @@ class Db extends PDO {
 			$sql.= ' 1 = 1 ';
 		}
 
-		$query = $this->pdo->prepare("select *from $table_name where $sql");
+		$query = self::prepare("select *from $table_name where $sql");
 		$query->execute();
 
 		return $query->rowCount();
 	}
 
 	public function insert($table_name,$values) {
+		$table_name = TABLE_PREFIX.$table_name;
 		$data = array();
 		$columns = array_keys($values);
 		$columns = implode(", ", $columns);
@@ -141,7 +146,7 @@ class Db extends PDO {
 			}
 		}
 		$sql = "INSERT into ".$table_name." (".$columns.") VALUES (".$count_value.")";
-		$query = $this->pdo->prepare($sql);
+		$query = self::prepare($sql);
 
 		foreach($value as $v){
 			$data[] = $v;
@@ -150,6 +155,8 @@ class Db extends PDO {
 	}
 
 	public function update($table_name,$values,$conditions){
+		$table_name = TABLE_PREFIX.$table_name;
+
 		$data = array();
 
 		foreach($values as $key1=>$value) {
@@ -165,11 +172,10 @@ class Db extends PDO {
 		}
 		$where_clause = implode(', ', $where);
 
-		$query = $this->pdo->prepare("UPDATE $table_name SET $set_clause WHERE $where_clause");
+		$query = self::prepare("UPDATE $table_name SET $set_clause WHERE $where_clause");
 
 		$query->execute($data);
 	}
-
 
 	public function search($keywords) {
 		$where = '';
@@ -198,7 +204,7 @@ class Db extends PDO {
 				}
 			}
 
-			$sql = $this->pdo->prepare("select *from private_jobs where status=1 AND ($where2) ORDER by id DESC");
+			$sql = self::prepare("select *from private_jobs where status=1 AND ($where2) ORDER by id DESC");
 			$sql->execute();
 
 			$results_count = $sql->rowCount();
@@ -226,13 +232,14 @@ class Db extends PDO {
 	}
 
 	public function delete($table_name,$conditions){
+		$table_name = TABLE_PREFIX.$table_name;
 		foreach($conditions as $key=>$condition) {
 			$where[] = $key .' ' . $condition;
 		}
 		$where_clause = implode(' AND ', $where);
 
 		$sql = "DELETE from ".$table_name." where ".$where_clause."";
-		$query = $this->pdo->prepare($sql);
+		$query = self::prepare($sql);
 		$query->execute();
 	}
 }

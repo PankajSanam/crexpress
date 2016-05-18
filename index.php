@@ -3,6 +3,12 @@ ob_start();
 
 define('CREXO', true);
 
+/** Set default timezone **/
+ini_set('date.timezone', 'Asia/Kolkata');
+
+/** Current version of Retina Framework **/
+define('RETINA_VERSION', '0.1.4');
+
 require_once 'config.php';
 
 /** Load core files **/

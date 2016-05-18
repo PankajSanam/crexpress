@@ -51,14 +51,14 @@ class College_Model extends Crexo_Model{
 			}
 		
 			if(isset($page_featured_image) && $page_featured_image!=''){
-				$featured_image = '<img class="'.$class.'" src="'.DATA_VISION.'/pages/'.$page_featured_image.'" width="'.$width.'" height="'.$height.'" />';
+				$featured_image = '<img class="'.$class.'" src="'.DATA_VIEW.'/pages/'.$page_featured_image.'" width="'.$width.'" height="'.$height.'" />';
 			} else {
 				//$featured_image = '<img class="'.$class.'" src="uploads/general/default-image.jpg" width="'.$width.'" height="'.$height.'" />';
 				$featured_image = '';
 			}
 			return $featured_image;
 		} else {
-			$featured_image = '<img class="'.$class.'" src="'.DATA_VISION.'/general/default-image.jpg" width="'.$width.'" height="'.$height.'" />';
+			$featured_image = '<img class="'.$class.'" src="'.DATA_VIEW.'/general/default-image.jpg" width="'.$width.'" height="'.$height.'" />';
 			return $featured_image;
 		}
 	}

@@ -58,7 +58,7 @@
 /* carousel */
 
 #amazingcarousel-container-1 {
-	padding: 5px 40px; 
+	padding: 10px 40px; 
 }
 
 #amazingcarousel-1 .amazingcarousel-list-container { 
@@ -78,14 +78,14 @@
 #amazingcarousel-1 .amazingcarousel-prev {
 	left: 0%;
 	top: 50%;
-	margin-left: -40px;
+	margin-left: -48px;
 	margin-top: -16px;
 }
 
 #amazingcarousel-1 .amazingcarousel-next {
 	right: 0%;
 	top: 50%;
-	margin-right: -40px;
+	margin-right: -48px;
 	margin-top: -16px;
 }
 

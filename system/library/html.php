@@ -4,13 +4,13 @@ class Html {
 
 	public static function styles($styles, $type = 0) {
 		if($type == 0) {
-			$path = FRONT_VISION;
+			$path = FRONT_VIEW;
 		} else {
-			$path = BACK_VISION;
+			$path = BACK_VIEW;
 		}
 		$s = '';
 		foreach($styles as $style => $media) {
-			$s .= '<link rel="stylesheet" type="text/css" href="' . $path . '/css/' . $style . '.css" media="' . $media . '" />';
+			$s .= '<link rel="stylesheet" type="text/css" href="' . $path . '/css/' . $style . '" media="' . $media . '" />';
 			$s .= "\n";
 		}
 		return $s;
@@ -18,13 +18,13 @@ class Html {
 
 	public static function scripts($scripts, $type = 0) {
 		if($type == 0) {
-			$path = FRONT_VISION;
+			$path = FRONT_VIEW;
 		} else {
-			$path = BACK_VISION;
+			$path = BACK_VIEW;
 		}
 		$s = '';
 		foreach($scripts as $script) {
-			$s .= '<script type="text/javascript" src="' . $path . '/js/' . $script . '.js"></script>';
+			$s .= '<script type="text/javascript" src="' . $path . '/js/' . $script . '"></script>';
 			$s .= "\n";
 		}
 		return $s;
@@ -95,11 +95,11 @@ class Html {
 	public static function img($src = '', $type = 0) {
 
 		if($type == 0) {
-			$path = FRONT_VISION . '/images/';
+			$path = FRONT_VIEW . '/images/';
 		} elseif($type == 1) {
-			$path = BACK_VISION . '/img/';
+			$path = BACK_VIEW . '/img/';
 		} else {
-			$path = DATA_VISION . '/';
+			$path = DATA_VIEW . '/';
 		}
 
 		if(!is_array($src)) {

@@ -9,23 +9,19 @@ class Crexo_Model {
 	}
 
 	public function meta_title($page) {
+		$page = explode('.',$page);
+		$page = $page[0];
+
 		$meta_tables = $this->db->check_meta();
 		$count_tables = count($meta_tables);
 
 		if(strrchr($page, '?')) {
-			$p = explode('?', $page);
-			$page = $p[0];
-		} else {
-			$page = $page;
+			$page = explode('?', $page);
+			$page = $page[0];
 		}
 
-		$cond = array(
-			'slug=' => $page,
-			'status=' => 1
-		);
-
 		for($i = 0; $i <= $count_tables - 1; $i++) {
-			$result = $this->db->select($meta_tables[$i], $cond);
+			$result = $this->db->select($meta_tables[$i], array( 'slug=' => $page, 'status=' => 1 ));
 			$count = count($result);
 
 			if($count > 0) {
@@ -40,6 +36,9 @@ class Crexo_Model {
 	}
 
 	public function meta_description($page) {
+		$page = explode('.',$page);
+		$page = $page[0];
+		
 		$meta_tables = $this->db->check_meta();
 		$count_tables = count($meta_tables);
 
@@ -71,6 +70,9 @@ class Crexo_Model {
 	}
 
 	public function meta_keywords($page) {
+		$page = explode('.',$page);
+		$page = $page[0];
+		
 		$meta_tables = $this->db->check_meta();
 		$count_tables = count($meta_tables);
 
@@ -182,6 +184,17 @@ class Crexo_Model {
 			$col = $row['value'];
 		}
 		return $col;
+	}
+	
+	public function latest_news($length){
+		$sanitize = new Sanitize();
+		
+		$cond = array( 'id=' => 17 );
+		$rows = $this->db->select('pages',$cond);
+		
+		$content = $rows[0]['content'];
+
+		return $sanitize->strip_html($content, $length);
 	}
 
 }
