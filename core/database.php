@@ -52,6 +52,7 @@ class Db_query{
 		$this->query = "UPDATE ".$this->tablename." set ".$set_clause." where ".$where_clause."";
 		$this->run_query($this->query);
 	}
+
 	public function select_query($tablename,$conditions="",$sortby="",$sorttype="",$startlimit="",$endlimit="") {
 		$this->tablename = $tablename;
 		$sql='';
@@ -77,7 +78,29 @@ class Db_query{
 		while($this->row = mysql_fetch_array($this->result)){
 			$this->col[] = $this->row;
 		}
-		return $this->col;
+		return @$this->col;
+	}
+
+	public function count_query($tablename,$conditions="") {
+		$this->tablename = $tablename;
+		$sql='';
+
+		if($conditions!='') {
+			foreach($conditions as $key=>$value) {
+				$where[] = " ".$key." = '".$value."'";
+			}
+			$sql.= implode(' AND ', $where);
+		} else {
+			$sql.= ' 1 = 1 ';
+		}
+
+		$this->sql = $sql;
+		$this->query = "SELECT * from $this->tablename where $this->sql ";
+		$this->result = $this->run_query($this->query);
+
+		$this->row = mysql_num_rows($this->result);
+		
+		return $this->row;
 	}
 
 	public function delete_me($tblname,$values,$onSuccess="",$onFailure=""){

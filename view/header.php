@@ -1,30 +1,36 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<?php echo $doctype; ?>
+<html <?php echo $html;?>>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title><?php echo $meta_title; ?></title>
-	<meta name="description" content="<?php echo $meta_description; ?>" />
-	<meta name="keywords" content="<?php echo $meta_keywords; ?>" />
-	<meta name="revisit-after" content="2 days" />
-	<meta name="author" content="Pankaj Sanam" />
+	<?php echo $content_type; ?>
+	<?php echo $meta_title; ?>
+	<?php echo $meta_description; ?>
+	<?php echo $meta_keywords; ?>
+	<?php echo $author; ?>
+	<?php echo $revisit_after; ?>
 	
-	<!-- Stylesheet -->
-	<link href="./css/style.css" rel="stylesheet" type="text/css" />
-	<link rel="stylesheet" type="text/css" href="./css/ddsmoothmenu.css" />
-	<link rel="stylesheet" type="text/css" href="./css/jquery.fancybox-1.3.4.css" media="screen" />
+	<?php
+	stylesheets(array(
+		'style' => '',
+		'ddsmoothmenu' => '',
+		'jquery.fancybox-1.3.4' => 'screen'
+	));
+	?>
 	
-	<!-- Javascript -->
-	<script src="./js/jquery.min.js" type="text/javascript"></script>
-	<script src="./js/ddsmoothmenu.js" type="text/javascript"></script>
-	<script src="./js/contentslider.js" type="text/javascript"></script>
-	<script type="text/javascript" src="./js/jcarousellite_1.0.1.js"></script>
-	<script type="text/javascript" src="./js/jquery.easing.1.1.js"></script>
-	<script type="text/javascript" src="./js/cufon-yui.js"></script>
-	<script type="text/javascript" src="./js/DIN_500.font.js"></script>
-	<script type="text/javascript" src="./js/menu.js"></script>
-	<script type="text/javascript" src="./js/tabs.js"></script>
-	<script type="text/javascript" src="./js/jquery.mousewheel-3.0.4.pack.js"></script>
-	<script type="text/javascript" src="./js/jquery.fancybox-1.3.4.pack.js"></script>
+	<?php
+	javascripts(array(
+		'jquery.min',
+		'ddsmoothmenu',
+		'contentslider',
+		'jcarousellite_1.0.1',
+		'jquery.easing.1.1',
+		'cufon-yui',
+		'DIN_500.font',
+		'menu',
+		'tabs',
+		'jquery.mousewheel-3.0.4.pack',
+		'jquery.fancybox-1.3.4.pack',
+	));
+	?>
 </head>
 <body>
 <div id="bg">
@@ -45,7 +51,7 @@
                	<div class="top_search">
                 	<div class="advance_search"><a href="#"></a></div>
                     	<ul>
-                        	<li><input name="txt" value="Search you any keyword" onfocus="if(this.value=='Search you any keyword') {this.value='';}" onblur="if(this.value=='') {this.value='Search you any keyword';}" type="text" /></li>
+                        	<li><input name="txt" value="Search here" onfocus="if(this.value=='Search here') {this.value='';}" onblur="if(this.value=='') {this.value='Search here';}" type="text" /></li>
                             <li><a class="search" href="#">Search</a></li>
                      	</ul>
                 	</div>

@@ -2,8 +2,10 @@
 require_once '../core/connection.php';
 require_once '../core/validation.php';
 require_once '../core/database.php';
+require_once '../core/ajax.php';
 require_once '../core/helper.php';
 require_once '../model/pages_model.php';
+require_once '../model/private_jobs_model.php';
 
 include 'view/top_navigation.php';
 include 'view/left_sidebar.php';

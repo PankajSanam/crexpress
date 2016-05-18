@@ -7,7 +7,7 @@
 	<!-- Apple devices fullscreen -->
 	<meta names="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-	<title>GIT Admin Panel - Pages</title>
+	<title>GIT BOX - Pages</title>
 
 	<!-- Bootstrap -->
 	<link rel="stylesheet" href="css/bootstrap.min.css">
@@ -109,7 +109,7 @@
 										<tr class='thefilter'>
 											<th class='with-checkbox'></th>
 											<th>ID</th>
-											<th>Template Name</th>
+											<th>Template</th>
 											<th>Sort Order</th>
 											<th>Page Name</th>
 											<th>Page Slug</th>
@@ -120,7 +120,7 @@
 										<tr>
 											<th class='with-checkbox'><input type="checkbox" name="check_all" id="check_all"></th>
 											<th>ID</th>
-											<th>Template Name</th>
+											<th>Template</th>
 											<th>Sort Order</th>
 											<th>Page Name</th>
 											<th>Page Slug</th>

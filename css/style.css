@@ -495,7 +495,7 @@ ul.listing li { width:100%; float:left; border-bottom:solid 1px #cfcfcf; padding
 ul.listing li.last { border:0px; }
 ul.listing li .thumb { width:126px; float:left; }
 ul.listing li .thumb img { border:solid 2px #dcdcdc; }
-ul.listing li .description { width:567px; height:104px; float:right; }
+ul.listing li .description { width:567px; height:104px; float:right; overflow: hidden;}
 ul.listing li .description h6 { color:#08387f; font-size:13px; padding-bottom:7px; font-weight:bold; }
 ul.listing li .description h6 a { color:#222427; }
 ul.listing li .description p { padding-bottom:10px!important; }

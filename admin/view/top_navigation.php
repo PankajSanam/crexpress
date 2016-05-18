@@ -1,21 +1,20 @@
 <?php function top_navigation() { ?>
 <div id="navigation">
 	<div class="container-fluid">
-		<a href="#" id="brand">FLAT</a>
+		<a href="#" id="brand">GIT BOX</a>
 		<a href="#" class="toggle-nav" rel="tooltip" data-placement="bottom" title="Toggle navigation"><i class="icon-reorder"></i></a>
 		<ul class='main-nav'>
 			<li class='active'><a href="dashboard.php"><span>Dashboard</span></a></li>
 			<li>
-				<a href="#" data-toggle="dropdown" class='dropdown-toggle'><span>Forms</span><span class="caret"></span></a>
+				<a href="#" data-toggle="dropdown" class='dropdown-toggle'><span>Private Jobs</span><span class="caret"></span></a>
 				<ul class="dropdown-menu">
-					<li><a href="forms-basic.html">Basic forms</a></li>
-					<li><a href="forms-extended.html">Extended forms</a></li>
-					<li><a href="forms-validation.html">Validation</a></li>
-					<li><a href="forms-wizard.html">Wizard</a></li>
+					<li><a href="private-jobs.php">Private Jobs</a></li>
+					<li><a href="post-private-jobs.php">Post Private Jobs</a></li>
+					<li><a href="job-categories.php">Job Categories</a></li>
 				</ul>
 			</li>
 			<li>
-				<a href="#" data-toggle="dropdown" class='dropdown-toggle'><span>Components</span><span class="caret"></span></a>
+				<a href="#" data-toggle="dropdown" class='dropdown-toggle'><span>Extras</span><span class="caret"></span></a>
 				<ul class="dropdown-menu">
 					<li><a href="components-timeline.html">Timeline</a></li>
 					<li><a href="components-pagestatistics.html">Page statistics</a></li>
@@ -28,6 +27,10 @@
 					<li><a href="components-typography.html">Typography</a></li>
 					<li><a href="components-bootstrap.html">Bootstrap elements</a></li>
 					<li><a href="components-grid.html">Grid</a></li>
+					<li><a href="forms-basic.html">Basic forms</a></li>
+					<li><a href="forms-extended.html">Extended forms</a></li>
+					<li><a href="forms-validation.html">Validation</a></li>
+					<li><a href="forms-wizard.html">Wizard</a></li>
 				</ul>
 			</li>
 			<li>
